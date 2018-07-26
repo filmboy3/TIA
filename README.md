@@ -11,7 +11,7 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 5. Article Summaries from 75+ News Sources
 6. Jeopardy Trivia Questions
 7. Yelp Searches
-8. Tranlsation Services
+8. Translation Services
 9. Late-Night Jokes
 10. Timed Reminders (WIP) 
 
