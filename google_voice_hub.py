@@ -29,35 +29,10 @@ def start_google_voice(emailAddress, emailPassword):
     time.sleep(8)
     return browser
 
-# def make_sms_chunks(text):
-#     sms_size = 500
-#     count = len(text)
-#     print(count)
-#     number_of_chunks = int(math.ceil(count / float(sms_size)))
-#     chunk_array = []
-#     if number_of_chunks == 1:
-#         print("No chunking Necessary")
-#         chunk_array.append(text)
-#         return chunk_array
-#     else:
-#         print("Chunking Necessary")
-#         sms_end = sms_size
-#         sms_start = 0
-#         for i in range(number_of_chunks):
-#             # If we are not at the end of text, we can check for blanks
-#             if i < number_of_chunks - 1:
-#                 marker = "\n"
-#                 while (text[sms_end] != marker):
-#                     sms_end = sms_end - 1
-                        
-#                 current_chunk = text[sms_start:sms_end]
-#                 current_chunk = current_chunk + " \n\n⬇️ (" + str(i+1) + " of " + str(number_of_chunks) + ") ⬇️"
-#             else:
-#                 current_chunk = text[sms_start:]
-#             chunk_array.append(current_chunk)
-#             sms_start = sms_end
-#             sms_end = sms_end + sms_size
-#         return chunk_array
+def send_message(gv_number, gv_message, sender_info):
+    print("Triggered Sending Message on GV")
+    send_reply(gv_number, gv_message, BROWSER)
+    mark_as_sent(sender_info)
 
 def make_sms_chunks(text, sms_size=300):
     count = len(text)
