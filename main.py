@@ -51,59 +51,18 @@ from wit import Wit
 # from selenium.webdriver.common.keys import Keys
 # from selenium.webdriver.common.action_chains import ActionChains
 import google_voice_hub as gv
+import google_sheets_api_storage as SHEETS
 
-# LINK UP GOOGLE SHEETS DATABASE
-
-# Setup Google Sheets
-scope = ['https://spreadsheets.google.com/feeds',
-         'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    'client_secret_sheet.json', scope)
-client = gspread.authorize(creds)
-
-# Open the Spreadsheets
-user_info_sheet = client.open('SIA_USERS').sheet1
-sms_request_sheet = client.open('SIA_USERS').get_worksheet(1)
-api_keys_sheet = client.open('SIA_USERS').get_worksheet(2)
-
-# Download spreadsheet data
-tia_user_info = user_info_sheet.get_all_records()
-sms_request_info = sms_request_sheet.get_all_records()
-api_keys_info = api_keys_sheet.get_all_records()
-
-# Convert spreadsheets to lists
-users_converted_to_List = ast.literal_eval(str(tia_user_info))
-sms_request_converted_to_List = ast.literal_eval(str(sms_request_info))
-
-# Download API Keys from Database
-HERE_APPID = api_keys_sheet.cell(2, 3).value
-HERE_APPCODE = api_keys_sheet.cell(2, 4).value
-OPEN_WEATHER_API = api_keys_sheet.cell(2, 5).value
-NY_TIMES_API = api_keys_sheet.cell(2, 6).value
-NEWS_API = api_keys_sheet.cell(2, 7).value
-JOKES_URL = api_keys_sheet.cell(2, 8).value
-WOLFRAM_API = api_keys_sheet.cell(2, 9).value
-SECRET_MONGO_URI = str(api_keys_sheet.cell(2, 13).value)
-SECRET_YELP_API = str(api_keys_sheet.cell(2, 14).value)
-YELP_API = YelpAPI(SECRET_YELP_API)
-
-# SET UP NLP w/ WIT.AI
-WIT_CLIENT = Wit(str(api_keys_sheet.cell(2, 18).value))
-print(WIT_CLIENT)
-GV_EMAIL = str(api_keys_sheet.cell(2, 16).value)
-GV_PASSWORD = str(api_keys_sheet.cell(2, 17).value)
-
-BROWSER = gv.start_google_voice(GV_EMAIL, GV_PASSWORD)
+BROWSER = gv.start_google_voice(SHEETS.GV_EMAIL, SHEETS.GV_PASSWORD)
 print("Done sleeping after startup of Google Voice")
 
 # WIT.AI NLP-BASED FUNCTIONS ############
-
 
 def wit_parse_message(message, sender_info):
     print("In the parsing phase...")
     message = message.lower()
     message = re.sub(",", "", message)
-    resp = WIT_CLIENT.message(message)
+    resp = SHEETS.WIT_CLIENT.message(message)
     nlp_extraction(resp, sender_info)
 
 
@@ -240,7 +199,6 @@ def trigger_jokes(resp, sender_info):
     print("Jokes Triggered")
     print(resp)
     jokes_date = "latest"
-    # print(resp['entities']['wdatetime'][0]['values'][0]['from']['value'])
     try:
         if (resp['entities']['wdatetime'][0]['values'][0]['from']['value']):
             jokes_date = resp['entities']['wdatetime'][0]['values'][0]['from']['value']
@@ -303,8 +261,8 @@ def trigger_translate(resp, sender_info):
     blob = TextBlob(translationPhrase)
     langCode = language_code_convert(language)
     translation = (resp['_text'], blob.translate(to=langCode))
-    result = "Original: '" + translationPhrase + "'\n\nTranslated into 🌏 " + \
-        language.capitalize() + " 🌏 '" + str(translation[1]).capitalize() + "'"
+    result = "✍️ '" + translationPhrase.capitalize() + "' translated into 🌏 " + \
+        language.capitalize() + " 🌏 '" + str(translation[1]).capitalize() + "' ✍️"
     # print(result)
     print("Language Code: ", langCode)
     print("Translation Phrase: ", translationPhrase)
@@ -717,7 +675,7 @@ def checkKeywords(resp, sender_info):
 # MONGO DB SETUP AND HELPER FUNCTIONS ###
 
 
-MONGODB_URI = SECRET_MONGO_URI
+MONGODB_URI = SHEETS.SECRET_MONGO_URI
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
 db = client.get_database("tia")
 message_records = db.message_records
@@ -924,8 +882,8 @@ def parse_weather(str):
 
 
 def lookup_single_location(location_str):
-    url = "https://geocoder.cit.api.here.com/6.2/geocode.json?app_id=" + \
-        str(HERE_APPID) + "&app_code=" + str(HERE_APPCODE) + "&searchtext="
+    url = "https://geocoder.cit.SHEETS.here.com/6.2/geocode.json?app_id=" + \
+        str(SHEETS.HERE_APPID) + "&app_code=" + str(SHEETS.HERE_APPCODE) + "&searchtext="
     for s in string.punctuation:
         location_str = location_str.replace(s, '')
     location_str = location_str.split(" ")
@@ -962,12 +920,12 @@ def weather_request(subject_label, sender_info):
                    "please text 📲 me something like: My home address is 'address'"
         zip = home.split(" ")
         zip = str(zip[len(zip) - 1])
-        url = "http://api.openweathermap.org/data/2.5/weather?appid=" + \
-            str(OPEN_WEATHER_API) + "&zip=" + zip
+        url = "http://SHEETS.openweathermap.org/data/2.5/weather?appid=" + \
+            str(SHEETS.OPEN_WEATHER_API) + "&zip=" + zip
         subject_label = "🏠"
     else:
-        api_address = "http://api.openweathermap.org/data/2.5/weather?appid=" + \
-            str(OPEN_WEATHER_API) + "&zip="
+        api_address = "http://SHEETS.openweathermap.org/data/2.5/weather?appid=" + \
+            str(SHEETS.OPEN_WEATHER_API) + "&zip="
         url = api_address + get_zip(subject_label)
         print("url: " + str(url))
     json_data = requests.get(url).json()
@@ -1053,13 +1011,13 @@ def forecast_request(subject_label, sender_info):
                    "please text 📲 me something like: My home address is 'address'"
         zip = home.split(" ")
         zip = str(zip[len(zip) - 1])
-        url = "http://api.openweathermap.org/data/2.5/forecast?appid=" + \
-            str(OPEN_WEATHER_API) + "&zip=" + zip
+        url = "http://SHEETS.openweathermap.org/data/2.5/forecast?appid=" + \
+            str(SHEETS.OPEN_WEATHER_API) + "&zip=" + zip
         subject_label = "🏠"
     # Or input zipcode
     else:
-        api_address = "http://api.openweathermap.org/data/2.5/forecast?appid=" + \
-            str(OPEN_WEATHER_API) + "&zip="
+        api_address = "http://SHEETS.openweathermap.org/data/2.5/forecast?appid=" + \
+            str(SHEETS.OPEN_WEATHER_API) + "&zip="
         url = api_address + get_zip(subject_label)
     json_data = requests.get(url).json()
     result = readable_forecast(json_data['list'], subject_label)
@@ -1175,8 +1133,8 @@ def format_directions(data, lat_long_list):
 
 
 def make_directions_request(lat_long_list, transit_mode):
-    url = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=" + \
-        HERE_APPID + "&app_code=" + HERE_APPCODE + "&waypoint0=geo!" + \
+    url = "https://route.cit.SHEETS.here.com/routing/7.2/calculateroute.json?app_id=" + \
+        SHEETS.HERE_APPID + "&app_code=" + SHEETS.HERE_APPCODE + "&waypoint0=geo!" + \
         str(lat_long_list[0][0]) + "," + str(lat_long_list[0][1]) + "&waypoint1=geo!" + str(lat_long_list[1][0]) + "," + \
         str(lat_long_list[1][1]) + "&mode=fastest;" + transit_mode + ";traffic:enabled"
     print(url)
@@ -1240,7 +1198,7 @@ def yelp_request(query):
 
 
 def full_results_yelp_search(categories, location, limit):
-    search_results = YELP_API.search_query(
+    search_results = SHEETS.YELP_API.search_query(
         term=categories, location=location, limit=limit)
     yelp_fully_formatted = format_yelp_search(search_results, limit)
     return yelp_fully_formatted
@@ -1303,7 +1261,7 @@ def format_single_yelp_biz(listing):
 
 
 def format_yelp_reviews(id):
-    reviews_results = YELP_API.reviews_query(id)
+    reviews_results = SHEETS.YELP_API.reviews_query(id)
     total = "\n"
     for i in range(0, len(reviews_results)):
         text_review = str(reviews_results['reviews'][i]['text'])
@@ -1322,7 +1280,7 @@ def format_yelp_reviews(id):
 
 
 def fetch_more_yelp_details(id):
-    details = YELP_API.business_query(id=id)
+    details = SHEETS.YELP_API.business_query(id=id)
     more_details = {}
     try:
         if details['location']['cross_streets'] != "":
@@ -1497,7 +1455,7 @@ def hacker_news_request():
 
 
 def nyt_request():
-    url = "https://api.nytimes.com/svc/topstories/v2/home.json?api-key=" + NY_TIMES_API
+    url = "https://SHEETS.nytimes.com/svc/topstories/v2/home.json?api-key=" + SHEETS.NY_TIMES_API
     json_data = requests.get(url).json()
     print(json_data)
     print(type(json_data))
@@ -1517,8 +1475,8 @@ def news_request(news):
     print("Inside the news_request")
     sourceInsert = news_source_parse(news)
     print("Source Insert: " + sourceInsert)
-    url = "https://newsapi.org/v2/top-headlines?sources=" + \
-          sourceInsert + "&apiKey=" + NEWS_API
+    url = "https://newsSHEETS.org/v2/top-headlines?sources=" + \
+          sourceInsert + "&apiKey=" + SHEETS.NEWS_API
     print("News url: " + url)
     json_data = requests.get(url).json()
     articles = json_data['articles']
@@ -1601,7 +1559,7 @@ def jeopardy_request():
 
 
 def late_night_request(response):
-    url = JOKES_URL
+    url = SHEETS.JOKES_URL
     json_data = requests.get(url).json()
     json_data = json_data['feed']['entry']
     if response == "latest":
@@ -1673,8 +1631,8 @@ def wolfram_request(input):
     print("triggered wolf alert inside with: " + str(input))
     original_input = input
     input = re.sub(" ", "%20", str(input))
-    url = "http://api.wolframalpha.com/v2/query?appid=" + \
-        WOLFRAM_API + "&input=" + input + "&output=json"
+    url = "http://SHEETS.wolframalpha.com/v2/query?appid=" + \
+        SHEETS.WOLFRAM_API + "&input=" + input + "&output=json"
     print(url)
     json_data = requests.get(url).json()
     result = "Question: '" + str(original_input) + "'\n\n📚 Answer: " + str(
