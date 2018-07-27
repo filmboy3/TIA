@@ -10,7 +10,7 @@
 from __future__ import print_function
 from textblob import TextBlob
 import wit_helpers as wit
-import message_boilerplates as msg_boiler
+
 import general_message_helpers as msg_gen
 
 
@@ -157,6 +157,6 @@ def trigger_translate(resp, sender_info):
         msg_gen.send_error_text_message(result, sender_info, "📝 Translation 📝")
     except BaseException:
         msg_gen.send_error_text_message(
-            msg_boiler.send_error_text("Translation"),
+            msg_gen.send_error_text("Translation"),
             sender_info,
             "💀 Error 💀")

@@ -12,7 +12,7 @@ import requests
 import string
 import calendar
 import google_sheets_api_storage as SHEETS
-import message_boilerplates as msg_boiler
+
 import general_message_helpers as msg_gen
 import wit_helpers as wit
 
@@ -218,7 +218,7 @@ def trigger_weather(resp, sender_info):
                 "⛅ Weather ⛅")
         except BaseException:
             msg_gen.send_full_text_message(
-                msg_boiler.send_error_text("Weather"),
+                msg_gen.send_error_text("Weather"),
                 sender_info,
                 "💀 Error 💀")
     except BaseException:
@@ -246,7 +246,7 @@ def trigger_forecast(resp, sender_info):
                 "🌞 Forecast 🌞")
         except BaseException:
             msg_gen.send_full_text_message(
-                msg_boiler.send_error_text("forecast"),
+                msg_gen.send_error_text("forecast"),
                 sender_info,
                 "💀 Error 💀")
     except BaseException:

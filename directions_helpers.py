@@ -12,7 +12,7 @@ import re
 import requests
 import math
 import google_sheets_api_storage as SHEETS
-import message_boilerplates as msg_boiler
+
 import general_message_helpers as msg_gen
 import weather_helpers as wthr
 
@@ -244,7 +244,7 @@ def trigger_directions(resp, sender_info):
             "🚗 Directions 🚗")
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("directions"),
+            msg_gen.send_error_text("directions"),
             sender_info,
             "💀 Error 💀")
 

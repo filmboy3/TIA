@@ -12,7 +12,7 @@ import re
 import wikipedia
 import requests
 from textblob import TextBlob
-import message_boilerplates as msg_boiler
+
 import general_message_helpers as msg_gen
 import google_sheets_api_storage as SHEETS
 
@@ -114,7 +114,7 @@ def trigger_wolfram(resp, sender_info):
             "🔭 Wolfram-Alpha 🔭")
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("wolfram-alpha"),
+            msg_gen.send_error_text("wolfram-alpha"),
             sender_info,
             "💀 Error 💀")
 
@@ -142,7 +142,7 @@ def trigger_wiki(resp, sender_info):
             "🔎 Wikipedia 🔎")
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("wikipedia"),
+            msg_gen.send_error_text("wikipedia"),
             sender_info,
             "💀 Error 💀")
 

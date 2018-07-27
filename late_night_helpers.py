@@ -13,7 +13,7 @@ import datetime
 import requests
 from dateutil import parser
 from faker import Faker
-import message_boilerplates as msg_boiler
+
 import general_message_helpers as msg_gen
 import google_sheets_api_storage as SHEETS
 
@@ -92,6 +92,6 @@ def trigger_jokes(resp, sender_info):
             "🌃 Late Night 🌃")
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("late night jokes"),
+            msg_gen.send_error_text("late night jokes"),
             sender_info,
             "💀 Error 💀")

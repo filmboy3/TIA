@@ -13,7 +13,7 @@ import requests
 
 
 import google_sheets_api_storage as SHEETS
-import message_boilerplates as msg_boiler
+
 import general_message_helpers as msg_gen
 # NEWS FUNCTIONS #
 
@@ -191,7 +191,7 @@ def trigger_news_directory(resp, sender_info):
         msg_gen.send_full_text_message(news_directory_text, sender_info, header)
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("news"),
+            msg_gen.send_error_text("news"),
             sender_info,
             "💀 Error 💀")
 
@@ -203,7 +203,7 @@ def trigger_nyt(resp, sender_info):
         msg_gen.send_full_text_message(nyt_request(), sender_info, "📰 NY Times 📰")
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("ny times"),
+            msg_gen.send_error_text("ny times"),
             sender_info,
             "💀 Error 💀")
 
@@ -218,7 +218,7 @@ def trigger_hn(resp, sender_info):
             "💻 Hacker News 💻")
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("hacker news"),
+            msg_gen.send_error_text("hacker news"),
             sender_info,
             "💀 Error 💀")
 
@@ -238,6 +238,6 @@ def trigger_news(resp, sender_info):
         msg_gen.send_full_text_message(news_request(newsSource), sender_info, header)
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("news"),
+            msg_gen.send_error_text("news"),
             sender_info,
             "💀 Error 💀")

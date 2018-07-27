@@ -10,7 +10,7 @@
 from __future__ import print_function
 import wit_helpers as wit
 import translation_helpers as trans
-import message_boilerplates as msg_boiler
+
 import general_message_helpers as msg_gen
 import google_sheets_api_storage as SHEETS
 
@@ -191,7 +191,7 @@ def trigger_yelp(resp, sender_info):
                 yelp_request(result), sender_info, "🍴 Yelp 🍴")
         except BaseException:
             msg_gen.send_full_text_message(
-                msg_boiler.send_error_text("Yelp"),
+                msg_gen.send_error_text("Yelp"),
                 sender_info,
                 "💀 Error 💀")
     else:

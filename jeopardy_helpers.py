@@ -10,7 +10,7 @@
 from __future__ import print_function
 import requests
 import random
-import message_boilerplates as msg_boiler
+
 import general_message_helpers as msg_gen
 
 
@@ -60,6 +60,6 @@ def trigger_jeopardy(resp, sender_info):
         msg_gen.send_full_text_message(jeopardyTogether, sender_info, "📺 Jeopardy 📺")
     except BaseException:
         msg_gen.send_full_text_message(
-            msg_boiler.send_error_text("jeopardy"),
+            msg_gen.send_error_text("jeopardy"),
             sender_info,
             "💀 Error 💀")
