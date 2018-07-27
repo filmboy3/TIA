@@ -8,49 +8,11 @@
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
 import time
-import base64
 import re
-import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
-import datetime
-import requests
-import string
-import numbers
-import math
-import random
-import calendar
-from textblob import TextBlob
-from textblob import Word
-from dateutil import parser
-from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
-from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
-
-
 import google_voice_hub as gv
-import google_sheets_api_storage as SHEETS
+import mongo_helpers as mongo
+
 
 def send_full_text_message(result, sender_info, topic):
     tia_sign_off = "\n\n--😘,\n✨ Tia ✨\nText" \
@@ -59,20 +21,27 @@ def send_full_text_message(result, sender_info, topic):
     result = "I've got some " + str(topic) + " info for you, " + str(
         sender_info['name']) + "!\n\n" + result + tia_sign_off
     try:
-        send_message(sender_info['from'], result, sender_info)
+        gv.send_message(sender_info['from'], result, sender_info)
         print("Responded to request successfully: " + str(topic))
     except BaseException:
         print("Error, was unable to respond to request")
-        mark_as_error(sender_info)
+        mongo.mark_as_error(sender_info)
         result = "I'm so sorry, " + str(sender_info['name']) + ", " \
             "but I'm having a tough time with your " + str(
             topic) + " request. Please try again." + tia_sign_off
-        send_message(sender_info['from'], result, sender_info)
+        gv.send_message(sender_info['from'], result, sender_info)
     time.sleep(1)
+
+
+def send_error_text(text):
+    return "\n😟 I hate to be the bearer of bad 🗞️, but right now, your " + \
+        text + " request didn't work ... 🙏 try again!"
+
 
 # OPENING GREETING FUNCTIONS FOR NEW USER
 
 # Help Message
+
 
 def command_help_messages(sender_info):
     message = "\nHey, " + str(sender_info['name']) + "! Here's a 🗒️ " \
@@ -94,7 +63,8 @@ def command_help_messages(sender_info):
     "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
     "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
     "What are the headlines from wired?\n(For the full list of available sources, ask for the 'news directory')\n\nNow 🙏 give me a task!"
-    send_message(sender_info['from'], message, sender_info)
+    gv.send_message(sender_info['from'], message, sender_info)
+
 
 def trigger_help(resp, sender_info):
     print("Help Triggered")
@@ -103,10 +73,11 @@ def trigger_help(resp, sender_info):
 
 
 def new_home_request(command, sender_info):
-    sender_info = add_new_item_to_db(sender_info, "home", command)
+    sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
     message = "\nNice digs, " + \
         str(sender_info['name']) + "!\n\nText me 'new home' with your address to change 🏠 at any time"
-    send_message(sender_info['from'], message, sender_info)
+    gv.send_message(sender_info['from'], message, sender_info)
+
 
 def trigger_new_home(resp, sender_info):
     print("New Home Triggered")
@@ -134,7 +105,7 @@ def process_first_message(sender_info):
               "Yelp 🍲\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News 📰 from " \
               "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡\nand more!\n\n🙋‍ " \
               "What would you like me to 💬 call you?"
-    send_message(sender_info['from'], message, sender_info)
+    gv.send_message(sender_info['from'], message, sender_info)
 
 
 def parse_name(name_string):
@@ -213,17 +184,17 @@ def parse_address(address_string):
 
 
 def process_intro_messages(sender_info):
-    current_user = user_records.find_one({"phone": sender_info['from']})
+    current_user = mongo.user_records.find_one({"phone": sender_info['from']})
     # SECOND MESSAGE, ASKING FOR FIRST NAME
     if current_user['count'] == 1:
         name = parse_name(sender_info['body'])
-        sender_info = add_new_item_to_db(sender_info, "name", name)
+        sender_info = mongo.add_new_item_to_db(sender_info, "name", name)
         print("Hi, " + sender_info['name'] + "!")
         message = "\nIt's a pleasure to 🤗 meet you, " + name + \
             "!\n\nIf you'd like me to set up a 🏠 address for quicker 🚗" \
             " directions and 🌧️ weather, please reply with your full address or NO\n"
         # Sending Message
-        send_message(sender_info['from'], message, sender_info)
+        gv.send_message(sender_info['from'], message, sender_info)
     # FINAL INTRO MESSAGE, ASKING FOR ADDRESS
     elif current_user['count'] == 2:
         if (sender_info['body'].lower() == 'no'):
@@ -232,7 +203,7 @@ def process_intro_messages(sender_info):
         else:
             print('they said yes to the address!')
             address = parse_address(sender_info['body'])
-            sender_info = add_new_item_to_db(sender_info, "home", address)
+            sender_info = mongo.add_new_item_to_db(sender_info, "home", address)
             print(
                 "\nNice digs, " +
                 sender_info['name'] +
@@ -242,4 +213,4 @@ def process_intro_messages(sender_info):
             message = "\nNice digs, "
         # Put together a response whether they gave an address or not
         message = message + str(sender_info['name']) + "! \n\n🙋 Want to learn how I can help you? 📲 Reply help"
-        send_message(sender_info['from'], message, sender_info)
+        gv.send_message(sender_info['from'], message, sender_info)
