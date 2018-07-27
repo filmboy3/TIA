@@ -154,9 +154,9 @@ def trigger_translate(resp, sender_info):
     print("Translation Phrase: ", translationPhrase)
 
     try:
-        msg_gen.send_error_text_message(result, sender_info, "📝 Translation 📝")
+        msg_gen.send_error_text(result, sender_info, "📝 Translation 📝")
     except BaseException:
-        msg_gen.send_error_text_message(
+        msg_gen.send_error_text(
             msg_gen.send_error_text("Translation"),
             sender_info,
             "💀 Error 💀")
