@@ -1,18 +1,20 @@
 # -*- coding: UTF-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 import time
 import math
+import mongo_helpers as mongo
+from main import BROWSER
+
 
 def start_google_voice(emailAddress, emailPassword):
     chromedriver = "C:\\Users\\Jonathan2017\\Downloads\\chromedriver.exe"
-    
+
     options = webdriver.ChromeOptions()
     # options.add_argument('headless')
     options.add_argument("--incognito")
-    options.add_argument('window-size=1200x600') # optional
-    
+    options.add_argument('window-size=1200x600')  # optional
+
     browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
     print("Browser: " + str(browser))
     browser.get('https://voice.google.com')
@@ -29,10 +31,12 @@ def start_google_voice(emailAddress, emailPassword):
     time.sleep(8)
     return browser
 
+
 def send_message(gv_number, gv_message, sender_info):
     print("Triggered Sending Message on GV")
     send_reply(gv_number, gv_message, BROWSER)
-    mark_as_sent(sender_info)
+    mongo.mark_as_sent(sender_info)
+
 
 def make_sms_chunks(text, sms_size=300):
     count = len(text)
@@ -50,7 +54,7 @@ def make_sms_chunks(text, sms_size=300):
         while (sms_end < count):
             while (text[sms_end] != "\n"):
                 sms_end = sms_end + 1
-            print("sms_end after: " + str(sms_end) + "\n")      
+            print("sms_end after: " + str(sms_end) + "\n")
             current_chunk = text[sms_start:sms_end]
             print(chunk_array)
             chunk_array.append(current_chunk)
@@ -58,11 +62,12 @@ def make_sms_chunks(text, sms_size=300):
             sms_end = sms_end + sms_size
         final_chunk = text[sms_start:]
         chunk_array.append(final_chunk)
-        for i in range (0, len(chunk_array)-1):
+        for i in range(0, len(chunk_array)-1):
             chunk_array[i] = chunk_array[i] + "\n\n⬇️ (" + str(i+1) + " of " + str(len(chunk_array)) + ") ⬇️"
 
         print("\n\nChunk Array formmated: \n\n" + str(chunk_array) + "\n\n")
         return chunk_array
+
 
 def enter_message(message, gv_message, browser):
     JS_ADD_TEXT_TO_INPUT = """
@@ -78,6 +83,7 @@ def enter_message(message, gv_message, browser):
     time.sleep(1)
     message.send_keys(Keys.RETURN)
     time.sleep(2)
+
 
 def delete_previous_conversation(browser):
     # x_path_index
@@ -106,46 +112,31 @@ def send_reply(gv_number, gv_message, browser):
     try:
         chunk_set = make_sms_chunks(gv_message)
     except:
-        # try:
-        #     chunk_set = make_sms_chunks(gv_message, 400)
-        #     print("Triggered lower SMS chunking size @ 400")
-        # except:
-        #     try:
-        #         chunk_set = make_sms_chunks(gv_message, 350)
-        #         print("Triggered lower SMS chunking size @ 350")
-        #     except:
-                # try:
-                #     chunk_set = make_sms_chunks(gv_message, 300)
-                #     print("Triggered lower SMS chunking size @ 300")
-                # except:
+        try:
+            chunk_set = make_sms_chunks(gv_message, 250)
+            print("Triggered lower SMS chunking size @ 250")
+        except:
+            try:
+                chunk_set = make_sms_chunks(gv_message, 200)
+                print("Triggered lower SMS chunking size @ 200")
+            except:
+                try:
+                    chunk_set = make_sms_chunks(gv_message, 150)
+                    print("Triggered lower SMS chunking size @ 150")
+                except:
                     try:
-                        chunk_set = make_sms_chunks(gv_message, 250)
-                        print("Triggered lower SMS chunking size @ 250")
+                        chunk_set = make_sms_chunks(gv_message, 100)
+                        print("Triggered lower SMS chunking size @ 100")
                     except:
-                        try:
-                            chunk_set = make_sms_chunks(gv_message, 200)
-                            print("Triggered lower SMS chunking size @ 200")
-                        except:
-                            try:
-                                chunk_set = make_sms_chunks(gv_message, 150)
-                                print("Triggered lower SMS chunking size @ 150")
-                            except:
-                                try:
-                                    chunk_set = make_sms_chunks(gv_message, 100)
-                                    print("Triggered lower SMS chunking size @ 100")
-                                except:
-                                        chunk_set = make_sms_chunks(gv_message, 50)
-                                        print("Triggered lower SMS chunking size @ 50")
-                            
-    #     print("Triggered lower SMS chunking size")
-    #     chunk_set = make_sms_chunks(gv_message, 100)
-    # print("\n\nchunk_set type: " + str(type(chunk_set)) + "\n\nchunk_set: " + str(chunk_set))
-    for i in range(0, len( chunk_set)):
+                            chunk_set = make_sms_chunks(gv_message, 50)
+                            print("Triggered lower SMS chunking size @ 50")
+
+    for i in range(0, len(chunk_set)):
         time.sleep(1)
         enter_message(message, chunk_set[i], browser)
         time.sleep(2)
-    # enter_message(message, gv_message, browser)
     delete_previous_conversation(browser)
+
 
 def setup_message(gv_number, browser):
     initiate_Message = browser.find_element_by_xpath("""//*[@id="messaging-view"]/div/div/md-content/div/div/div""")

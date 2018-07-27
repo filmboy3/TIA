@@ -1,59 +1,19 @@
 # coding=utf8
 
 ######################################################
-#
+# MONGO DB SETUP AND HELPER FUNCTIONS
 # Tia Text Assistant - Internet tasks without using Data/Wi-Fi
 # written by Jonathan Schwartz (jonathanschwartz30@gmail.com)
 #
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
-import time
-import base64
 import re
-import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
 import datetime
-import requests
-import string
-import numbers
-import math
-import random
-import calendar
-from textblob import TextBlob
-from textblob import Word
-from dateutil import parser
-from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
 from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
-
-
-import google_voice_hub as gv
 import google_sheets_api_storage as SHEETS
-
-# MONGO DB SETUP AND HELPER FUNCTIONS ###
-
+import wit_helpers as wit
+import general_message_helpers as msg_gen
 
 MONGODB_URI = SHEETS.SECRET_MONGO_URI
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
@@ -119,6 +79,7 @@ def update_user_data():
             }
             update_record(sender_info, shared_user_data, message_records)
 
+
 def mark_as_sent(sender_info):
     updated_status = {
         "status": "sent"
@@ -134,18 +95,19 @@ def mark_as_error(sender_info):
     update_record(sender_info, updated_status, message_records)
     print("Marked message as error")
 
+
 def process_message(sender_info):
     current_user = user_records.find_one({"phone": sender_info['from']})
     # If they haven't texted much with TIA (i.e., the count), she first sends
     # some intro messages
     if current_user['count'] < 1:
         print("Inside process message")
-        process_first_message(sender_info)
+        msg_gen.process_first_message(sender_info)
     elif current_user['count'] < 3:
-        process_intro_messages(sender_info)
+        msg_gen.process_intro_messages(sender_info)
     # Otherwise, she processes the users' messages
     else:
-        wit_parse_message(sender_info['body'], sender_info)
+        wit.wit_parse_message(sender_info['body'], sender_info)
 
 
 def scrub_html_from_message(message):
@@ -161,7 +123,6 @@ def scrub_html_from_message(message):
         message = re.sub(key, value, message)
     print("New Message: " + str(message))
     return str(message)
-
 
 
 def process_all_unsent():

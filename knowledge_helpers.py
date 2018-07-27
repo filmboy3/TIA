@@ -8,54 +8,20 @@
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
-import time
-import base64
 import re
 import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
-import datetime
 import requests
-import string
-import numbers
-import math
-import random
-import calendar
 from textblob import TextBlob
-from textblob import Word
-from dateutil import parser
-from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
-from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
-
-
-import google_voice_hub as gv
+import message_boilerplates as msg_boiler
+import general_message_helpers as msg_gen
 import google_sheets_api_storage as SHEETS
 
 # INFORMATION FUNCTIONS #######
 
+
 def wikipedia_request(command_body, sender_info):
     return wiki_split(wikipedia.summary(command_body))
+
 
 def wiki_split(text_input):
     text_input = re.sub('"', "\'", str(text_input))
@@ -63,13 +29,13 @@ def wiki_split(text_input):
     text_input = re.sub('%', " percent", str(text_input))
     wiki = TextBlob(text_input)
     chunked = wiki.sentences
-    
+
     total_string = []
     for i in range(0, len(chunked)):
 
         total_string.append(str(chunked[i]))
 
-    total_string =  " 📖 \n\n 📖 ".join(total_string)
+    total_string = " 📖 \n\n 📖 ".join(total_string)
     return total_string
 
 def wolfram_request(input):
@@ -136,18 +102,19 @@ def wolfram_examples_request():
     " odds, bet 97 euros 📖 📖 chance 3 people share a birthday 📖 📖 probability 2 " \
     "people born in same month 📖"
 
+
 def trigger_wolfram(resp, sender_info):
     print("Wolfram Triggered")
     print(resp)
     try:
-        send_full_text_message(
+        msg_gen.send_full_text_message(
             wolfram_request(
                 resp['_text']),
             sender_info,
             "🔭 Wolfram-Alpha 🔭")
     except BaseException:
-        send_full_text_message(
-            send_error_text("wolfram-alpha"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("wolfram-alpha"),
             sender_info,
             "💀 Error 💀")
 
@@ -167,15 +134,15 @@ def trigger_wiki(resp, sender_info):
 
     print("Wit.AI Wikisearch term: " + wikiSearch)
     try:
-        send_full_text_message(
+        msg_gen.send_full_text_message(
             wikipedia_request(
                 wikiSearch,
                 sender_info),
             sender_info,
             "🔎 Wikipedia 🔎")
     except BaseException:
-        send_full_text_message(
-            send_error_text("wikipedia"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("wikipedia"),
             sender_info,
             "💀 Error 💀")
 

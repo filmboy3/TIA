@@ -8,49 +8,11 @@
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
-import time
-import base64
-import re
-import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
-import datetime
 import requests
-import string
-import numbers
-import math
 import random
-import calendar
-from textblob import TextBlob
-from textblob import Word
-from dateutil import parser
-from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
-from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
+import message_boilerplates as msg_boiler
+import general_message_helpers as msg_gen
 
-
-import google_voice_hub as gv
-import google_sheets_api_storage as SHEETS
 
 def jeopardy_request():
     url = "http://jservice.io/api/random?count=1"
@@ -89,14 +51,15 @@ def jeopardy_request():
     answer_key = answer_key.replace('</i>', '')
     return (total_string, answer_key)
 
+
 def trigger_jeopardy(resp, sender_info):
     print("Jeopardy Triggered")
     try:
         jeopardyTuple = jeopardy_request()
         jeopardyTogether = jeopardyTuple[0] + jeopardyTuple[1]
-        send_full_text_message(jeopardyTogether, sender_info, "📺 Jeopardy 📺")
+        msg_gen.send_full_text_message(jeopardyTogether, sender_info, "📺 Jeopardy 📺")
     except BaseException:
-        send_full_text_message(
-            send_error_text("jeopardy"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("jeopardy"),
             sender_info,
             "💀 Error 💀")

@@ -8,50 +8,13 @@
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
-import time
-import base64
 import re
-import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
-import datetime
 import requests
-import string
-import numbers
-import math
-import random
-import calendar
-from textblob import TextBlob
-from textblob import Word
-from dateutil import parser
-from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
-from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
 
 
-import google_voice_hub as gv
 import google_sheets_api_storage as SHEETS
-
+import message_boilerplates as msg_boiler
+import general_message_helpers as msg_gen
 # NEWS FUNCTIONS #
 
 
@@ -225,21 +188,22 @@ def trigger_news_directory(resp, sender_info):
     try:
         header = "🌏 News Directory 🌏"
         print(header)
-        send_full_text_message(news_directory_text, sender_info, header)
+        msg_gen.send_full_text_message(news_directory_text, sender_info, header)
     except BaseException:
-        send_full_text_message(
-            send_error_text("news"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("news"),
             sender_info,
             "💀 Error 💀")
+
 
 def trigger_nyt(resp, sender_info):
     print("NY Times Triggered")
     print(resp)
     try:
-        send_full_text_message(nyt_request(), sender_info, "📰 NY Times 📰")
+        msg_gen.send_full_text_message(nyt_request(), sender_info, "📰 NY Times 📰")
     except BaseException:
-        send_full_text_message(
-            send_error_text("ny times"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("ny times"),
             sender_info,
             "💀 Error 💀")
 
@@ -248,13 +212,13 @@ def trigger_hn(resp, sender_info):
     print("Hacker News Triggered")
     print(resp)
     try:
-        send_full_text_message(
+        msg_gen.send_full_text_message(
             hacker_news_request(),
             sender_info,
             "💻 Hacker News 💻")
     except BaseException:
-        send_full_text_message(
-            send_error_text("hacker news"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("hacker news"),
             sender_info,
             "💀 Error 💀")
 
@@ -271,9 +235,9 @@ def trigger_news(resp, sender_info):
     try:
         header = "🌏 " + str(newsSource).upper() + " 🌏"
         print(header)
-        send_full_text_message(news_request(newsSource), sender_info, header)
+        msg_gen.send_full_text_message(news_request(newsSource), sender_info, header)
     except BaseException:
-        send_full_text_message(
-            send_error_text("news"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("news"),
             sender_info,
             "💀 Error 💀")

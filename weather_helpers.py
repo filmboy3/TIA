@@ -8,51 +8,15 @@
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
-import time
-import base64
-import re
-import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
-import datetime
 import requests
 import string
-import numbers
-import math
-import random
 import calendar
-from textblob import TextBlob
-from textblob import Word
-from dateutil import parser
-from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
-from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
-
-
-import google_voice_hub as gv
 import google_sheets_api_storage as SHEETS
+import message_boilerplates as msg_boiler
+import general_message_helpers as msg_gen
+import wit_helpers as wit
 
-# LOCATION-BASED FUNCTIONS (WEATHER/
+# LOCATION-BASED FUNCTIONS (WEATHER)
 
 
 def convert_weather_to_emoji(icon_name):
@@ -233,6 +197,7 @@ def forecast_request(subject_label, sender_info):
     result = readable_forecast(json_data['list'], subject_label)
     return result
 
+
 def trigger_weather(resp, sender_info):
     print("Weather Triggered")
     location = 'home'
@@ -245,20 +210,20 @@ def trigger_weather(resp, sender_info):
         result = location
         print("Weather location: " + location)
         try:
-            send_full_text_message(
+            msg_gen.send_full_text_message(
                 weather_request(
                     result,
                     sender_info),
                 sender_info,
                 "⛅ Weather ⛅")
         except BaseException:
-            send_full_text_message(
-                send_error_text("Weather"),
+            msg_gen.send_full_text_message(
+                msg_boiler.send_error_text("Weather"),
                 sender_info,
                 "💀 Error 💀")
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
-        checkKeywords(resp, sender_info)
+        wit.check_keywords(resp, sender_info)
 
 
 def trigger_forecast(resp, sender_info):
@@ -273,17 +238,17 @@ def trigger_forecast(resp, sender_info):
         result = location
         print("Forecast location: " + location)
         try:
-            send_full_text_message(
+            msg_gen.send_full_text_message(
                 forecast_request(
                     result,
                     sender_info),
                 sender_info,
                 "🌞 Forecast 🌞")
         except BaseException:
-            send_full_text_message(
-                send_error_text("forecast"),
+            msg_gen.send_full_text_message(
+                msg_boiler.send_error_text("forecast"),
                 sender_info,
                 "💀 Error 💀")
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
-        checkKeywords(resp, sender_info)
+        wit.check_keywords(resp, sender_info)

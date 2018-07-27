@@ -1,13 +1,6 @@
 from __future__ import print_function
-from apiclient.discovery import build
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-import numbers
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import ast
 from yelpapi import YelpAPI
 from wit import Wit
 

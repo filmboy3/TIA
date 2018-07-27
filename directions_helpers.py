@@ -8,49 +8,14 @@
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
-import time
-import base64
 import re
-import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
-import datetime
 import requests
-import string
-import numbers
 import math
-import random
-import calendar
-from textblob import TextBlob
-from textblob import Word
-from dateutil import parser
-from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
-from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
-
-
-import google_voice_hub as gv
 import google_sheets_api_storage as SHEETS
+import message_boilerplates as msg_boiler
+import general_message_helpers as msg_gen
+import weather_helpers as wthr
+
 
 def convert_distance_from_metric(text):
     num = re.findall('<span class="length">(.*?)</span>', text)
@@ -198,16 +163,17 @@ def get_two_lat_long(subject_label, sender_info):
     if (subject_label[0] == 'home'):
         if str(home) == "NO ADDRESS GIVEN":
             return "😟 Sorry, but I don't have your 🏠 address on file ... "
-        lat_long_origin.append(get_lat_long(home))
+        lat_long_origin.append(wthr.get_lat_long(home))
     else:
-        lat_long_origin.append(get_lat_long(subject_label[0]))
+        lat_long_origin.append(wthr.get_lat_long(subject_label[0]))
     if (subject_label[1] == 'home'):
         if str(home) == "NO ADDRESS GIVEN":
             return "😟 Sorry, but I don't have your 🏠 address on file ... "
-        lat_long_origin.append(get_lat_long(home))
+        lat_long_origin.append(wthr.get_lat_long(home))
     else:
-        lat_long_origin.append(get_lat_long(subject_label[1]))
+        lat_long_origin.append(wthr.get_lat_long(subject_label[1]))
     return lat_long_origin
+
 
 def trigger_directions(resp, sender_info):
     print("Directions Triggered")
@@ -270,15 +236,15 @@ def trigger_directions(resp, sender_info):
         transit_method)
 
     try:
-        send_full_text_message(
+        msg_gen.send_full_text_message(
             directions_request(
                 directions_data,
                 sender_info),
             sender_info,
             "🚗 Directions 🚗")
     except BaseException:
-        send_full_text_message(
-            send_error_text("directions"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("directions"),
             sender_info,
             "💀 Error 💀")
 

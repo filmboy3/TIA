@@ -8,49 +8,15 @@
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
-import time
-import base64
 import re
-import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
 import datetime
 import requests
-import string
-import numbers
-import math
-import random
-import calendar
-from textblob import TextBlob
-from textblob import Word
 from dateutil import parser
 from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
-from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
-
-
-import google_voice_hub as gv
+import message_boilerplates as msg_boiler
+import general_message_helpers as msg_gen
 import google_sheets_api_storage as SHEETS
+
 
 def late_night_request(response):
     url = SHEETS.JOKES_URL
@@ -100,6 +66,7 @@ def late_night_request(response):
 
     return total_jokes
 
+
 def trigger_jokes(resp, sender_info):
     print("Jokes Triggered")
     print(resp)
@@ -119,12 +86,12 @@ def trigger_jokes(resp, sender_info):
 
     print(jokes_date)
     try:
-        send_full_text_message(
+        msg_gen.send_full_text_message(
             late_night_request(jokes_date),
             sender_info,
             "🌃 Late Night 🌃")
     except BaseException:
-        send_full_text_message(
-            send_error_text("late night jokes"),
+        msg_gen.send_full_text_message(
+            msg_boiler.send_error_text("late night jokes"),
             sender_info,
             "💀 Error 💀")

@@ -1,58 +1,18 @@
 # coding=utf8
 
 ######################################################
-#
+# YELP FUNCTIONS
 # Tia Text Assistant - Internet tasks without using Data/Wi-Fi
 # written by Jonathan Schwartz (jonathanschwartz30@gmail.com)
 #
 ######################################################
 
 from __future__ import print_function
-import httplib2
-import os
-from apiclient.discovery import build
-import time
-import base64
-import re
-import wikipedia
-from apiclient import errors
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
-import datetime
-import requests
-import string
-import numbers
-import math
-import random
-import calendar
-from textblob import TextBlob
-from textblob import Word
-from dateutil import parser
-from faker import Faker
-from oauth2client import file, client, tools
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import bs4
-import html5lib
-from pymongo import MongoClient
-import ast
-import json
-from httplib2 import Http
-import apiclient
-from googleapiclient import errors
-from googleapiclient import discovery
-from googleapiclient.discovery import build
-import numbers
-from yelpapi import YelpAPI
-from wit import Wit
-
-
-import google_voice_hub as gv
+import wit_helpers as wit
+import translation_helpers as trans
+import message_boilerplates as msg_boiler
+import general_message_helpers as msg_gen
 import google_sheets_api_storage as SHEETS
-
-# YELP FUNCTIONS #
 
 
 def yelp_request(query):
@@ -218,7 +178,7 @@ def trigger_yelp(resp, sender_info):
     try:
         category = resp['entities']['wit_yelp_category'][0]['value']
     except BaseException:
-        category = use_backup_keywords(resp)
+        category = wit.use_backup_keywords(resp)
 
     print("Yelp Location: " + location)
     print("Yelp Category: " + category)
@@ -227,17 +187,17 @@ def trigger_yelp(resp, sender_info):
     # Yelp Ethnic foods, i.e., Chinese (language) vs Chinese (cuisine)
     if (location != ""):
         try:
-            send_full_text_message(
+            msg_gen.send_full_text_message(
                 yelp_request(result), sender_info, "🍴 Yelp 🍴")
         except BaseException:
-            send_full_text_message(
-                send_error_text("Yelp"),
+            msg_gen.send_full_text_message(
+                msg_boiler.send_error_text("Yelp"),
                 sender_info,
                 "💀 Error 💀")
     else:
         try:
             print("Switching Yelp to Translate Task")
-            trigger_translate(resp, sender_info)
+            trans.trigger_translate(resp, sender_info)
         except BaseException:
             pass
 

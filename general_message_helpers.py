@@ -70,10 +70,6 @@ def send_full_text_message(result, sender_info, topic):
         send_message(sender_info['from'], result, sender_info)
     time.sleep(1)
 
-def send_error_text(text):
-    return "\n😟 I hate to be the bearer of bad 🗞️, but right now, your " + \
-        text + " request didn't work ... 🙏 try again!"
-
 # OPENING GREETING FUNCTIONS FOR NEW USER
 
 # Help Message
@@ -112,7 +108,7 @@ def new_home_request(command, sender_info):
         str(sender_info['name']) + "!\n\nText me 'new home' with your address to change 🏠 at any time"
     send_message(sender_info['from'], message, sender_info)
 
-def trigger_newHome(resp, sender_info):
+def trigger_new_home(resp, sender_info):
     print("New Home Triggered")
     location = resp['entities']['location'][0]['value']
     result = location
