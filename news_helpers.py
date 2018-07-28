@@ -133,7 +133,8 @@ def hacker_news_request():
 
 
 def nyt_request():
-    url = "https://SHEETS.nytimes.com/svc/topstories/v2/home.json?api-key=" + SHEETS.NY_TIMES_API
+    url = "https://api.nytimes.com/svc/topstories/v2/home.json?api-key=" + \
+        SHEETS.NY_TIMES_API
     json_data = requests.get(url).json()
     print(json_data)
     print(type(json_data))
@@ -143,7 +144,14 @@ def nyt_request():
         section = str(json_data['results'][i]['section'])
         title = str(json_data['results'][i]['title'])
         abstract = str(json_data['results'][i]['abstract'])
-        phrase = str("🗽 " + section + " 📰 '" + title + "' 📰\n" + abstract + " 🗽\n\n")
+        phrase = str(
+            "🗽 " +
+            section +
+            " 📰 '" +
+            title +
+            "' 📰\n" +
+            abstract +
+            " 🗽\n\n")
         if section != "Briefing":
             full_text += phrase
     return full_text
@@ -153,7 +161,7 @@ def news_request(news):
     print("Inside the news_request")
     sourceInsert = news_source_parse(news)
     print("Source Insert: " + sourceInsert)
-    url = "https://newsSHEETS.org/v2/top-headlines?sources=" + \
+    url = "https://newsapi.org/v2/top-headlines?sources=" + \
           sourceInsert + "&apiKey=" + SHEETS.NEWS_API
     print("News url: " + url)
     json_data = requests.get(url).json()
@@ -188,39 +196,41 @@ def trigger_news_directory(browser, resp, sender_info):
     try:
         header = "🌏 News Directory 🌏"
         print(header)
-        msg_gen.send_full_text_message(browser, news_directory_text, sender_info, header)
+        msg_gen.send_full_text_message(
+            browser, news_directory_text, sender_info, header)
     except BaseException:
-        msg_gen.send_full_text_message(browser, 
-            msg_gen.send_error_text("news"),
-            sender_info,
-            "💀 Error 💀")
+        msg_gen.send_full_text_message(browser,
+                                       msg_gen.send_error_text("news"),
+                                       sender_info,
+                                       "💀 Error 💀")
 
 
 def trigger_nyt(browser, resp, sender_info):
     print("NY Times Triggered")
     print(resp)
     try:
-        msg_gen.send_full_text_message(browser, nyt_request(), sender_info, "📰 NY Times 📰")
+        msg_gen.send_full_text_message(
+            browser, nyt_request(), sender_info, "📰 NY Times 📰")
     except BaseException:
-        msg_gen.send_full_text_message(browser, 
-            msg_gen.send_error_text("ny times"),
-            sender_info,
-            "💀 Error 💀")
+        msg_gen.send_full_text_message(browser,
+                                       msg_gen.send_error_text("ny times"),
+                                       sender_info,
+                                       "💀 Error 💀")
 
 
 def trigger_hn(browser, resp, sender_info):
     print("Hacker News Triggered")
     print(resp)
     try:
-        msg_gen.send_full_text_message(browser, 
-            hacker_news_request(),
-            sender_info,
-            "💻 Hacker News 💻")
+        msg_gen.send_full_text_message(browser,
+                                       hacker_news_request(),
+                                       sender_info,
+                                       "💻 Hacker News 💻")
     except BaseException:
-        msg_gen.send_full_text_message(browser, 
-            msg_gen.send_error_text("hacker news"),
-            sender_info,
-            "💀 Error 💀")
+        msg_gen.send_full_text_message(browser,
+                                       msg_gen.send_error_text("hacker news"),
+                                       sender_info,
+                                       "💀 Error 💀")
 
 
 def trigger_news(browser, resp, sender_info):
@@ -235,9 +245,10 @@ def trigger_news(browser, resp, sender_info):
     try:
         header = "🌏 " + str(newsSource).upper() + " 🌏"
         print(header)
-        msg_gen.send_full_text_message(browser, news_request(newsSource), sender_info, header)
+        msg_gen.send_full_text_message(
+            browser, news_request(newsSource), sender_info, header)
     except BaseException:
-        msg_gen.send_full_text_message(browser, 
-            msg_gen.send_error_text("news"),
-            sender_info,
-            "💀 Error 💀")
+        msg_gen.send_full_text_message(browser,
+                                       msg_gen.send_error_text("news"),
+                                       sender_info,
+                                       "💀 Error 💀")

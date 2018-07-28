@@ -16,7 +16,7 @@ import google_voice_hub as gv
 
 def send_full_text_message(browser, result, sender_info, topic):
     tia_sign_off = "\n\n--😘,\n✨ Tia ✨\nText" \
-            " 📲 me another request, " + str(
+        " 📲 me another request, " + str(
             sender_info['name']) + ", or text HELP"
     result = "I've got some " + str(topic) + " info for you, " + str(
         sender_info['name']) + "!\n\n" + result + tia_sign_off
@@ -46,24 +46,24 @@ def send_error_text(text):
 
 def command_help_messages(browser, sender_info):
     message = "\nHey, " + str(sender_info['name']) + "! Here's a 🗒️ " \
-    "of tasks I can 📲: \n\n🚇 Turn-by-turn directions 🚇\n🚗 by car, transit, " \
-    "or foot 🚗\n\n📲 Examples: 'I want to drive from home to \"221 79th Street, " \
-    "Bay Ridge, Brooklyn\"' 📲 'Let's walk from \"403 Main Street, Oakland, " \
-    "California\", to \"1807 Thompson Ave, Oakland, CA 94612\"'\n\n☀️ Current weather ☀️ " \
-    "and 5-day forecast ☔\n\n📲 Examples: 'What's it like outside in Houston?' " \
-    "📲 'What\'s the weather forecast near me? \n\n🇺🇸 " \
-    "Language Translation 🇺🇸\n📲 Example: How would an Italian say, 'I don't like pasta'?" \
-    "\n\n🍲 Yelp Searches 🍲\n📲 Example: 'Please find me some asian fusion " \
-    "near my house'\n\n🔎 Wikipedia summaries 🔎\n📲 Example: 'Tell me about Barack Obama'" \
-    "\n\n💡 Jeopardy Questions 💡 \n📲 Example: 'This is Jeopardy!'" \
-    "\n\nLate Night 🌃 Monologue jokes\n🤣(most recent, random, or specific date 2009-Present)🤣 📲" \
-    " Example: 'What are the latest jokes? " \
-    "'\n\n🔭 General Knowledge Q&A 🔭\n📲 Examples: 'How many baseballs " \
-    "fit into a boeing 747?' 📲 'How many calories in a sweet potato? 📲 " \
-    "Where can I find the North Star?\n\nGet NY Times 📰, Hacker News 💻, " \
-    "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
-    "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
-    "What are the headlines from wired?\n(For the full list of available sources, ask for the 'news directory')\n\nNow 🙏 give me a task!"
+        "of tasks I can 📲: \n\n🚇 Turn-by-turn directions 🚇\n🚗 by car, transit, " \
+        "or foot 🚗\n\n📲 Examples: 'I want to drive from home to \"221 79th Street, " \
+        "Bay Ridge, Brooklyn\"' 📲 'Let's walk from \"403 Main Street, Oakland, " \
+        "California\", to \"1807 Thompson Ave, Oakland, CA 94612\"'\n\n☀️ Current weather ☀️ " \
+        "and 5-day forecast ☔\n\n📲 Examples: 'What's it like outside in Houston?' " \
+        "📲 'What\'s the weather forecast near me? \n\n🇺🇸 " \
+        "Language Translation 🇺🇸\n📲 Example: How would an Italian say, 'I don't like pasta'?" \
+        "\n\n🍲 Yelp Searches 🍲\n📲 Example: 'Please find me some asian fusion " \
+        "near my house'\n\n🔎 Wikipedia summaries 🔎\n📲 Example: 'Tell me about Barack Obama'" \
+        "\n\n💡 Jeopardy Questions 💡 \n📲 Example: 'This is Jeopardy!'" \
+        "\n\nLate Night 🌃 Monologue jokes\n🤣(most recent, random, or specific date 2009-Present)🤣 📲" \
+        " Example: 'What are the latest jokes? " \
+        "'\n\n🔭 General Knowledge Q&A 🔭\n📲 Examples: 'How many baseballs " \
+        "fit into a boeing 747?' 📲 'How many calories in a sweet potato? 📲 " \
+        "Where can I find the North Star?\n\nGet NY Times 📰, Hacker News 💻, " \
+        "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
+        "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
+        "What are the headlines from wired?\n(For the full list of available sources, ask for the 'news directory')\n\nNow 🙏 give me a task!"
     gv.send_new_message(browser, sender_info['from'], message, sender_info)
 
 
@@ -89,10 +89,10 @@ def trigger_new_home(browser, resp, sender_info):
     try:
         new_home_request(browser, result, sender_info)
     except BaseException:
-        send_full_text_message(browser, 
-            send_error_text("new home"),
-            sender_info,
-            "💀 Error 💀")
+        send_full_text_message(browser,
+                               send_error_text("new home"),
+                               sender_info,
+                               "💀 Error 💀")
 
 
 def process_first_message(browser, sender_info):
@@ -101,10 +101,10 @@ def process_first_message(browser, sender_info):
     print("sleeping...")
     print("New message: " + str(sender_info))
     # Boilerplate first message
-    message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant!\n\nI do 💻 tasks via text messages, " \
+    message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text messages, " \
               " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
-              "Yelp 🍲\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News 📰 from " \
-              "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡\nand more!\n\n🙋‍ " \
+              "Yelp 🍲\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
+              "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
               "What would you like me to 💬 call you?"
     gv.send_new_message(browser, sender_info['from'], message, sender_info)
 
@@ -204,7 +204,8 @@ def process_intro_messages(browser, sender_info):
         else:
             print('they said yes to the address!')
             address = parse_address(sender_info['body'])
-            sender_info = mongo.add_new_item_to_db(sender_info, "home", address)
+            sender_info = mongo.add_new_item_to_db(
+                sender_info, "home", address)
             print(
                 "\nNice digs, " +
                 sender_info['name'] +
@@ -213,5 +214,6 @@ def process_intro_messages(browser, sender_info):
                 "?")
             message = "\nNice digs, "
         # Put together a response whether they gave an address or not
-        message = message + str(sender_info['name']) + "! \n\n🙋 Want to learn how I can help you? 📲 Reply help"
+        message = message + \
+            str(sender_info['name']) + "! \n\n🙋 Want to learn how I can help you? 📲 Reply help"
         gv.send_new_message(browser, sender_info['from'], message, sender_info)

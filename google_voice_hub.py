@@ -9,13 +9,15 @@ import mongo_helpers as mongo
 
 def start_google_voice(emailAddress, emailPassword):
     chromedriver = "C:\\Users\\Jonathan2017\\Downloads\\chromedriver.exe"
-    
+
     options = webdriver.ChromeOptions()
     # options.add_argument('headless')
     options.add_argument("--incognito")
-    options.add_argument('window-size=1200x600') # optional
-    
-    browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
+    options.add_argument('window-size=1200x600')  # optional
+
+    browser = webdriver.Chrome(
+        executable_path=chromedriver,
+        chrome_options=options)
     print("Browser: " + str(browser))
     browser.get('https://voice.google.com')
     browser.find_element_by_xpath("""//*[@id="header"]/div[2]/a""").click()
@@ -25,7 +27,8 @@ def start_google_voice(emailAddress, emailPassword):
     email.send_keys(Keys.RETURN)
     time.sleep(1)
 
-    password = browser.find_element_by_xpath("""//*[@id="password"]/div[1]/div/div[1]/input""")
+    password = browser.find_element_by_xpath(
+        """//*[@id="password"]/div[1]/div/div[1]/input""")
     password.send_keys(emailPassword)
     password.send_keys(Keys.RETURN)
     time.sleep(8)
@@ -54,7 +57,7 @@ def make_sms_chunks(text, sms_size=300):
         while (sms_end < count):
             while (text[sms_end] != "\n"):
                 sms_end = sms_end + 1
-            print("sms_end after: " + str(sms_end) + "\n")      
+            print("sms_end after: " + str(sms_end) + "\n")
             current_chunk = text[sms_start:sms_end]
             print(chunk_array)
             chunk_array.append(current_chunk)
@@ -62,8 +65,9 @@ def make_sms_chunks(text, sms_size=300):
             sms_end = sms_end + sms_size
         final_chunk = text[sms_start:]
         chunk_array.append(final_chunk)
-        for i in range (0, len(chunk_array)-1):
-            chunk_array[i] = chunk_array[i] + "\n\n⬇️ (" + str(i+1) + " of " + str(len(chunk_array)) + ") ⬇️"
+        for i in range(0, len(chunk_array) - 1):
+            chunk_array[i] = chunk_array[i] + \
+                "\n\n⬇️ (" + str(i + 1) + " of " + str(len(chunk_array)) + ") ⬇️"
 
         print("\n\nChunk Array formmated: \n\n" + str(chunk_array) + "\n\n")
         return chunk_array
@@ -90,17 +94,20 @@ def delete_previous_conversation(browser):
 """)
     conversation_box.click()
     time.sleep(1)
-    settings_dots = browser.find_element_by_xpath("""//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-message-list-header/div/div[2]/div/md-menu/button/md-icon""")
+    settings_dots = browser.find_element_by_xpath(
+        """//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-message-list-header/div/div[2]/div/md-menu/button/md-icon""")
     settings_dots.click()
     time.sleep(1)
     browser.find_element_by_xpath("""//button[@aria-label='Delete']""").click()
     time.sleep(1)
     try:
-        browser.find_element_by_xpath("""//md-checkbox[@aria-label='I understand']""").click()
-    except:
+        browser.find_element_by_xpath(
+            """//md-checkbox[@aria-label='I understand']""").click()
+    except BaseException:
         pass
     time.sleep(2)
-    browser.find_element_by_xpath("""//button[@gv-test-id='delete-thread-confirm']""").click()
+    browser.find_element_by_xpath(
+        """//button[@gv-test-id='delete-thread-confirm']""").click()
 
 
 def send_reply(gv_number, gv_message, browser):
@@ -108,27 +115,27 @@ def send_reply(gv_number, gv_message, browser):
     message = setup_message(gv_number, browser)
     try:
         chunk_set = make_sms_chunks(gv_message)
-    except:
+    except BaseException:
         try:
             chunk_set = make_sms_chunks(gv_message, 250)
             print("Triggered lower SMS chunking size @ 250")
-        except:
+        except BaseException:
             try:
                 chunk_set = make_sms_chunks(gv_message, 200)
                 print("Triggered lower SMS chunking size @ 200")
-            except:
+            except BaseException:
                 try:
                     chunk_set = make_sms_chunks(gv_message, 150)
                     print("Triggered lower SMS chunking size @ 150")
-                except:
+                except BaseException:
                     try:
                         chunk_set = make_sms_chunks(gv_message, 100)
                         print("Triggered lower SMS chunking size @ 100")
-                    except:
-                            chunk_set = make_sms_chunks(gv_message, 50)
-                            print("Triggered lower SMS chunking size @ 50")
+                    except BaseException:
+                        chunk_set = make_sms_chunks(gv_message, 50)
+                        print("Triggered lower SMS chunking size @ 50")
 
-    for i in range(0, len( chunk_set)):
+    for i in range(0, len(chunk_set)):
         time.sleep(1)
         enter_message(message, chunk_set[i], browser)
         time.sleep(2)
@@ -136,11 +143,13 @@ def send_reply(gv_number, gv_message, browser):
 
 
 def setup_message(gv_number, browser):
-    initiate_Message = browser.find_element_by_xpath("""//*[@id="messaging-view"]/div/div/md-content/div/div/div""")
+    initiate_Message = browser.find_element_by_xpath(
+        """//*[@id="messaging-view"]/div/div/md-content/div/div/div""")
     initiate_Message.click()
     time.sleep(2)
 
-    toForm = browser.find_element_by_xpath("""//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-recipient-picker/div/md-content/md-chips/md-chips-wrap/div/div/input""")
+    toForm = browser.find_element_by_xpath(
+        """//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-recipient-picker/div/md-content/md-chips/md-chips-wrap/div/div/input""")
     toForm.click()
     toForm.send_keys(gv_number)
     toForm.send_keys(Keys.ARROW_DOWN)
@@ -148,6 +157,7 @@ def setup_message(gv_number, browser):
     toForm.send_keys(Keys.RETURN)
     time.sleep(1)
     time.sleep(2)
-    message = browser.find_element_by_xpath("""//textarea[@aria-label='Type a message']""")
+    message = browser.find_element_by_xpath(
+        """//textarea[@aria-label='Type a message']""")
     message.click()
     return message

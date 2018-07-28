@@ -187,13 +187,13 @@ def trigger_yelp(browser, resp, sender_info):
     # Yelp Ethnic foods, i.e., Chinese (language) vs Chinese (cuisine)
     if (location != ""):
         try:
-            msg_gen.send_full_text_message(browser, 
-                yelp_request(result), sender_info, "🍴 Yelp 🍴")
+            msg_gen.send_full_text_message(
+                browser, yelp_request(result), sender_info, "🍴 Yelp 🍴")
         except BaseException:
-            msg_gen.send_full_text_message(browser, 
-                msg_gen.send_error_text("Yelp"),
-                sender_info,
-                "💀 Error 💀")
+            msg_gen.send_full_text_message(browser,
+                                           msg_gen.send_error_text("Yelp"),
+                                           sender_info,
+                                           "💀 Error 💀")
     else:
         try:
             print("Switching Yelp to Translate Task")

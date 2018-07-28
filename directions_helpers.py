@@ -118,7 +118,7 @@ def format_directions(data, lat_long_list):
 
 
 def make_directions_request(lat_long_list, transit_mode):
-    url = "https://route.cit.SHEETS.here.com/routing/7.2/calculateroute.json?app_id=" + \
+    url = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=" + \
         SHEETS.HERE_APPID + "&app_code=" + SHEETS.HERE_APPCODE + "&waypoint0=geo!" + \
         str(lat_long_list[0][0]) + "," + str(lat_long_list[0][1]) + "&waypoint1=geo!" + str(lat_long_list[1][0]) + "," + \
         str(lat_long_list[1][1]) + "&mode=fastest;" + transit_mode + ";traffic:enabled"
@@ -236,17 +236,17 @@ def trigger_directions(browser, resp, sender_info):
         transit_method)
 
     try:
-        msg_gen.send_full_text_message(browser, 
-            directions_request(
-                directions_data,
-                sender_info),
-            sender_info,
-            "🚗 Directions 🚗")
+        msg_gen.send_full_text_message(browser,
+                                       directions_request(
+                                           directions_data,
+                                           sender_info),
+                                       sender_info,
+                                       "🚗 Directions 🚗")
     except BaseException:
-        msg_gen.send_full_text_message(browser, 
-            msg_gen.send_error_text("directions"),
-            sender_info,
-            "💀 Error 💀")
+        msg_gen.send_full_text_message(browser,
+                                       msg_gen.send_error_text("directions"),
+                                       sender_info,
+                                       "💀 Error 💀")
 
 
 def fallback_multi_address_parse(text):

@@ -154,7 +154,8 @@ def trigger_translate(browser, resp, sender_info):
     print("Translation Phrase: ", translationPhrase)
 
     try:
-        msg_gen.send_full_text_message(browser, result, sender_info, "📝 Translation 📝")
+        msg_gen.send_full_text_message(
+            browser, result, sender_info, "📝 Translation 📝")
     except BaseException:
         msg_gen.send_full_text_message(
             browser,

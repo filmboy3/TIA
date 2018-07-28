@@ -57,9 +57,10 @@ def trigger_jeopardy(browser, resp, sender_info):
     try:
         jeopardyTuple = jeopardy_request()
         jeopardyTogether = jeopardyTuple[0] + jeopardyTuple[1]
-        msg_gen.send_full_text_message(browser, jeopardyTogether, sender_info, "📺 Jeopardy 📺")
+        msg_gen.send_full_text_message(
+            browser, jeopardyTogether, sender_info, "📺 Jeopardy 📺")
     except BaseException:
-        msg_gen.send_full_text_message(browser, 
-            msg_gen.send_error_text("jeopardy"),
-            sender_info,
-            "💀 Error 💀")
+        msg_gen.send_full_text_message(browser,
+                                       msg_gen.send_error_text("jeopardy"),
+                                       sender_info,
+                                       "💀 Error 💀")

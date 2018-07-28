@@ -56,7 +56,7 @@ def parse_weather(str):
 
 
 def lookup_single_location(location_str):
-    url = "https://geocoder.cit.SHEETS.here.com/6.2/geocode.json?app_id=" + \
+    url = "https://geocoder.cit.api.here.com/6.2/geocode.json?app_id=" + \
         str(SHEETS.HERE_APPID) + "&app_code=" + str(SHEETS.HERE_APPCODE) + "&searchtext="
     for s in string.punctuation:
         location_str = location_str.replace(s, '')
@@ -94,11 +94,11 @@ def weather_request(subject_label, sender_info):
                    "please text 📲 me something like: My home address is 'address'"
         zip = home.split(" ")
         zip = str(zip[len(zip) - 1])
-        url = "http://SHEETS.openweathermap.org/data/2.5/weather?appid=" + \
+        url = "http://api.openweathermap.org/data/2.5/weather?appid=" + \
             str(SHEETS.OPEN_WEATHER_API) + "&zip=" + zip
         subject_label = "🏠"
     else:
-        api_address = "http://SHEETS.openweathermap.org/data/2.5/weather?appid=" + \
+        api_address = "http://api.openweathermap.org/data/2.5/weather?appid=" + \
             str(SHEETS.OPEN_WEATHER_API) + "&zip="
         url = api_address + get_zip(subject_label)
         print("url: " + str(url))
@@ -185,12 +185,12 @@ def forecast_request(subject_label, sender_info):
                    "please text 📲 me something like: My home address is 'address'"
         zip = home.split(" ")
         zip = str(zip[len(zip) - 1])
-        url = "http://SHEETS.openweathermap.org/data/2.5/forecast?appid=" + \
+        url = "http://api.openweathermap.org/data/2.5/forecast?appid=" + \
             str(SHEETS.OPEN_WEATHER_API) + "&zip=" + zip
         subject_label = "🏠"
     # Or input zipcode
     else:
-        api_address = "http://SHEETS.openweathermap.org/data/2.5/forecast?appid=" + \
+        api_address = "http://api.openweathermap.org/data/2.5/forecast?appid=" + \
             str(SHEETS.OPEN_WEATHER_API) + "&zip="
         url = api_address + get_zip(subject_label)
     json_data = requests.get(url).json()
@@ -210,17 +210,17 @@ def trigger_weather(browser, resp, sender_info):
         result = location
         print("Weather location: " + location)
         try:
-            msg_gen.send_full_text_message(browser, 
-                weather_request(
-                    result,
-                    sender_info),
-                sender_info,
-                "⛅ Weather ⛅")
+            msg_gen.send_full_text_message(browser,
+                                           weather_request(
+                                               result,
+                                               sender_info),
+                                           sender_info,
+                                           "⛅ Weather ⛅")
         except BaseException:
-            msg_gen.send_full_text_message(browser, 
-                msg_gen.send_error_text("Weather"),
-                sender_info,
-                "💀 Error 💀")
+            msg_gen.send_full_text_message(browser,
+                                           msg_gen.send_error_text("Weather"),
+                                           sender_info,
+                                           "💀 Error 💀")
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
         wit.check_keywords(browser, resp, sender_info)
@@ -238,17 +238,17 @@ def trigger_forecast(browser, resp, sender_info):
         result = location
         print("Forecast location: " + location)
         try:
-            msg_gen.send_full_text_message(browser, 
-                forecast_request(
-                    result,
-                    sender_info),
-                sender_info,
-                "🌞 Forecast 🌞")
+            msg_gen.send_full_text_message(browser,
+                                           forecast_request(
+                                               result,
+                                               sender_info),
+                                           sender_info,
+                                           "🌞 Forecast 🌞")
         except BaseException:
-            msg_gen.send_full_text_message(browser, 
-                msg_gen.send_error_text("forecast"),
-                sender_info,
-                "💀 Error 💀")
+            msg_gen.send_full_text_message(browser,
+                                           msg_gen.send_error_text("forecast"),
+                                           sender_info,
+                                           "💀 Error 💀")
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
         wit.check_keywords(browser, resp, sender_info)
