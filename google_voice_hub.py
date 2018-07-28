@@ -1,20 +1,20 @@
 # -*- coding: UTF-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 import math
 import mongo_helpers as mongo
-from main import BROWSER
 
 
 def start_google_voice(emailAddress, emailPassword):
     chromedriver = "C:\\Users\\Jonathan2017\\Downloads\\chromedriver.exe"
-
+    
     options = webdriver.ChromeOptions()
     # options.add_argument('headless')
     options.add_argument("--incognito")
-    options.add_argument('window-size=1200x600')  # optional
-
+    options.add_argument('window-size=1200x600') # optional
+    
     browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
     print("Browser: " + str(browser))
     browser.get('https://voice.google.com')
@@ -32,9 +32,9 @@ def start_google_voice(emailAddress, emailPassword):
     return browser
 
 
-def send_message(gv_number, gv_message, sender_info):
+def send_new_message(browser, gv_number, gv_message, sender_info):
     print("Triggered Sending Message on GV")
-    send_reply(gv_number, gv_message, BROWSER)
+    send_reply(gv_number, gv_message, browser)
     mongo.mark_as_sent(sender_info)
 
 
@@ -54,7 +54,7 @@ def make_sms_chunks(text, sms_size=300):
         while (sms_end < count):
             while (text[sms_end] != "\n"):
                 sms_end = sms_end + 1
-            print("sms_end after: " + str(sms_end) + "\n")
+            print("sms_end after: " + str(sms_end) + "\n")      
             current_chunk = text[sms_start:sms_end]
             print(chunk_array)
             chunk_array.append(current_chunk)
@@ -62,7 +62,7 @@ def make_sms_chunks(text, sms_size=300):
             sms_end = sms_end + sms_size
         final_chunk = text[sms_start:]
         chunk_array.append(final_chunk)
-        for i in range(0, len(chunk_array)-1):
+        for i in range (0, len(chunk_array)-1):
             chunk_array[i] = chunk_array[i] + "\n\n⬇️ (" + str(i+1) + " of " + str(len(chunk_array)) + ") ⬇️"
 
         print("\n\nChunk Array formmated: \n\n" + str(chunk_array) + "\n\n")
@@ -86,13 +86,10 @@ def enter_message(message, gv_message, browser):
 
 
 def delete_previous_conversation(browser):
-    # x_path_index
     conversation_box = browser.find_element_by_xpath("""//*[@id="messaging-view"]/div/div/md-content/div/gv-conversation-list/md-virtual-repeat-container/div/div[2]/div[1]/div/gv-text-thread-item/gv-thread-item/div/div[2]/div/gv-annotation
 """)
     conversation_box.click()
     time.sleep(1)
-    # number_to_compare = browser.find_element_by_xpath("""//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-message-list-header/div/div[1]/p""")
-    # print(number_to_compare.get_attribute('innerText'))
     settings_dots = browser.find_element_by_xpath("""//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-message-list-header/div/div[2]/div/md-menu/button/md-icon""")
     settings_dots.click()
     time.sleep(1)
@@ -131,7 +128,7 @@ def send_reply(gv_number, gv_message, browser):
                             chunk_set = make_sms_chunks(gv_message, 50)
                             print("Triggered lower SMS chunking size @ 50")
 
-    for i in range(0, len(chunk_set)):
+    for i in range(0, len( chunk_set)):
         time.sleep(1)
         enter_message(message, chunk_set[i], browser)
         time.sleep(2)

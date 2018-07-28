@@ -10,18 +10,19 @@
 from __future__ import print_function
 import time
 import re
-import google_voice_hub as gv
 import mongo_helpers as mongo
+import google_voice_hub as gv
 
 
-def send_full_text_message(result, sender_info, topic):
+def send_full_text_message(browser, result, sender_info, topic):
     tia_sign_off = "\n\n--😘,\n✨ Tia ✨\nText" \
             " 📲 me another request, " + str(
             sender_info['name']) + ", or text HELP"
     result = "I've got some " + str(topic) + " info for you, " + str(
         sender_info['name']) + "!\n\n" + result + tia_sign_off
+    print(result)
     try:
-        gv.send_message(sender_info['from'], result, sender_info)
+        gv.send_new_message(browser, sender_info['from'], result, sender_info)
         print("Responded to request successfully: " + str(topic))
     except BaseException:
         print("Error, was unable to respond to request")
@@ -29,7 +30,7 @@ def send_full_text_message(result, sender_info, topic):
         result = "I'm so sorry, " + str(sender_info['name']) + ", " \
             "but I'm having a tough time with your " + str(
             topic) + " request. Please try again." + tia_sign_off
-        gv.send_message(sender_info['from'], result, sender_info)
+        gv.send_new_message(browser, sender_info['from'], result, sender_info)
     time.sleep(1)
 
 
@@ -43,7 +44,7 @@ def send_error_text(text):
 # Help Message
 
 
-def command_help_messages(sender_info):
+def command_help_messages(browser, sender_info):
     message = "\nHey, " + str(sender_info['name']) + "! Here's a 🗒️ " \
     "of tasks I can 📲: \n\n🚇 Turn-by-turn directions 🚇\n🚗 by car, transit, " \
     "or foot 🚗\n\n📲 Examples: 'I want to drive from home to \"221 79th Street, " \
@@ -63,38 +64,38 @@ def command_help_messages(sender_info):
     "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
     "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
     "What are the headlines from wired?\n(For the full list of available sources, ask for the 'news directory')\n\nNow 🙏 give me a task!"
-    gv.send_message(sender_info['from'], message, sender_info)
+    gv.send_new_message(browser, sender_info['from'], message, sender_info)
 
 
-def trigger_help(resp, sender_info):
+def trigger_help(browser, resp, sender_info):
     print("Help Triggered")
     print(resp)
-    command_help_messages(sender_info)
+    command_help_messages(browser, sender_info)
 
 
-def new_home_request(command, sender_info):
+def new_home_request(browser, command, sender_info):
     sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
     message = "\nNice digs, " + \
         str(sender_info['name']) + "!\n\nText me 'new home' with your address to change 🏠 at any time"
-    gv.send_message(sender_info['from'], message, sender_info)
+    gv.send_new_message(browser, sender_info['from'], message, sender_info)
 
 
-def trigger_new_home(resp, sender_info):
+def trigger_new_home(browser, resp, sender_info):
     print("New Home Triggered")
     location = resp['entities']['location'][0]['value']
     result = location
     print("New Home Location: " + location)
     print(resp)
     try:
-        new_home_request(result, sender_info)
+        new_home_request(browser, result, sender_info)
     except BaseException:
-        send_full_text_message(
+        send_full_text_message(browser, 
             send_error_text("new home"),
             sender_info,
             "💀 Error 💀")
 
 
-def process_first_message(sender_info):
+def process_first_message(browser, sender_info):
     print("Inside process_first_message")
     time.sleep(1)
     print("sleeping...")
@@ -105,7 +106,7 @@ def process_first_message(sender_info):
               "Yelp 🍲\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News 📰 from " \
               "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡\nand more!\n\n🙋‍ " \
               "What would you like me to 💬 call you?"
-    gv.send_message(sender_info['from'], message, sender_info)
+    gv.send_new_message(browser, sender_info['from'], message, sender_info)
 
 
 def parse_name(name_string):
@@ -183,7 +184,7 @@ def parse_address(address_string):
     return result
 
 
-def process_intro_messages(sender_info):
+def process_intro_messages(browser, sender_info):
     current_user = mongo.user_records.find_one({"phone": sender_info['from']})
     # SECOND MESSAGE, ASKING FOR FIRST NAME
     if current_user['count'] == 1:
@@ -194,7 +195,7 @@ def process_intro_messages(sender_info):
             "!\n\nIf you'd like me to set up a 🏠 address for quicker 🚗" \
             " directions and 🌧️ weather, please reply with your full address or NO\n"
         # Sending Message
-        gv.send_message(sender_info['from'], message, sender_info)
+        gv.send_new_message(browser, sender_info['from'], message, sender_info)
     # FINAL INTRO MESSAGE, ASKING FOR ADDRESS
     elif current_user['count'] == 2:
         if (sender_info['body'].lower() == 'no'):
@@ -213,4 +214,4 @@ def process_intro_messages(sender_info):
             message = "\nNice digs, "
         # Put together a response whether they gave an address or not
         message = message + str(sender_info['name']) + "! \n\n🙋 Want to learn how I can help you? 📲 Reply help"
-        gv.send_message(sender_info['from'], message, sender_info)
+        gv.send_new_message(browser, sender_info['from'], message, sender_info)

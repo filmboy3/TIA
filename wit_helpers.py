@@ -21,12 +21,12 @@ import translation_helpers as trans
 import general_message_helpers as msg_gen
 
 
-def wit_parse_message(message, sender_info):
+def wit_parse_message(browser, message, sender_info):
     print("In the parsing phase...")
     message = message.lower()
     message = re.sub(",", "", message)
     resp = SHEETS.WIT_CLIENT.message(message)
-    nlp_extraction(resp, sender_info)
+    nlp_extraction(browser, resp, sender_info)
 
 
 def use_backup_keywords(resp):
@@ -46,7 +46,7 @@ def use_backup_keywords(resp):
     return resp['_text']
 
 
-def nlp_extraction(resp, sender_info):
+def nlp_extraction(browser, resp, sender_info):
     intent_db = {
         "new_home_get": "msg_gen.trigger_new_home",
         "translate_get": "trans.trigger_translate",
@@ -64,78 +64,78 @@ def nlp_extraction(resp, sender_info):
     }
     try:
         intent_result = str(resp['entities']['intent'][0]['value'])
-        func_name = intent_db[intent_result] + "(resp, sender_info)"
+        func_name = intent_db[intent_result] + "(browser, resp, sender_info)"
         print("Function name: " + func_name)
         eval(func_name)
     except BaseException:
         print("Unable to determine intent ... continuing:")
-        check_keywords(resp, sender_info)
+        check_keywords(browser, resp, sender_info)
 
 
-def check_keywords(resp, sender_info):
+def check_keywords(browser, resp, sender_info):
     preventRepeatCounter = 0
     try:
         if (preventRepeatCounter == 0 and resp['entities']['wit_direction']):
-            geo.trigger_directions(resp, sender_info)
+            geo.trigger_directions(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter == 0 and resp['entities']['wit_jeopardy']):
-            jep.trigger_jeopardy(resp, sender_info)
+            jep.trigger_jeopardy(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter == 0 and resp['entities']['wit_language']):
-            trans.trigger_translate(resp, sender_info)
+            trans.trigger_translate(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter == 0 and resp['entities']['wit_news_source']):
-            news.trigger_news(resp, sender_info)
+            news.trigger_news(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter ==
                 0 and resp['entities']['wit_yelp_category']):
-            yelp.trigger_yelp(resp, sender_info)
+            yelp.trigger_yelp(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter == 0 and resp['entities']['wit_transit']):
-            geo.trigger_directions(resp, sender_info)
+            geo.trigger_directions(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter ==
                 0 and resp['entities']['intent'][0]['value'] == "wiki_get"):
-            know.trigger_wiki(resp, sender_info)
+            know.trigger_wiki(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter ==
                 0 and resp['entities']['wolfram_search_query']):
-            know.trigger_wolfram(resp, sender_info)
+            know.trigger_wolfram(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter ==
                 0 and resp['entities']['intent'][0]['value'] == "wolfram_get"):
-            know.trigger_wolfram(resp, sender_info)
+            know.trigger_wolfram(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
     try:
         if (preventRepeatCounter ==
                 0 and resp['entities']['wikipedia_search_query']):
-            know.trigger_wiki(resp, sender_info)
+            know.trigger_wiki(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass

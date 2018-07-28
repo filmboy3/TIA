@@ -96,18 +96,18 @@ def mark_as_error(sender_info):
     print("Marked message as error")
 
 
-def process_message(sender_info):
+def process_message(browser, sender_info):
     current_user = user_records.find_one({"phone": sender_info['from']})
     # If they haven't texted much with TIA (i.e., the count), she first sends
     # some intro messages
     if current_user['count'] < 1:
         print("Inside process message")
-        msg_gen.process_first_message(sender_info)
+        msg_gen.process_first_message(browser, sender_info)
     elif current_user['count'] < 3:
-        msg_gen.process_intro_messages(sender_info)
+        msg_gen.process_intro_messages(browser, sender_info)
     # Otherwise, she processes the users' messages
     else:
-        wit.wit_parse_message(sender_info['body'], sender_info)
+        wit.wit_parse_message(browser, sender_info['body'], sender_info)
 
 
 def scrub_html_from_message(message):
@@ -125,9 +125,9 @@ def scrub_html_from_message(message):
     return str(message)
 
 
-def process_all_unsent():
+def process_all_unsent(browser):
     for message in message_records.find({"status": "unsent"}):
-        process_message(message)
+        process_message(browser, message)
 
 
 def database_new_item(phone, message):

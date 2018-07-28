@@ -175,7 +175,7 @@ def get_two_lat_long(subject_label, sender_info):
     return lat_long_origin
 
 
-def trigger_directions(resp, sender_info):
+def trigger_directions(browser, resp, sender_info):
     print("Directions Triggered")
     print(resp)
     start_location = ""
@@ -236,14 +236,14 @@ def trigger_directions(resp, sender_info):
         transit_method)
 
     try:
-        msg_gen.send_full_text_message(
+        msg_gen.send_full_text_message(browser, 
             directions_request(
                 directions_data,
                 sender_info),
             sender_info,
             "🚗 Directions 🚗")
     except BaseException:
-        msg_gen.send_full_text_message(
+        msg_gen.send_full_text_message(browser, 
             msg_gen.send_error_text("directions"),
             sender_info,
             "💀 Error 💀")

@@ -161,7 +161,7 @@ def time_reformat(time_string):
     return str(hours) + ":" + min + " " + period
 
 
-def trigger_yelp(resp, sender_info):
+def trigger_yelp(browser, resp, sender_info):
     print("Yelp Triggered")
     print(resp)
     try:
@@ -187,17 +187,17 @@ def trigger_yelp(resp, sender_info):
     # Yelp Ethnic foods, i.e., Chinese (language) vs Chinese (cuisine)
     if (location != ""):
         try:
-            msg_gen.send_full_text_message(
+            msg_gen.send_full_text_message(browser, 
                 yelp_request(result), sender_info, "🍴 Yelp 🍴")
         except BaseException:
-            msg_gen.send_full_text_message(
+            msg_gen.send_full_text_message(browser, 
                 msg_gen.send_error_text("Yelp"),
                 sender_info,
                 "💀 Error 💀")
     else:
         try:
             print("Switching Yelp to Translate Task")
-            trans.trigger_translate(resp, sender_info)
+            trans.trigger_translate(browser, resp, sender_info)
         except BaseException:
             pass
 

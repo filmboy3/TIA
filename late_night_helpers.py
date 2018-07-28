@@ -67,7 +67,7 @@ def late_night_request(response):
     return total_jokes
 
 
-def trigger_jokes(resp, sender_info):
+def trigger_jokes(browser, resp, sender_info):
     print("Jokes Triggered")
     print(resp)
     jokes_date = "latest"
@@ -86,12 +86,12 @@ def trigger_jokes(resp, sender_info):
 
     print(jokes_date)
     try:
-        msg_gen.send_full_text_message(
+        msg_gen.send_full_text_message(browser, 
             late_night_request(jokes_date),
             sender_info,
             "🌃 Late Night 🌃")
     except BaseException:
-        msg_gen.send_full_text_message(
+        msg_gen.send_full_text_message(browser, 
             msg_gen.send_error_text("late night jokes"),
             sender_info,
             "💀 Error 💀")

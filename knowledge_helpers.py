@@ -103,23 +103,23 @@ def wolfram_examples_request():
     "people born in same month 📖"
 
 
-def trigger_wolfram(resp, sender_info):
+def trigger_wolfram(browser, resp, sender_info):
     print("Wolfram Triggered")
     print(resp)
     try:
-        msg_gen.send_full_text_message(
+        msg_gen.send_full_text_message(browser, 
             wolfram_request(
                 resp['_text']),
             sender_info,
             "🔭 Wolfram-Alpha 🔭")
     except BaseException:
-        msg_gen.send_full_text_message(
+        msg_gen.send_full_text_message(browser, 
             msg_gen.send_error_text("wolfram-alpha"),
             sender_info,
             "💀 Error 💀")
 
 
-def trigger_wiki(resp, sender_info):
+def trigger_wiki(browser, resp, sender_info):
     print("Wikipedia Triggered")
     print(resp)
     wikiSearch = resp['_text']
@@ -134,14 +134,14 @@ def trigger_wiki(resp, sender_info):
 
     print("Wit.AI Wikisearch term: " + wikiSearch)
     try:
-        msg_gen.send_full_text_message(
+        msg_gen.send_full_text_message(browser, 
             wikipedia_request(
                 wikiSearch,
                 sender_info),
             sender_info,
             "🔎 Wikipedia 🔎")
     except BaseException:
-        msg_gen.send_full_text_message(
+        msg_gen.send_full_text_message(browser, 
             msg_gen.send_error_text("wikipedia"),
             sender_info,
             "💀 Error 💀")
