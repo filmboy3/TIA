@@ -58,7 +58,7 @@ For both weather-based commands, if left blank, the location defaults to home.
 
 The <a href="https://www.yelp.com/developers">Yelp API</a> is queried, using a specific Yelp category, i.e., 'Pizza' or 'movie theaters'and a location, 'in brooklyn', 'near me', etc.  Once the general query is made, another query is made with more specific business info data (open/closing times, reviews) for the top three results and formatted.  
 
-![alt text](https://raw.githubusercontent.com/filmboy3/TIA-Texting-Internet-Assistant/master/images/new_2.jpg | width=100)
+![alt text](https://raw.githubusercontent.com/filmboy3/TIA-Texting-Internet-Assistant/master/images/new_2.jpg&s=200)
 
 <a href="https://raw.githubusercontent.com/filmboy3/TIA-Texting-Internet-Assistant/master/images/new_2.jpg>Screenshot</a>
 
