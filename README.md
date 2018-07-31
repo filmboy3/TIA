@@ -33,7 +33,7 @@ TIA has a dedicated google voice number - (347) 352-6247 - which auto-forwards a
 
 5. TIA checks for any 'unsent' message_records in the MongoDB. If there are, TIA begins to process that message_record. 
 
-6. TIA queries <i><a href="https://mlab.com">Wit.AI</i></a>, a natural language processing API, which parses the message for multitude of potential intents and keywords. Once the response is returned from the WIT API, the processing begins:
+6. TIA queries <i><a href="https://mlab.com">Wit.AI</i></a>, a natural language processing API, which parses the message for various intents and keywords. Once the response is returned from the WIT API, the processing begins:
 
 ## TIA COMMANDS
 
@@ -50,9 +50,17 @@ This second call is sending the zip code information to <i><a href="https://open
 
 Next, a <b>create request</b> is made in the GMAIL API, to craft a new email, populate it with the formatted (and emoji-fied) results of the weather call. Next, another request is made to the Gmail API to send this email to the cell-email address. This process is the same for each of Tia's non-gmail commands (except <i>Jeopardy</i>, which actually sends two emails).  
 
-For both weather-based commands, if left blank, the location defaults to home (hard-coded for Tia's creator, in Cranford, NJ).
+For both weather-based commands, if left blank, the location defaults to home.
 
 <a href="https://ibb.co/dFdw4y">Screenshot</a>
+
+### Yelp
+
+The <a href="https://www.yelp.com/developers">Yelp API</a> is queried, using a specific Yelp category, i.e., 'Pizza' or 'movie theaters'and a location, 'in brooklyn', 'near me', etc.  Once the general query is made, another query is made with more specific business info data (open/closing times, reviews) for the top three results and formatted.  
+
+![alt text](https://raw.githubusercontent.com/filmboy3/TIA-Texting-Internet-Assistant/master/images/new_2.jpg)
+
+<a href="https://raw.githubusercontent.com/filmboy3/TIA-Texting-Internet-Assistant/master/images/new_2.jpg>Screenshot</a>
 
 ### Turn-By-Turn-Directions
 
