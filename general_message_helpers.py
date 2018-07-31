@@ -105,7 +105,7 @@ def process_first_message(browser, sender_info):
               " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
               "Yelp 🍲\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
               "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
-              "What would you like me to 💬 call you?"
+              "What's your first name?"
     gv.send_new_message(browser, sender_info['from'], message, sender_info)
 
 

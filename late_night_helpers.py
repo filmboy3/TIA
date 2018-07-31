@@ -72,11 +72,14 @@ def trigger_jokes(browser, resp, sender_info):
     print(resp)
     jokes_date = "latest"
     try:
-        if (resp['entities']['wdatetime'][0]['values'][0]['from']['value']):
-            jokes_date = resp['entities']['wdatetime'][0]['values'][0]['from']['value']
-            jokes_date = jokes_date[:10]
+        jokes_date = resp['entities']['wdatetime'][0]['values'][0]['from']['value']
+        jokes_date = jokes_date[:10]
     except BaseException:
-        pass
+        try:
+            jokes_date = resp['entities']['datetime'][0]['value']
+            jokes_date = jokes_date[:10]
+        except BaseException:
+            pass
 
     try:
         if (resp['entities']['wit_random'][0]['value']):

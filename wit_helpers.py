@@ -19,6 +19,7 @@ import weather_helpers as weather
 import late_night_helpers as jokes
 import translation_helpers as trans
 import general_message_helpers as msg_gen
+import reminder_helpers as reminder
 
 
 def wit_parse_message(browser, message, sender_info):
@@ -37,7 +38,8 @@ def use_backup_keywords(resp):
         "wolfram_search_query",
         "wit_news_source",
         "wit_biography_terms",
-        "wit_yelp_category"]
+        "wit_yelp_category",
+        "wit_reminder_terms"]
     for i in range(0, len(wit_keyword_list)):
         try:
             return resp['entities'][wit_keyword_list[i]][0]['value']
@@ -60,7 +62,9 @@ def nlp_extraction(browser, resp, sender_info):
         "jeopardy_get": "jep.trigger_jeopardy",
         "yelp_get": "yelp.trigger_yelp",
         "weather_get": "weather.trigger_weather",
-        "forecast_get": "weather.trigger_forecast"
+        "forecast_get": "weather.trigger_forecast",
+        "reminder_get": "reminder.trigger_reminder"
+
     }
     try:
         intent_result = str(resp['entities']['intent'][0]['value'])
@@ -77,6 +81,18 @@ def check_keywords(browser, resp, sender_info):
     try:
         if (preventRepeatCounter == 0 and resp['entities']['wit_direction']):
             geo.trigger_directions(browser, resp, sender_info)
+            preventRepeatCounter = 1
+    except BaseException:
+        pass
+    try:
+        if (preventRepeatCounter == 0 and resp['entities']['wit_reminder_terms']):
+            reminder.trigger_reminder(browser, resp, sender_info)
+            preventRepeatCounter = 1
+    except BaseException:
+        pass
+    try:
+        if (preventRepeatCounter == 0 and resp['entities']['reminder']):
+            reminder.trigger_reminder(browser, resp, sender_info)
             preventRepeatCounter = 1
     except BaseException:
         pass
