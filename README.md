@@ -14,7 +14,7 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 6. Yelp Searches
 7. Translation Services
 8. Late-Night Jokes
-9. Timed Reminders
+9. Scheduled Reminders
 10. Forward | Delete | Mark-As-Read new emails (OWNER-ONLY, see gmailfeatures.py)
 
 ### Feel free to try Tia out by texting 📲 347-352-6247 📲
@@ -111,12 +111,12 @@ The translation command utlizes another NLP resource, <a href="https://textblob.
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_9.jpg" width="25%" height="25%">
 
-## Timed Reminders
+## Scheduled Reminders
 
 Example: "Remind me to pick up my sister in 5 minutes'"
 Example: "don't forget to take out the trash tomorrow"
 
-The Timed Reminders command utlizes the <a href="https://timezonedb.com>TimeZoneDB</a> API, which helps convert and get us local time for specific timezones.  Currently, the timed reminders are currently anchored to the users' home time zone. 
+The Scheduled Reminders command utlizes the <a href="https://timezonedb.com>TimeZoneDB</a> API, which helps convert and get us local time for specific timezones.  Currently, the Scheduled Reminders are currently available only for the users' home time zones. 
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_21.png" width="25%" height="25%">
 

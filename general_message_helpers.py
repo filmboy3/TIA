@@ -54,7 +54,8 @@ def command_help_messages(browser, sender_info):
         "Bay Ridge, Brooklyn\"' 📲 'Let's walk from \"403 Main Street, Oakland, " \
         "California\", to \"1807 Thompson Ave, Oakland, CA 94612\"'\n\n☀️ Current weather ☀️ " \
         "and 5-day forecast ☔\n\n📲 Examples: 'What's it like outside in Houston?' " \
-        "📲 'What\'s the weather forecast near me? \n\n🇺🇸 " \
+        "📲 'What\'s the weather forecast near me? \n\n⏲️ Scheduled Reminders ⏲️\n\n📲 Example: " \
+        "'Remind me to pick up my sister in an hour'\n\n🇺🇸 " \
         "Language Translation 🇺🇸\n📲 Example: How would an Italian say, 'I don't like pasta'?" \
         "\n\n🍲 Yelp Searches 🍲\n📲 Example: 'Please find me some asian fusion " \
         "near my house'\n\n🔎 Wikipedia summaries 🔎\n📲 Example: 'Tell me about Barack Obama'" \
@@ -156,7 +157,7 @@ def process_first_message(browser, sender_info):
     # Boilerplate first message
     message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text message, " \
               " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
-              "Yelp 🍲\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
+              "Yelp 🍲\n⏲️ Scheduled Reminders ⏲️\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
               "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
               "What's your first name?"
     gv.send_new_message(browser, sender_info['from'], message, sender_info)
