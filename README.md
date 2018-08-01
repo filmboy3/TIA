@@ -17,7 +17,7 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 9. Timed Reminders
 10. Forward | Delete | Mark-As-Read new emails (OWNER-ONLY, see gmailfeatures.py)
 
-### Feel free to try Tia out by texting 347-352-6247!
+### Feel free to try Tia out by texting 📲 347-352-6247 📲
 
 ## How it works
 
