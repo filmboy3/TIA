@@ -79,7 +79,16 @@ def convert_coords_to_time_zone(lat, long):
     url = "http://api.timezonedb.com/v2/get-time-zone?key=" + \
           SHEETS.ZONE_API_KEY + "&format=json&by=position&lat=" + str(lat) + "&lng=" + str(long)
     json_data = requests.get(url).json()
-    return json_data['zoneName']
+    result = []
+    result.append(json_data['zoneName'])
+    result.append(json_data['formatted'])
+    return result
+
+def update_local_time(zone):
+    url = "http://api.timezonedb.com/v2/get-time-zone?key=" + \
+          SHEETS.ZONE_API_KEY + "&format=json&by=zone&zone=" + zone
+    json_data = requests.get(url).json()
+    return json_data['formatted']
 
 def convert_wit_zone_to_home(home_zone):
   dt = parser.parse("2018-07-31T23:05:00.000-07:00")
@@ -93,13 +102,19 @@ def convert_wit_zone_to_home(home_zone):
   # print("Now_time east:" + str(time.time()))
   return int(result)
 
-def add_time_zone_offset_from_pst(command, sender_info):
+def add_time_zone_data(command, sender_info):
     home_lat_long = geo.lat_long_single_location(command)
     print("home_lat_long: " + str(home_lat_long))
-    time_zone_change = convert_wit_zone_to_home(convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1])))
+    time_zone_list = convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1]))
+    zone_name = time_zone_list[0]
+    local_current_time = time_zone_list[1]
+
+    time_zone_change = convert_wit_zone_to_home(zone_name)
     print("time_zone_change: " + str(time_zone_change))
     # Comment Out the Following Line when Unit Testing
     sender_info = mongo.add_new_item_to_db(sender_info, "offset_time_zone", time_zone_change)
+    sender_info = mongo.add_new_item_to_db(sender_info, "local_current_time", local_current_time)
+    sender_info = mongo.add_new_item_to_db(sender_info, "zone_name", zone_name)
     return time_zone_change
 
 def new_home_request(browser, command, sender_info):
@@ -107,7 +122,7 @@ def new_home_request(browser, command, sender_info):
         message = "\nI totally understand, "
     else:
         command = re.sub("new home", "", command.lower())
-        add_time_zone_offset_from_pst(command, sender_info)
+        add_time_zone_data(command, sender_info)
         sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
         message = "\nThere's no place like 🏠, "
     message = message + str(sender_info['name']) + "!\n\nText me 'new home'" \

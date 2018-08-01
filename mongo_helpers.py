@@ -14,6 +14,7 @@ from pymongo import MongoClient
 import google_sheets_api_storage as SHEETS
 import wit_helpers as wit
 import general_message_helpers as msg_gen
+import reminder_helpers as remind
 
 MONGODB_URI = SHEETS.SECRET_MONGO_URI
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
@@ -36,6 +37,10 @@ def update_record(record, updates, collection):
         '$set': updates
     }, upsert=False)
 
+
+def process_reminders(browser):
+    for message in message_records.find({"reminder_trigger": "activated"}):
+        remind.check_reminder(browser, message)
 
 def add_new_item_to_db(sender_info, key, value):
     current_user = user_records.find_one({"phone": sender_info['from']})
@@ -71,12 +76,26 @@ def update_user_data():
             }
             update_record(existing_user, incremented_user_count, user_records)
 
+            try:
+                offset = existing_user['offset_time_zone']
+            except:
+                offset = "unknown offset"
+            try:
+                zone = existing_user['zone_name']
+            except:
+                zone = "unknown zone"
+            try:
+                local_time = msg_gen.update_local_time(existing_user['zone_name'])
+            except:
+                local_time = "unknown local time"
             # "This is a transfer of existing user data back to the message"
             shared_user_data = {
                 "home": existing_user['home'],
                 "count": existing_user['count'],
                 "name": existing_user['name'],
-                "offset_time_zone": existing_user['offset_time_zone']
+                "offset_time_zone": offset,
+                "zone_name": zone,
+                "current_local_time": local_time
             }
             update_record(sender_info, shared_user_data, message_records)
 
