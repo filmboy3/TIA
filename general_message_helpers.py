@@ -98,7 +98,8 @@ def add_time_zone_offset_from_pst(command, sender_info):
     print("home_lat_long: " + str(home_lat_long))
     time_zone_change = convert_wit_zone_to_home(convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1])))
     print("time_zone_change: " + str(time_zone_change))
-    # sender_info = mongo.add_new_item_to_db(sender_info, "offset_time_zone", time_zone_change )
+    # Comment Out the Following Line when Unit Testing
+    sender_info = mongo.add_new_item_to_db(sender_info, "offset_time_zone", time_zone_change )
     return time_zone_change
 
 def new_home_request(browser, command, sender_info):
