@@ -14,9 +14,6 @@ from dateutil import parser
 import datetime 
 import general_message_helpers as msg_gen
 
-# def get_home_time_zone(home):
-#     home
-
 
 def reminder_request(input, date):
     date = re.sub("T", ".", date)
@@ -42,7 +39,7 @@ def reminder_request(input, date):
 
 def trigger_reminder(browser, resp, sender_info):
     print("Reminder Triggered")
-    time_zone = get_home_time_zone(sender_info['home'])
+    time_zone = sender_info['offset_time_zone'])
     print("Sender Info: " + str(sender_info))
     print(resp)
     try:
