@@ -12,7 +12,7 @@ import re
 import requests
 import math
 import google_sheets_api_storage as SHEETS
-
+import string
 import general_message_helpers as msg_gen
 import weather_helpers as wthr
 
@@ -37,6 +37,21 @@ def convert_distance_from_metric(text):
             print("post converted km: " + str(new_num))
         text = text.replace(num[i], new_num)
     return text
+
+def lat_long_single_location(location_str):
+    print("Inside lat_long_single_location")
+    url = "https://geocoder.cit.api.here.com/6.2/geocode.json?app_id=" + \
+        str(SHEETS.HERE_APPID) + "&app_code=" + str(SHEETS.HERE_APPCODE) + "&searchtext="
+    for s in string.punctuation:
+        location_str = location_str.replace(s, '')
+    location_str = location_str.split(" ")
+    location_str = "+".join(location_str)
+    url = url + location_str
+    json_data = requests.get(url).json()
+    lat_long = []
+    lat_long.append(json_data['Response']['View'][0]['Result'][0]['Location']['DisplayPosition']['Latitude'])
+    lat_long.append(json_data['Response']['View'][0]['Result'][0]['Location']['DisplayPosition']['Longitude'])
+    return lat_long
 
 
 def clean_up_directions(text):
@@ -122,9 +137,8 @@ def make_directions_request(lat_long_list, transit_mode):
         SHEETS.HERE_APPID + "&app_code=" + SHEETS.HERE_APPCODE + "&waypoint0=geo!" + \
         str(lat_long_list[0][0]) + "," + str(lat_long_list[0][1]) + "&waypoint1=geo!" + str(lat_long_list[1][0]) + "," + \
         str(lat_long_list[1][1]) + "&mode=fastest;" + transit_mode + ";traffic:enabled"
-    print(url)
     return format_directions(requests.get(url).json(), lat_long_list)
-
+    
 
 def car_directions(subject_label, sender_info):
     lat_long_list = get_two_lat_long(subject_label, sender_info)
@@ -155,23 +169,35 @@ def directions_request(directions_data, sender_info):
 
 def get_two_lat_long(subject_label, sender_info):
     home = str(sender_info['home'])
-    print(home)
-
+    print("Home in two_lat_long:" + str(home))
+    print("Subject_label/data input: " + str(subject_label))
     lat_long_origin = []
+    print("lat_long_origin: " + str(lat_long_origin))
     # If either start or final destination are the home, then change it to
     # saved home address.
     if (subject_label[0] == 'home'):
         if str(home) == "NO ADDRESS GIVEN":
             return "😟 Sorry, but I don't have your 🏠 address on file ... "
-        lat_long_origin.append(wthr.get_lat_long(home))
+        print("Yes, this is home...")
+        subject_label[0] = home
+        lat_long_origin.append(lat_long_single_location(subject_label[0]))
+        print("lat_long_origin.append 1: " + str(lat_long_origin))
     else:
-        lat_long_origin.append(wthr.get_lat_long(subject_label[0]))
+        lat_long_origin.append(lat_long_single_location(subject_label[0]))
+        print("lat_long_origin.append 2: " + str(lat_long_origin))
     if (subject_label[1] == 'home'):
         if str(home) == "NO ADDRESS GIVEN":
             return "😟 Sorry, but I don't have your 🏠 address on file ... "
-        lat_long_origin.append(wthr.get_lat_long(home))
+            print("No, this is not home")
+        print("Yes this is a destination home")
+        subject_label[1] == home
+        lat_long_origin.append(lat_long_single_location(subject_label[1]))
+        print("lat_long_origin.append 3: " + str(lat_long_origin))
     else:
-        lat_long_origin.append(wthr.get_lat_long(subject_label[1]))
+        lat_long_origin.append(lat_long_single_location(subject_label[1]))
+        print("lat_long_origin.append 4: " + str(lat_long_origin))
+    
+    print("lat_long_origin.append 5: " + str(lat_long_origin))
     return lat_long_origin
 
 

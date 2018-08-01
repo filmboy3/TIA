@@ -56,6 +56,7 @@ def parse_weather(str):
 
 
 def lookup_single_location(location_str):
+    print("Inside lookup_single_location")
     url = "https://geocoder.cit.api.here.com/6.2/geocode.json?app_id=" + \
         str(SHEETS.HERE_APPID) + "&app_code=" + str(SHEETS.HERE_APPCODE) + "&searchtext="
     for s in string.punctuation:
@@ -63,19 +64,10 @@ def lookup_single_location(location_str):
     location_str = location_str.split(" ")
     location_str = "+".join(location_str)
     url = url + location_str
-    print(url)
+    print("Url inside lookup_single_location: " + str(url))
     json_data = requests.get(url).json()
+    print("JSON response inside lookup_single_location: " + str(json_data))
     return json_data
-
-
-def get_lat_long(str):
-    json_data = lookup_single_location(str)
-    lat_long = []
-    lat_long.append(json_data['Response']['View'][0]['Result']
-                    [0]['Location']['DisplayPosition']['Latitude'])
-    lat_long.append(json_data['Response']['View'][0]['Result']
-                    [0]['Location']['DisplayPosition']['Longitude'])
-    return lat_long
 
 
 def get_zip(str):
@@ -92,10 +84,11 @@ def weather_request(subject_label, sender_info):
         if str(home) == "NO ADDRESS GIVEN":
             return "😟 Sorry, but I don't have your 🏠 address on file ... " \
                    "please text 📲 me something like: My home address is 'address'"
-        zip = home.split(" ")
-        zip = str(zip[len(zip) - 1])
+        zip = get_zip(home)
+        # zip = str(zip[len(zip) - 1])
         url = "http://api.openweathermap.org/data/2.5/weather?appid=" + \
             str(SHEETS.OPEN_WEATHER_API) + "&zip=" + zip
+        print("Home with URL and zip: " + str(url))
         subject_label = "🏠"
     else:
         api_address = "http://api.openweathermap.org/data/2.5/weather?appid=" + \
@@ -120,8 +113,8 @@ def weather_request(subject_label, sender_info):
     weather_icon = convert_weather_to_emoji(
         str(json_data['weather'][0]['icon']))
     result = (
-        "Today in " +
-        subject_label.upper() +
+        "\nToday near " +
+        subject_label.capitalize() +
         " expect " +
         description +
         ", " +
@@ -139,7 +132,7 @@ def weather_request(subject_label, sender_info):
 
 
 def readable_forecast(data, subject_label):
-    outer = "Your 5-Day Forecast for " + subject_label.upper() + "\n"
+    outer = "\nYour 5-Day Forecast for " + subject_label.capitalize() + "\n"
     for i in range(0, len(data) - 1):
         date_check = data[i]["dt_txt"].split(" ")[0]
         day_of_week = str(calendar.weekday(int(date_check.split(
@@ -183,11 +176,11 @@ def forecast_request(subject_label, sender_info):
         if str(home) == "NO ADDRESS GIVEN":
             return "😟 Sorry, but I don't have your 🏠 address on file ... " \
                    "please text 📲 me something like: My home address is 'address'"
-        zip = home.split(" ")
-        zip = str(zip[len(zip) - 1])
+        zip = get_zip(home)
+        # zip = str(zip[len(zip) - 1])
         url = "http://api.openweathermap.org/data/2.5/forecast?appid=" + \
             str(SHEETS.OPEN_WEATHER_API) + "&zip=" + zip
-        subject_label = "🏠"
+        subject_label = "home"
     # Or input zipcode
     else:
         api_address = "http://api.openweathermap.org/data/2.5/forecast?appid=" + \
@@ -200,11 +193,10 @@ def forecast_request(subject_label, sender_info):
 
 def trigger_weather(browser, resp, sender_info):
     print("Weather Triggered")
-    location = 'home'
     try:
         location = resp['entities']['location'][0]['value']
     except BaseException:
-        pass
+        location = 'home'
 
     try:
         result = location
@@ -228,11 +220,10 @@ def trigger_weather(browser, resp, sender_info):
 
 def trigger_forecast(browser, resp, sender_info):
     print("Forecast Triggered")
-    location = 'home'
     try:
         location = resp['entities']['location'][0]['value']
     except BaseException:
-        pass
+        location = 'home'
 
     try:
         result = location
