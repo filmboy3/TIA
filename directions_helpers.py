@@ -187,8 +187,8 @@ def get_two_lat_long(subject_label, sender_info):
         print("lat_long_origin.append 2: " + str(lat_long_origin))
     if (subject_label[1] == 'home'):
         if str(home) == "NO ADDRESS GIVEN":
-            return "😟 Sorry, but I don't have your 🏠 address on file ... "
             print("No, this is not home")
+            return "😟 Sorry, but I don't have your 🏠 address on file ... "
         print("Yes this is a destination home")
         subject_label[1] == home
         lat_long_origin.append(lat_long_single_location(subject_label[1]))
