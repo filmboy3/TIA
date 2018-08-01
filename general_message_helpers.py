@@ -234,19 +234,3 @@ def process_intro_messages(browser, sender_info):
             " directions and 🌧️ weather, please reply with your full address or NO\n"
         # Sending Message
         gv.send_new_message(browser, sender_info['from'], message, sender_info)
-    # FINAL INTRO MESSAGE, ASKING FOR ADDRESS
-    # elif current_user['count'] == 2:
-    #     if (sender_info['body'].lower() == 'no'):
-    #         print('they said no')
-    #         message = "\nI totally understand, "
-    #     else:
-    #         print('they said yes to the address!')
-    #         address = parse_address(sender_info['body'])
-    #         add_time_zone_offset_from_pst(address, sender_info)
-    #         sender_info = mongo.add_new_item_to_db(
-    #             sender_info, "home", address)
-    #         message = "\nThere's no place like 🏠, "
-    #     # Put together a response whether they gave an address or not
-    #     message = message + \
-    #         str(sender_info['name']) + "! \n\n🙋 Want some tips on what I can do? 📲 Reply help"
-    #     gv.send_new_message(browser, sender_info['from'], message, sender_info)
