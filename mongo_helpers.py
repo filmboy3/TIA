@@ -75,7 +75,8 @@ def update_user_data():
             shared_user_data = {
                 "home": existing_user['home'],
                 "count": existing_user['count'],
-                "name": existing_user['name']
+                "name": existing_user['name'],
+                "offset_time_zone": existing_user['offset_time_zone']
             }
             update_record(sender_info, shared_user_data, message_records)
 
@@ -103,7 +104,7 @@ def process_message(browser, sender_info):
     if current_user['count'] < 1:
         print("Inside process message")
         msg_gen.process_first_message(browser, sender_info)
-    elif current_user['count'] < 3:
+    elif current_user['count'] < 2:
         msg_gen.process_intro_messages(browser, sender_info)
     # Otherwise, she processes the users' messages
     else:

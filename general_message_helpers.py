@@ -99,15 +99,19 @@ def add_time_zone_offset_from_pst(command, sender_info):
     time_zone_change = convert_wit_zone_to_home(convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1])))
     print("time_zone_change: " + str(time_zone_change))
     # Comment Out the Following Line when Unit Testing
-    sender_info = mongo.add_new_item_to_db(sender_info, "offset_time_zone", time_zone_change )
+    sender_info = mongo.add_new_item_to_db(sender_info, "offset_time_zone", time_zone_change)
     return time_zone_change
 
 def new_home_request(browser, command, sender_info):
-    add_time_zone_offset_from_pst(command, sender_info)
-    sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
-
-    message = "\nNice digs, " + \
-        str(sender_info['name']) + "!\n\nText me 'new home' with your address to change 🏠 at any time"
+    if command.lower() == "no":
+        message = "\nI totally understand, "
+    else:
+        command = re.sub("new home", "", command.lower())
+        add_time_zone_offset_from_pst(command, sender_info)
+        sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
+        message = "\nThere's no place like 🏠, "
+    message = message + str(sender_info['name']) + "!\n\nText me 'new home'" \
+             " with your address to change 🏠 at any time\n\n🙋 Want some tips on what I can do? 📲 Reply help"
     gv.send_new_message(browser, sender_info['from'], message, sender_info)
 
 
@@ -135,7 +139,7 @@ def process_first_message(browser, sender_info):
     print("sleeping...")
     print("New message: " + str(sender_info))
     # Boilerplate first message
-    message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text messages, " \
+    message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text message, " \
               " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
               "Yelp 🍲\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
               "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
@@ -231,24 +235,18 @@ def process_intro_messages(browser, sender_info):
         # Sending Message
         gv.send_new_message(browser, sender_info['from'], message, sender_info)
     # FINAL INTRO MESSAGE, ASKING FOR ADDRESS
-    elif current_user['count'] == 2:
-        if (sender_info['body'].lower() == 'no'):
-            print('they said no')
-            message = "\nI totally understand, "
-        else:
-            print('they said yes to the address!')
-            address = parse_address(sender_info['body'])
-            add_time_zone_offset_from_pst(address, sender_info)
-            sender_info = mongo.add_new_item_to_db(
-                sender_info, "home", address)
-            print(
-                "\nNice digs, " +
-                sender_info['name'] +
-                "! Is your address really ... " +
-                sender_info['home'] +
-                "?")
-            message = "\nNice digs, "
-        # Put together a response whether they gave an address or not
-        message = message + \
-            str(sender_info['name']) + "! \n\n🙋 Want to learn how I can help you? 📲 Reply help"
-        gv.send_new_message(browser, sender_info['from'], message, sender_info)
+    # elif current_user['count'] == 2:
+    #     if (sender_info['body'].lower() == 'no'):
+    #         print('they said no')
+    #         message = "\nI totally understand, "
+    #     else:
+    #         print('they said yes to the address!')
+    #         address = parse_address(sender_info['body'])
+    #         add_time_zone_offset_from_pst(address, sender_info)
+    #         sender_info = mongo.add_new_item_to_db(
+    #             sender_info, "home", address)
+    #         message = "\nThere's no place like 🏠, "
+    #     # Put together a response whether they gave an address or not
+    #     message = message + \
+    #         str(sender_info['name']) + "! \n\n🙋 Want some tips on what I can do? 📲 Reply help"
+    #     gv.send_new_message(browser, sender_info['from'], message, sender_info)

@@ -67,10 +67,13 @@ def nlp_extraction(browser, resp, sender_info):
 
     }
     try:
-        intent_result = str(resp['entities']['intent'][0]['value'])
-        func_name = intent_db[intent_result] + "(browser, resp, sender_info)"
-        print("Function name: " + func_name)
-        eval(func_name)
+        if (resp['_text'].lower() == 'no'):
+            msg_gen.trigger_new_home(browser, resp, sender_info)
+        else:
+            intent_result = str(resp['entities']['intent'][0]['value'])
+            func_name = intent_db[intent_result] + "(browser, resp, sender_info)"
+            print("Function name: " + func_name)
+            eval(func_name)
     except BaseException:
         print("Unable to determine intent ... continuing:")
         check_keywords(browser, resp, sender_info)

@@ -60,13 +60,13 @@ def run_sms_assist():
         except BaseException:
             print("Moving on to next loop ...")
         latest_email_temp = latest_email
-        time.sleep(10)
+        time.sleep(4)
     while True:
         try:
             inner()
-            time.sleep(10)
+            time.sleep(4)
         except BaseException:
-            time.sleep(10)
+            time.sleep(4)
             print('Hit an error... trying to avoid a crash here')
 
 

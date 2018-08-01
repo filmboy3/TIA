@@ -40,6 +40,7 @@ def reminder_request(input, date):
 def trigger_reminder(browser, resp, sender_info):
     print("Reminder Triggered")
     time_zone = sender_info['offset_time_zone']
+    print("Time_zone offset is: " + str(time_zone))
     print("Sender Info: " + str(sender_info))
     print(resp)
     try:
