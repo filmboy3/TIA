@@ -4,7 +4,7 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_4.jpg" width="30%" height="30%">
 
-#### What Can Tia Do?
+### What Can Tia Do?
 
 1. Driving | Walking | Pedestrian Directions 
 2. Current Weather | 5-Day-Forecast
@@ -37,9 +37,9 @@ TIA has a dedicated google voice number - (347) 352-6247 - which auto-forwards a
 
 6. TIA queries <i><a href="https://mlab.com">Wit.AI</i></a>, a natural language processing API, which parses the message for various intents and keywords. Once the response is returned from the WIT API, the processing begins:
 
-## TIA COMMANDS
+# TIA COMMANDS
 
-### Check Weather / 5-Day-Forecast
+## Check Weather / 5-Day-Forecast
 
 There are two commands for weather services:
 
@@ -58,13 +58,13 @@ For both weather-based commands, if left blank, the location defaults to home.
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_13.png" width="30%" height="30%">
 
-### Yelp
+## Yelp
 
 The <a href="https://www.yelp.com/developers">Yelp API</a> is queried, using a specific Yelp category, i.e., 'Pizza' or 'movie theaters'and a location, 'in brooklyn', 'near me', etc.  Once the general query is made, another query is made with more specific business info data (open/closing times, reviews) for the top three results and formatted.  
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_6.jpg" width="30%" height="30%">
 
-### Turn-By-Turn-Directions
+## Turn-By-Turn-Directions
 
 There are three types of direction commands:
 
@@ -80,7 +80,7 @@ Again, "home" synonyms can be used in either direction to default to the creator
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_20.png" width="30%" height="30%">
 
-### News Sources
+## News Sources
 
 There are four commands related to news services:
 
@@ -100,7 +100,7 @@ While NY Times and Hacker News headlines are also available through the News API
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_1.jpg" width="30%" height="30%">
 
-### Language Translation
+## Language Translation
 
 Example: "How would an Italian say, 'How much for that book?'"
 Example: "Translate お元気ですか into English"
@@ -109,7 +109,7 @@ The translation command utlizes another NLP resource, <a href="https://textblob.
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_9.jpg" width="30%" height="30%">
 
-### Knowledge
+## Knowledge
 
 Example: "Bio of Betty White"
 Example: "Let's play some Jeopardy"
@@ -127,7 +127,7 @@ The jeopardy call uses a <a href="http://jservice.io/">Jeopardy Trivia API</a> t
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_8.jpg" width="30%" height="30%">
 
-### Late Night Jokes
+## Late Night Jokes
 
 Example: "Make me laugh"
 Example: "I want some late night jokes from January 1st, 2010"
@@ -137,7 +137,7 @@ This author put together a google sheets-based API using topical Late Night Mono
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_16.png" width="30%" height="30%">
 
-### Help
+## Help
 
 There are two helper commands which give more information to the user:
 
