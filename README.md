@@ -50,13 +50,13 @@ First, the <a href="https://developer.here.com/documentation/geocoder/topics/qui
 
 This second call is sending the zip code information to <i><a href="https://openweathermap.org/API">Open Weather Map</a></i> API.  Once the request has been returned as JSON, weather information is extracted, formatted, and decorated with condition-specific weather emojis. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_17.jpg" width="40%" height="40%">
+<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_17.png" width="40%" height="40%">
 
 Next, a <b>create request</b> is made in the GMAIL API, to craft a new email, populate it with the formatted (and emoji-fied) results of the weather call. Next, another request is made to the Gmail API to send this email to the cell-email address. This process is the same for each of Tia's non-gmail commands (except <i>Jeopardy</i>, which actually sends two emails).  
 
 For both weather-based commands, if left blank, the location defaults to home.
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_13.jpg" width="40%" height="40%">
+<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_13.png" width="40%" height="40%">
 
 ### Yelp
 
@@ -78,7 +78,7 @@ Similar to the weather commands, each of the two waypoint locations are used in 
 
 Again, "home" synonyms can be used in either direction to default to the creator's home location.
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_20.jpg" width="40%" height="40%">
+<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_20.png" width="40%" height="40%">
 
 ### News Sources
 
@@ -90,11 +90,11 @@ Examples: "ABC headlines please"
 
 The <a href="https://newsapi.org/"><i>News Api</i></a> features a plethora of updated news summaries from providers across the globe, 75 of which were hand-picked to use on Tia. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_19.jpg" width="40%" height="40%">
+<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_19.jpng" width="40%" height="40%">
 
 For this command a GET request is made to the News API for the latest ABC news headlines, which then return up to 10 of the most recent Article Titles along with brief summary, which are numbered, formatted, and emoji-fied for sms-viewing.  
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_15.jpg" width="40%" height="40%">
+<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_15.png" width="40%" height="40%">
 
 While NY Times and Hacker News headlines are also available through the News API, these two have their own respective APIs, which TIA defaults to when requested, since there is more content available by querying the <a href= "https://developer.nytimes.com/">NY Times API</a> and <a href="https://github.com/HackerNews/API">Hacker News API</a>.  
 
@@ -121,7 +121,7 @@ The wiki search makes a GET request using the simple <a href="https://www.mediaw
 
 More advanced, non-biographical questions use the Wolfram-Alpha algorithmic answer API, which has a wide variety of topics and sources,  including ➗ Mathematics, 🔬 Science & Technology, 🎭 Society & Culture and 🍴 Everyday Life 🏀
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_14.jpg" width="40%" height="40%">
+<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_14.png" width="40%" height="40%">
 
 The jeopardy call uses a <a href="http://jservice.io/">Jeopardy Trivia API</a> to first get a random question. Using the category ID from that number, a second GET request is made for all the clues ever aired in that category. Tia randomly picks a matched set of five clues for that category, and sends the category questions along with the spoiler answers below it. 
 
@@ -135,7 +135,7 @@ Example: "Give me some random jokes"
 
 This author put together a google sheets-based API using topical Late Night Monologue jokes from <a href="https://www.newsmax.com/jokes/">Newsmax's</a> vast collection from 2009-Present. A call to the API will yield all hosts' jokes (Fallon, Kimmel, Colbert, etc.) combined for a specific night. This request defaults to the most recent airdate, but users can select a specific date or request jokes from a random date as well. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_16.jpg" width="40%" height="40%">
+<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_16.png" width="40%" height="40%">
 
 ### Help
 
@@ -146,5 +146,5 @@ Example: "Which news sources can I choose from again?" (WIP)
 
 These commands do not utilize any APIs, and are hard-coded text messages to remind the user of TIA's commands and which news sources are available. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_18.jpg" width="40%" height="40%">
+<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_18.ng" width="40%" height="40%">
 
