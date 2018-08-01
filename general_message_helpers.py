@@ -12,7 +12,10 @@ import time
 import re
 import mongo_helpers as mongo
 import google_voice_hub as gv
-
+import google_sheets_api_storage as SHEETS
+import directions_helpers as geo
+from dateutil import parser
+import requests
 
 def send_full_text_message(browser, result, sender_info, topic):
     tia_sign_off = "\n\n--😘,\n✨ Tia ✨\nText" \
@@ -72,9 +75,36 @@ def trigger_help(browser, resp, sender_info):
     print(resp)
     command_help_messages(browser, sender_info)
 
+def convert_coords_to_time_zone(lat, long):
+    url = "http://api.timezonedb.com/v2/get-time-zone?key=" + \
+          SHEETS.ZONE_API_KEY + "&format=json&by=position&lat=" + str(lat) + "&lng=" + str(long)
+    json_data = requests.get(url).json()
+    return json_data['zoneName']
+
+def convert_wit_zone_to_home(home_zone):
+  dt = parser.parse("2018-07-31T23:05:00.000-07:00")
+  unixTime = int(time.mktime(dt.timetuple()))
+  url = "http://api.timezonedb.com/v2/convert-time-zone?key=" + \
+        SHEETS.ZONE_API_KEY + "&format=json&from=America/Los_Angeles&to=" + str(home_zone) + "&time=" + str(unixTime)
+  json_data = requests.get(url).json()
+  distance_from_pst = int(json_data['offset'])
+  result = distance_from_pst/3600
+  print("Offset: " + str(distance_from_pst/3600))
+  # print("Now_time east:" + str(time.time()))
+  return int(result)
+
+def add_time_zone_offset_from_pst(command, sender_info):
+    home_lat_long = geo.lat_long_single_location(command)
+    print("home_lat_long: " + str(home_lat_long))
+    time_zone_change = convert_wit_zone_to_home(convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1])))
+    print("time_zone_change: " + str(time_zone_change))
+    # sender_info = mongo.add_new_item_to_db(sender_info, "offset_time_zone", time_zone_change )
+    return time_zone_change
 
 def new_home_request(browser, command, sender_info):
+    add_time_zone_offset_from_pst(command, sender_info)
     sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
+
     message = "\nNice digs, " + \
         str(sender_info['name']) + "!\n\nText me 'new home' with your address to change 🏠 at any time"
     gv.send_new_message(browser, sender_info['from'], message, sender_info)
@@ -82,7 +112,10 @@ def new_home_request(browser, command, sender_info):
 
 def trigger_new_home(browser, resp, sender_info):
     print("New Home Triggered")
-    location = resp['entities']['location'][0]['value']
+    try:
+        location = resp['entities']['location'][0]['value']
+    except BaseException:
+        location = resp['_text']
     result = location
     print("New Home Location: " + location)
     print(resp)
@@ -204,6 +237,7 @@ def process_intro_messages(browser, sender_info):
         else:
             print('they said yes to the address!')
             address = parse_address(sender_info['body'])
+            add_time_zone_offset_from_pst(address, sender_info)
             sender_info = mongo.add_new_item_to_db(
                 sender_info, "home", address)
             print(

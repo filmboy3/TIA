@@ -28,6 +28,7 @@ WOLFRAM_API = api_keys_sheet.cell(2, 9).value
 SECRET_MONGO_URI = str(api_keys_sheet.cell(2, 13).value)
 SECRET_YELP_API = str(api_keys_sheet.cell(2, 14).value)
 YELP_API = YelpAPI(SECRET_YELP_API)
+ZONE_API_KEY = str(api_keys_sheet.cell(2, 19).value)
 
 # SET UP NLP w/ WIT.AI
 WIT_CLIENT = Wit(str(api_keys_sheet.cell(2, 18).value))

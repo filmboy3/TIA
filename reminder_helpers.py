@@ -14,12 +14,36 @@ from dateutil import parser
 import datetime 
 import general_message_helpers as msg_gen
 
+# def get_home_time_zone(home):
+#     home
+
+
 def reminder_request(input, date):
-    result = "Okay, I've set a reminder for " + parser.parse(str(date)) + ": ⏱️ " + str(input) + " ⏱️"
+    date = re.sub("T", ".", date)
+    date = date.split(".")
+    parsed_date = parser.parse(str(date[0]) + " " + str(date[1]))
+    day_full = str(parsed_date).split(" ")[0]
+    day_without_year = day_full.split("-")[1:]
+    day_str_without_year = "/".join(day_without_year)
+    time = str(parsed_date).split(" ")[1]
+    time_split = time.split(":")
+    hours = time_split[0]
+    minutes = time_split[1]
+    time_of_day_str = "AM"
+    
+    if (int(hours) > 12):
+      hours = int(hours) - 12
+      time_of_day_str = "PM"
+  
+    formatted_time = str(hours) + ":" + str(minutes) + " " + time_of_day_str
+
+    result = "I've set a reminder for " + day_str_without_year + " @ " + formatted_time + ": ⏱️ " + str(input) + " ⏱️"
     return result
 
 def trigger_reminder(browser, resp, sender_info):
     print("Reminder Triggered")
+    time_zone = get_home_time_zone(sender_info['home'])
+    print("Sender Info: " + str(sender_info))
     print(resp)
     try:
         reminder = resp['entities']['reminder'][0]['value']
@@ -43,7 +67,7 @@ def trigger_reminder(browser, resp, sender_info):
             except BaseException:
                 try:
                     date = resp['entities']['wdatetime'][0]['value']
-                    print("\n3rd Try date: " + str(date))
+                    print("\n4rd Try date: " + str(date))
                 except BaseException:
                     today = datetime.date.today()
                     date = today + datetime.timedelta(days = 1) 
@@ -53,7 +77,7 @@ def trigger_reminder(browser, resp, sender_info):
     try:
         msg_gen.send_full_text_message(browser,
                                        reminder_request(
-                                           reminder, date),
+                                           str(reminder), str(date)),
                                        sender_info,
                                        "⏱️ Reminder Setup ⏱️")
     except BaseException:
