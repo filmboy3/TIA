@@ -67,7 +67,7 @@ def nlp_extraction(browser, resp, sender_info):
 
     }
     try:
-        if (resp['_text'].lower() == 'no'):
+        if (resp['_text'].lower() == 'no' or resp['_text'].lower().startswith("new home")) :
             msg_gen.trigger_new_home(browser, resp, sender_info)
         else:
             intent_result = str(resp['entities']['intent'][0]['value'])
