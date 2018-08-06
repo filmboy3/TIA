@@ -152,14 +152,12 @@ def trigger_translate(resp, sender_info):
 
     blob = TextBlob(translationPhrase)
     langCode = language_code_convert(language)
-    translation = (resp['_text'], blob.translate(to=langCode))
+    translation = blob.translate(to=langCode)
     result = "✍️ '" + translationPhrase.capitalize() + "' translated into 🌏 " + \
-        language.capitalize() + " 🌏 '" + str(translation[1]).capitalize() + "' ✍️"
+        language.capitalize() + " 🌏 '" + str(translation).capitalize() + "' ✍️"
     # print(result)
     print("Language Code: ", langCode)
     print("Translation Phrase: ", translationPhrase)
-    msg_gen.store_reply_in_mongo(
-             result, sender_info, "📝 Translation 📝")
     try:
         msg_gen.store_reply_in_mongo(
              result, sender_info, "📝 Translation 📝")
