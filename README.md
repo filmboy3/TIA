@@ -17,11 +17,12 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 9. Scheduled Reminders
 10. Forward | Delete | Mark-As-Read new emails (OWNER-ONLY, see gmailfeatures.py)
 
-### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ (at this point in development, the server is taken down for frequent changes/testing, so please hold off on the demo for now!)
+### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ 
+(at this stage, Tia's servers are frequently down for changes/testing, so please hold off on the demo for now!)
 
 ## How it works
 
-Tia is made up of several python servers communicating via RabbitMQ task queues as well as 10+ RESTful APIs, beginning with ...
+Tia is made up of several python servers communicating via <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queues as well as dozens of RESTful APIs, beginning with:
  
 ## GMAIL API 
 
