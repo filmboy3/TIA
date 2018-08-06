@@ -1,0 +1,1805 @@
+Microsoft Windows [Version 6.1.7601]Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+CConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'Charlie likes me' from '+19083766480' [x] DoneConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'One more try' from '+19083766480'
+ [x] DoneConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'Next one' from '+19083766480' [x] DoneConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'What was happening?' from '+19083766480' [x] DoneTraceback (most recent call last):
+  File "listener_preprocess.py", line 24, in <module>    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, in start_consumingF:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+CConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'New rules' from '+19083766480'Successfully marked message as currently processing
+ [x] DoneConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'New rules' from '+19083766480'
+Successfully marked message as currently processing [x] DoneConverted Message
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message[x] Received Message from PRE-PROCESSING QUEUE: 'New rules' from '+19083766480'
+ [x] DoneConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'New rules' from '+19083766480'
+ [x] Done
+Traceback (most recent call last):
+  File "listener_preprocess.py", line 24, in <module>    channel.start_consuming()
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.pyF:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+CConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'Let's see that rocking bod' from '+19083766480'
+{'_id': "ObjectId('5b67a838bc3dca1e8cb7a610')", 'sms_id': 'datetime.datetime(2018', 8: None, 5: None, 21: Nonene, 28: None, '822000)': None, 'body': "Let's see that rocking bod", 'from': '+19083766480', 'status': 'unproc
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+CConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'How would you say 'i love you' in italian?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)Translate Triggered{'_text': "how would you say 'i love you' in italian?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.9152275, 'value': 'how would you say', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.93808666666667, 'value': 'i love you', 'type': 'value'}], 'wit_language': [{'confidence': 0.98661971966463, 'value': 'italian', 'type': 'value'}], 'intent': [{'confidence': 0.99999164011062, 'value': 'translate_get'}]}, 'msg_id': '0JhAtS16kg5oITiNK'}Language Code:  it
+Translation Phrase:  i love you
+Unable to determine intent ... continuing:Translate Triggered
+{'_text': "how would you say 'i love you' in italian?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.9152275, 'value': 'how would you say', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.93808666666667, 'value': 'i love you', 'type': 'value'}], 'wit_language': [{'confidence': 0.98661971966463, 'value': 'italian', 'type': 'value'}], 'intent': [{'confidence': 0.99999164011062, 'value': 'translate_get'}]}, 'msg_id': '0JhAtS16kg5oITiNK'}Language Code:  it
+Translation Phrase:  i love you
+Wolfram TriggeredF:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+CConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'please shoot me' in Italian?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)Translate Triggered
+{'_text': "how do you say 'please shoot me' in italian?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.93536333333333, 'value': 'please shoot me', 'type': 'value'}], 'wit_language': [{'confidence': 0.98374514835823, 'value': 'italian', 'type': 'value'}], 'intent': [{'confidence': 0.99805170892884, 'value': 'translate_get'}]}, 'msg_id': '0MdAXonEewmHUie8N'}
+Language Code:  itTranslation Phrase:  please shoot me
+I've got some 📝 Translation 📝 info for you, Jp !
+✍️ 'Please shoot me' translated into 🌏 Italian 🌏 'Per favore sparami' ✍️
+
+--😘,✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+I've got some 💀 Error 💀 info for you, Jp !
+
+😟 I hate to be the bearer of bad 🗞️, but right now, your Translation request didn't work ... 🙏 try again!
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+Unable to determine intent ... continuing:
+Translate Triggered
+{'_text': "how do you say 'please shoot me' in italian?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.93536333333333, 'value': 'please shoot me', 'type': 'value'}], 'wit_language': [{'confidence': 0.98374514835823, 'value': 'italian', 'type': 'value'}], 'intent': [{'confidence': 0.99805170892884, 'value': 'translate_get'}]}, 'msg_id': '0MdAXonEewmHUie8N'}
+Language Code:  it
+Translation Phrase:  please shoot me
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'Please shoot me' translated into 🌏 Italian 🌏 'Per favore sparami' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How does a german say 'hello'?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how does a german say 'hello'?", 'entities': {'reminder': [{'suggested': True, 'confidence': 0.84325, 'value': 'how', 'type': 'value'}], 'wit_language': [{'confidence': 0.94972030709856, 'value': 'german', 'type': 'value'}],
+'phrase_to_translate': [{'suggested': True, 'confidence': 0.93809, 'value': 'hello', 'type': 'value'}], 'intent': [{'confidence': 0.98078738023716, 'value': 'translate_get'}]}, 'msg_id': '0ent7r6r1CpYiPlmg'}
+Language Code:  deTranslation Phrase:  hello
+I've got some 📝 Translation 📝 info for you, Jp !
+✍️ 'Hello' translated into 🌏 German 🌏 'Hallo' ✍️
+
+--😘,✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+{'_id': "ObjectId('5b67b428bc3dca2ed0f2bc53')", 'sms_id': 'datetime.datetime(2018', 8: None, 5: None, 22: None, 36: None, 24: None, '566000)': None, 'body': "How does a german say 'hello'?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:36:24', 'zone_name': 'America/New_York', 'count': 23, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Unable to determine intent ... continuing:
+Reminder Triggered
+Time_zone offset is: 3
+Sender Info: {'_id': "ObjectId('5b67b428bc3dca2ed0f2bc53')", 'sms_id': 'datetime.datetime(2018', 8: None, 5: None, 22: None, 36: None, 24: None, '566000)': None, 'body': "How does a german say 'hello'?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:36:24', 'zone_name': 'America/New_York', 'count': 23, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_text': "how does a german say 'hello'?", 'entities': {'reminder': [{'suggested': True, 'confidence': 0.84325, 'value': 'how', 'type': 'value'}], 'wit_language': [{'confidence': 0.94972030709856, 'value': 'german', 'type': 'value'}],
+'phrase_to_translate': [{'suggested': True, 'confidence': 0.93809, 'value': 'hello', 'type': 'value'}], 'intent': [{'confidence': 0.98078738023716, 'value': 'translate_get'}]}, 'msg_id': '0ent7r6r1CpYiPlmg'}
+
+Reminder: how
+Translate Triggered
+{'_text': "how does a german say 'hello'?", 'entities': {'reminder': [{'suggested': True, 'confidence': 0.84325, 'value': 'how', 'type': 'value'}], 'wit_language': [{'confidence': 0.94972030709856, 'value': 'german', 'type': 'value'}],
+'phrase_to_translate': [{'suggested': True, 'confidence': 0.93809, 'value': 'hello', 'type': 'value'}], 'intent': [{'c
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Traceback (most recent call last):
+  File "listener_preprocess.py", line 24, in <module>
+    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, i
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+CConverted Message[x] Received Message from PRE-PROCESSING QUEUE: 'How does a german say 'goodbye'?' from '+19083766480'In the parsing phase...Function name: trans.trigger_translate(resp, sender_info)Translate Triggered
+{'_text': "how does a german say 'goodbye'?", 'entities': {'reminder': [{'suggested': True, 'confidence': 0.83917, 'value': 'how', 'type': 'value'}], 'wit_language': [{'confidence': 0.94564224093438, 'value': 'german', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True,
+uggested': Tru                                                                                                              _get'}]}, 'msg_id'confidence': 0.93809, 'value': 'goodbye', 'type': 'value'}], 'intent': [{'confidence': 0.9958160739467, 'value': 'translate_get'}]}, 'msg': '0C9ILdcW0O2Bbuj0q'}
+Language Code:  de
+Translation Phrase:  goodbyeI've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'Goodbye' translated into 🌏 German 🌏 'Auf wiedersehen' ✍️
+
+--😘,
+✨ Tia ✨                                                                                                                     rom': '+190837664Text 📲 me another request, Jp , or text HELP                                                                                e': 'America/New_alue'}], 'wit_language': [{'confidence': 0.94564224093438, 'value': 'german', 'type': 'value'}], 'phrase_to_translate': [{'sp '}
+uggested': Tr                                                                                                               m': '+19083766480'confidence': 0.93809, 'value': 'goodbye', 'type': 'value'}], 'intent': [{'confidence': 0.9958160739467, 'value': 'translateone_name': 'Ameri_get'}]}, 'ms                                                                                                               me': 'Jp ', 'laun': '0C9ILdcW0O2Bbuj0q'}
+Language Code:  de
+Translation Phrase:  goodbye
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'Goodbye' translated into 🌏 German 🌏 'Auf wiedersehen' ✍️
+
+--😘,
+✨ Tia ✨                                                                                                                     rom': '+190837664Text 📲 me another request, Jp , or text HELP                                                                                e': 'America/New_alue'}], 'wit_language': [{'confidence': 0.94564224093438, 'value': 'german', 'type': 'value'}], 'phrase_to_translate': [{'sp '}
+uom': '+19083                                                                                                               m': '+19083766480'confidence': 0.93809, 'value': 'goodbye', 'type': 'value'}], 'intent': [{'confidence': 0.9958160739467, 'value': 'translateone_name': 'Ameri_': 'America/                                                                                                               me': 'Jp ', 'laun': '0C9ILdcW0O2Bbuj0q'}
+Language Code:  de
+Translation Phrase:  goodbyeI've got some 📝 Translation 📝 info for you, Jp !
+✍️ 'Goodbye' translated into 🌏 German 🌏 'Auf wiedersehen' ✍️
+--😘,
+✨ Tia ✨Text 📲 me another request, Jp , or text HELP
+alue'}], 'wit_language': [{'confidence': 0.94564224093438, 'value': 'german', 'type': 'value'}], 'phrase_to_translate': [{'s'confidence': 0.93809, 'value': 'goodbye', 'type': 'value'}], 'intent': [{'confidence': 0.9958160739467, 'value': 'translate': '0C9ILdcW0O2Bbuj0q'}Language Code:  de
+Translation Phrase:  goodbye
+I've got some 📝 Translation 📝 info for you, Jp !
+✍️ 'Goodbye' translated into 🌏 German 🌏 'Auf wiedersehen' ✍️
+--😘,
+✨ Tia ✨Text 📲 me another request, Jp , or text HELP
+{'_id': "ObjectId('5b67b7b5bc3dca3768e01f46')", 'sms_id': 'PaJUudAb0c9pA1ze', 'body': "How does a german say 'goodbye'?", 'f80', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:51:32', 'zone_namYork', 'count': 24, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'J{'_id': ObjectId('5b67b7b5bc3dca3768e01f46'), 'sms_id': 'PaJUudAb0c9pA1ze', 'body': "How does a german say 'goodbye'?", 'fro', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:51:32', 'zca/New_York', 'count': 24, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'nach_time': 'NOW'}
+I've got some 📝 Translation 📝 info for you, Jp !
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say, 'apples and carrots' in spanish?' from '+19083766480'
+In the parsing phase...Function name: trans.trigger_translate(resp, sender_info)Translate Triggered{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence': 0.93241, 'value': 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_language': [{'confidence': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'translate_get'}]}, 'msg_id': '0YKsFLqob60X7hrE5'}
+Language Code:  es
+Translation Phrase:  apples and carrots
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'Apples and carrots' translated into 🌏 Spanish 🌏 'Manzanas y zanahorias' ✍️
+--😘,
+✨ Tia ✨Text 📲 me another request, Jp , or text HELP
+{'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'apples and carrots' in spanish?",
+'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Unable to determine intent ... continuing:Reminder Triggered
+Time_zone offset is: 3
+Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'apples and carrots' ies and carrots'                                                                                                          ': '2018-08-05 23n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time street new york
+': '2018-08-05 2
+:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette0.93241, 'value': street new york                                                                                                         age': [{'confidenny 10012', 'name': 'Jp '}                                                                                                late_get'}]}, 'ms{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
+0.93241, 'value'
+ 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu
+age': [{'confide
+ce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans0.93241, 'value':Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'applage': [{'confidenes and                                                                                                                   late_get'}]}, 'msn spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time
+': '201
+:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette
+ street
+ny 10012', 'name': 'Jp '}
+{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
+0.93241
+ 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu
+age': [
+ce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans
+late_ge                                                                                                                  s' in spanish?",
+n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time5 23:00:13', 'zon': '20                                                                                                                   ork ny 10012', 'n:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette
+ stree
+ny 10012', 'name': 'Jp '}
+{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
+0.9324
+ 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu
+age':ce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans
+Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'apples an
+n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2
+:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette
+ stre
+ny 10012', 'name': 'Jp '}
+{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
+0.932
+ 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu
+age':ce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans
+Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'apple_id': '0YKsFLqob60X7hrE5'}
+n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time'eminder: apples
+:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayetteny 10012', 'name': 'Jp '}
+{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
+0'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu
+ae': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'transce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans
+Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'appln spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayetteny 10012', 'name': 'Jp '}
+{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
+ 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_languce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'transg_id': '0YKsFLqob60X7hrE5'}
+
+Reminder: apples
+Translate Triggered{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
+ 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_languce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'transg_id': '0YKsFLqob60X7hrE5'}Language Code:  es
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say, 'Peas and carrots' in french?' from '+19083766480'
+In the parsing phase...Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered{'_text': "how do you say 'peas and carrots' in french?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.86388, 'value': 'how do', 'type': 'value'}], 'reminder': [{'suggested': True, 'confidence': 0.889185, 'value': "'peas", 'type': 'value'},{'suggested': True, 'confidence': 0.90225, 'value': 'carrots', 'type': 'value'}], 'wit_language': [{'confidence': 0.74044975654172, 'v
+a
+lue': 'French', 'type': 'value'}], 'intent': [{'confidence': 0.9654051222084, 'value': 'translate_get'}]}, 'msg_id': '0a5wStyTswS3GBqx
+p
+'}
+Language Code:  frTranslation Phrase:  peas and carrots
+{'_text': "how do you say 'peas and carrots' in french?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.8688, 'value': 'how do', 'type': 'value'}], 'reminder': [{'suggested': True, 'confidence': 0.889185, 'value': "'peas", 'type': 'value'},{'suggested': True, 'confidence': 0.90225, 'value': 'carrots', 'type': 'value'}], 'wit_language': [{'confidence': 0.74044975654172, 'vlue': 'French', 'type': 'value'}], 'intent': [{'confidence': 0.9654051222084, 'value': 'translate_get'}]}, 'msg_id': '0a5wStyTswS3GBqx'}Language Code:  frTranslation Phrase:  peas and carrots
+Unable to determine intent ... continuing:Reminder Triggered
+Translate Triggered
+{'_text': "how do you say 'peas and carrots' in french?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.8688, 'value': 'how do', 'type': 'value'}], 'reminder': [{'suggested': True, 'confidence': 0.889185, 'value': "'peas", 'type': 'value'},{'suggested': True, 'confidence': 0.90225, 'value': 'carrots', 'type': 'value'}], 'wit_language': [{'confidence': 0.74044975654172, 'vlue': 'French', 'type': 'value'}], 'intent': [{'confidence': 0.9654051222084, 'value': 'translate_get'}]}, 'msg_id': '0a5wStyTswS3GBqx'}
+Language Code:  fr
+Translation Phrase:  peas and carrotsWolfram Triggered{'_text': "how do you say 'peas and carrots' in french?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.8688, 'value': 'how do', 'type': 'value'}], 'reminder': [{'suggested': True, 'confidence': 0.889185, 'value': "'peas", 'type': 'value'},{'suggested': True, 'confidence': 0.90225, 'value': 'carrots', 'type': 'value'}], 'wit_language': [{'confidence': 0.74044975654172, 'vlue': 'French', 'type': 'value'}], 'intent': [{'confidence': 0.9654051222084, 'value': 'translate_get'}]}, 'msg_id': '0a5wStyTswS3GBqx'}
+triggered wolf alert inside with: how do you say 'peas and carrots' in french?http://api.wolframalpha.com/v2/query?appid=39JT58-55R6LWTVVV&input=how%20do%20you%20say%20'peas%20and%20carrots'%20in%20french?&outputjson
+ [x] Done
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'rooster' in french?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how do you say 'rooster' in french?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.907455, 'value': "'rooster", 'type': 'value'}], 'wit_language': [{'confidence': 1, 'value': 'French', 'type': 'value'}], 'intent': [{'confidence': 0.98493102111619, 'value': 'translate_get'}]}, 'msg_id': '0z5IKFRnnCt10Bk7b'}
+Language Code:  fr
+Translation Phrase:  'rooster
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ ''rooster' translated into 🌏 French 🌏 ''coq' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+{'_id': "ObjectId('5b67bb73bc3dca3178b48bcf')", 'sms_id': 'OjPdWnvlmeiB5crY', 'body': "How do you say 'rooster' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:07:31', 'zone_name': 'America/New_York', 'count': 27, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully changed Reply message
+I've got some 📝 Translation 📝 info for you, Jp !
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'hello' in french?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)Translate Triggered{'_text': "how do you say 'hello' in french?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.914895, 'value': 'how do', 'type': 'value'}, {'suggested': True, 'confidence': 0.84539, 'value': 'say', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.9381, 'value': 'hello', 'type': 'value'}], 'wit_language': [{'confidence': 1, 'value': 'French', 'type': 'value'}], 'intent': [{'confidence': 0.9956361399242, 'value': 'translate_get'}]}, 'msg_id': '0IO4W8Ba2ReVNMPY3'}
+Language Code:  fr
+Translation Phrase:  hello
+Unable to determine intent ... continuing:
+Translate Triggered
+{'_text': "how do you say 'hello' in french?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.914895, 'value': 'how do', 'type': 'value'}, {'suggested': True, 'confidence': 0.84539, 'value': 'say', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.9381, 'value': 'hello', 'type': 'value'}], 'wit_language': [{'confidence': 1, 'value': 'French', 'type': 'value'}], 'intent': [{'confidence': 0.9956361399242, 'value': 'translate_get'}]}, 'msg_id': '0IO4W8Ba2ReVNMPY3'}
+Language Code:  fr
+Translation Phrase:  hello
+Wolfram Triggered
+{'_text': "how do you say 'hello' in french?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.914895, 'value': 'how do', 'type': 'value'}, {'suggested': True, 'confidence': 0.84539, 'value': 'say', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.9381, 'value': 'hello', 'type': 'value'}], 'wit_language': [{'confidence': 1, 'value': 'French', 'type': 'value'}], 'intent': [{'confidence': 0.9956361399242, 'value': 'translate_get'}]}, 'msg_id': '0IO4W8Ba2ReVNMPY3'}
+triggered wolf alert inside with: how do you say 'hello' in french?http://api.wolframalpha.com/v2/query?appid=39JT58-55R6LWTVVV&input=how%20do%20you%20say%20'hello'%20in%20french?&output=json
+ [x] Done
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'book' in french?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how do you say 'book' in french?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.88738, 'value': "'book'", 'type': 'value'}], 'wit_yelp_category': [{'confidence': 1, 'value': 'french', 'type': 'value'}], 'intent': [{'confidence':
+0.99268433337709, 'value': 'translate_get'}]}, 'msg_id': '0oxkJFj9bE9mp0MwT'}
+Language Code:  fr
+Translation Phrase:  'book'
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ ''book'' translated into 🌏 French 🌏 ''livre'' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+{'_id': "ObjectId('5b67bdd6bc3dca34e0eac45c')", 'sms_id': 'CWc1sFqgD5rd7cie', 'body': "How do you say 'book' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:17:42', 'zone_name': 'America/New_York', 'count': 29, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully changed Reply message
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ ''book'' translated into 🌏 French 🌏 ''livre'' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+{'_id': "ObjectId('5b67bdd6bc3dca34e0eac45c')", 'sms_id': 'CWc1sFqgD5rd7cie', 'body': "How do you say 'book' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:17:42', 'zone_name': 'America/New_York', 'count': 29, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name'
+F:\Hive\TIA-Texting-Internet-Assistant>
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'love' in italian?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how do you say 'love' in italian?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.92441, 'value': "'love", 'type': 'value'}], 'wit_language': [{'confidence': 0.97682299544242, 'value': 'italian', 'type': 'value'}], 'intent': [{'confidence': 0.99953462888144, 'value': 'translate_get'}]}, 'msg_id': '0MFD1Kx8cBhHCnjBN'}
+Language Code:  it
+Translation Phrase:  'love
+Unable to determine intent ... continuing:
+Translate Triggered{'_text': "how do you say 'love' in italian?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.92441, 'value': "'love", 'type': 'value'}], 'wit_language': [{'confidence': 0.97682299544242, 'value': 'italian', 'type': 'value'}], 'intent': [{'confidence': 0.99953462888144, 'value': 'translate_get'}]}, 'msg_id': '0MFD1Kx8cBhHCnjBN'}Language Code:  it
+Translation Phrase:  'love
+ [x] Done
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'Jeopardy' from '+19083766480'
+In the parsing phase...Function name: jep.trigger_jeopardy(resp, sender_info)
+Jeopardy Triggered
+I've got some 📺 Jeopardy 📺 info for you, Jp !
+
+U.S.A. (1996)
+
+💰 $100💰 In 1978, this New Jersey city hit the jackpot with the opening of its first casino
+
+💰 $200💰 The Wadsworth Athenium, America's oldest public art museum, is located in this Conn. capital
+
+💰 $300💰 The visitor center at this fort offers a film of the writing of "The Star-Spangled Banner"
+
+💰 $400💰 A formation known as Half Dome rises more than 4,700 feet in this California national park
+
+💰 $500💰 What's thought to be the oldest log cabin in the U.S. is located on Vermont's Grand Isle in this lake
+
+
+🚧 🚧 🚧 🚧 🚧 🚧
+⬇️ SPOILERS ⬇️
+🚧 🚧 🚧 🚧 🚧 🚧
+
+U.S.A. (1996)
+
+In 1978, this New Jersey city hit the jackpot with the opening of its first casino 🎯 Atlantic City 🎯
+
+The Wadsworth Athenium, America's oldest public art museum, is located in this Conn. capital 🎯 Hartford 🎯
+
+The visitor center at this fort offers a film of the writing of "The Star-Spangled Banner" 🎯 Fort McHenry 🎯
+
+A formation known as Half Dome rises more than 4,700 feet in this California national park 🎯 Yosemite 🎯
+
+What's thought to be the oldest log cabin in the U.S. is located on Vermont's Grand Isle in this lake 🎯 Lake Champlain 🎯
+
+
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+Successfully marked message as completed processing
+Successfully changed Reply message
+{'_id': ObjectId('5b67bed6bc3dca3e78dedb5d'), 'sms_id': 'ohNIyG8dzz4S9ZBX', 'body': 'Jeopardy', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:21:57', 'zone_name': 'America/New_York', 'count': 31, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+ [x] Done
+Traceback (most recent call last):
+  File "listener_preprocess.py", line 24, in <module>
+      File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, in start_consuming
+    self.connection.process_data_events(time_limit=None)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+707, in process_data_events
+    self._flush_output(common_terminator)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+455, in _flush_output
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'I want to play jeopardy' from '+19083766480'In the parsing phase...
+Function name: jep.trigger_jeopardy(resp, sender_info)
+Jeopardy Triggered
+Unable to determine intent ... continuing:
+Jeopardy Triggered
+ [x] DoneConverted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'Play jeopardy' from '+19083766480'
+In the parsing phase...
+Function name: jep.trigger_jeopardy(resp, sender_info)
+Jeopardy Triggered
+Unable to determine intent ... continuing:
+Jeopardy Triggered
+ [x] Done
+Traceback (most recent call last):
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+ [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'popcorn' ib Italian?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how do you say 'popcorn' ib italian?", 'entities': {'wolfram_search_query': [{'suggested': True, 'confidence': 0.8918775, 'value': 'how do you say', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.927275, 'value': "'popcorn",
+'type': 'value'}], 'wit_language': [{'confidence': 0.89204696785058, 'value': 'italian', 'type': 'value'}], 'intent': [{'confidence':
+0.9991690023282, 'value': 'translate_get'}]}, 'msg_id': '0yyvTUlEwbwEPAc0j'}Language Code:  it
+Translation Phrase:  'popcorn
+I've got some 📝 Translation 📝 info for you, Jp !
+✍️ ''popcorn' translated into 🌏 Italian 🌏 ''popcorn' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+<class 'dict'>
+{'_id': "ObjectId('5b67c0f8bc3dca3cdce2c056')", 'sms_id': '1fcoveom6t1rNdik', 'body': "How do you say 'popcorn' ib Italian?", 'from':
+'+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:31:04', 'zone_name': 'America/New_York', 'count': 34, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ ''popcorn' translated into 🌏 Italian 🌏 ''popcorn' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+<class 'dict'>
+{'_id': "ObjectId('5b67c0f8bc3dca3cdce2c056')", 'sms_id': '1fcoveom6t1rNdik', 'body': "How do you say 'popcorn' ib Italian?", 'from':
+'+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:31:04', 'zone_name': 'America/New_York', 'count': 34, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+ [x] Done
+Traceback (most recent call last):
+  File "listener_preprocess.py", line 24, in <module>
+    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+1756, in start_consuming
+    self.connection.process_data_events(time_limit=None)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+707, in process_data_events
+    self._flush_output(common_terminator)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+455, in _flush_output
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'hotel' in german?' from '+19083766480'In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how do you say 'hotel' in german?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.90374666666667, 'value': "'hotel'", 'type': 'value'}], 'wit_language': [{'confidence': 0.91663159906656, 'value': 'german', 'type': 'value'}], 'intent': [{'confidence': 0.99951332875839, 'value': 'translate_get'}]}, 'msg_id': '0ESdQYMCK5fs3j1Pg'}Language Code:  de
+Translation Phrase:  'hotel'
+Unable to determine intent ... shut it down:
+ [x] Done
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How does a german say hotel' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': 'how does a german say hotel', 'entities': {'reminder': [{'suggested': True, 'confidence': 0.906235, 'value': 'how does', 'type': 'value'}], 'wit_language': [{'confidence': 0.95967763900953, 'value': 'german', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.92072, 'value': 'hotel', 'type': 'value'}], 'intent': [{'confidence': 0.98645958973457, 'value': 'translate_get'}]}, 'msg_id': '02Cl2SGc9OGYlbgpJ'}
+Language Code:  de
+Translation Phrase:  hotel
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'Hotel' translated into 🌏 German 🌏 'Hotel' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+<class 'dict'>
+{'_id': "ObjectId('5b67c245bc3dca23cc6f3192')", 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully marked message as completed processing
+Successfully changed Reply message
+{'_id': ObjectId('5b67c245bc3dca23cc6f3192'), 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'Hotel' translated into 🌏 German 🌏 'Hotel' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+<class 'dict'>
+{'_id': "ObjectId('5b67c245bc3dca23cc6f3192')", 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully marked message as completed processing
+Successfully changed Reply message
+{'_id': ObjectId('5b67c245bc3dca23cc6f3192'), 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+ [x] Done
+Traceback (most recent call last):
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+[*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say computer in italian?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': 'how do you say computer in italian?', 'entities': {'reminder': [{'suggested': True, 'confidence': 0.89681, 'value': 'do you say computer', 'type': 'value'}], 'wit_language': [{'confidence': 0.98565965172574, 'value': 'italian', 'type': 'value'}], 'intent':
+[{'confidence': 0.998322883766, 'value': 'translate_get'}]}, 'msg_id': '0SSixPRc0p3ifZuR0'}
+Language Code:  itTranslation Phrase:  how do you say computer in italian?
+I've got some 📝 Translation 📝 info for you, Jp !
+✍️ 'How do you say computer in italian?' translated into 🌏 Italian 🌏 'Come si dice computer in italiano?' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+<class 'dict'>
+{'_id': "ObjectId('5b67c3b8bc3dca3f64edcf75')", 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67c3b8bc3dca3f64edcf75'), 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'How do you say computer in italian?' translated into 🌏 Italian 🌏 'Come si dice computer in italiano?' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+<class 'dict'>
+{'_id': "ObjectId('5b67c3b8bc3dca3f64edcf75')", 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67c3b8bc3dca3f64edcf75'), 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+ [x] Done
+Traceback (most recent call last):
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+[*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How does an italian say 'mountain'?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how does an italian say 'mountain'?", 'entities': {'wit_language': [{'confidence': 0.98918007420317, 'value': 'italian', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.93808, 'value': 'mountain', 'type': 'value'}], 'intent':
+[{'confidence': 0.99936988292861, 'value': 'translate_get'}]}, 'msg_id': '0exDBvohxlUh1ZkuT'}
+Language Code:  itTranslation Phrase:  mountain
+Unable to determine intent ... shut it down:
+ [x] DoneTraceback (most recent call last):
+  File "listener_preprocess.py", line 24, in <module>
+    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+1756, in start_consuming
+    self.connection.process_data_events(time_limit=None)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+707, in process_data_events
+    self._flush_output(common_terminator)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+455, in _flush_output
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py[*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How does an italian say 'mountain'?' from '+19083766480'In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how does an italian say 'mountain'?", 'entities': {'wit_language': [{'confidence': 0.98918007420317, 'value': 'italian', 'type': 'value'}], 'phrase_to_translate': [{'suggested': True, 'confidence': 0.93808, 'value': 'mountain', 'type': 'value'}], 'intent':
+[{'confidence': 0.99936988292861, 'value': 'translate_get'}]}, 'msg_id': '0aBAX3E0yPK0DfGEt'}Language Code:  it
+Translation Phrase:  mountain
+Unable to determine intent ... shut it down:
+ [x] Done
+Traceback (most recent call last):
+  File "listener_preprocess.py", line 24, in <module>
+    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+1756, in start_consuming
+    self.connection.process_data_events(time_limit=None)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+707, in process_data_events
+    self._flush_output(common_terminator)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+455, in _flush_output
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py[*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say hello in japanese' from '+19083766480'In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': 'how do you say hello in japanese', 'entities': {'reminder': [{'suggested': True, 'confidence': 0.89458, 'value': 'do you say hello', 'type': 'value'}], 'wit_language': [{'confidence': 0.88453461613585, 'value': 'Japanese', 'type': 'value'}], 'intent': [{'confidence': 0.99957313315284, 'value': 'translate_get'}]}, 'msg_id': '0zoKfrzbSmwAwRvOr'}Language Code:  ja
+Translation Phrase:  how do you say hello in japanese
+NOW
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'How do you say hello in japanese' translated into 🌏 Japanese 🌏 'どうやって日本にこんにちは' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+<class 'dict'>
+{'_id': "ObjectId('5b67c980bc3dca2bb02e3740')", 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully changed Reply message
+{'_id': ObjectId('5b67c980bc3dca2bb02e3740'), 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+NOW
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ 'How do you say hello in japanese' translated into 🌏 Japanese 🌏 'どうやって日本にこんにちは' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+<class 'dict'>
+{'_id': "ObjectId('5b67c980bc3dca2bb02e3740')", 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully changed Reply message
+{'_id': ObjectId('5b67c980bc3dca2bb02e3740'), 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+ [x] Done
+Traceback (most recent call last):
+  File "listener_preprocess.py", line 24, in <module>
+    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+1756, in start_consuming
+    self.connection.process_data_events(time_limit=None)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+707, in process_data_events
+    self._flush_output(common_terminator)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line
+455, in _flush_output
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py[*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'Betty white biography' from '+19083766480'In the parsing phase...
+Unable to determine intent ... shut it down:
+ [x] Done
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'kill' in japanese?' from '+19083766480'
+In the parsing phase...Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how do you say 'kill' in japanese?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.89544666666667, 'value': "'kill'", 'type': 'value'}], 'wit_language': [{'confidence': 0.94086295629389, 'value': 'Japanese', 'type': 'value'}], 'intent': [{'confidence': 0.99941164039681, 'value': 'translate_get'}]}, 'msg_id': '04C7O60xJXwbZnNQr'}
+Language Code:  ja
+Translation Phrase:  'kill'
+NOW
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ ''kill'' translated into 🌏 Japanese 🌏 ''殺します'' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+New Message Below
+{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+<class 'dict'>
+Old Message Below
+{'_id': "ObjectId('5b67cbdebc3dca393450a0e8')", 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully marked message as completed processing
+Successfully changed Reply message
+{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'completed processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+NOW
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ ''kill'' translated into 🌏 Japanese 🌏 ''殺します'' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+New Message Below
+{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'completed processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+<class 'dict'>
+Old Message Below
+{'_id': "ObjectId('5b67cbdebc3dca393450a0e8')", 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully marked message as completed processing
+Successfully changed Reply message
+{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'completed processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zoF:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
+[*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
+Converted Message
+[x] Received Message from PRE-PROCESSING QUEUE: 'How do you say 'murderer' in chinese?' from '+19083766480'
+In the parsing phase...
+Function name: trans.trigger_translate(resp, sender_info)
+Translate Triggered
+{'_text': "how do you say 'murderer' in chinese?", 'entities': {'phrase_to_translate': [{'suggested': True, 'confidence': 0.89459, 'value': "'murderer'", 'type': 'value'}], 'wit_language': [{'confidence': 0.71166877911966, 'value': 'Chinese', 'type': 'value'}], 'intent': [{'confidence': 0.99792620366795, 'value': 'translate_get'}]}, 'msg_id': '0k8lTxnYkhGDx7TEU'}
+Language Code:  zh-CN
+Translation Phrase:  'murderer'
+NOW
+I've got some 📝 Translation 📝 info for you, Jp !
+✍️ ''murderer'' translated into 🌏 Chinese 🌏 ''凶手'' ✍️
+
+--😘,✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+New Message Below
+{'_id': ObjectId('5b67ccb1bc3dca25c88d2959'), 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:21:04',
+'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+<class 'dict'>
+Old Message Below
+{'_id': "ObjectId('5b67ccb1bc3dca25c88d2959')", 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully marked message as completed processing
+Successfully changed Reply message
+{'_id': ObjectId('5b67ccb1bc3dca25c88d2959'), 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'completed processing', 'result': "I've got some 📝 Translation 📝 info for you, Jp !\n\n✍️ ''murderer'' tran
+slated into 🌏 Chinese 🌏 ''凶手'' ✍️\n\n--😘,\n✨ Tia ✨\nText 📲 me another request, Jp , or text HELP", 'offset_time_zone': 3, 'local_c
+urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+NOW
+I've got some 📝 Translation 📝 info for you, Jp !
+
+✍️ ''murderer'' translated into 🌏 Chinese 🌏 ''凶手'' ✍️
+
+--😘,
+✨ Tia ✨
+Text 📲 me another request, Jp , or text HELP
+New Message Below
+{'_id': ObjectId('5b67ccb1bc3dca25c88d2959'), 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'completed processing', 'result': "I've got some 📝 Translation 📝 info for you, Jp !\n\n✍️ ''murderer'' tran
+slated into 🌏 Chinese 🌏 ''凶手'' ✍️\n\n--😘,\n✨ Tia ✨\nText 📲 me another request, Jp , or text HELP", 'offset_time_zone': 3, 'local_c
+urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+<class 'dict'>
+Old Message Below
+{'_id': "ObjectId('5b67ccb1bc3dca25c88d2959')", 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Successfully marked message as completed processing
+Successfully changed Reply message
+{'_id': ObjectId('5b67ccb1bc3dca25c88d2959'), 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'completed processing', 'result': "I've got some 📝 Translation 📝 info for you, Jp !\n\n✍️ ''murderer'' tran
+slated into 🌏 Chinese 🌏 ''凶手'' ✍️\n\n--😘,\n✨ Tia ✨\nText 📲 me another request, Jp , or text HELP", 'offset_time_zone': 3, 'local_c
+urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+ [x] Done
+
+ Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  Al
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+Message snippet: Message from Email
+Passing over a non-Tia email ...
+Message snippet: Google Voice Are you happy now? To respond to this text message, reply to this email or visit Google Voice. YOUR ACCOUNT HELP CENTER HELP FORUM To edit your email preferences for text messages, go to
+Received a new TIA-related message ...
++19083766480
+Are you happy now?
+ [x] Sent "['+19083766480', 'Are you happy now? ']"
+Message ID: 1650c8f04ce3397b - With Label IDs ['CATEGORY_UPDATES', 'INBOX']
+Completed Removing of the Label for 1650c8f04ce3397b?
+Message snippet: Message from Email
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+Message snippet: Message from Email
+Passing over a non-Tia email ...
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+Message snippet: Google Voice Dua test YOUR ACCOUNT HELP CENTER HELP FORUM To edit your email preferences for text messages, go to the email notification settings in your account. Google LLC 1600 Amphitheatre Pkwy
+
+Received a new TIA-related message ...
++19083766480
+Dua test
+ [x] Sent "['+19083766480', 'Dua test']"
+Message ID: 1650ca21ec8653b3 - With Label IDs ['CATEGORY_PERSONAL', 'INBOX']
+Completed Removing of the Label for 1650ca21ec8653b3?
+Message snippet: Message from EmailPassing over a non-Tia email ...
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+Passing over a non-Tia email ...
+
+
+[x] Sent message to GMAIL QUEUE: 'How did the name change go?' from '+19083766480
+Message ID: 1650cc2991aa06cb - With Label IDs ['CATEGORY_PERSONAL', 'INBOX']
+Gmail Labeled Removed
+
+Passing over a non-Tia email ...
+
+
+[x] Sent message to GMAIL QUEUE: 'Strange print messages' from '+19083766480
+Message ID: 1650cc8b1b589602 - With Label IDs ['CATEGORY_PERSONAL', 'INBOX']
+Gmail Labeled Removed
+Passing over a non-Tia email ...
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+[x] Sent message to GMAIL QUEUE: 'Checj this out!' from '+19083766480
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+[x] Sent message to GMAIL QUEUE: 'I&#39;m a mess' from '+19083766480
+
+[x] Sent message to GMAIL QUEUE: 'Charlie likes me' from '+19083766480
+[x] Sent message to GMAIL QUEUE: 'One more try' from '+19083766480
+
+
+[x] Sent message to GMAIL QUEUE: 'Next one' from '+19083766480
+[x] Sent message to GMAIL QUEUE: 'What was happening?' from '+19083766480
+
+
+[x] Sent message to GMAIL QUEUE: 'New rules' from '+19083766480
+
+[x] Sent message to GMAIL QUEUE: 'Here&#39;s another bitches' from '+19083766480
+
+
+[x] Sent message to GMAIL QUEUE: 'Let&#39;s see that rocking bod' from '+19083766480
+
+
+[x] Sent message to GMAIL QUEUE: 'Pre breaking point' from '+19083766480
+Traceback (most recent call last):
+  File "worker_gmail.py", line 67, in gmail_loop
+    inner()
+  File "worker_gmail.py", line 26, in inner
+    gmail.service, 'me', label_ids=['UNREAD'])[0]['id']
+  File "F:\Hive\TIA-Texting-Internet-Assistant\gmail_helpers.py", line 40, in messages_label_list
+    userId=user_id, labelIds=label_ids).execute()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\googleapiclient\_helpers.py", line 130, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\googleapiclient\http.py", line 835, in execute
+    method=str(self.method), body=self.body, headers=self.headers)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\googleapiclient\http.py", line 162, in _retry_request
+    resp, content = http.request(uri, method, *args, **kwargs)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\oauth2client\transport.py",
+line 175, in new_request
+    redirections, connection_type)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\oauth2client\transport.py",
+line 282, in request
+    connection_type=connection_type)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\httplib2\__init__.py", line
+1514, in request
+    (response, content) = self._request(conn, authority, uri, request_uri, method, body, headers, redirections, cachekey)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\httplib2\__init__.py", line
+1264, in _request
+    (response, content) = self._conn_request(conn, request_uri, method, body, headers)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\httplib2\__init__.py", line
+1217, in _conn_request
+    response = conn.getresponse()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\http\client.py", line 1331, in getresponse
+    response.begin()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\http\client.py", line 297, in begin
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+[x] Sent message to GMAIL QUEUE: 'How does a german say &#39;goodbye&#39;?' from '+19083766480
+Traceback (most recent call last):
+  File "worker_gmail.py", line 67, in gmail_loop
+    inner()
+  File "worker_gmail.py", line 64, in inner
+    time.sleep(1)KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+[x] Sent message to GMAIL QUEUE: 'How do you say &#39;love&#39; in italian?' from '+19083766480
+
+
+[x] Sent message to GMAIL QUEUE: 'Jeopardy' from '+19083766480
+
+
+[x] Sent message to GMAIL QUEUE: 'I want to play jeopardy' from '+19083766480
+
+
+[x] Sent message to GMAIL QUEUE: 'Play jeopardy' from '+19083766480
+Traceback (most recent call last):
+  File "worker_gmail.py", line 67, in gmail_loop    inner()  File "worker_gmail.py", line 64, in inner
+    time.sleep(1)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+[x] Sent message to GMAIL QUEUE: 'How do you say &#39;popcorn&#39; ib Italian?' from '+19083766480
+Traceback (most recent call last):
+  File "worker_gmail.py", line 68, in gmail_loop
+    time.sleep(1)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+[x] Sent message to GMAIL QUEUE: 'How do you say &#39;hotel&#39; in german?' from '+19083766480
+
+
+[x] Sent message to GMAIL QUEUE: 'How does a german say hotel' from '+19083766480
+Traceback (most recent call last):
+  File "worker_gmail.py", line 68, in gmail_loop
+    time.sleep(1)
+KeyboardInterrupt
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+[x] Sent message to GMAIL QUEUE: 'How do you say computer in italian?' from '+19083766480
+Traceback (most recent call last):
+  File "worker_gmail.py", line 68, in gmail_loop
+    time.sleep(1)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+[x] Sent message to GMAIL QUEUE: 'How does an italian say &#39;mountain&#39;?' from '+19083766480
+Traceback (most recent call last):
+  File "worker_gmail.py", line 68, in gmail_loop
+    time.sleep(1)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+Traceback (most recent call last):
+  File "worker_gmail.py", line 68, in gmail_loop
+    time.sleep(1)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+[x] Sent message to GMAIL QUEUE: 'How do you say hello in japanese' from '+19083766480
+Hit an error... trying to avoid a crash here
+Traceback (most recent call last):
+  File "worker_gmail.py", line 67, in gmail_loop
+    inner()
+  File "worker_gmail.py", line 64, in inner
+    time.sleep(1)
+KeyboardInterrupt
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_gmail.py
+
+[*] Checking for Gmail Messages ... To exit press CTRL+C
+
+
+[x] Sent message to GMAIL QUEUE: 'How do you say &#39;murderer&#39; in chinese?' from '+19083766480
+
+
+Microsoft Windows [Version 6.1.7601]
+Microsoft Windows [Version 6.1.7601Copyright (c) 2009 Microsoft Corpor
+F:\Hive\TIA-Texting-Internet-Assist
+python listener_gmail.py
+ [*] Waiting for new messages from GMAIL. To exit press CTRL+C
+ [x] Received 'b"[\'+19083766480\', \'Are you happy now? \']"'
+b"['+19083766480', 'Are you happy now? ']"
+Yes, This is a new item ...
+Are you happy now?
+Attempting to Scrub message here
+New Message: Are you happy now?
+{'sms_id': datetime.datetime(2018, 8, 5, 20, 7, 7, 89117), 'body': 'Are you happy now? ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba'}
+Updating an existing record ...
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL. To exit press CTRL+C
+ [x] Received 'b"[\'+19083766480\', \'Dua test\']"'
+b"['+19083766480', 'Dua test']"
+New Message: Dua test
+{'sms_id': datetime.datetime(2018, 8, 5, 20, 28, 0, 461806), 'body': 'Dua test', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba'}
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+
+[x] Received message from GMAIL QUEUE: 'How about idgaf?' from '+19083766480{'sms_id': datetime.datetime(2018, 8, 5, 20, 41, 41, 425762), 'body': 'How about idgaf?', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba'}
+Updating existing record ...
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+
+[x] Received message from GMAIL QUEUE: 'How did the name change go?' from '+19083766480{'sms_id': datetime.datetime(2018, 8, 5, 21, 3, 27, 245929), 'body': 'How did the name change go?', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba'}
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+Traceback (most recent call last):
+  File "listener_gmail.py", line 4, in <module>    import mongo_helpers as mongo
+  File "F:\Hive\TIA-Texting-Internet-Assistant\mongo_helpers.py", line 223
+    def database_new_item(phone, message):    ^
+IndentationError: expected an indented block
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+F:\Hive\TIA-Texting-Internet-Assista
+ [*] Waiting for new messages from G[x] Received message from GMAIL QUEU
+
+ [x] Done
+[x] Received message from GMAIL QUEU
+ [x] Done
+[x] Received message from GMAIL QUEU
+ [x] Done
+
+[x] Received message from GMAIL QUEUE: 'Next one' from '+19083766480'
+ [x] Done
+[x] Received message from GMAIL QUEUE: 'What was happening?' from '+19083766480'
+
+ [x] Done
+[x] Received message from GMAIL QUEUE: 'New rules' from '+19083766480'
+
+ [x] Done
+
+[x] Received message from GMAIL QUEUE: 'Here&#39;s another bitches' from '+19083766480'
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+
+[x] Received message from GMAIL QUEUE: 'How would you say &#39;i love you&#39; in italian?' from '+19083766480'
+
+ [x] Done
+Traceback (most recent call last):
+  File "listener_gmail.py", line 26, in <module>
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'How do you say &#39;please shoot me&#39; in Italian?' from '+19083766480'
+ [x] DoneTraceback (most recent call last):  File "listener_gmail.py", line 26, in <module>
+    channel.start_consuming()  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, in start_consuming
+    self.connection.process_data_events(time_limit=None)  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 707, in process_data_events
+    self._flush_output(common_terminator)  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 455, in _flush_output
+    self._impl.ioloop.poll()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\select_connection.py", line 245, in poll
+    self._poller.poll()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\select_connection.py", line 696, in poll
+    self._get_next_deadline())KeyboardInterrupt
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pymongo\periodic_executor.py", line 96, in join
+    self._thread.join(timeout)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\threading.py", line 1060, in join
+    self._wait_for_tstate_lock(timeout=max(timeout, 0))
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\threading.py", line 1072, in _wait_for_tstate_lock
+    elif lock.acquire(block, timeout):
+KeyboardInterrupt
+^C
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+Traceback (most recent call last):
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\urllib3\connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse(buffering=True)
+TypeError: getresponse() got an unexpected keyword argument 'buffering'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "listener_gmail.py", line 4, in <module>
+    import mongo_helpers as mongo
+  File "F:\Hive\TIA-Texting-Internet-Assistant\mongo_helpers.py", line 14, in <module>
+    import google_sheets_api_storage as SHEETS
+  File "F:\Hive\TIA-Texting-Internet-Assistant\google_sheets_api_storage.py", line 17, in <module>
+    sms_request_sheet = client.open('SIA_USERS').get_worksheet(1)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\gspread\models.py", line 141, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\gspread\models.py", line 123, in fetch_sheet_metadata
+    r = self.client.request('get', url, params=params)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\gspread\client.py", line 73, in request
+    headers=headers
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\requests\sessions.py", line 521, in get
+    return self.request('GET', url, **kwargs)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\requests\sessions.py", line 508, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\requests\sessions.py", line
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'How does a german say &#39;goodbye&#39;?' from '+19083766480'
+Traceback (most recent call last):
+  File "listener_gmail.py", line 26, in <module>
+    channel.start_consuming()  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, in start_consuming    self.connection.process_data_events(time_limit=None)  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 716, in process_data_events    self._dispatch_channel_events()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 518, in _dispatch_channel_events    impl_channel._get_cookie()._dispatch_events()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1385, in _dispatch_events    evt.body)
+  File "listener_gmail.py", line 17, in callback
+    record = mongo.database_new_item(result[0], result[1])  File "F:\Hive\TIA-Texting-Internet-Assistant\mongo_helpers.py", line 235, in database_new_item
+    push_record(record, message_records)
+  File "F:\Hive\TIA-Texting-Internet-Assistant\mongo_helpers.py", line 40, in push_record
+    collection.insert_one(record)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pymongo\collection.py", line 693, in insert_one
+    session=session),
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pymongo\collection.py", line 607, in _insert
+    bypass_doc_val, session)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pymongo\collection.py", line 595, in _insert_one
+    acknowledged, _insert_command, session)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pymongo\mongo_client.py", line 1243, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pymongo\mongo_client.py", line 1196, in _retry_with_session
+    return func(session, sock_info, retryable)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pymongo\collection.py", line 590, in _insert_command
+    retryable_write=retryable_write)
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'How does a german say &#39;goodbye&#39;?' from '+19083766480'
+
+Traceback (most recent call last):  File "listener_gmail.py", line 26, in <module>
+    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, in start_consuming
+    self.connection.process_data_events(time_limit=None)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 716, in process_data_events
+    self._dispatch_channel_events()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 518, in _dispatch_channel_events
+    impl_channel._get_cookie()._dispatch_events()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1385, in _dispatch_events
+    evt.body)
+  File "listener_gmail.py", line 17, in callback
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+
+[x] Received message from GMAIL QUEUE: 'How do you say &#39;hello&#39; in french?' from '+19083766480'
+ [x] Done
+
+[x] Received message from GMAIL QUEUE: 'How do you say &#39;book&#39; in french?' from '+19083766480'
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+
+[x] Received message from GMAIL QUEUE: 'How do you say &#39;love&#39; in italian?' from '+19083766480'
+ [x] Done[x] Received message from GMAIL QUEUE: 'Jeopardy' from '+19083766480'
+ [x] Done
+[x] Received message from GMAIL QUEUE: 'I want to play jeopardy' from '+19083766480' [x] Done
+[x] Received message from GMAIL QUEUE: 'Play jeopardy' from '+19083766480'
+ [x] DoneTraceback (most recent call last):
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'How do you say &#39;popcorn&#39; ib Italian?' from '+19083766480'
+ [x] Done
+Traceback (most recent call last):
+  File "listener_gmail.py", line 26, in <module>    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, in start_consuming  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 707, in process_data_events
+    self._flush_output(common_terminator)  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 455, in _flush_output
+    self._impl.ioloop.poll()
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'How do you say &#39;hotel&#39; in german?' from '+19083766480'
+
+ [x] Done
+
+[x] Received message from GMAIL QUEUE: 'How does a german say hotel' from '+19083766480'
+ [x] Done
+Traceback (most recent call last):
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'How do you say computer in italian?' from '+19083766480'
+ [x] Done
+Traceback (most recent call last):
+  File "listener_gmail.py", line 26, in <module>    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, in start_consuming    self.connection.process_data_events(time_limit=None)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 707, in process_data_events    self._flush_output(common_terminator)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 455, in _flush_output
+    self._impl.ioloop.poll()
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'How does an italian say &#39;mountain&#39;?' from '+19083766480'
+
+Traceback (most recent call last):
+  File "listener_gmail.py", line 26, in <module>
+    channel.start_consuming()
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 1756, in start_consuming
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+
+[x] Received message from GMAIL QUEUE: 'How do you say hello in japanese' from '+19083766480'
+ [x] Done
+Traceback (most recent call last):
+
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'Betty white biography' from '+19083766480'
+ [x] Done
+F:\Hive\TIA-Texting-Internet-Assistant>python listener_gmail.py
+ [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C
+[x] Received message from GMAIL QUEUE: 'How do you say &#39;murderer&#39; in chinese?' from '+19083766480'
+
+ [x] Done
+
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667857bc3dca366001f648'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 8, 55, 700000), 'body': 'James just emailed me', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b6679fbbc3dca1d286f4505'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667857bc3dca366001f648'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 8, 55, 700000), 'body': 'James just emailed me', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b6679fbbc3dca1d286f4505'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667857bc3dca366001f648'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 8, 55, 700000), 'body': 'James just emailed me', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b6679fbbc3dca1d286f4505'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667857bc3dca366001f648'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 8, 55, 700000), 'body': 'James just emailed me', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b6679fbbc3dca1d286f4505'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667857bc3dca366001f648'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 8, 55, 700000), 'body': 'James just emailed me', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b6679fbbc3dca1d286f4505'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+Hit an error... trying to avoid a crash here
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667857bc3dca366001f648'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 8, 55, 700000), 'body': 'James just emailed me', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b6679fbbc3dca1d286f4505'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+Hit an error... trying to avoid a crash here
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667857bc3dca366001f648'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 8, 55, 700000), 'body': 'James just emailed me', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b6679fbbc3dca1d286f4505'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667857bc3dca366001f648'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 8, 55, 700000), 'body': 'James just emailed me', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b6679fbbc3dca1d286f4505'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 15, 55, 124000), 'body': 'Move that body into the next time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 10, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c32bc3dca0790574e5c'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 22, 269000), 'body': 'Back to this', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 11, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue '{\'_id\': ObjectId(\'5b667c35bc3dca0790574e5d\'), \'sms_id\': datetime.datetime(2018,
+8, 5, 0, 25, 25, 254000), \'body\': "Why didn\'t we get paradise?", \'from\': \'+19083766480\', \'status\': \'unprocessed\', \'result\': \'tba\', \'count\': 4, \'current_local_time\': \'2018-08-05 00:25:10\', \'home\': \'250 lafayette street new york ny 10012\', \'name\': \'Jp \', \'offset_time_zone\': 3, \'zone_name\': \'America/New_York\'}'
+ [x] Sent Message To Queue "{'_id': ObjectId('5b667c38bc3dca0790574e5e'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 25, 28, 156000), 'body': 'Is one kiss all it takes?! ', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'count': 5, 'current_local_time': '2018-08-05 00:25:13', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'offset_time_zone': 3, 'zone_name': 'America/New_York'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668316bc3dca2f741a871f'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 46, 316000), 'body': 'One hiccup is all it takes', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 12, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668319bc3dca2f741a8720'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 54, 49, 183000), 'body': 'Last message of the night', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 13, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66832fbc3dca2f741a8721'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 11, 689000), 'body': 'This one comes later', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 14, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668355bc3dca2f741a8722'), 'sms_id': datetime.datetime(2018, 8, 5,
+0, 55, 49, 429000), 'body': 'Then this too', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 15, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor',
+'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66849bbc3dca2f741a8723'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 1, 15, 493000), 'body': 'Still there, Tia?!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 16, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668713bc3dca3a50124f04'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 11, 47, 615000), 'body': 'I want a time zone east coast!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 17, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66883fbc3dca2e38653194'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 16, 47, 472000), 'body': 'Test this sucker out!', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 18, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b66898ebc3dca2e38653195'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 22, 22, 587000), 'body': 'What the f?', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 19, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668ad4bc3dca2e38653196'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 27, 48, 937000), 'body': 'Stop the madness', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba',
+'count': 20, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668b31bc3dca2e38653197'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 29, 21, 591000), 'body': 'Very late', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'count': 21, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor', 'offset_time_zone': 'unknown offset', 'zone_name': 'unknown zone'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b668c79bc3dca0da0a986e1'), 'sms_id': datetime.datetime(2018, 8, 5,
+1, 34, 49, 534000), 'body': 'I wamt my time zone', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-04 22:34:50', 'zone_name': 'America/Los_Angeles', 'count': 22, 'current_local_time': '2018-08-04 22:34:51', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+ [x] Sent Message To Queue "{'_id': ObjectId('5b675db6bc3dca215835ddb9'), 'sms_id': datetime.datetime(2018, 8, 5,
+16, 27, 34, 975000), 'body': 'How about demi? ', 'from': '+19084778171', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 0, 'local_current_time': '2018-08-05 13:27:35', 'zone_name': 'America/Los_Angeles', 'count':
+23, 'current_local_time': 'unknown local time', 'home': '1401 3rd Ave Oakland, CA 94606', 'name': 'Connor'}"
+Traceback (most recent call last):
+  File "worker_wit.py", line 41, in wit_loop
+    time.sleep(1)
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_wit.py
+[*] Checking for new unprocessed messages in db ... To exit press CTRL+C
+Converted Message
+Hit an error... trying to avoid a crash here
+Converted Message
+Hit an error... trying to avoid a crash here
+Converted Message
+Hit an error... trying to avoid a crash here
+Converted Message
+Hit an error... trying to avoid a crash here
+Converted Message
+Hit an error... trying to avoid a crash hereConverted Message
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_wit.py
+[*] Checking for new unprocessed messages in db ... To exit press CTRL+C
+Converted MessageHit an error... trying to avoid a crash here
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_wit.py
+[*] Checking for new unprocessed messages in db ... To exit press CTRL+C
+Hit an error... trying to avoid a crash here
+Hit an error... trying to avoid a crash here
+Hit an error... trying to avoid a crash here
+Traceback (most recent call last):
+  File "worker_wit.py", line 45, in wit_loop
+    inner()
+  File "worker_wit.py", line 41, in inner
+    transfer_unprocessed_to_wit_queue_2()
+  File "worker_wit.py", line 33, in transfer_unprocessed_to_wit_queue_2
+    delivery_mode = 2, # make message persistent
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 2053, in basic_publish
+    mandatory, immediate)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\adapters\blocking_connection.py", line 2139, in publish
+    immediate=immediate)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\channel.py", line 425, in basic_publish
+    (properties, body))
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\channel.py", line 1328, in _send_method
+    self.connection._send_method(self.channel_number, method, content)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\connection.py", line 2168, in _send_method
+    self._send_message(channel_number, method, content)
+  File "C:\Users\Jonathan2017\AppData\Local\Programs\Python\Python36-32\lib\site-packages\pika\connection.py", line 2195, in _send_message
+    content[1][start:end]).marshal())
+TypeError: unhashable type: 'slice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "worker_wit.py", line 51, in <module>
+    wit_loop()
+  File "worker_wit.py", line 48, in wit_loop
+    time.sleep(1)
+KeyboardInterrupt
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_wit.py
+[*] Checking for new unprocessed messages in db ... To exit press CTRL+C
+ [x] Sent Message To Queue 'James just emailed me'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Move that body into the next time zone'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Back to this'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue "Why didn't we get paradise?"
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Is one kiss all it takes?! '
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'One hiccup is all it takes'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Last message of the night'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'This one comes later'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Then this too'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Still there, Tia?!'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'I want a time zone east coast!'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Test this sucker out!'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'What the f?'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Stop the madness'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'Very late'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'I wamt my time zone'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'How about demi? '
+Successfully marked message as currently processing
+Hit an error... trying to avoid a crash here
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_w[*] Checking for new unprocessed messages in db ... To [x] Sent Message To Queue 'Stop the madness'
+Successfully marked message as currently processing
+ [x] Sent Message To Queue 'How about demi? '
+Successfully marked message as currently processing
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_wit.py
+[*] Checking for new unprocessed messages in db ... To exit press CTRL+C
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages in db ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'How did the name change go?'
+Successfully marked message as currently processing
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Checj this out!'
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE "I'm a mess"
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Charlie likes me'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'One more try'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Next one'
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+Converted Message
+Hit an error... trying to avoid a crash hereConverted Message
+Hit an error... trying to avoid a crash hereConverted Message
+Hit an error... trying to avoid a crash here
+Converted Message
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'New rules'
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'New rules'
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'New rules'
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'New rules'
+
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'New rules'
+Successfully marked message as currently processing
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE "Here's another bitches"Successfully marked message as currently processing
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE "Let's see that rocking bod"
+Successfully marked message as currently processing
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+Traceback (most recent call last):
+  File "worker_preprocess.py", line 46, in wit_loop
+    time.sleep(5)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "worker_preprocess.py", line 51, in <module>
+    wit_loop()
+  File "worker_preprocess.py", line 48, in wit_loop    time.sleep(5)
+KeyboardInterrupt
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+[x] Sent Message To PRE-PROCESSING QUEUE "How do you say 'love' in italian?"
+Successfully marked message as currently processing
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Jeopardy'
+Successfully marked message as currently processing
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'I want to play jeopardy'
+Successfully marked message as currently processing
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Play jeopardy'Successfully marked message as currently processingTraceback (most recent call last):
+  File "worker_preprocess.py", line 46, in wit_loop
+    time.sleep(5)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE "How do you say 'popcorn' ib Italian?"
+Successfully marked message as currently processing
+Traceback (most recent call last):  File "worker_preprocess.py", line 46, in wit_loop
+    time.sleep(5)
+KeyboardInterrupt
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE "How do you say 'hotel' in german?"
+Successfully marked message as currently processing
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'How does a german say hotel'
+Successfully marked message as currently processing
+Traceback (most recent call last):  File "worker_preprocess.py", line 46, in wit_loop
+    time.sleep(5)
+KeyboardInterrupt
+During handling of the above exception, another exception occurred:
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'How do you say computer in italian?'
+Successfully marked message as currently processing
+Traceback (most recent call last):
+  File "worker_preprocess.py", line 46, in wit_loop    time.sleep(5)
+KeyboardInterrupt
+During handling of the above exception, another exception occurred:
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE "How does an italian say 'mountain'?"
+What is the id look like for currently processing?{'_id': ObjectId('5b67c88abc3dca38ac61a8fa'), 'sms_id': 'UI4PLcdNyStYaq2t', 'body': "How does an italian say 'mountain'?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba'}
+Successfully marked message as currently processingTraceback (most recent call last):
+  File "worker_preprocess.py", line 46, in wit_loop
+    time.sleep(5)KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'How do you say hello in japanese'
+Successfully marked message as currently processing
+Traceback (most recent call last):
+  File "worker_preprocess.py", line 46, in wit_loop    time.sleep(5)
+KeyboardInterrupt
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE 'Betty white biography'
+Successfully marked message as currently processing
+
+[x] Sent Message To PRE-PROCESSING QUEUE "How do you say 'kill' in japanese?"
+Successfully marked message as currently processingTraceback (most recent call last):
+  File "worker_preprocess.py", line 46, in wit_loop
+    time.sleep(5)KeyboardInterrupt
+
+F:\Hive\TIA-Texting-Internet-Assistant>python worker_preprocess.py
+[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C
+
+
+[x] Sent Message To PRE-PROCESSING QUEUE "How do you say 'murderer' in chinese?"
+Successfully marked message as currently processing
+
+
+
+
+
+
