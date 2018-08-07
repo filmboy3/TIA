@@ -51,6 +51,7 @@ def process_reminders():
     for message in message_records.find({"reminder_trigger": "activated"}):
         remind.check_reminder(message)
 
+
 def add_new_item_to_db(sender_info, key, value):
     current_user = user_records.find_one({"phone": sender_info['from']})
     updated_gateway = {
@@ -61,6 +62,7 @@ def add_new_item_to_db(sender_info, key, value):
     # Returning a copy of the newly updated message so it can be used
     # immediately back in caller functions
     return message_records.find_one({"sms_id": sender_info['sms_id']})
+
 
 def update_user_data_for_message(sender_info):
         if user_records.find_one({"phone": sender_info['from']}) is None:
@@ -113,7 +115,6 @@ def update_user_data_for_message(sender_info):
             return shared_user_data
 
 
-
 def update_user_data():
     for sender_info in message_records.find({"status": "unprocessed"}):
         if user_records.find_one({"phone": sender_info['from']}) is None:
@@ -160,43 +161,13 @@ def update_user_data():
             update_record(sender_info, shared_user_data, message_records)
 
 
-
-def mark_as_sent(sender_info):
+def change_db_value(sender_info, key, value):
     updated_status = {
-        "status": "sent"
+        key: value
     }
     update_record(sender_info, updated_status, message_records)
-    print("Successfully marked message as sent")
-
-def change_reply(sender_info, result):
-    updated_status = {
-        "result": result
-    }
-    update_record(sender_info, updated_status, message_records)
-    print("Successfully changed Reply message")
-
-def mark_as_in_process(sender_info):
-    updated_status = {
-        "status": "currently processing"
-    }
-    # print("What is the id look like for currently processing?\n" + str(sender_info))
-    update_record(sender_info, updated_status, message_records)
-    print("Successfully marked message as currently processing")
-
-def mark_as_done_processing(sender_info):
-    updated_status = {
-        "status": "completed processing"
-    }
-    update_record(sender_info, updated_status, message_records)
-    print("Successfully marked message as completed processing")
-
-
-def mark_as_error(sender_info):
-    updated_status = {
-        "status": "error"
-    }
-    update_record(sender_info, updated_status, message_records)
-    print("Marked message as error")
+    print("Updated " + str(key) + " to " + str(value))
+    return message_records.find_one({"sms_id": sender_info['sms_id']})
 
 
 def process_message(sender_info):
@@ -227,15 +198,6 @@ def scrub_html_from_message(message):
     # print("New Message: " + str(message))
     return str(message)
 
-
-def process_all_unprocessed(browser):
-    for message in message_records.find({"status": "unprocessed"}):
-        process_message( message)
-
-def process_unprocessed():
-    for message in message_records.find({"status": "unprocessed"}):
-        print(message)
-        # process_message( message)
 
 def database_new_item(phone, message):
     # print("Yes, This is a new item ...")

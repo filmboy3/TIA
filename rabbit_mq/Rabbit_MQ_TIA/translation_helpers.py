@@ -143,12 +143,7 @@ def trigger_translate(resp, sender_info):
     try:
         translationPhrase = resp['entities']['phrase_to_translate'][0]['value']
     except BaseException:
-        try:
-            translationFull = resp['_text']
-            translationFull = re.sub('"', "'", translationFull)
-            translationPhrase = re.search(r'\'(.*?)\'', str(translationFull)).group(1)
-        except BaseException:
-            translationPhrase = resp['_text']
+        translationPhrase = msg_gen.extract_quoted_text(resp['_text'])
 
     blob = TextBlob(translationPhrase)
     langCode = language_code_convert(language)

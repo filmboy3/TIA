@@ -76,10 +76,7 @@ def trigger_wiki(resp, sender_info):
     try:
         wikiSearch = resp['entities']['wikipedia_search_query'][0]['value']
     except BaseException:
-        try:
-            wikiSearch = resp['entities']['wolfram_search_query'][0]['value']
-        except BaseException:
-            pass
+        wikiSearch = msg_gen.extract_quoted_text(resp['_text'])
     
     print("Wit.AI Wikisearch term: " + wikiSearch)
     try:

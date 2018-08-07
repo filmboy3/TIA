@@ -38,7 +38,7 @@ def start_google_voice(emailAddress, emailPassword):
 def send_new_message(browser, gv_number, gv_message, sender_info):
     print("Triggered Sending Message on GV")
     send_reply(gv_number, gv_message, browser)
-    mongo.mark_as_sent(sender_info)
+    mongo.change_db_value(sender_info, "status", "sent")
 
 
 def make_sms_chunks(text, send_all_chunks, sms_size=300):

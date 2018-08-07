@@ -20,13 +20,22 @@ import late_night_helpers as jokes
 import translation_helpers as trans
 import general_message_helpers as msg_gen
 import reminder_helpers as reminder
+import mongo_helpers as mongo
 
+def pre_wit_scrub(message):
+    replacements = [
+                        (',', ''),
+                        ('\.', ''),
+                    ]
+    for old, new in replacements:
+        message = re.sub(old, new, message)
+    message = message.lower()
+    print("Wit Scrubbed Message: " + str(message))
+    return message
 
 def wit_parse_message(message, sender_info):
-    print("In the parsing phase...")
-    message = message.lower()
-    message = re.sub(",", "", message)
-    # message = re.sub(".", "", message)
+    message = pre_wit_scrub(str(message))
+    mongo.change_db_value(sender_info, 'body', message)
     resp = SHEETS.WIT_CLIENT.message(message)
     nlp_extraction(resp, sender_info)
 

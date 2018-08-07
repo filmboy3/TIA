@@ -33,7 +33,8 @@ def transfer_unprocessed_to_wit_queue():
                               delivery_mode = 2, # make message persistent
                               ))
         print("\n\n[x] Sent Message To PRE-PROCESSING QUEUE %r" % str(message['body']))
-        mongo.mark_as_in_process(message)
+        mongo.change_db_value(message, "status", "currently processing")
+
 
 def wit_loop():
 

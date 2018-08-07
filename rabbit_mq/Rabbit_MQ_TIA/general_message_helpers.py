@@ -14,8 +14,18 @@ import mongo_helpers as mongo
 import google_voice_hub as gv
 import google_sheets_api_storage as SHEETS
 import directions_helpers as geo
+import wit_helpers as wit
 from dateutil import parser
 import requests
+
+
+def extract_quoted_text(text):
+    text = re.sub('"', "'", text)
+    try:
+        text = re.search(r'\'(.*?)\'', str(text)).group(1)
+    except:
+        pass
+    return text
 
 
 def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="NO", launch_time="NOW"):
@@ -26,14 +36,16 @@ def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="NO", launc
         sender_info['name']) + "!\n\n" + result + tia_sign_off
 
     message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
-    mongo.mark_as_done_processing(message_copy)
+
     result = gv.sizing_sms_chunks(result, send_all_chunks)
     chunk_len = result[0]
     chunk_reply = result[1]
-    print("New chunked length: " + str(chunk_len))
-    print("New Chunked reply: " + str(chunk_reply))
-    mongo.change_reply(message_copy, chunk_reply)
+
+    mongo.change_db_value(message_copy, "result", chunk_reply)
+    mongo.change_db_value(message_copy, "status", "completed processing")
+
     sender_info = mongo.add_new_item_to_db(message_copy, "launch_time", launch_time)
+    sender_info = mongo.add_new_item_to_db(message_copy, "send_all_chunks", send_all_chunks)
     sender_info = mongo.add_new_item_to_db(message_copy, "current_chunk", 0)
     sender_info = mongo.add_new_item_to_db(message_copy, "chunk_len", chunk_len)
 
@@ -146,7 +158,7 @@ def trigger_new_home(resp, sender_info):
     try:
         location = resp['entities']['location'][0]['value']
     except BaseException:
-        location = resp['_text']
+        location = msg_gen.extract_quoted_text(resp['_text'])
     result = location
     print("New Home Location: " + location)
     print(resp)
