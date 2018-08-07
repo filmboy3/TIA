@@ -170,7 +170,7 @@ def mark_as_sent(sender_info):
 
 def change_reply(sender_info, result):
     updated_status = {
-        "result": str(result)
+        "result": result
     }
     update_record(sender_info, updated_status, message_records)
     print("Successfully changed Reply message")

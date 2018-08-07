@@ -8,7 +8,7 @@ connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost')
 channel = connection.channel()
 
 channel.queue_declare(queue='gmail_queue', durable=True)
-print(' [*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C')
+print('[*] Waiting for new messages from GMAIL QUEUE. To exit press CTRL+C')
 
 def callback(ch, method, properties, body):   
     body = body.decode("utf-8")

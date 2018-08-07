@@ -18,37 +18,27 @@ from dateutil import parser
 import requests
 
 
-def store_reply_in_mongo(result, sender_info, topic):
-    launch_time = "NOW"
-    print(launch_time)
+def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="NO", launch_time="NOW"):
     tia_sign_off = "\n\n--😘,\n✨ Tia ✨\nText" \
         " 📲 me another request, " + str(
             sender_info['name']) + ", or text HELP"
     result = "I've got some " + str(topic) + " info for you, " + str(
         sender_info['name']) + "!\n\n" + result + tia_sign_off
-    print(result)
+
     message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
-    print("New Message Below")
-    print(message_copy)
-    print(type(sender_info))
-    print("Old Message Below")
-    print(sender_info)
     mongo.mark_as_done_processing(message_copy)
-    mongo.change_reply(message_copy, result)
-    # mongo.change_reply(sender_info['_id'], )
+    result = gv.sizing_sms_chunks(result, send_all_chunks)
+    chunk_len = result[0]
+    chunk_reply = result[1]
+    print("New chunked length: " + str(chunk_len))
+    print("New Chunked reply: " + str(chunk_reply))
+    mongo.change_reply(message_copy, chunk_reply)
     sender_info = mongo.add_new_item_to_db(message_copy, "launch_time", launch_time)
+    sender_info = mongo.add_new_item_to_db(message_copy, "current_chunk", 0)
+    sender_info = mongo.add_new_item_to_db(message_copy, "chunk_len", chunk_len)
+
     print(sender_info)
-    # try:
-    #     # gv.send_new_message(sender_info['from'], result, sender_info)
-    #     print("Responded to request successfully: " + str(topic))
-    # except BaseException:
-    #     print("Error, was unable to respond to request")
-    #     # mongo.mark_as_error(sender_info)
-    #     # result = "I'm so sorry, " + str(sender_info['name']) + ", " \
-    #     #     "but I'm having a tough time with your " + str(
-    #     #     topic) + " request. Please try again." + tia_sign_off
-    #     # gv.send_new_message(sender_info['from'], result, sender_info)
-    # time.sleep(1)
+
 
 
 def send_error_text(text):

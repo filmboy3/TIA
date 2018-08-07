@@ -41,25 +41,31 @@ def send_new_message(browser, gv_number, gv_message, sender_info):
     mongo.mark_as_sent(sender_info)
 
 
-def make_sms_chunks(text, sms_size=300):
+def make_sms_chunks(text, send_all_chunks, sms_size=300):
     count = len(text)
-    print(count)
+    # print(count)
+
+    chunk_note = "\nFor next message, 📲 text MORE\nFor all messages, 📲 text ALL"
+    
+    if send_all_chunks == "YES":
+        chunk_note = ""
+
     number_of_chunks = int(math.ceil(count / float(350)))
     chunk_array = []
     if number_of_chunks == 1:
-        print("No chunking Necessary")
+        # print("No chunking Necessary")
         chunk_array.append(text)
         return chunk_array
     else:
-        print("Chunking Necessary")
+        # print("Chunking Necessary")
         sms_end = sms_size
         sms_start = 0
         while (sms_end < count):
             while (text[sms_end] != "\n"):
                 sms_end = sms_end + 1
-            print("sms_end after: " + str(sms_end) + "\n")
+            # print("sms_end after: " + str(sms_end) + "\n")
             current_chunk = text[sms_start:sms_end]
-            print(chunk_array)
+            # print(chunk_array)
             chunk_array.append(current_chunk)
             sms_start = sms_end
             sms_end = sms_end + sms_size
@@ -67,10 +73,36 @@ def make_sms_chunks(text, sms_size=300):
         chunk_array.append(final_chunk)
         for i in range(0, len(chunk_array) - 1):
             chunk_array[i] = chunk_array[i] + \
-                "\n\n⬇️ (" + str(i + 1) + " of " + str(len(chunk_array)) + ") ⬇️"
+                "\n\n⬇️ (" + str(i + 1) + " of " + str(len(chunk_array)) + ") ⬇️" + chunk_note
 
-        print("\n\nChunk Array formmated: \n\n" + str(chunk_array) + "\n\n")
-        return chunk_array
+        # print("\n\nChunk Array formmated: \n\n" + str(chunk_array) + "\n\n")
+        chunk_result = (len(chunk_array), chunk_array)
+        return chunk_result
+
+def sizing_sms_chunks(text, send_all_chunks):
+    print("Optimizing SMS chunking")
+    try:
+        chunk_set = make_sms_chunks(text, send_all_chunks)
+    except BaseException:
+        try:
+            chunk_set = make_sms_chunks(text, send_all_chunks, 250)
+            print("Triggered lower SMS chunking size @ 250")
+        except BaseException:
+            try:
+                chunk_set = make_sms_chunks(text, send_all_chunks, 200)
+                print("Triggered lower SMS chunking size @ 200")
+            except BaseException:
+                try:
+                    chunk_set = make_sms_chunks(text, send_all_chunks, 150)
+                    print("Triggered lower SMS chunking size @ 150")
+                except BaseException:
+                    try:
+                        chunk_set = make_sms_chunks(text, send_all_chunks, 100)
+                        print("Triggered lower SMS chunking size @ 100")
+                    except BaseException:
+                        chunk_set = make_sms_chunks(text, send_all_chunks, 50)
+                        print("Triggered lower SMS chunking size @ 50")
+    return chunk_set
 
 
 def enter_message(message, gv_message, browser):

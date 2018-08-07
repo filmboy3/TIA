@@ -9,23 +9,24 @@
 
 from __future__ import print_function
 import re
-# import google_sheets_api_storage as SHEETS
-# import knowledge_helpers as know
-# import directions_helpers as geo
-# import yelp_helpers as yelp
-# import news_helpers as news
-# import jeopardy_helpers as jep
-# import weather_helpers as weather
-# import late_night_helpers as jokes
-# import translation_helpers as trans
-# import general_message_helpers as msg_gen
-# import reminder_helpers as reminder
+import google_sheets_api_storage as SHEETS
+import knowledge_helpers as know
+import directions_helpers as geo
+import yelp_helpers as yelp
+import news_helpers as news
+import jeopardy_helpers as jep
+import weather_helpers as weather
+import late_night_helpers as jokes
+import translation_helpers as trans
+import general_message_helpers as msg_gen
+import reminder_helpers as reminder
 
 
 def wit_parse_message(message, sender_info):
     print("In the parsing phase...")
     message = message.lower()
     message = re.sub(",", "", message)
+    # message = re.sub(".", "", message)
     resp = SHEETS.WIT_CLIENT.message(message)
     nlp_extraction(resp, sender_info)
 
@@ -75,84 +76,82 @@ def nlp_extraction(resp, sender_info):
     except BaseException:
         print("Unable to determine intent ... moving on to keyword parsing.")
         func_name = check_keywords(resp, sender_info)
+
     eval(func_name)
 
 def check_keywords(resp, sender_info):
     preventRepeatCounter = 0
     try:
-        if (preventRepeatCounter == 0 and resp['entities']['wit_direction']):
+        if (resp['entities']['wit_direction']):
             return "geo.trigger_directions(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter == 0 and resp['entities']['wit_reminder_terms']):
+        if (resp['entities']['wit_reminder_terms']):
             return "reminder.trigger_reminder(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter == 0 and resp['entities']['reminder']):
+        if (resp['entities']['reminder']):
             return "reminder.trigger_reminder(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter == 0 and resp['entities']['wit_jeopardy']):
+        if (resp['entities']['wit_jeopardy']):
             return "jep.trigger_jeopardy(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter == 0 and resp['entities']['wit_language']):
+        if (resp['entities']['wit_language']):
             return "trans.trigger_translate(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter == 0 and resp['entities']['wit_news_source']):
+        if (resp['entities']['wit_news_source']):
             return "news.trigger_news(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
         if (preventRepeatCounter ==
                 0 and resp['entities']['wit_yelp_category']):
             return "yelp.trigger_yelp(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter == 0 and resp['entities']['wit_transit']):
+        if (resp['entities']['wit_transit']):
             return "geo.trigger_directions(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter ==
-                0 and resp['entities']['intent'][0]['value'] == "wiki_get"):
+        if (resp['entities']['intent'][0]['value'] == "wiki_get"):
             return "know.trigger_wiki(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter ==
-                0 and resp['entities']['wolfram_search_query']):
+        if (resp['entities']['wolfram_search_query']):
             return "know.trigger_wolfram(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
-        if (preventRepeatCounter ==
-                0 and resp['entities']['intent'][0]['value'] == "wolfram_get"):
+        if (resp['entities']['intent'][0]['value'] == "wolfram_get"):
             return "know.trigger_wolfram(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
     try:
         if (preventRepeatCounter ==
                 0 and resp['entities']['wikipedia_search_query']):
             return "know.trigger_wiki(resp, sender_info)"
-            preventRepeatCounter = 1
+            
     except BaseException:
         pass
