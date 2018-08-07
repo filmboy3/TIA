@@ -29,11 +29,11 @@ def extract_quoted_text(text):
 
 
 def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="NO", launch_time="NOW"):
-    tia_sign_off = "\n\n--😘,\n✨ Tia ✨\nText" \
+    tia_sign_off = "\n--😘,\n✨ Tia ✨ Text" \
         " 📲 me another request, " + str(
             sender_info['name']) + ", or text HELP"
-    result = "I've got some " + str(topic) + " info for you, " + str(
-        sender_info['name']) + "!\n\n" + result + tia_sign_off
+    result = str(topic) + " for " + str(
+        sender_info['name']) + "!\n" + result + tia_sign_off
 
     message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
 

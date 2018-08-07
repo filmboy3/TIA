@@ -80,6 +80,13 @@ def make_sms_chunks(text, send_all_chunks, sms_size=300):
         return chunk_result
 
 def sizing_sms_chunks(text, send_all_chunks):
+    print(text)
+    count = len(text)
+    print("Count is: " + str(count))
+    if (count < 300):
+        chunk_set = [1, [text]]
+        return chunk_set
+
     print("Optimizing SMS chunking")
     try:
         chunk_set = make_sms_chunks(text, send_all_chunks)

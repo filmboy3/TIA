@@ -60,11 +60,11 @@ def trigger_wolfram(resp, sender_info):
                                        wolfram_request(
                                            resp['_text']),
                                        sender_info,
-                                       "🔭 Wolfram-Alpha 🔭")
+                                       "🔭 Q & A 🔭")
     except BaseException:
         msg_gen.store_reply_in_mongo(
             
-            msg_gen.send_error_text("wolfram-alpha"),
+            msg_gen.send_error_text("Q & A"),
             sender_info,
             "💀 Error 💀")
 
