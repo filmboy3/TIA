@@ -20,6 +20,8 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 ### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ 
 (at this stage, Tia's servers are frequently down for changes/testing, so please hold off on the demo for now!)
 
+<b>Note</b>: I'm currently in the midst of a <i>separation-of-concerns<i> focused overhaul, so while the main server works as is, my current goal is to split Tia into 6 separate workers communicating over task queues. Thus far I have 4 Rabbit-MQ workers able to receive and parse user requests, the final two will be used to send the replies back to the user. You can see this WIP in rabbit_mq/Rabbit_MQ_TIA in this repo.
+
 ## How it works
 
 Tia is made up of several python servers communicating via <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queues as well as dozens of RESTful APIs, beginning with:
