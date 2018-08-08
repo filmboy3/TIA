@@ -17,7 +17,7 @@ import mongo_helpers as mongo
 from datetime import datetime
 
 
-def check_reminder( message):
+def check_reminder(browser, message):
     trigger_local_time = message['local_trigger_time']
     current_local_time = msg_gen.update_local_time(message['zone_name'])
 
@@ -28,21 +28,21 @@ def check_reminder( message):
 
     if (bool_trigger is True):
         print("It's time to remind user about: " + str(message['reminder_text']))
-        trigger_reminder_alert( message)
+        trigger_reminder_alert(browser, message)
 
 
-def trigger_reminder_alert( message):
+def trigger_reminder_alert(browser, message):
     result = "Don't forget! " + " '" + message['reminder_text'].capitalize() + "'!"
 
     try:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        result,
                                        message,
                                        "⏱️ Reminder ⏱️")
         mongo.add_new_item_to_db(message, 'reminder_trigger', 'off')
 
     except BaseException:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        msg_gen.send_error_text("reminder"),
                                        message,
                                        "💀 Error 💀")
@@ -96,7 +96,7 @@ def reminder_request(sender_info, input, date):
     result = "I've set a reminder for " + day_str_without_year + " @ " + formatted_time + ": ⏱️ " + str(input) + " ⏱️"
     return result
 
-def trigger_reminder(resp, sender_info):
+def trigger_reminder(browser, resp, sender_info):
     print("Reminder Triggered")
     time_zone = sender_info['offset_time_zone']
     print("Time_zone offset is: " + str(time_zone))
@@ -132,13 +132,13 @@ def trigger_reminder(resp, sender_info):
                     print("\nExcept date: " + str(date))
     print("Date: " + str(date))
     try:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        reminder_request(sender_info, str(reminder), str(date)),
                                        sender_info,
                                        "⏱️ Reminder Setup ⏱️")
     except BaseException:
-        msg_gen.store_reply_in_mongo(
-            
+        msg_gen.send_full_text_message(
+            browser,
             msg_gen.send_error_text("reminder"),
             sender_info,
             "💀 Error 💀")

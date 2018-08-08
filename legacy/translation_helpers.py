@@ -129,7 +129,7 @@ def language_code_convert(language):
         return 'en'
 
 
-def trigger_translate(resp, sender_info):
+def trigger_translate(browser, resp, sender_info):
     print("Translate Triggered")
     print(resp)
 
@@ -143,22 +143,28 @@ def trigger_translate(resp, sender_info):
     try:
         translationPhrase = resp['entities']['phrase_to_translate'][0]['value']
     except BaseException:
-        translationPhrase = msg_gen.extract_quoted_text(resp['_text'])
+        try:
+            translationFull = resp['_text']
+            translationFull = re.sub('"', "'", translationFull)
+            translationPhrase = re.search(r'\'(.*?)\'', str(translationFull)).group(1)
+        except BaseException:
+            translationPhrase = resp['_text']
 
     blob = TextBlob(translationPhrase)
     langCode = language_code_convert(language)
-    translation = blob.translate(to=langCode)
+    translation = (resp['_text'], blob.translate(to=langCode))
     result = "✍️ '" + translationPhrase.capitalize() + "' translated into 🌏 " + \
-        language.capitalize() + " 🌏 '" + str(translation).capitalize() + "' ✍️"
+        language.capitalize() + " 🌏 '" + str(translation[1]).capitalize() + "' ✍️"
     # print(result)
     print("Language Code: ", langCode)
     print("Translation Phrase: ", translationPhrase)
+
     try:
-        msg_gen.store_reply_in_mongo(
-             result, sender_info, "📝 Translation 📝")
+        msg_gen.send_full_text_message(
+            browser, result, sender_info, "📝 Translation 📝")
     except BaseException:
-        msg_gen.store_reply_in_mongo(
-            
+        msg_gen.send_full_text_message(
+            browser,
             msg_gen.send_error_text("Translation"),
             sender_info,
             "💀 Error 💀")

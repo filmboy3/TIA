@@ -39,7 +39,7 @@ def convert_distance_from_metric(text):
     return text
 
 def lat_long_single_location(location_str):
-    # print("Inside lat_long_single_location")
+    print("Inside lat_long_single_location")
     url = "https://geocoder.cit.api.here.com/6.2/geocode.json?app_id=" + \
         str(SHEETS.HERE_APPID) + "&app_code=" + str(SHEETS.HERE_APPCODE) + "&searchtext="
     for s in string.punctuation:
@@ -201,7 +201,7 @@ def get_two_lat_long(subject_label, sender_info):
     return lat_long_origin
 
 
-def trigger_directions(resp, sender_info):
+def trigger_directions(browser, resp, sender_info):
     print("Directions Triggered")
     print(resp)
     start_location = ""
@@ -262,14 +262,14 @@ def trigger_directions(resp, sender_info):
         transit_method)
 
     try:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        directions_request(
                                            directions_data,
                                            sender_info),
                                        sender_info,
                                        "🚗 Directions 🚗")
     except BaseException:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        msg_gen.send_error_text("directions"),
                                        sender_info,
                                        "💀 Error 💀")

@@ -191,7 +191,7 @@ def forecast_request(subject_label, sender_info):
     return result
 
 
-def trigger_weather(resp, sender_info):
+def trigger_weather(browser, resp, sender_info):
     print("Weather Triggered")
     try:
         location = resp['entities']['location'][0]['value']
@@ -202,23 +202,23 @@ def trigger_weather(resp, sender_info):
         result = location
         print("Weather location: " + location)
         try:
-            msg_gen.store_reply_in_mongo(
+            msg_gen.send_full_text_message(browser,
                                            weather_request(
                                                result,
                                                sender_info),
                                            sender_info,
                                            "⛅ Weather ⛅")
         except BaseException:
-            msg_gen.store_reply_in_mongo(
+            msg_gen.send_full_text_message(browser,
                                            msg_gen.send_error_text("Weather"),
                                            sender_info,
                                            "💀 Error 💀")
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
-        wit.check_keywords(resp, sender_info)
+        wit.check_keywords(browser, resp, sender_info)
 
 
-def trigger_forecast(resp, sender_info):
+def trigger_forecast(browser, resp, sender_info):
     print("Forecast Triggered")
     try:
         location = resp['entities']['location'][0]['value']
@@ -229,17 +229,17 @@ def trigger_forecast(resp, sender_info):
         result = location
         print("Forecast location: " + location)
         try:
-            msg_gen.store_reply_in_mongo(
+            msg_gen.send_full_text_message(browser,
                                            forecast_request(
                                                result,
                                                sender_info),
                                            sender_info,
                                            "🌞 Forecast 🌞")
         except BaseException:
-            msg_gen.store_reply_in_mongo(
+            msg_gen.send_full_text_message(browser,
                                            msg_gen.send_error_text("forecast"),
                                            sender_info,
                                            "💀 Error 💀")
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
-        wit.check_keywords(resp, sender_info)
+        wit.check_keywords(browser, resp, sender_info)

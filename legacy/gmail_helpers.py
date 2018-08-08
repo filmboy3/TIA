@@ -55,7 +55,7 @@ def messages_label_list(service, user_id, label_ids=[]):
 def get_message(service, user_id, msg_id):
     try:
         message = service.users().messages().get(userId=user_id, id=msg_id).execute()
-        # print('Message snippet: %s' % message['snippet'])
+        print('Message snippet: %s' % message['snippet'])
         return message
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
@@ -73,8 +73,8 @@ def modify_message(service, user_id, msg_id, msg_labels):
     try:
         message = service.users().messages().modify(userId=user_id, id=msg_id,
                                                     body=msg_labels).execute()
-        # label_ids = message['labelIds']
-        # print('Message ID: %s - With Label IDs %s' % (msg_id, label_ids))
+        label_ids = message['labelIds']
+        print('Message ID: %s - With Label IDs %s' % (msg_id, label_ids))
         return message
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
@@ -112,4 +112,4 @@ def parse_message_from_GV(message):
 def mark_as_read():
     a = messages_label_list(service, 'me', label_ids=['UNREAD'])[0]['id']
     modify_message(service, 'me', a, create_message_labels())
-    # print("Gmail Labeled Removed\n")
+    print("Completed Removing of the Label for " + a + "?")

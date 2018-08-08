@@ -9,22 +9,19 @@
 
 from __future__ import print_function
 import time
-import google_voice_hub as gv
-import google_sheets_api_storage as SHEETS
 import mongo_helpers as mongo
 import gmail_helpers as gmail
+import pika
+import sys
 
-browser = gv.start_google_voice(SHEETS.GV_EMAIL, SHEETS.GV_PASSWORD)
-print("Done sleeping after startup of Google Voice")
+print("[*] Checking for Gmail Messages ... To exit press CTRL+C")
 
-
-def run_sms_assist():
+def gmail_loop():
     # A 'latest_email_temp' global variable is initialized
     # to compare whether newer 'unread' emails have arrived
     latest_email_temp = ''
 
     def inner():
-        print('Starting...')
         latest_email = gmail.messages_label_list(
             gmail.service, 'me', label_ids=['UNREAD'])[0]['id']
         nonlocal latest_email_temp
@@ -45,30 +42,33 @@ def run_sms_assist():
                         mongo_message = gmail.parse_message_from_GV(
                             gmail_resp['snippet'])
                 if "New text message from" in str(subject_label):
-                    print("Received a new TIA-related message")
-                    print(mongo_num)
-                    print(mongo_message)
-                    mongo.database_new_item(mongo_num, mongo_message)
-                    # Run Full Script
-                    time.sleep(2)
+                    result = [mongo_num, mongo_message]
+                    str_result = str(result)
+                    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+                    channel = connection.channel()
+                    channel.queue_declare(queue='gmail_queue_2', durable=True)
+
+                    channel.basic_publish(exchange='',
+                                          routing_key='gmail_queue_2',
+                                          body=str_result,
+                                          properties=pika.BasicProperties(
+                                            delivery_mode = 2, # make message persistent
+                                          ))
+                    print("\n\n[x] Sent message to GMAIL QUEUE: '" + str(result[1]) + "' from '" + str(result[0]))
                     gmail.mark_as_read()
             except BaseException:
-                print("No new messages ...")
-        try:
-            mongo.update_user_data()
-            mongo.process_all_unprocessed()
-            mongo.process_reminders()
-        except BaseException:
-            print("Moving on to next loop ...")
+                pass
+                # print("Passing over a non-Tia email ...")
+                # print("\n[*] Checking for Gmail Messages ... To exit press CTRL+C")
         latest_email_temp = latest_email
-        time.sleep(4)
+        time.sleep(1)
     while True:
         try:
             inner()
-            time.sleep(4)
+            time.sleep(1)
         except BaseException:
-            time.sleep(4)
+            time.sleep(1)
             print('Hit an error... trying to avoid a crash here')
 
 
-run_sms_assist()
+gmail_loop()

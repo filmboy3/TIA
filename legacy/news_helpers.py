@@ -178,7 +178,7 @@ def news_request(news):
     return full_text
 
 
-def trigger_news_directory(resp, sender_info):
+def trigger_news_directory(browser, resp, sender_info):
     news_directory_text = "Here are the available news sources you can use: \n\n📰 abc 📰" \
                           "ap 📰 abc 📰 abc au 📰 al jazeera 📰 ars technica 📰 axios 📰" \
                           " bbc 📰 bbc sport 📰 br 📰 bloomberg 📰 business " \
@@ -196,44 +196,44 @@ def trigger_news_directory(resp, sender_info):
     try:
         header = "🌏 News Directory 🌏"
         print(header)
-        msg_gen.store_reply_in_mongo(
-             news_directory_text, sender_info, header)
+        msg_gen.send_full_text_message(
+            browser, news_directory_text, sender_info, header)
     except BaseException:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        msg_gen.send_error_text("news"),
                                        sender_info,
                                        "💀 Error 💀")
 
 
-def trigger_nyt(resp, sender_info):
+def trigger_nyt(browser, resp, sender_info):
     print("NY Times Triggered")
     print(resp)
     try:
-        msg_gen.store_reply_in_mongo(
-             nyt_request(), sender_info, "📰 NY Times 📰")
+        msg_gen.send_full_text_message(
+            browser, nyt_request(), sender_info, "📰 NY Times 📰")
     except BaseException:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        msg_gen.send_error_text("ny times"),
                                        sender_info,
                                        "💀 Error 💀")
 
 
-def trigger_hn(resp, sender_info):
+def trigger_hn(browser, resp, sender_info):
     print("Hacker News Triggered")
     print(resp)
     try:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        hacker_news_request(),
                                        sender_info,
                                        "💻 Hacker News 💻")
     except BaseException:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        msg_gen.send_error_text("hacker news"),
                                        sender_info,
                                        "💀 Error 💀")
 
 
-def trigger_news(resp, sender_info):
+def trigger_news(browser, resp, sender_info):
     print("News Triggered")
     print(resp)
     try:
@@ -245,10 +245,10 @@ def trigger_news(resp, sender_info):
     try:
         header = "🌏 " + str(newsSource).upper() + " 🌏"
         print(header)
-        msg_gen.store_reply_in_mongo(
-             news_request(newsSource), sender_info, header)
+        msg_gen.send_full_text_message(
+            browser, news_request(newsSource), sender_info, header)
     except BaseException:
-        msg_gen.store_reply_in_mongo(
+        msg_gen.send_full_text_message(browser,
                                        msg_gen.send_error_text("news"),
                                        sender_info,
                                        "💀 Error 💀")

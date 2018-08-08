@@ -56,8 +56,8 @@ def run_sms_assist():
                 print("No new messages ...")
         try:
             mongo.update_user_data()
-            mongo.process_all_unprocessed()
-            mongo.process_reminders()
+            mongo.process_all_unsent(browser)
+            mongo.process_reminders(browser)
         except BaseException:
             print("Moving on to next loop ...")
         latest_email_temp = latest_email

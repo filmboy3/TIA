@@ -20,7 +20,14 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 ### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ 
 (at this stage, Tia's servers are frequently down for changes/testing, so please hold off on the demo for now!)
 
-<b>Note</b>: I'm currently in the midst of a <i>separation-of-concerns<i> focused overhaul, so while the main server works as is, my current goal is to split Tia into 6 separate workers communicating over task queues. Thus far I have 4 Rabbit-MQ workers able to receive and parse user requests, the final two will be used to send the replies back to the user. You can see this WIP in rabbit_mq/Rabbit_MQ_TIA in this repo.
+<b>Note</b>: I'm currently in the midst of a <i>separation-of-concerns<i> overhaul, so while the original single-server works as is -- see <i>legacy</i> folder -- my current WIP is dividing the app into the following separately continuously running servers communicating over <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queues: 
+
+1. Worker -- worker_gmail.py -- sends new user messages to gmail queue from GMAIL API
+2. Listener -- listener_gmail.py -- receives gmail queue items, logs into (Mongo) database
+3. Worker -- worker_preprocess.py -- sends new database messages to preprocessing queue
+4. Listener -- listener_preprocess.py -- receives messages from preprocessing queue, performs processing, and updates message data on database
+5. Worker -- worker_voice.py -- sends processed messages from database to google voice queue
+6. Listener -- listener_voice.py -- receives messages from google voice queue, performs voice processing, and sends reply to user. 
 
 ## How it works
 

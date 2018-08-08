@@ -871,7 +871,7 @@ def runSMSAssist():
                 elif subjectLabel == "read":
                   a = ListMessagesWithLabels(service, 'me', label_ids = ['UNREAD'])[0]['id']
                   ModifyMessage(service, 'me', a, CreateMsgLabels())
-                  print("Completed Removing of the Label for " + a + "?")
+                  # print("Completed Removing of the Label for " + a + "?")
                 # Wikipedia Query
                 elif subjectLabel.split(" ")[0] == "wiki":
                   try:
