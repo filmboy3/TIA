@@ -17,10 +17,9 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 9. Scheduled Reminders
 10. Forward | Delete | Mark-As-Read new emails (OWNER-ONLY, see gmailfeatures.py)
 
-### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ 
-(at this stage, Tia's servers are frequently down for changes/testing, so please hold off on the demo for now!)
+### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ (too many server changes to host it continuously, so hold off on the demo)
 
-<b>Note</b>: I'm currently in the midst of a <i>separation-of-concerns<i> overhaul, so while the original single-server works as is -- see <i>legacy</i> folder -- my current WIP is dividing the app into the following separately continuously running servers communicating over <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queues: 
+<b>Note</b>: I'm currently in the midst of a <i>separation-of-concerns</i> overhaul, so while the original single-server works as is -- see <i>legacy</i> folder -- my current goal is dividing the app into the following separately continuously running servers communicating over <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queue progression: 
 
 1. Worker -- worker_gmail.py -- sends new user messages to gmail queue from GMAIL API
 2. Listener -- listener_gmail.py -- receives gmail queue items, logs into (Mongo) database
