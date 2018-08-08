@@ -10,43 +10,41 @@
 from __future__ import print_function
 import time
 import mongo_helpers as mongo
-import gmail_helpers as gmail
 import pika
 import sys
 
 
-print("[*] Checking for new unprocessed messages from MongoDB ... To exit press CTRL+C")
+print("[*] Checking for wit-processed 'SEND-NOW' messages from MongoDB ... To exit press CTRL+C")
 
 
-def transfer_unprocessed_to_wit_queue():
+def transfer_processed_to_voice_queue():
 
-    for message in mongo.message_records.find({"status": "unprocessed"}):
+    for message in mongo.message_records.find({"status": "completed processing"}):
         # message = mongo.convert_message_from_bytes(message)
-
         connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
         channel = connection.channel()
-        channel.queue_declare(queue='pre_processing_queue', durable=True)
+        channel.queue_declare(queue='google_voice_queue', durable=True)
         channel.basic_publish(exchange='',
-                              routing_key='pre_processing_queue',
-                              body=str(message),
-                              properties=pika.BasicProperties(
-                              delivery_mode = 2, # make message persistent
-                              ))
-        print("\n\n[x] Sent Message To PRE-PROCESSING QUEUE %r" % str(message['body']))
-        mongo.change_db_value(message, "status", "currently processing")
+                            routing_key='google_voice_queue',
+                            body=str(message),
+                            properties=pika.BasicProperties(
+                            delivery_mode = 2, # make message persistent
+                            ))
+        print("\n\n[x] Sent Message To GOOGLE VOICE QUEUE %r" % str(message['body']))
+        mongo.change_db_message_value(message, "status", "preparing to send")
 
 
-def wit_loop():
+def voice_loop():
 
     def inner():
-        transfer_unprocessed_to_wit_queue()
+        transfer_processed_to_voice_queue()
 
     while True:
         try:
             inner()
-            time.sleep(5)
+            time.sleep(1)
         except BaseException:
-            time.sleep(5)
+            time.sleep(1)
             print('Hit an error... trying to avoid a crash here')
 
-wit_loop()
+voice_loop()
