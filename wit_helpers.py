@@ -9,6 +9,7 @@
 
 from __future__ import print_function
 import re
+import time
 import api_keys as SHEETS
 import knowledge_helpers as know
 import directions_helpers as geo
@@ -87,6 +88,8 @@ def nlp_extraction(resp, sender_info):
         func_name = check_keywords(resp, sender_info)
 
     try:
+        sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+        time.sleep(1)
         eval(func_name)
     except BaseException:
         print("Final effort ")

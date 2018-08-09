@@ -12,7 +12,8 @@ import requests
 import string
 import calendar
 import api_keys as SHEETS
-
+import time
+import mongo_helpers as mongo
 import general_message_helpers as msg_gen
 import wit_helpers as wit
 
@@ -193,6 +194,8 @@ def forecast_request(subject_label, sender_info):
 
 def trigger_weather(resp, sender_info):
     print("Weather Triggered")
+    sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
     try:
         location = resp['entities']['location'][0]['value']
     except BaseException:
@@ -219,6 +222,8 @@ def trigger_weather(resp, sender_info):
 
 
 def trigger_forecast(resp, sender_info):
+    sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
     print("Forecast Triggered")
     try:
         location = resp['entities']['location'][0]['value']

@@ -15,6 +15,8 @@ import api_keys as SHEETS
 import string
 import general_message_helpers as msg_gen
 import weather_helpers as wthr
+import time
+import mongo_helpers as mongo
 
 
 def convert_distance_from_metric(text):
@@ -202,6 +204,8 @@ def get_two_lat_long(subject_label, sender_info):
 
 
 def trigger_directions(resp, sender_info):
+    sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
     print("Directions Triggered")
     # print(resp)
     start_location = ""

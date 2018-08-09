@@ -18,6 +18,7 @@ def callback(ch, method, properties, body):
     body = str(mongo.convert_message_from_bytes(body))
     print("Body after conversion: " + body)
     body = mongo.message_records.find_one({"sms_id": body})
+    time.sleep(1)
     # print(body)
     current_reply = body['current_chunk']
     print("[x] Received Message from GOOGLE-VOICE QUEUE: '" + str(body['result'][current_reply]) + "' to be sent to '" + str(body['from']) + "'")

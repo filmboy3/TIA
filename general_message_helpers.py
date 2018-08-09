@@ -178,11 +178,11 @@ def process_first_message(sender_info):
     print("sleeping...")
     print("New message: " + str(sender_info))
     # Boilerplate first message
-    message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text message, " \
-              " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
-              "Yelp 🍲\n⏲️ Scheduled Reminders ⏲️\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
-              "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
-              "What's your first name?"
+    # message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text message, " \
+    #           " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
+    #           "Yelp 🍲\n⏲️ Scheduled Reminders ⏲️\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
+    #           "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
+    #           "What's your first name?"
     # gv.send_new_message(sender_info['from'], message, sender_info)
 
 

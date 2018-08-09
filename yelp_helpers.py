@@ -10,7 +10,7 @@
 from __future__ import print_function
 import wit_helpers as wit
 import translation_helpers as trans
-
+import mongo_helpers as mongo
 import general_message_helpers as msg_gen
 import api_keys as SHEETS
 
@@ -162,7 +162,10 @@ def time_reformat(time_string):
 
 
 def trigger_yelp(resp, sender_info):
+    print("Pre Sender_Info: " + str(sender_info))
+    sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
     print("Yelp Triggered")
+    print("Sender Info: " + str(sender_info))
     # print(resp)
     try:
         location = resp['entities']['location'][0]['value']
@@ -174,7 +177,7 @@ def trigger_yelp(resp, sender_info):
             try:
                 location = location = resp['entities']['wikipedia_search_query'][0]['value']
             except BaseException:
-                location = ""
+                location = sender_info['home']
     try:
         category = resp['entities']['wit_yelp_category'][0]['value']
     except BaseException:
@@ -185,20 +188,14 @@ def trigger_yelp(resp, sender_info):
     result = (category, location)
     # Handling an early edge case in which AI confuses language names with
     # Yelp Ethnic foods, i.e., Chinese (language) vs Chinese (cuisine)
-    if (location != ""):
-        try:
-            msg_gen.store_reply_in_mongo(
-                 yelp_request(result), sender_info, "🍴 Yelp 🍴")
-        except BaseException:
-            msg_gen.store_reply_in_mongo(
-                                           msg_gen.send_error_text("Yelp"),
-                                           sender_info,
-                                           "💀 Error 💀")
-    else:
-        try:
-            print("Switching Yelp to Translate Task")
-            trans.trigger_translate(resp, sender_info)
-        except BaseException:
-            pass
+
+    try:
+        msg_gen.store_reply_in_mongo(
+                yelp_request(result), sender_info, "🍴 Yelp 🍴")
+    except BaseException:
+        msg_gen.store_reply_in_mongo(
+                                        msg_gen.send_error_text("Yelp"),
+                                        sender_info,
+                                        "💀 Error 💀")
 
     return result

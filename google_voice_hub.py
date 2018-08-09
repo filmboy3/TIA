@@ -35,10 +35,10 @@ def start_google_voice(emailAddress, emailPassword):
     return browser
 
 
-def send_new_message(browser, gv_number, gv_message, sender_info):
-    print("Triggered Sending Message on GV")
-    send_reply(gv_number, gv_message, browser)
-    mongo.change_db_message_value(sender_info, "status", "sent")
+# def send_new_message(browser, gv_number, gv_message, sender_info):
+#     print("Triggered Sending Message on GV")
+#     send_reply(gv_number, gv_message, browser)
+#     mongo.change_db_message_value(sender_info, "status", "sent")
 
 def initiate_gv_send(number, browser, message):
     print("Initiated actual GV sending message to: " + str(number))
@@ -61,6 +61,7 @@ def trigger_send_reply(record, browser):
         updated_message = mongo.change_db_message_value(record, "current_chunk", (current_chunk + 1))
     except:
         print("Error inside Trigger_send_reply")
+        updated_message = mongo.message_records.find_one({"sms_id": record['sms_id']})
     return updated_message
 
 def check_launch_time(record, browser):
@@ -74,6 +75,7 @@ def send_all_messages(record, browser):
 
 def send_next_message(record, browser):
     record = mongo.message_records.find_one({"sms_id": record['sms_id']})
+    time.sleep(1)
     if (record['current_chunk'] < record['chunk_len']):
         print("Sending Next Message") 
         trigger_send_reply(record, browser)
