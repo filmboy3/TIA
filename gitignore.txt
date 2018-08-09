@@ -42,12 +42,12 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
+python-gmail-api-tutorial.json
 credentials.json
 credentialsSheets.json
 client_secret_sheet
 client_secret
 .credentials
-
+api_keys.py
 .pyc
 __pycache__
