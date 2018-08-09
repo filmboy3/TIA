@@ -52,3 +52,9 @@ client_secret
 api_keys.py
 .pyc
 __pycache__
+api_keys.py
+client_secret.json
+client_secret_sheet.json
+credentials.json
+credentialsSheets.json
+python-gmail-api-tutorial.json
