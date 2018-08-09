@@ -10,7 +10,7 @@
 from __future__ import print_function
 import time
 import google_voice_hub as gv
-import google_sheets_api_storage as SHEETS
+import api_keys as SHEETS
 import mongo_helpers as mongo
 import gmail_helpers as gmail
 

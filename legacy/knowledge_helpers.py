@@ -14,7 +14,7 @@ import requests
 from textblob import TextBlob
 
 import general_message_helpers as msg_gen
-import google_sheets_api_storage as SHEETS
+import api_keys as SHEETS
 
 # INFORMATION FUNCTIONS #######
 

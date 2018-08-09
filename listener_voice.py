@@ -3,7 +3,7 @@ import pika
 import time
 import mongo_helpers as mongo
 import google_voice_hub as gv
-import google_sheets_api_storage as SHEETS
+import api_keys as SHEETS
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()

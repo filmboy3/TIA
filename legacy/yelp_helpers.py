@@ -12,7 +12,7 @@ import wit_helpers as wit
 import translation_helpers as trans
 
 import general_message_helpers as msg_gen
-import google_sheets_api_storage as SHEETS
+import api_keys as SHEETS
 
 
 def yelp_request(query):

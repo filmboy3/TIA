@@ -11,7 +11,7 @@ from __future__ import print_function
 import re
 import datetime
 from pymongo import MongoClient
-import google_sheets_api_storage as SHEETS
+import api_keys as SHEETS
 import wit_helpers as wit
 import general_message_helpers as msg_gen
 import reminder_helpers as remind

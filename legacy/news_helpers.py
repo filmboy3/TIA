@@ -12,7 +12,7 @@ import re
 import requests
 
 
-import google_sheets_api_storage as SHEETS
+import api_keys as SHEETS
 
 import general_message_helpers as msg_gen
 # NEWS FUNCTIONS #

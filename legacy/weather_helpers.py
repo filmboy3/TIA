@@ -11,7 +11,7 @@ from __future__ import print_function
 import requests
 import string
 import calendar
-import google_sheets_api_storage as SHEETS
+import api_keys as SHEETS
 
 import general_message_helpers as msg_gen
 import wit_helpers as wit

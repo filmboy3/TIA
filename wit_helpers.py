@@ -9,7 +9,7 @@
 
 from __future__ import print_function
 import re
-import google_sheets_api_storage as SHEETS
+import api_keys as SHEETS
 import knowledge_helpers as know
 import directions_helpers as geo
 import yelp_helpers as yelp
