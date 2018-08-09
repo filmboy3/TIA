@@ -75,7 +75,6 @@ def nlp_extraction(resp, sender_info):
         "weather_get": "weather.trigger_weather",
         "forecast_get": "weather.trigger_forecast",
         "reminder_get": "reminder.trigger_reminder"
-
     }
     try:
         if (resp['_text'].lower() == 'no' or resp['_text'].lower().startswith("new home")):
@@ -87,87 +86,48 @@ def nlp_extraction(resp, sender_info):
         print("Unable to determine intent ... moving on to keyword parsing.")
         func_name = check_keywords(resp, sender_info)
 
-    eval(func_name)
+    try:
+        eval(func_name)
+    except BaseException:
+        print("Final effort ")
+        try:
+            msg_gen.store_reply_in_mongo(
+                                        know.wolfram_request(
+                                            resp['_text']),
+                                        sender_info,
+                                        "🔭 Q & A 🔭")
+        except BaseException:
+            msg_gen.store_reply_in_mongo(
+                
+                msg_gen.send_error_text("Q & A"),
+                sender_info,
+                "💀 Error 💀")
+            
 
 def check_keywords(resp, sender_info):
-    preventRepeatCounter = 0
-    try:
-        if (resp['entities']['wit_biography_terms']):
-            return "know.trigger_wiki(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['wit_direction']):
-            return "geo.trigger_directions(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['wit_reminder_terms']):
-            return "reminder.trigger_reminder(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['reminder']):
-            return "reminder.trigger_reminder(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['wit_jeopardy']):
-            return "jep.trigger_jeopardy(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['wit_language']):
-            return "trans.trigger_translate(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['wit_news_source']):
-            return "news.trigger_news(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (preventRepeatCounter ==
-                0 and resp['entities']['wit_yelp_category']):
-            return "yelp.trigger_yelp(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['wit_transit']):
-            return "geo.trigger_directions(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['intent'][0]['value'] == "wiki_get"):
-            return "know.trigger_wiki(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['wolfram_search_query']):
-            return "know.trigger_wolfram(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (resp['entities']['intent'][0]['value'] == "wolfram_get"):
-            return "know.trigger_wolfram(resp, sender_info)"
-            
-    except BaseException:
-        pass
-    try:
-        if (preventRepeatCounter ==
-                0 and resp['entities']['wikipedia_search_query']):
-            return "know.trigger_wiki(resp, sender_info)"
-            
-    except BaseException:
-        pass
+    keywords_db = {
+        "01_wit_biography_terms": "know.trigger_wiki",
+        "02_wit_direction": "geo.trigger_directions",
+        "03_wit_reminder_terms": "reminder.trigger_reminder",
+        "04_reminder": "reminder.trigger_reminder",
+        "05_news_directory_get": "news.trigger_news_directory",
+        "06_wit_jeopardy": "jep.trigger_jeopardy",
+        "07_wit_language": "news.trigger_nyt",
+        "08_wit_news_source": "news.trigger_hn",
+        "09_wit_yelp_category": "yelp.trigger_yelp",
+        "10_wit_transit": "geo.trigger_directions",
+        "12_wikipedia_search_query": "know.trigger_wiki",
+        "13_wolfram_search_query": "know.trigger_wolfram"
+    }
+    sorted_keys = sorted(keywords_db.keys())
+
+    for i in range(0, len(sorted_keys)):
+        formatted_key = sorted_keys[i][3:]
+        try:
+          if (resp['entities'][formatted_key]):
+              func_name = keywords_db[sorted_keys[i]] + "(resp, sender_info)"
+              return func_name
+        except BaseException:
+          pass
+    
+    return "know.trigger_wolfram(resp, sender_info)"

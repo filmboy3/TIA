@@ -48,3 +48,6 @@ credentialsSheets.json
 client_secret_sheet
 client_secret
 .credentials
+
+.pyc
+__pycache__

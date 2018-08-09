@@ -272,4 +272,4 @@ def process_intro_messages(sender_info):
             "!\n\nIf you'd like me to set up a 🏠 address for quicker 🚗" \
             " directions and 🌧️ weather, please reply with your full address or NO\n"
         # Sending Message
-        gv.send_new_message(sender_info['from'], message, sender_info)
+        # gv.send_new_message(sender_info['from'], message, sender_info)

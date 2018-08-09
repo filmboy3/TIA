@@ -73,6 +73,7 @@ def send_all_messages(record, browser):
 
 
 def send_next_message(record, browser):
+    record = mongo.message_records.find_one({"sms_id": record['sms_id']})
     if (record['current_chunk'] < record['chunk_len']):
         print("Sending Next Message") 
         trigger_send_reply(record, browser)
@@ -101,6 +102,7 @@ def make_sms_chunks(text, send_all_chunks, sms_size=300):
     if number_of_chunks == 1:
         # print("No chunking Necessary")
         chunk_array.append(text)
+        chunk_result = (1, chunk_array)
     else:
         # print("Chunking Necessary")
         sms_end = sms_size
@@ -122,7 +124,7 @@ def make_sms_chunks(text, send_all_chunks, sms_size=300):
 
         # print("\n\nChunk Array formmated: \n\n" + str(chunk_array) + "\n\n")
         chunk_result = (len(chunk_array), chunk_array)
-        return chunk_result
+    return chunk_result
 
 def sizing_sms_chunks(text, send_all_chunks):
     print("Optimizing SMS chunking")
