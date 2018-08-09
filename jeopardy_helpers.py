@@ -54,13 +54,8 @@ def jeopardy_request():
 
 def trigger_jeopardy(resp, sender_info):
     print("Jeopardy Triggered")
-    try:
-        jeopardyTuple = jeopardy_request()
-        jeopardyTogether = jeopardyTuple[0] + jeopardyTuple[1]
-        msg_gen.store_reply_in_mongo(
-             jeopardyTogether, sender_info, "📺 Jeopardy 📺")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                       msg_gen.send_error_text("jeopardy"),
-                                       sender_info,
-                                       "💀 Error 💀")
+    jeopardyTuple = jeopardy_request()
+    jeopardyTogether = jeopardyTuple[0] + jeopardyTuple[1]
+    msg_gen.store_reply_in_mongo(
+            jeopardyTogether, sender_info, "📺 Jeopardy 📺")
+

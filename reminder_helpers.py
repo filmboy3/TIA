@@ -34,18 +34,11 @@ def check_reminder( message):
 def trigger_reminder_alert( message):
     result = "Don't forget! " + " '" + message['reminder_text'].capitalize() + "'!"
 
-    try:
-        msg_gen.store_reply_in_mongo(
-                                       result,
-                                       message,
-                                       "⏱️ Reminder ⏱️")
-        mongo.add_new_item_to_db(message, 'reminder_trigger', 'off')
-
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                       msg_gen.send_error_text("reminder"),
-                                       message,
-                                       "💀 Error 💀")
+    msg_gen.store_reply_in_mongo(
+                                    result,
+                                    message,
+                                    "⏱️ Reminder ⏱️")
+    mongo.add_new_item_to_db(message, 'reminder_trigger', 'off')
 
 def reminder_request(sender_info, input, date):
     hour_to_trigger_pst = str(date[11:13])
@@ -131,14 +124,7 @@ def trigger_reminder(resp, sender_info):
                     date = str(date) + "T00:00:00.000-07:00"
                     print("\nExcept date: " + str(date))
     print("Date: " + str(date))
-    try:
-        msg_gen.store_reply_in_mongo(
+    msg_gen.store_reply_in_mongo(
                                        reminder_request(sender_info, str(reminder), str(date)),
                                        sender_info,
                                        "⏱️ Reminder Setup ⏱️")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-            
-            msg_gen.send_error_text("reminder"),
-            sender_info,
-            "💀 Error 💀")

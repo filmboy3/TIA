@@ -79,7 +79,7 @@ def news_source_parse(source):
         "Globe and Mail": "the-globe-and-mail",
         "the guardian": "the-guardian-uk",
         "the guardian australian": "the-guardian-au",
-        "huffpost": "the-huffington-post",
+        "the huffington post": "the-huffington-post",
         "irish times": "irish-times",
         "the lad bible": "the-lad-bible",
         "the next web": "the-next-web",

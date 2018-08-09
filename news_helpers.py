@@ -193,44 +193,28 @@ def trigger_news_directory(resp, sender_info):
                           "guardian au 📰 huffpost 📰 the irish times 📰 lad bible 📰 nyt 📰 next " \
                           "web 📰 sport bible 📰 telegraph 📰 verge 📰 wsj 📰 washington post 📰 " \
                           "washington times 📰 time 📰 usa today 📰 vice 📰 wired 📰"
-    try:
-        header = "🌏 News Directory 🌏"
-        print(header)
-        msg_gen.store_reply_in_mongo(
-             news_directory_text, sender_info, header)
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                       msg_gen.send_error_text("news"),
-                                       sender_info,
-                                       "💀 Error 💀")
+    header = "🌏 News Directory 🌏"
+    print(header)
+    msg_gen.store_reply_in_mongo(
+            news_directory_text, sender_info, header)
+
 
 
 def trigger_nyt(resp, sender_info):
     print("NY Times Triggered")
     # print(resp)
-    try:
-        msg_gen.store_reply_in_mongo(
+    msg_gen.store_reply_in_mongo(
              nyt_request(), sender_info, "📰 NY Times 📰")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                       msg_gen.send_error_text("ny times"),
-                                       sender_info,
-                                       "💀 Error 💀")
+
 
 
 def trigger_hn(resp, sender_info):
     print("Hacker News Triggered")
     # print(resp)
-    try:
-        msg_gen.store_reply_in_mongo(
+    msg_gen.store_reply_in_mongo(
                                        hacker_news_request(),
                                        sender_info,
                                        "💻 Hacker News 💻")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                       msg_gen.send_error_text("hacker news"),
-                                       sender_info,
-                                       "💀 Error 💀")
 
 
 def trigger_news(resp, sender_info):
@@ -242,13 +226,8 @@ def trigger_news(resp, sender_info):
         newsSource = 'cnn'
     print("Wit.AI extracted news source: " + newsSource)
 
-    try:
-        header = "🌏 " + str(newsSource).upper() + " 🌏"
-        print(header)
-        msg_gen.store_reply_in_mongo(
-             news_request(newsSource), sender_info, header)
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                       msg_gen.send_error_text("news"),
-                                       sender_info,
-                                       "💀 Error 💀")
+    header = "🌏 " + str(newsSource).upper() + " 🌏"
+    print(header)
+    msg_gen.store_reply_in_mongo(
+            news_request(newsSource), sender_info, header)
+

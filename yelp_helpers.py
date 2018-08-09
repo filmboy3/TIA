@@ -189,13 +189,9 @@ def trigger_yelp(resp, sender_info):
     # Handling an early edge case in which AI confuses language names with
     # Yelp Ethnic foods, i.e., Chinese (language) vs Chinese (cuisine)
 
-    try:
-        msg_gen.store_reply_in_mongo(
+
+    msg_gen.store_reply_in_mongo(
                 yelp_request(result), sender_info, "🍴 Yelp 🍴")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                        msg_gen.send_error_text("Yelp"),
-                                        sender_info,
-                                        "💀 Error 💀")
+
 
     return result

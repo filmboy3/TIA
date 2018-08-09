@@ -204,18 +204,14 @@ def trigger_weather(resp, sender_info):
     try:
         result = location
         print("Weather location: " + location)
-        try:
-            msg_gen.store_reply_in_mongo(
+
+        msg_gen.store_reply_in_mongo(
                                            weather_request(
                                                result,
                                                sender_info),
                                            sender_info,
                                            "⛅ Weather ⛅")
-        except BaseException:
-            msg_gen.store_reply_in_mongo(
-                                           msg_gen.send_error_text("Weather"),
-                                           sender_info,
-                                           "💀 Error 💀")
+
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
         wit.check_keywords(resp, sender_info)
@@ -233,18 +229,14 @@ def trigger_forecast(resp, sender_info):
     try:
         result = location
         print("Forecast location: " + location)
-        try:
-            msg_gen.store_reply_in_mongo(
+
+        msg_gen.store_reply_in_mongo(
                                            forecast_request(
                                                result,
                                                sender_info),
                                            sender_info,
                                            "🌞 Forecast 🌞")
-        except BaseException:
-            msg_gen.store_reply_in_mongo(
-                                           msg_gen.send_error_text("forecast"),
-                                           sender_info,
-                                           "💀 Error 💀")
+
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
         wit.check_keywords(resp, sender_info)

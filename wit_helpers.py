@@ -102,7 +102,7 @@ def nlp_extraction(resp, sender_info):
         except BaseException:
             msg_gen.store_reply_in_mongo(
                 
-                msg_gen.send_error_text("Q & A"),
+                msg_gen.send_error_text("text"),
                 sender_info,
                 "💀 Error 💀")
             

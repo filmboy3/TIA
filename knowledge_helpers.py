@@ -55,18 +55,11 @@ def wolfram_request(input):
 def trigger_wolfram(resp, sender_info):
     print("Wolfram Triggered")
     # print(resp)
-    try:
-        msg_gen.store_reply_in_mongo(
+    msg_gen.store_reply_in_mongo(
                                        wolfram_request(
                                            resp['_text']),
                                        sender_info,
                                        "🔭 Q & A 🔭")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-            
-            msg_gen.send_error_text("Q & A"),
-            sender_info,
-            "💀 Error 💀")
 
 
 def trigger_wiki(resp, sender_info):
@@ -80,17 +73,11 @@ def trigger_wiki(resp, sender_info):
         wikiSearch = msg_gen.extract_quoted_text(resp['_text'])
     
     print("Wit.AI Wikisearch term: " + wikiSearch)
-    try:
-        msg_gen.store_reply_in_mongo(
+    msg_gen.store_reply_in_mongo(
                                        wikipedia_request(
                                            wikiSearch,
                                            sender_info),
                                        sender_info,
                                        "🔎 Wikipedia 🔎")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                       msg_gen.send_error_text("wikipedia"),
-                                       sender_info,
-                                       "💀 Error 💀")
 
     # print(resp)

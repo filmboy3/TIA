@@ -20,8 +20,8 @@ def callback(ch, method, properties, body):
     body = mongo.message_records.find_one({"sms_id": body})
     time.sleep(1)
     # print(body)
-    current_reply = body['current_chunk']
-    print("[x] Received Message from GOOGLE-VOICE QUEUE: '" + str(body['result'][current_reply]) + "' to be sent to '" + str(body['from']) + "'")
+    
+    print("[x] Received Message from GOOGLE-VOICE QUEUE with sms_id '" + body['sms_id'] + "' to be sent to '" + str(body['from']) + "'")
     ch.basic_ack(delivery_tag = method.delivery_tag)
     # print(body)
     gv.process_reply(body, browser)

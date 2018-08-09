@@ -265,18 +265,14 @@ def trigger_directions(resp, sender_info):
         "\nTransit: " +
         transit_method)
 
-    try:
-        msg_gen.store_reply_in_mongo(
+
+    msg_gen.store_reply_in_mongo(
                                        directions_request(
                                            directions_data,
                                            sender_info),
                                        sender_info,
                                        "🚗 Directions 🚗")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-                                       msg_gen.send_error_text("directions"),
-                                       sender_info,
-                                       "💀 Error 💀")
+
 
 
 def fallback_multi_address_parse(text):
