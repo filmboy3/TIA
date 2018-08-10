@@ -65,6 +65,8 @@ def check_launch_time(record, browser):
 
 def send_all_messages(record, browser):
     print("Sending all Messages at Once...")
+    record = mongo.message_records.find_one({"sms_id": record['sms_id']})
+    time.sleep(1)
     while (record['current_chunk'] < record['chunk_len']):
         record = trigger_send_reply(record, browser)
         time.sleep(1)
@@ -77,9 +79,11 @@ def send_next_message(record, browser):
         print("Sending Next Message") 
         trigger_send_reply(record, browser)
 
+
 def process_reply(record, browser):
     record = mongo.message_records.find_one({"sms_id": record['sms_id']})
-    time.sleep(1)
+    time.sleep(2)
+
     if record['launch_time'] == "NOW":
         if record['send_all_chunks'] == "SINGLE_CHUNKS":
             send_next_message(record, browser)

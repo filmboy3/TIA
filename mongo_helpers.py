@@ -203,6 +203,24 @@ def trigger_all(sender_info):
     change_db_message_value(message, "status", "completed processing")
 
 
+def fetch_name_from_db(sender_info):
+    user_info = user_records.find_one({"phone": sender_info['from']})
+    time.sleep(1)
+    name = user_info['name']
+    return name
+ 
+
+def trigger_no(sender_info):
+    name = fetch_name_from_db(sender_info)
+
+    message = "Gotcha. Let me know if you need anything! \n\n--😘,\n✨ Tia ✨ Text" \
+            " 📲 me another request, " + str(
+            name) + ", or text HELP"
+
+
+    msg_gen.store_reply_in_mongo_no_header(message, sender_info, "ALL_CHUNKS")
+
+
 def core_commands_check(resp, sender_info):
     print("Inside Core Commands Check")
     command = str(resp).lower().strip()
@@ -210,14 +228,14 @@ def core_commands_check(resp, sender_info):
     print("Sender_info: " + str(sender_info))
     base_keywords = {
                         'no': 'trigger_no',
-                        'help': 'trigger_help',
+                        'help': 'msg_gen.trigger_help',
                         'more': 'trigger_more',
                         'all': 'trigger_all'
                     }
     func_name = "none"
 
     if (command.startswith("new home")):
-        func_name = "msg_gen.trigger_new_home(resp, sender_info)"
+        func_name = "msg_gen.new_home_request(resp, sender_info)"
         print(func_name)
         print("Found a Core Command")
         sender_info = message_records.find_one({"sms_id": sender_info['sms_id']})

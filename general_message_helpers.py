@@ -27,6 +27,22 @@ def extract_quoted_text(text):
         pass
     return text
 
+def store_reply_in_mongo_no_header(result, sender_info, send_all_chunks="ALL_CHUNKS", launch_time="NOW"):
+    message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
+    
+    result = gv.sizing_sms_chunks(result, send_all_chunks)
+    chunk_len = result[0]
+    chunk_reply = result[1]
+
+    mongo.change_db_message_value(message_copy, "result", chunk_reply)
+    mongo.change_db_message_value(message_copy, "status", "completed processing")
+
+    sender_info = mongo.add_new_item_to_db(message_copy, "launch_time", launch_time)
+    sender_info = mongo.add_new_item_to_db(message_copy, "send_all_chunks", send_all_chunks)
+    sender_info = mongo.add_new_item_to_db(message_copy, "current_chunk", 0)
+    sender_info = mongo.add_new_item_to_db(message_copy, "chunk_len", chunk_len)
+
 
 def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="SINGLE_CHUNKS", launch_time="NOW"):
     message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
@@ -64,37 +80,65 @@ def send_error_text(text):
 # Help Message
 
 
-def command_help_messages(sender_info):
-    message = "\nHey, " + str(sender_info['name']) + "! Here's a 🗒️ " \
-        "of tasks I can 📲: \n\n🚇 Turn-by-turn directions 🚇\n🚗 by car, transit, " \
-        "or foot 🚗\n\n📲 Examples: 'I want to drive from home to \"221 79th Street, " \
-        "Bay Ridge, Brooklyn\"' 📲 'Let's walk from \"403 Main Street, Oakland, " \
-        "California\", to \"1807 Thompson Ave, Oakland, CA 94612\"'\n\n☀️ Current weather ☀️ " \
-        "and 5-day forecast ☔\n\n📲 Examples: 'What's it like outside in Houston?' " \
-        "📲 'What\'s the weather forecast near me? \n\n⏲️ Scheduled Reminders ⏲️\n\n📲 Example: " \
-        "'Remind me to pick up my sister in an hour'\n\n🇺🇸 " \
-        "Language Translation 🇺🇸\n📲 Example: How would an Italian say, 'I don't like pasta'?" \
-        "\n\n🍲 Yelp Searches 🍲\n📲 Example: 'Please find me some asian fusion " \
-        "near my house'\n\n🔎 Wikipedia summaries 🔎\n📲 Example: 'Tell me about Barack Obama'" \
-        "\n\n💡 Jeopardy Questions 💡 \n📲 Example: 'This is Jeopardy!'" \
-        "\n\nLate Night 🌃 Monologue jokes\n🤣(most recent, random, or specific date 2009-Present)🤣 📲" \
-        " Example: 'What are the latest jokes? " \
-        "'\n\n🔭 General Knowledge Q&A 🔭\n📲 Examples: 'How many baseballs " \
-        "fit into a boeing 747?' 📲 'How many calories in a sweet potato? 📲 " \
-        "Where can I find the North Star?\n\nGet NY Times 📰, Hacker News 💻, " \
-        "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
-        "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
-        "What are the headlines from wired?\n(For the full list of available sources, ask for the 'news directory')\n\nNow 🙏 give me a task!"
-    sender_info = mongo.add_new_item_to_db(sender_info, "result", message)
-    sender_info = mongo.add_new_item_to_db(sender_info, "launch_time", 'now')
-    # print(sender_info)
-    # gv.send_new_message(sender_info['from'], message, sender_info)
+# def command_help_messages(sender_info):
+#     sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+#     time.sleep(2)
+#     print(sender_info)
+#     message = "\nHey, " + str(sender_info['name']) + "! Here's a 🗒️ " \
+#     "of tasks I can 📲: \n\n🚇 Turn-by-turn directions 🚇\n🚗 by car, transit, " \
+#     "or foot 🚗\n\n📲 Examples: 'I want to drive from home to \"221 79th Street, " \
+#     "Bay Ridge, Brooklyn\"' 📲 'Let's walk from \"403 Main Street, Oakland, " \
+#     "California\", to \"1807 Thompson Ave, Oakland, CA 94612\"'\n\n☀️ Current weather ☀️ " \
+#     "and 5-day forecast ☔\n\n📲 Examples: 'What's it like outside in Houston?' " \
+#     "📲 'What\'s the weather forecast near me? \n\n⏲️ Scheduled Reminders ⏲️\n\n📲 Example: " \
+#     "'Remind me to pick up my sister in an hour'\n\n🇺🇸 " \
+#     "Language Translation 🇺🇸\n📲 Example: How would an Italian say, 'I don't like pasta'?" \
+#     "\n\n🍲 Yelp Searches 🍲\n📲 Example: 'Please find me some asian fusion " \
+#     "near my house'\n\n🔎 Wikipedia summaries 🔎\n📲 Example: 'Tell me about Barack Obama'" \
+#     "\n\n💡 Jeopardy Questions 💡 \n📲 Example: 'This is Jeopardy!'" \
+#     "\n\nLate Night 🌃 Monologue jokes\n🤣(most recent, random, or specific date 2009-Present)🤣 📲" \
+#     " Example: 'What are the latest jokes? " \
+#     "'\n\n🔭 General Knowledge Q&A 🔭\n📲 Examples: 'How many baseballs " \
+#     "fit into a boeing 747?' 📲 'How many calories in a sweet potato? 📲 " \
+#     "Where can I find the North Star?\n\nGet NY Times 📰, Hacker News 💻, " \
+#     "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
+#     "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
+#     "What are the headlines from wired?\n(For the full list of available sources, ask for the 'news directory')\n\nNow 🙏 give me a task!"
 
 
-def trigger_help(resp, sender_info):
-    print("Help Triggered")
-    # print(resp)
-    command_help_messages(sender_info)
+
+#     store_reply_in_mongo(message, sender_info, "ℹ️ Help ℹ️", "ALL_CHUNKS")
+#     # sender_info = mongo.add_new_item_to_db(sender_info, "result", message)
+#     # sender_info = mongo.add_new_item_to_db(sender_info, "launch_time", 'now')
+#     # print(sender_info)
+#     # gv.send_new_message(sender_info['from'], message, sender_info)
+
+
+def trigger_help(sender_info):
+    name = mongo.fetch_name_from_db(sender_info)
+
+    message = "\nHey, " + name + "! Here's a 🗒️ " \
+    "of tasks I can 📲: \n\n🚇 Turn-by-turn directions 🚇\n🚗 by car, transit, " \
+    "or foot 🚗\n\n📲 Examples: 'I want to drive from home to \"221 79th Street, " \
+    "Bay Ridge, Brooklyn\"' 📲 'Let's walk from \"403 Main Street, Oakland, " \
+    "California\", to \"1807 Thompson Ave, Oakland, CA 94612\"'\n\n☀️ Current weather ☀️ " \
+    "and 5-day forecast ☔\n\n📲 Examples: 'What's it like outside in Houston?' " \
+    "📲 'What\'s the weather forecast near me? \n\n⏲️ Scheduled Reminders ⏲️\n\n📲 Example: " \
+    "'Remind me to pick up my sister in an hour'\n\n🇺🇸 " \
+    "Language Translation 🇺🇸\n📲 Example: How would an Italian say, 'I don't like pasta'?" \
+    "\n\n🍲 Yelp Searches 🍲\n📲 Example: 'Please find me some asian fusion " \
+    "near my house'\n\n🔎 Wikipedia summaries 🔎\n📲 Example: 'Tell me about Barack Obama'" \
+    "\n\n💡 Jeopardy Questions 💡 \n📲 Example: 'This is Jeopardy!'" \
+    "\n\nLate Night 🌃 Monologue jokes\n🤣(most recent, random, or specific date 2009-Present)🤣 📲" \
+    " Example: 'What are the latest jokes? " \
+    "'\n\n🔭 General Knowledge Q&A 🔭\n📲 Examples: 'How many baseballs " \
+    "fit into a boeing 747?' 📲 'How many calories in a sweet potato? 📲 " \
+    "Where can I find the North Star?\n\nGet NY Times 📰, Hacker News 💻, " \
+    "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
+    "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
+    "What are the headlines from wired?\n(For the full list of available sources, ask for the 'news directory')\n\nNow 🙏 give me a task!"
+
+    store_reply_in_mongo_no_header(message, sender_info)
 
 
 def convert_coords_to_time_zone(lat, long):
@@ -151,11 +195,12 @@ def new_home_request(command, sender_info):
         add_time_zone_data(command, sender_info)
         sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
         message = "\nThere's no place like 🏠, "
-    message = message + str(sender_info['name']) + "!\n\nText me 'new home'" \
-             " with your address to change 🏠 at any time\n\n🙋 Want some tips on what I can do? 📲 Reply help"
-    # gv.send_new_message(sender_info['from'], message, sender_info)
+    message = message + str(sender_info['name']) + "!\n\nText me NEW HOME" \
+             " followed by your address to change 🏠 at any time\n\n🙋 Want some tips on what I can do? 📲 Text HELP"
     sender_info = mongo.add_new_item_to_db(sender_info, "result", message)
     sender_info = mongo.add_new_item_to_db(sender_info, "launch_time", 'now')
+    store_reply_in_mongo_no_header(message, sender_info)
+    # gv.send_new_message(sender_info['from'], message, sender_info)
     # print(sender_info)
 
 
@@ -167,14 +212,10 @@ def trigger_new_home(resp, sender_info):
         location = extract_quoted_text(resp['_text'])
     result = location
     print("New Home Location: " + location)
-    # print(resp)
-    try:
-        new_home_request(result, sender_info)
-    except BaseException:
-        store_reply_in_mongo(
-                               send_error_text("new home"),
-                               sender_info,
-                               "💀 Error 💀")
+    store_reply_in_mongo(
+                        new_home_request(result, sender_info),
+                        sender_info,
+                        "🏠 New Home 🏠")
 
 
 def process_first_message(sender_info):
@@ -183,11 +224,12 @@ def process_first_message(sender_info):
     print("sleeping...")
     print("New message: " + str(sender_info))
     # Boilerplate first message
-    # message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text message, " \
-    #           " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
-    #           "Yelp 🍲\n⏲️ Scheduled Reminders ⏲️\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
-    #           "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
-    #           "What's your first name?"
+    message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text message, " \
+              " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
+              "Yelp 🍲\n⏲️ Scheduled Reminders ⏲️\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
+              "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
+              "What's your first name?"
+    store_reply_in_mongo(message, sender_info, "ℹ️ Help ℹ️", "ALL_CHUNKS")
     # gv.send_new_message(sender_info['from'], message, sender_info)
 
 

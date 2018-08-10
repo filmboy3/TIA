@@ -79,11 +79,8 @@ def nlp_extraction(resp, sender_info):
         "reminder_get": "reminder.trigger_reminder"
     }
     try:
-        if (resp['_text'].lower() == 'no' or resp['_text'].lower().startswith("new home")):
-            func_name = "msg_gen.trigger_new_home(resp, sender_info)"    
-        else:
-            intent_result = str(resp['entities']['intent'][0]['value'])
-            func_name = intent_db[intent_result] + "(resp, sender_info)" 
+        intent_result = str(resp['entities']['intent'][0]['value'])
+        func_name = intent_db[intent_result] + "(resp, sender_info)" 
     except BaseException:
         print("Unable to determine intent ... moving on to keyword parsing.")
         func_name = check_keywords(resp, sender_info)
