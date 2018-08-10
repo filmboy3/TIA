@@ -178,25 +178,25 @@ def news_request(news):
     return full_text
 
 
-def trigger_news_directory(resp, sender_info):
-    news_directory_text = "Here are the available news sources you can use: \n\n📰 abc 📰" \
-                          "ap 📰 abc 📰 abc au 📰 al jazeera 📰 ars technica 📰 axios 📰" \
-                          " bbc 📰 bbc sport 📰 br 📰 bloomberg 📰 business " \
-                          "insider 📰 business insider uk 📰 buzzfeed 📰 cbc 📰 cbs 📰 " \
-                          "cnbc 📰 cnn 📰 crypto 📰 daily mail 📰 engadget 📰 ew 📰 espn 📰" \
-                          " financial post 📰 ft 📰 fortune 📰 fox sports 📰 google 📰 google " \
-                          "uk 📰 hn 📰 ign 📰\n📰 independent 📰 mashable 📰 medical 📰 metro 📰 " \
-                          "mirror 📰 msnbc 📰 mtv 📰 mtv uk 📰 national geographic 📰 national " \
-                          "review 📰 nbc 📰 new scientist 📰 com au 📰week 📰 nymag 📰 future 📰" \
-                          " nfl 📰 nhl 📰 politico 📰 polygon 📰 recode 📰 reddit 📰 reuters 📰 " \
-                          "techcrunch 📰 techradar 📰 economist 📰 globe and mail 📰 guardian 📰 " \
-                          "guardian au 📰 huffpost 📰 the irish times 📰 lad bible 📰 nyt 📰 next " \
-                          "web 📰 sport bible 📰 telegraph 📰 verge 📰 wsj 📰 washington post 📰 " \
-                          "washington times 📰 time 📰 usa today 📰 vice 📰 wired 📰"
+def trigger_news_directory(sender_info):
+    news_directory_text = "Here are the available news sources you can use: \n\n📰 ABC 📰" \
+                          "A.P. 📰 ABC 📰 ABC (au) 📰 Al Jazeera 📰 Ars Technica 📰 Axios 📰" \
+                          " BBC 📰 BBC Sport 📰 Bleacher Report 📰 Bloomberg 📰 Business " \
+                          "Insider 📰 Business Insider (uk) 📰 Buzzfeed 📰 CBC 📰 CBS 📰 " \
+                          "CNBC 📰 CNN 📰 Crypto 📰 Daily Mail 📰 Engadget 📰 Entertainment Weekly 📰 ESPN 📰" \
+                          " Financial Post 📰 Financial Times 📰 Fortune 📰 Fox Sports 📰 Google 📰 Google " \
+                          "UK 📰 Hacker News 📰 IGN 📰\n📰 Independent 📰 Mashable 📰 Medical 📰 Metro 📰 " \
+                          "Mirror 📰 MSNBC 📰 MTV 📰 MTV (uk) 📰 National Geographic 📰 National " \
+                          "Review 📰 NBC 📰 New Scientist 📰 com au 📰 The Week 📰 NY Mag 📰 Futurism 📰" \
+                          " NFL 📰 NHL 📰 Politico 📰 Polygon 📰 Recode 📰 Reddit 📰 Reuters 📰 " \
+                          "Techcrunch 📰 Techradar 📰 The Economist 📰 Globe and Mail 📰 The Guardian 📰 " \
+                          "The Guardian (au) 📰 Huffpost 📰 The Irish Times 📰 Lad Bible 📰 NY Times 📰 The Next " \
+                          "Web 📰 Sport Bible 📰 The Telegraph 📰 verge 📰 Wall Street Journal 📰 Washington Post 📰 " \
+                          "Washington Times 📰 Time 📰 USA Today 📰 Vice 📰 Wired 📰"
     header = "🌏 News Directory 🌏"
     print(header)
     msg_gen.store_reply_in_mongo(
-            news_directory_text, sender_info, header)
+            news_directory_text, sender_info, header, "ALL_CHUNKS")
 
 
 

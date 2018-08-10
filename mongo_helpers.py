@@ -15,6 +15,7 @@ import api_keys as SHEETS
 import wit_helpers as wit
 import general_message_helpers as msg_gen
 import reminder_helpers as remind
+import news_helpers as news
 import yaml
 import random
 import string
@@ -152,7 +153,7 @@ def update_user_data():
                 local_time = msg_gen.update_local_time(existing_user['zone_name'])
             except:
                 local_time = "unknown local time"
-            # "This is a transfer of existing user data back to the message"
+            "This is a transfer of existing user data back to the message"
             shared_user_data = {
                 "home": existing_user['home'],
                 "count": existing_user['count'],
@@ -232,7 +233,10 @@ def core_commands_check(resp, sender_info):
                         'no': 'trigger_no',
                         'help': 'msg_gen.trigger_help',
                         'more': 'trigger_more',
-                        'all': 'trigger_all'
+                        'all': 'trigger_all',
+                        'info': 'msg_gen.trigger_help',
+                        'news': 'news.trigger_news_directory' ,
+                        'fave': 'remind.trigger_recurring'
                     }
     func_name = "none"
 
@@ -267,7 +271,7 @@ def process_message(sender_info):
         print("Inside process message")
         msg_gen.process_first_message(sender_info)
     elif current_user['count'] < 2:
-        msg_gen.process_intro_messages(sender_info)
+        msg_gen.process_name_prompt(sender_info)
     # Otherwise, it processes the users' messages
     else:
         core_commands_check(sender_info['body'], sender_info)
