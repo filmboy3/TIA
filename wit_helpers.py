@@ -30,13 +30,13 @@ def pre_wit_scrub(message):
                     ]
     for old, new in replacements:
         message = re.sub(old, new, message)
-    message = message.lower()
+    message = message.lower().strip()
     print("Wit Scrubbed Message: " + str(message))
     return message
     
 
 def wit_parse_message(message, sender_info):
-    message = pre_wit_scrub(str(message))
+    # message = pre_wit_scrub(str(message))
     mongo.change_db_message_value(sender_info, 'body', message)
     resp = SHEETS.WIT_CLIENT.message(message)
     print(resp)

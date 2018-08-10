@@ -222,6 +222,8 @@ def trigger_no(sender_info):
 
 
 def core_commands_check(resp, sender_info):
+    resp = wit.pre_wit_scrub(str(resp)) 
+    print("Scrubbed resp: " + resp)
     print("Inside Core Commands Check")
     command = str(resp).lower().strip()
     print(command)

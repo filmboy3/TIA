@@ -77,42 +77,6 @@ def send_error_text(text):
 
 # OPENING GREETING FUNCTIONS FOR NEW USER
 
-# Help Message
-
-
-# def command_help_messages(sender_info):
-#     sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
-#     time.sleep(2)
-#     print(sender_info)
-#     message = "\nHey, " + str(sender_info['name']) + "! Here's a 🗒️ " \
-#     "of tasks I can 📲: \n\n🚇 Turn-by-turn directions 🚇\n🚗 by car, transit, " \
-#     "or foot 🚗\n\n📲 Examples: 'I want to drive from home to \"221 79th Street, " \
-#     "Bay Ridge, Brooklyn\"' 📲 'Let's walk from \"403 Main Street, Oakland, " \
-#     "California\", to \"1807 Thompson Ave, Oakland, CA 94612\"'\n\n☀️ Current weather ☀️ " \
-#     "and 5-day forecast ☔\n\n📲 Examples: 'What's it like outside in Houston?' " \
-#     "📲 'What\'s the weather forecast near me? \n\n⏲️ Scheduled Reminders ⏲️\n\n📲 Example: " \
-#     "'Remind me to pick up my sister in an hour'\n\n🇺🇸 " \
-#     "Language Translation 🇺🇸\n📲 Example: How would an Italian say, 'I don't like pasta'?" \
-#     "\n\n🍲 Yelp Searches 🍲\n📲 Example: 'Please find me some asian fusion " \
-#     "near my house'\n\n🔎 Wikipedia summaries 🔎\n📲 Example: 'Tell me about Barack Obama'" \
-#     "\n\n💡 Jeopardy Questions 💡 \n📲 Example: 'This is Jeopardy!'" \
-#     "\n\nLate Night 🌃 Monologue jokes\n🤣(most recent, random, or specific date 2009-Present)🤣 📲" \
-#     " Example: 'What are the latest jokes? " \
-#     "'\n\n🔭 General Knowledge Q&A 🔭\n📲 Examples: 'How many baseballs " \
-#     "fit into a boeing 747?' 📲 'How many calories in a sweet potato? 📲 " \
-#     "Where can I find the North Star?\n\nGet NY Times 📰, Hacker News 💻, " \
-#     "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
-#     "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
-#     "What are the headlines from wired?\n(For the full list of available sources, ask for the 'news directory')\n\nNow 🙏 give me a task!"
-
-
-
-#     store_reply_in_mongo(message, sender_info, "ℹ️ Help ℹ️", "ALL_CHUNKS")
-#     # sender_info = mongo.add_new_item_to_db(sender_info, "result", message)
-#     # sender_info = mongo.add_new_item_to_db(sender_info, "launch_time", 'now')
-#     # print(sender_info)
-#     # gv.send_new_message(sender_info['from'], message, sender_info)
-
 
 def trigger_help(sender_info):
     name = mongo.fetch_name_from_db(sender_info)
@@ -144,6 +108,8 @@ def trigger_help(sender_info):
 def convert_coords_to_time_zone(lat, long):
     url = "http://api.timezonedb.com/v2/get-time-zone?key=" + \
           SHEETS.ZONE_API_KEY + "&format=json&by=position&lat=" + str(lat) + "&lng=" + str(long)
+    print(url)
+    # json_data = requests.get(url).json()
     json_data = requests.get(url).json()
     result = []
     result.append(json_data['zoneName'])
@@ -173,13 +139,13 @@ def convert_wit_zone_to_home(home_zone):
 
 def add_time_zone_data(command, sender_info):
     home_lat_long = geo.lat_long_single_location(command)
-    # print("home_lat_long: " + str(home_lat_long))
+    print("home_lat_long: " + str(home_lat_long))
     time_zone_list = convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1]))
     zone_name = time_zone_list[0]
     local_current_time = time_zone_list[1]
 
     time_zone_change = convert_wit_zone_to_home(zone_name)
-    # print("time_zone_change: " + str(time_zone_change))
+    print("time_zone_change: " + str(time_zone_change))
     # Comment Out the Following Line when Unit Testing
     sender_info = mongo.add_new_item_to_db(sender_info, "offset_time_zone", time_zone_change)
     sender_info = mongo.add_new_item_to_db(sender_info, "local_current_time", local_current_time)
@@ -188,10 +154,14 @@ def add_time_zone_data(command, sender_info):
 
 
 def new_home_request(command, sender_info):
-    if command.lower() == "no":
+    command = str(command).lower()
+    print(command)
+    if command == "no":
         message = "\nI totally understand, "
     else:
-        command = re.sub("new home", "", command.lower())
+        command = re.sub("new home", "", command)
+        command = extract_quoted_text(command)
+        print(command)
         add_time_zone_data(command, sender_info)
         sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
         message = "\nThere's no place like 🏠, "
@@ -224,12 +194,12 @@ def process_first_message(sender_info):
     print("sleeping...")
     print("New message: " + str(sender_info))
     # Boilerplate first message
-    message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via text message, " \
+    message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via texts, " \
               " so no need for 📶 or Wi-Fi!\n\nI can text you:\n🚗 Directions 🚗\n☔ Weather Forecasts ☔\n🍲 " \
-              "Yelp 🍲\n⏲️ Scheduled Reminders ⏲️\n✍️ Language Translation ✍️\n📚 Knowledge Questions 📚 \n🔎 Wikipedia 🔎\n🌏 News from " \
-              "around the 🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
+              "Yelp 🍲\n⏲️ Reminders ⏲️\n✍️ Translation ✍️\n📚 Q & A 📚 \n🔎 Wikipedia 🔎\n🌏 News Briefs " \
+              "🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more!\n\n🙋‍ " \
               "What's your first name?"
-    store_reply_in_mongo(message, sender_info, "ℹ️ Help ℹ️", "ALL_CHUNKS")
+    store_reply_in_mongo_no_header(message, sender_info)
     # gv.send_new_message(sender_info['from'], message, sender_info)
 
 
@@ -318,5 +288,6 @@ def process_intro_messages(sender_info):
         message = "\nIt's a pleasure to 🤗 meet you, " + name + \
             "!\n\nIf you'd like me to set up a 🏠 address for quicker 🚗" \
             " directions and 🌧️ weather, please reply with your full address or NO\n"
+        store_reply_in_mongo_no_header(message, sender_info)
         # Sending Message
         # gv.send_new_message(sender_info['from'], message, sender_info)
