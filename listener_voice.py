@@ -25,7 +25,8 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag = method.delivery_tag)
     # print(body)
     gv.process_reply(body, browser)
-    print(" [x] Done")
+    print(" [x] Message Sent")
+    mongo.change_db_message_value(body, "status", "message sent")
 
 channel.basic_qos(prefetch_count=1)
 channel.basic_consume(callback,

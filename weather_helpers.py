@@ -210,7 +210,8 @@ def trigger_weather(resp, sender_info):
                                                result,
                                                sender_info),
                                            sender_info,
-                                           "⛅ Weather ⛅")
+                                           "⛅ Weather ⛅",
+                                           "ALL_CHUNKS")
 
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")
@@ -235,7 +236,8 @@ def trigger_forecast(resp, sender_info):
                                                result,
                                                sender_info),
                                            sender_info,
-                                           "🌞 Forecast 🌞")
+                                           "🌞 Forecast 🌞",
+                                           "ALL_CHUNKS")
 
     except BaseException:
         print("Location not found, so checking for Non-Weather keywords ...")

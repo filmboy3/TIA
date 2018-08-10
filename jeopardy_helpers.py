@@ -57,5 +57,5 @@ def trigger_jeopardy(resp, sender_info):
     jeopardyTuple = jeopardy_request()
     jeopardyTogether = jeopardyTuple[0] + jeopardyTuple[1]
     msg_gen.store_reply_in_mongo(
-            jeopardyTogether, sender_info, "📺 Jeopardy 📺")
+            jeopardyTogether, sender_info, "📺 Jeopardy 📺", "ALL_CHUNKS")
 

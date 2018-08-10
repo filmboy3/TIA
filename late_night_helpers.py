@@ -88,14 +88,8 @@ def trigger_jokes(resp, sender_info):
         pass
 
     print(jokes_date)
-    try:
-        msg_gen.store_reply_in_mongo(
+    msg_gen.store_reply_in_mongo(
                                        late_night_request(jokes_date),
                                        sender_info,
                                        "🌃 Late Night 🌃")
-    except BaseException:
-        msg_gen.store_reply_in_mongo(
-            
-            msg_gen.send_error_text("late night jokes"),
-            sender_info,
-            "💀 Error 💀")
+

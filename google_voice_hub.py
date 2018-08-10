@@ -5,10 +5,11 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 import math
 import mongo_helpers as mongo
+import api_keys as SHEETS
 
 
 def start_google_voice(emailAddress, emailPassword):
-    chromedriver = "C:\\Users\\Jonathan2017\\Downloads\\chromedriver.exe"
+    chromedriver = SHEETS.CHROME_PATH
 
     options = webdriver.ChromeOptions()
     # options.add_argument('headless')
@@ -34,11 +35,6 @@ def start_google_voice(emailAddress, emailPassword):
     time.sleep(8)
     return browser
 
-
-# def send_new_message(browser, gv_number, gv_message, sender_info):
-#     print("Triggered Sending Message on GV")
-#     send_reply(gv_number, gv_message, browser)
-#     mongo.change_db_message_value(sender_info, "status", "sent")
 
 def initiate_gv_send(number, browser, message):
     print("Initiated actual GV sending message to: " + str(number))
@@ -71,6 +67,7 @@ def send_all_messages(record, browser):
     print("Sending all Messages at Once...")
     while (record['current_chunk'] < record['chunk_len']):
         record = trigger_send_reply(record, browser)
+        time.sleep(1)
 
 
 def send_next_message(record, browser):
@@ -81,8 +78,10 @@ def send_next_message(record, browser):
         trigger_send_reply(record, browser)
 
 def process_reply(record, browser):
+    record = mongo.message_records.find_one({"sms_id": record['sms_id']})
+    time.sleep(1)
     if record['launch_time'] == "NOW":
-        if record['send_all_chunks'] == "NO":
+        if record['send_all_chunks'] == "SINGLE_CHUNKS":
             send_next_message(record, browser)
         else:
             send_all_messages(record, browser)
@@ -94,9 +93,9 @@ def make_sms_chunks(text, send_all_chunks, sms_size=300):
     count = len(text)
     # print(count)
 
-    chunk_note = "\nFor next message, 📲 text MORE\nFor all messages, 📲 text ALL"
+    chunk_note = "\nFor more 📲, text MORE\nFor all 📲, text ALL"
     
-    if send_all_chunks == "YES":
+    if send_all_chunks == "ALL_CHUNKS":
         chunk_note = ""
 
     number_of_chunks = int(math.ceil(count / float(350)))
@@ -189,38 +188,6 @@ def delete_previous_conversation(browser):
     time.sleep(2)
     browser.find_element_by_xpath(
         """//button[@gv-test-id='delete-thread-confirm']""").click()
-
-
-# def send_reply(gv_number, gv_message, browser):
-#     print("Browser inside SendReply: " + str(browser))
-#     message = setup_message(gv_number, browser)
-#     try:
-#         chunk_set = make_sms_chunks(gv_message)
-#     except BaseException:
-#         try:
-#             chunk_set = make_sms_chunks(gv_message, 250)
-#             print("Triggered lower SMS chunking size @ 250")
-#         except BaseException:
-#             try:
-#                 chunk_set = make_sms_chunks(gv_message, 200)
-#                 print("Triggered lower SMS chunking size @ 200")
-#             except BaseException:
-#                 try:
-#                     chunk_set = make_sms_chunks(gv_message, 150)
-#                     print("Triggered lower SMS chunking size @ 150")
-#                 except BaseException:
-#                     try:
-#                         chunk_set = make_sms_chunks(gv_message, 100)
-#                         print("Triggered lower SMS chunking size @ 100")
-#                     except BaseException:
-#                         chunk_set = make_sms_chunks(gv_message, 50)
-#                         print("Triggered lower SMS chunking size @ 50")
-
-#     for i in range(0, len(chunk_set)):
-#         time.sleep(1)
-#         enter_message(message, chunk_set[i], browser)
-#         time.sleep(2)
-#     delete_previous_conversation(browser)
 
 
 def setup_message(gv_number, browser):

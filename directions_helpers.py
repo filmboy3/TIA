@@ -271,7 +271,8 @@ def trigger_directions(resp, sender_info):
                                            directions_data,
                                            sender_info),
                                        sender_info,
-                                       "🚗 Directions 🚗")
+                                       "🚗 Directions 🚗",
+                                       "ALL_CHUNKS")
 
 
 

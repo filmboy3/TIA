@@ -28,10 +28,10 @@ def extract_quoted_text(text):
     return text
 
 
-def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="NO", launch_time="NOW"):
+def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="SINGLE_CHUNKS", launch_time="NOW"):
     message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
     time.sleep(1)
-    tia_sign_off = "\n--😘,\n✨ Tia ✨ Text" \
+    tia_sign_off = "\n\n--😘,\n✨ Tia ✨ Text" \
         " 📲 me another request, " + str(
             message_copy['name']) + ", or text HELP"
     result = str(topic) + " for " + str(
@@ -96,6 +96,7 @@ def trigger_help(resp, sender_info):
     # print(resp)
     command_help_messages(sender_info)
 
+
 def convert_coords_to_time_zone(lat, long):
     url = "http://api.timezonedb.com/v2/get-time-zone?key=" + \
           SHEETS.ZONE_API_KEY + "&format=json&by=position&lat=" + str(lat) + "&lng=" + str(long)
@@ -105,11 +106,13 @@ def convert_coords_to_time_zone(lat, long):
     result.append(json_data['formatted'])
     return result
 
+
 def update_local_time(zone):
     url = "http://api.timezonedb.com/v2/get-time-zone?key=" + \
           SHEETS.ZONE_API_KEY + "&format=json&by=zone&zone=" + zone
     json_data = requests.get(url).json()
     return json_data['formatted']
+
 
 def convert_wit_zone_to_home(home_zone):
   dt = parser.parse("2018-07-31T23:05:00.000-07:00")
@@ -122,6 +125,7 @@ def convert_wit_zone_to_home(home_zone):
 #   print("Offset: " + str(distance_from_pst/3600))
   # print("Now_time east:" + str(time.time()))
   return int(result)
+
 
 def add_time_zone_data(command, sender_info):
     home_lat_long = geo.lat_long_single_location(command)
@@ -137,6 +141,7 @@ def add_time_zone_data(command, sender_info):
     sender_info = mongo.add_new_item_to_db(sender_info, "local_current_time", local_current_time)
     sender_info = mongo.add_new_item_to_db(sender_info, "zone_name", zone_name)
     return time_zone_change
+
 
 def new_home_request(command, sender_info):
     if command.lower() == "no":

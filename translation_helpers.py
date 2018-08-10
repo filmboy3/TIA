@@ -154,4 +154,4 @@ def trigger_translate(resp, sender_info):
     print("Language Code: ", langCode)
     print("Translation Phrase: ", translationPhrase)
     msg_gen.store_reply_in_mongo(
-             result, sender_info, "📝 Translation 📝")
+             result, sender_info, "📝 Translation 📝", "ALL_CHUNKS")

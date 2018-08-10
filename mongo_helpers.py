@@ -18,6 +18,7 @@ import reminder_helpers as remind
 import yaml
 import random
 import string
+import time
 
 MONGODB_URI = SHEETS.SECRET_MONGO_URI
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
@@ -169,7 +170,9 @@ def change_db_message_value(sender_info, key, value):
     }
     update_record(sender_info, updated_status, message_records)
     print("Updated message '" + str(key) + "'")
+    time.sleep(1)
     return message_records.find_one({"sms_id": sender_info['sms_id']})
+
 
 def change_db_user_value(sender_info, key, value):
     current_user = user_records.find_one({"phone": sender_info['from']})
@@ -181,18 +184,74 @@ def change_db_user_value(sender_info, key, value):
     return user_records.find_one({"phone": sender_info['from']})
 
 
+def get_user_prev_msg(sender_info):
+    user = user_records.find_one({"phone": sender_info['from']})
+    current_thread = user['current_sms_id']
+    return message_records.find_one({"sms_id": current_thread})
+
+
+def trigger_more(sender_info):
+    print("Inside trigger_more function")
+    message = get_user_prev_msg(sender_info)
+    change_db_message_value(message, "status", "completed processing")
+    
+
+def trigger_all(sender_info):
+    print("Inside trigger_all function")
+    message = get_user_prev_msg(sender_info)
+    change_db_message_value(message, "send_all_chunks", "ALL_CHUNKS")
+    change_db_message_value(message, "status", "completed processing")
+
+
+def core_commands_check(resp, sender_info):
+    print("Inside Core Commands Check")
+    command = str(resp).lower().strip()
+    print(command)
+    print("Sender_info: " + str(sender_info))
+    base_keywords = {
+                        'no': 'trigger_no',
+                        'help': 'trigger_help',
+                        'more': 'trigger_more',
+                        'all': 'trigger_all'
+                    }
+    func_name = "none"
+
+    if (command.startswith("new home")):
+        func_name = "msg_gen.trigger_new_home(resp, sender_info)"
+        print(func_name)
+        print("Found a Core Command")
+        sender_info = message_records.find_one({"sms_id": sender_info['sms_id']})
+        time.sleep(1)
+
+    for key,val in base_keywords.items():
+        if command == key:
+            func_name = str(val) + '(sender_info)'
+            print(func_name)
+            print("Found a Core Command")
+            sender_info = message_records.find_one({"sms_id": sender_info['sms_id']})
+            time.sleep(1)
+
+    if (func_name == "none"):
+        print("Skipped core commands")
+        func_name = "wit.wit_parse_message(resp, sender_info)"
+    
+    eval(func_name)
+
+
 def process_message(sender_info):
     current_user = user_records.find_one({"phone": sender_info['from']})
-    # If they haven't texted much with TIA (i.e., the count), she first sends
+
+    # If they haven't texted much with TIA (i.e., the count), it first sends
     # some intro messages
     if current_user['count'] < 1:
         print("Inside process message")
         msg_gen.process_first_message(sender_info)
     elif current_user['count'] < 2:
         msg_gen.process_intro_messages(sender_info)
-    # Otherwise, she processes the users' messages
+    # Otherwise, it processes the users' messages
     else:
-        wit.wit_parse_message(sender_info['body'], sender_info)
+        core_commands_check(sender_info['body'], sender_info)
+        # wit.wit_parse_message(sender_info['body'], sender_info)
 
 
 def scrub_html_from_message(message):

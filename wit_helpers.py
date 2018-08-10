@@ -33,6 +33,7 @@ def pre_wit_scrub(message):
     message = message.lower()
     print("Wit Scrubbed Message: " + str(message))
     return message
+    
 
 def wit_parse_message(message, sender_info):
     message = pre_wit_scrub(str(message))
