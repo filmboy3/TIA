@@ -83,25 +83,25 @@ def trigger_help(sender_info):
 
     message = "\nHey, " + name + "! Here's a 🗒️ " \
     "of tasks I can 📲: \n\n🚇 Directions 🚇\n by 🚗, 🚉, " \
-    "or 🚶\n\n📲 Examples: I want to drive from home to '221 79th Street, " \
+    "or 🚶\n\nExamples 📲 I want to drive from home to '221 79th Street, " \
     "Bay Ridge, Brooklyn' 📲 Let's walk from '403 Main Street, Oakland, " \
     "California', to '1807 Thompson Ave, Oakland, CA 94612'\n\n☀️ Weather ☀️ " \
-    "\n\n📲 Examples: What's it like outside in Houston? " \
-    "📲 What's the forecast near me? \n\n⏲️ Reminders ⏲️\n\n📲 Example: " \
+    "\nExamples 📲 What's it like outside in Houston? " \
+    "📲 What's the forecast near me? \n\n⏲️ Reminders ⏲️\nExample 📲  " \
     "Remind me to pick up my sister in an hour\n\n🇺🇸 " \
-    "Translation 🇺🇸\n📲 Example: How would an Italian say, 'I don't like pasta'?" \
-    "\n\n🍲 Yelp 🍲\n📲 Example: Please find me some asian fusion " \
+    "Translation 🇺🇸\nExample 📲  How would an Italian say, 'I don't like pasta'?" \
+    "\n\n🍲 Yelp 🍲\nExample 📲  Please find me some asian fusion " \
     "near my house\n\n🔎 Wikipedia 🔎\n📲 Example: I want a bio of Barack Obama" \
     "\n\n💡 Jeopardy Trivia 💡 \n📲 Example: Let's play jeopardy" \
-    "\n\nLate Night 🌃 Jokes\n🤣(most recent, random, or specific date 2009-Present)🤣 📲" \
-    " Example: What are the latest jokes? " \
-    "'\n\n🔭 Knowledge Q&A 🔭\n📲 Examples: How many baseballs " \
+    "\n\nLate Night 🌃 Jokes\n🤣(most recent, random, or specific date 2009-Present)🤣" \
+    "\nExample 📲 What are the latest jokes? " \
+    "'\n\n🔭 Knowledge Q&A 🔭\nExamples 📲 How many baseballs " \
     "fit into a boeing 747? 📲 How many calories in a sweet potato? 📲 " \
-    "Where can I find the North Star?\n\nGet NY Times 📰, Hacker News 💻, " \
+    "Where can I find the North Star?\n\n📰 News Briefs 📰 Get NY 🗽 Times, Hacker 💻 News, " \
     "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
-    "techcrunch, etc. 🌏\n📲 Examples: What's happening at buzzfeed? 📲 " \
+    "techcrunch, etc. \nExamples 📲 What's happening at buzzfeed? 📲 " \
     "What are the headlines from wired?\n(For a full list of available sources, text NEWS)\n\nIf you'd " \
-    "like any of your ✨ favorites ✨ texted to you on a regular basis, 📲 for example, NYT top stories every hour " \
+    "like any of your ✨ favorites ✨ on a regular basis, for example 📲 NYT top stories every hour " \
     "or a Jeopardy category each morning, 📲 text FAVES\n\nNow 🙏 give me a task!"
 
     store_reply_in_mongo_no_header(message, sender_info)
@@ -168,7 +168,7 @@ def new_home_request(command, sender_info):
         sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
         message = "\nThere's no place like 🏠, "
     message = message + str(sender_info['name']) + "!\n\nText me NEW HOME" \
-             " followed by your address to change 🏠 at any time\n\n🙋 Want some tips on what I can do? 📲 Text INFO"
+             " followed by your address to change 🏠 at any time\n\n🙋 Wanna see what I can do? 📲 Text INFO"
     sender_info = mongo.add_new_item_to_db(sender_info, "result", message)
     sender_info = mongo.add_new_item_to_db(sender_info, "launch_time", 'now')
     store_reply_in_mongo_no_header(message, sender_info)
@@ -192,7 +192,6 @@ def trigger_new_home(resp, sender_info):
 
 def process_first_message(sender_info):
     print("Inside process_first_message")
-    time.sleep(1)
     print("New message: " + str(sender_info))
     # Boilerplate first message
     message = "\n👋 Hi! I'm TIA 🤗, your Texting 📲 Internet Assistant! I do 💻 tasks via texts, " \
@@ -284,6 +283,7 @@ def process_name_prompt(sender_info):
     # SECOND MESSAGE, ASKING FOR FIRST NAME
     if current_user['count'] == 1:
         name = parse_name(sender_info['body'])
+        name = name.strip()
         sender_info = mongo.add_new_item_to_db(sender_info, "name", name)
         print("Hi, " + name + "!")
         message = "\nIt's a pleasure to 🤗 meet you, " + name + \

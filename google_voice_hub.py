@@ -58,6 +58,7 @@ def trigger_send_reply(record, browser):
     except:
         print("Error inside Trigger_send_reply")
         updated_message = mongo.message_records.find_one({"sms_id": record['sms_id']})
+        time.sleep(1)
     return updated_message
 
 def check_launch_time(record, browser):
@@ -69,7 +70,6 @@ def send_all_messages(record, browser):
     time.sleep(1)
     while (record['current_chunk'] < record['chunk_len']):
         record = trigger_send_reply(record, browser)
-        time.sleep(1)
 
 
 def send_next_message(record, browser):
@@ -82,8 +82,7 @@ def send_next_message(record, browser):
 
 def process_reply(record, browser):
     record = mongo.message_records.find_one({"sms_id": record['sms_id']})
-    time.sleep(2)
-
+    time.sleep(1)
     if record['launch_time'] == "NOW":
         if record['send_all_chunks'] == "SINGLE_CHUNKS":
             send_next_message(record, browser)
@@ -164,13 +163,13 @@ def enter_message(message, gv_message, browser):
     elm.dispatchEvent(new Event('change'));
     """
     browser.execute_script(JS_ADD_TEXT_TO_INPUT, message, gv_message)
-    time.sleep(2)
+    time.sleep(1)
     message.send_keys(Keys.CONTROL, 'a')
     message.send_keys(Keys.CONTROL, 'c')
     message.send_keys(Keys.CONTROL, 'v')
     time.sleep(1)
     message.send_keys(Keys.RETURN)
-    time.sleep(2)
+    time.sleep(1)
 
 
 def delete_previous_conversation(browser):
@@ -189,7 +188,7 @@ def delete_previous_conversation(browser):
             """//md-checkbox[@aria-label='I understand']""").click()
     except BaseException:
         pass
-    time.sleep(2)
+    time.sleep(1)
     browser.find_element_by_xpath(
         """//button[@gv-test-id='delete-thread-confirm']""").click()
 
@@ -198,7 +197,7 @@ def setup_message(gv_number, browser):
     initiate_Message = browser.find_element_by_xpath(
         """//*[@id="messaging-view"]/div/div/md-content/div/div/div""")
     initiate_Message.click()
-    time.sleep(2)
+    time.sleep(1)
 
     toForm = browser.find_element_by_xpath(
         """//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-recipient-picker/div/md-content/md-chips/md-chips-wrap/div/div/input""")
@@ -208,7 +207,7 @@ def setup_message(gv_number, browser):
     time.sleep(1)
     toForm.send_keys(Keys.RETURN)
     time.sleep(1)
-    time.sleep(2)
+    time.sleep(1)
     message = browser.find_element_by_xpath(
         """//textarea[@aria-label='Type a message']""")
     message.click()

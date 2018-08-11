@@ -13,6 +13,7 @@ import translation_helpers as trans
 import mongo_helpers as mongo
 import general_message_helpers as msg_gen
 import api_keys as SHEETS
+import time
 
 
 def yelp_request(query):
@@ -31,7 +32,7 @@ def format_yelp_search(search_results, limit):
     result = [""]
     for i in range(limit):
         result.append(format_single_yelp_biz(search_results['businesses'][i]))
-    return "\n\n☕☕☕☕☕☕☕☕☕\n\n".join(result)
+    return "\n☕☕☕☕☕☕☕☕\n".join(result)
 
 
 def format_single_yelp_biz(listing):
@@ -85,7 +86,7 @@ def format_single_yelp_biz(listing):
 
 def format_yelp_reviews(id):
     reviews_results = SHEETS.YELP_API.reviews_query(id)
-    total = "\n"
+    total = ""
     for i in range(0, len(reviews_results)):
         text_review = str(reviews_results['reviews'][i]['text'])
         text_review = text_review.replace('\n', ' ')
@@ -164,6 +165,7 @@ def time_reformat(time_string):
 def trigger_yelp(resp, sender_info):
     print("Pre Sender_Info: " + str(sender_info))
     sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
     print("Yelp Triggered")
     print("Sender Info: " + str(sender_info))
     # print(resp)

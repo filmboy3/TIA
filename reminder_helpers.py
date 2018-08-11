@@ -31,7 +31,7 @@ def check_reminder( message):
         trigger_reminder_alert( message)
 
 
-def trigger_reminder_alert( message):
+def trigger_reminder_alert(message):
     result = "Don't forget! " + " '" + message['reminder_text'].capitalize() + "'!"
 
     msg_gen.store_reply_in_mongo(
@@ -39,6 +39,9 @@ def trigger_reminder_alert( message):
                                     message,
                                     "⏱️ Reminder ⏱️")
     mongo.add_new_item_to_db(message, 'reminder_trigger', 'off')
+
+# def trigger_recurring(resp, sender_info):
+#     result = ""
 
 def reminder_request(sender_info, input, date):
     hour_to_trigger_pst = str(date[11:13])
