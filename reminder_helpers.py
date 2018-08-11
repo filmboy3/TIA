@@ -40,8 +40,40 @@ def trigger_reminder_alert(message):
                                     "⏱️ Reminder ⏱️")
     mongo.add_new_item_to_db(message, 'reminder_trigger', 'off')
 
-# def trigger_recurring(resp, sender_info):
-#     result = ""
+def trigger_recurring(resp, sender_info):
+    print(sender_info)
+    current_user = mongo.user_records.find_one({"phone": sender_info['from']})
+    time.sleep(1)
+    name = current_user['name']
+    print(name)
+    print("Inside trigger_recurring")
+    freq_dict = {
+        "hourly": "every hour",
+        "daily": "once a day",
+        "weekly": "once a week",
+    }
+    freq = resp['entities']['recur_frequency'][0]['value']
+    print(freq)
+    topic = ""
+    try:
+        topic = resp['entities']['wit_news_source'][0]['value']
+        # print("Topic:" + str(topic))
+    except:
+        try:
+            topic = resp['entities']['intent'][0]['value']
+        except:
+            pass
+
+    if (topic == ""):
+        result = "Sorry, " + name + " ... I'm having trouble setting up your notification. Please try again later. \n\n--😘,\n✨ Tia ✨ Text" \
+        " 📲 me another request, " + name + ", or text HELP"
+    else:
+        # INSERT ACTUAL SCHEDULING FUNCTION HERE
+        result = "Got it " + name + "! You'll get " + topic + " updates " + str(freq_dict[freq]) + ".\n\n--😘,\n✨ Tia ✨ Text" \
+            " 📲 me another request, " + name + ", or text HELP"
+    
+    msg_gen.store_reply_in_mongo_no_header(result, sender_info)
+
 
 def reminder_request(sender_info, input, date):
     hour_to_trigger_pst = str(date[11:13])

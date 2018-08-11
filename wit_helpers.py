@@ -34,13 +34,21 @@ def pre_wit_scrub(message):
     print("Wit Scrubbed Message: " + str(message))
     return message
     
+def recurring_check(resp, sender_info):
+    try:
+        _ = resp['entities']['recur_frequency'][0]['value']
+        print(resp['entities']['recur_frequency'][0]['value'])
+        reminder.trigger_recurring(resp, sender_info)
+    except:
+        nlp_extraction(resp, sender_info)
+
 
 def wit_parse_message(message, sender_info):
     # message = pre_wit_scrub(str(message))
     mongo.change_db_message_value(sender_info, 'body', message)
     resp = SHEETS.WIT_CLIENT.message(message)
     print(resp)
-    nlp_extraction(resp, sender_info)
+    recurring_check(resp, sender_info)
 
 
 def use_backup_keywords(resp):

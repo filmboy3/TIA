@@ -166,7 +166,7 @@ def news_request(news):
     print("News url: " + url)
     json_data = requests.get(url).json()
     articles = json_data['articles']
-    full_text = "Top Headlines from " + articles[0]['source']['name'] + ":\n\n"
+    full_text = ""
     for i in range(0, len(articles)):
         title = articles[i]['title']
         description = ""

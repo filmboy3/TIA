@@ -83,26 +83,27 @@ def trigger_help(sender_info):
 
     message = "\nHey, " + name + "! Here's a 🗒️ " \
     "of tasks I can 📲: \n\n🚇 Directions 🚇\n by 🚗, 🚉, " \
-    "or 🚶\n\nExamples 📲 I want to drive from home to '221 79th Street, " \
+    "or 🚶\n\n📲 I want to drive from home to '221 79th Street, " \
     "Bay Ridge, Brooklyn' 📲 Let's walk from '403 Main Street, Oakland, " \
     "California', to '1807 Thompson Ave, Oakland, CA 94612'\n\n☀️ Weather ☀️ " \
-    "\nExamples 📲 What's it like outside in Houston? " \
-    "📲 What's the forecast near me? \n\n⏲️ Reminders ⏲️\nExample 📲  " \
+    "\n📲 What's it like outside in Houston? " \
+    "📲 What's the forecast near me? \n\n⏲️ Reminders ⏲️\n 📲 " \
     "Remind me to pick up my sister in an hour\n\n🇺🇸 " \
-    "Translation 🇺🇸\nExample 📲  How would an Italian say, 'I don't like pasta'?" \
-    "\n\n🍲 Yelp 🍲\nExample 📲  Please find me some asian fusion " \
-    "near my house\n\n🔎 Wikipedia 🔎\n📲 Example: I want a bio of Barack Obama" \
-    "\n\n💡 Jeopardy Trivia 💡 \n📲 Example: Let's play jeopardy" \
+    "Translation 🇺🇸\n 📲 How would an Italian say, 'I don't like pasta'?" \
+    "\n\n🍲 Yelp 🍲\n 📲 Please find me some asian fusion " \
+    "near my house\n\n🔎 Wikipedia 🔎\n📲 : I want a bio of Barack Obama" \
+    "\n\n💡 Jeopardy Trivia 💡 \n📲 Let's play jeopardy" \
     "\n\nLate Night 🌃 Jokes\n🤣(most recent, random, or specific date 2009-Present)🤣" \
-    "\nExample 📲 What are the latest jokes? " \
-    "'\n\n🔭 Knowledge Q&A 🔭\nExamples 📲 How many baseballs " \
+    "\n📲 What are the latest jokes? " \
+    "'\n\n🔭 Knowledge Q&A 🔭\n📲 How many baseballs " \
     "fit into a boeing 747? 📲 How many calories in a sweet potato? 📲 " \
     "Where can I find the North Star?\n\n📰 News Briefs 📰 Get NY 🗽 Times, Hacker 💻 News, " \
     "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
-    "techcrunch, etc. \nExamples 📲 What's happening at buzzfeed? 📲 " \
-    "What are the headlines from wired?\n(For a full list of available sources, text NEWS)\n\nIf you'd " \
-    "like any of your ✨ favorites ✨ on a regular basis, for example 📲 NYT top stories every hour " \
-    "or a Jeopardy category each morning, 📲 text FAVES\n\nNow 🙏 give me a task!"
+    "techcrunch, etc. \n📲 What's happening at buzzfeed? 📲 " \
+    "What are the headlines from wired?\n(For a full list of sources, text NEWS)\n\nI can also send" \
+    "your ✨ faves ✨ on a regular basis ⏲️ hourly, daily, or weekly.\n\n📲" \
+    "📲 I want daily new york times 📲 Give me Jeopardy every hour" \
+    "\n\nNow 🙏 give me a task!"
 
     store_reply_in_mongo_no_header(message, sender_info)
 
@@ -200,7 +201,6 @@ def process_first_message(sender_info):
               "🌏\n📺 Late Night Jokes 📺\n💡 Jeopardy Trivia 💡 and more...\n\n🙋‍ " \
               "What's your first name?"
     store_reply_in_mongo_no_header(message, sender_info)
-    # gv.send_new_message(sender_info['from'], message, sender_info)
 
 
 def parse_name(name_string):
@@ -272,7 +272,6 @@ def parse_address(address_string):
     for i in range(0, len(address_string)):
         if address_string[i] not in address_scrub['scrubs']:
             new_address_list.append(address_string[i].capitalize())
-    # print(new_name_list)
     result = " ".join(new_address_list)
     print(result)
     return result
@@ -290,5 +289,4 @@ def process_name_prompt(sender_info):
             "!\n\nIf you'd like me to set up a 🏠 address for quicker 🚗" \
             " directions and 🌧️ weather, please reply with your full address or NO\n"
         store_reply_in_mongo_no_header(message, sender_info)
-        # Sending Message
-        # gv.send_new_message(sender_info['from'], message, sender_info)
+

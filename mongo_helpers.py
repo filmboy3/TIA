@@ -235,8 +235,7 @@ def core_commands_check(resp, sender_info):
                         'more': 'trigger_more',
                         'all': 'trigger_all',
                         'info': 'msg_gen.trigger_help',
-                        'news': 'news.trigger_news_directory' ,
-                        'fave': 'remind.trigger_recurring'
+                        'news': 'news.trigger_news_directory'
                     }
     func_name = "none"
 
