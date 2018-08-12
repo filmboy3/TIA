@@ -227,8 +227,11 @@ def trigger_more(sender_info):
 def trigger_all(sender_info):
     print("Inside trigger_all function")
     message = get_user_prev_msg(sender_info)
-    change_db_message_value(message, "send_all_chunks", "ALL_CHUNKS")
-    change_db_message_value(message, "status", "completed processing")
+    record = {
+        "send_all_chunks": "ALL_CHUNKS",
+        "status": "completed processing"
+    }
+    update_record(message, record, message_records)
 
 
 def fetch_name_from_db(sender_info):
@@ -315,20 +318,20 @@ def scrub_html_from_message(message):
     }
     for key, value in scrub_dict.items():
         message = re.sub(key, value, message)
-    # print("New Message: " + str(message))
     return str(message)
 
+def database_new_populated_item(record_dict):
+    record_dict.update( {'sms_id' : ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0, 16)])} )
+    push_record(record_dict, message_records)
+    return record_dict
 
 def database_new_item(phone, message):
-    # print("Yes, This is a new item ...")
-    # print(message)
     record = {
         "sms_id": ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0, 16)]),
         "body": scrub_html_from_message(message),
         "from": phone,
         "status": "unprocessed",
-        "result": "tba"
+        "result": "tba",
     }
-    # print(record)
     push_record(record, message_records)
     return record

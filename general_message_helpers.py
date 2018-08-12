@@ -27,6 +27,7 @@ def extract_quoted_text(text):
         pass
     return text
 
+
 def store_reply_in_mongo_no_header(result, sender_info, send_all_chunks="ALL_CHUNKS", launch_time="NOW"):
     message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
     time.sleep(1)
@@ -35,13 +36,17 @@ def store_reply_in_mongo_no_header(result, sender_info, send_all_chunks="ALL_CHU
     chunk_len = result[0]
     chunk_reply = result[1]
 
-    mongo.change_db_message_value(message_copy, "result", chunk_reply)
-    mongo.change_db_message_value(message_copy, "status", "completed processing")
+    db_changes = {
+        "result": chunk_reply,
+        "status": "completed processing",
+        "launch_time": launch_time,
+        "send_all_chunks": send_all_chunks,
+        "current_chunk": 0,
+        "chunk_len": chunk_len
+    }
 
-    sender_info = mongo.add_new_item_to_db(message_copy, "launch_time", launch_time)
-    sender_info = mongo.add_new_item_to_db(message_copy, "send_all_chunks", send_all_chunks)
-    sender_info = mongo.add_new_item_to_db(message_copy, "current_chunk", 0)
-    sender_info = mongo.add_new_item_to_db(message_copy, "chunk_len", chunk_len)
+    mongo.update_record(message_copy, db_changes, mongo.message_records)
+
 
 
 def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="SINGLE_CHUNKS", launch_time="NOW"):
@@ -53,18 +58,20 @@ def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="SINGLE_CHU
     result = str(topic) + " for " + str(
         message_copy['name']) + "!\n" + result + tia_sign_off
 
-
     result = gv.sizing_sms_chunks(result, send_all_chunks)
     chunk_len = result[0]
     chunk_reply = result[1]
 
-    mongo.change_db_message_value(message_copy, "result", chunk_reply)
-    mongo.change_db_message_value(message_copy, "status", "completed processing")
+    db_changes = {
+        "result": chunk_reply,
+        "status": "completed processing",
+        "launch_time": launch_time,
+        "send_all_chunks": send_all_chunks,
+        "current_chunk": 0,
+        "chunk_len": chunk_len
+    }
 
-    sender_info = mongo.add_new_item_to_db(message_copy, "launch_time", launch_time)
-    sender_info = mongo.add_new_item_to_db(message_copy, "send_all_chunks", send_all_chunks)
-    sender_info = mongo.add_new_item_to_db(message_copy, "current_chunk", 0)
-    sender_info = mongo.add_new_item_to_db(message_copy, "chunk_len", chunk_len)
+    mongo.update_record(message_copy, db_changes, mongo.message_records)
 
     # print(sender_info)
 
@@ -150,9 +157,15 @@ def add_time_zone_data(command, sender_info):
     time_zone_change = convert_wit_zone_to_home(zone_name)
     print("time_zone_change: " + str(time_zone_change))
     # Comment Out the Following Line when Unit Testing
-    sender_info = mongo.add_new_item_to_db(sender_info, "offset_time_zone", time_zone_change)
-    sender_info = mongo.add_new_item_to_db(sender_info, "local_current_time", local_current_time)
-    sender_info = mongo.add_new_item_to_db(sender_info, "zone_name", zone_name)
+
+    message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    db_changes = {
+        "offset_time_zone", time_zone_change,
+        "local_current_time", local_current_time,
+        "zone_name", zone_name
+    }
+    mongo.update_record(message_copy, db_changes, mongo.message_records)
+
     return time_zone_change
 
 
@@ -170,8 +183,7 @@ def new_home_request(command, sender_info):
         message = "\nThere's no place like 🏠, "
     message = message + str(sender_info['name']) + "!\n\nText me NEW HOME" \
              " followed by your address to change 🏠 at any time\n\n🙋 Wanna see what I can do? 📲 Text INFO"
-    sender_info = mongo.add_new_item_to_db(sender_info, "result", message)
-    sender_info = mongo.add_new_item_to_db(sender_info, "launch_time", 'now')
+
     store_reply_in_mongo_no_header(message, sender_info)
     # gv.send_new_message(sender_info['from'], message, sender_info)
     # print(sender_info)

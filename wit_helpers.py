@@ -122,7 +122,7 @@ def check_keywords(resp, sender_info):
         "05_news_directory_get": "news.trigger_news_directory",
         "06_wit_jeopardy": "jep.trigger_jeopardy",
         "07_wit_language": "news.trigger_nyt",
-        "08_wit_news_source": "news.trigger_hn",
+        "08_wit_news_source": "news.trigger_news",
         "09_wit_yelp_category": "yelp.trigger_yelp",
         "10_wit_transit": "geo.trigger_directions",
         "12_wikipedia_search_query": "know.trigger_wiki",

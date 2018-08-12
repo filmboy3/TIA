@@ -52,13 +52,17 @@ def trigger_send_reply(record, browser):
         number = record['from']
         initiate_gv_send(number, browser, current_message)
         mongo.change_db_user_value(record, "current_sms_id", record['sms_id'])
+        updated_record = {
+            "current_sms_id": record['sms_id'],
+            "current_chunk": (current_chunk + 1)
+        }
+        mongo.update_record(record, updated_record, mongo.message_records)
         mongo.change_db_message_value(record, "current_sms_id", record['sms_id'])
-        updated_message = mongo.change_db_message_value(record, "current_chunk", (current_chunk + 1))
-        updated_message = mongo.change_db_message_value(record, "current_chunk", (current_chunk + 1))
     except:
         print("Error inside Trigger_send_reply")
-        updated_message = mongo.message_records.find_one({"sms_id": record['sms_id']})
         time.sleep(1)
+    
+    updated_message = mongo.message_records.find_one({"sms_id": record['sms_id']})
     return updated_message
 
 def check_launch_time(record, browser):
