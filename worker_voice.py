@@ -41,11 +41,7 @@ def voice_loop():
         transfer_processed_to_voice_queue()
 
     while True:
-        try:
-            inner()
-            time.sleep(1)
-        except BaseException:
-            time.sleep(1)
-            print('Hit an error... trying to avoid a crash here')
+        inner()
+
 
 voice_loop()

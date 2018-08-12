@@ -14,9 +14,9 @@ channel.queue_declare(queue='google_voice_queue', durable=True)
 print('[*] Waiting for messages from GOOGLE-VOICE QUEUE ... To exit press CTRL+C')
 
 def callback(ch, method, properties, body): 
-    print("Body: " + str(body))  
+    # print("Body: " + str(body))  
     body = str(mongo.convert_message_from_bytes(body))
-    print("Body after conversion: " + body)
+    # print("Body after conversion: " + body)
     body = mongo.message_records.find_one({"sms_id": body})
     time.sleep(1)
     # print(body)

@@ -58,17 +58,12 @@ def gmail_loop():
                     gmail.mark_as_read()
             except BaseException:
                 pass
-                # print("Passing over a non-Tia email ...")
-                # print("\n[*] Checking for Gmail Messages ... To exit press CTRL+C")
+
         latest_email_temp = latest_email
         time.sleep(1)
     while True:
-        try:
-            inner()
-            time.sleep(1)
-        except BaseException:
-            time.sleep(1)
-            print('Hit an error... trying to avoid a crash here')
+        inner()
+
 
 
 gmail_loop()

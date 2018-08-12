@@ -19,9 +19,9 @@ from datetime import datetime
 
 def check_reminder(browser, message):
     trigger_local_time = message['local_trigger_time']
-    current_local_time = msg_gen.update_local_time(message['zone_name'])
+    local_current_time = msg_gen.update_local_time(message['zone_name'])
 
-    current_local_strip = datetime.strptime(current_local_time, '%Y-%m-%d %I:%M:%S')
+    current_local_strip = datetime.strptime(local_current_time, '%Y-%m-%d %I:%M:%S')
     trigger_local_strip = datetime.strptime(str(trigger_local_time), '%Y-%m-%d %I:%M:%S')
 
     bool_trigger = bool(current_local_strip >= trigger_local_strip)

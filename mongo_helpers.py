@@ -26,6 +26,7 @@ client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
 db = client.get_database("tia")
 message_records = db.message_records
 user_records = db.user_records
+timed_records = db.timed_records
 
 
 def convert_message_from_bytes(message):
@@ -49,6 +50,11 @@ def update_record(record, updates, collection):
         '$set': updates
     }, upsert=False)
 
+def update_sms_record(sms_id, updates, collection):
+    collection.update_one({'sms_id': sms_id}, {
+        '$set': updates
+    }, upsert=False)
+
 
 def process_reminders():
     for message in message_records.find({"reminder_trigger": "activated"}):
@@ -65,6 +71,18 @@ def add_new_item_to_db(sender_info, key, value):
     # Returning a copy of the newly updated message so it can be used
     # immediately back in caller functions
     return message_records.find_one({"sms_id": sender_info['sms_id']})
+
+def add_timed_message_to_db(number, sms_id, message, freq, recurring="YES"):
+    print("This is a backing up of the timed message on the db")
+    new_timed_info = {
+        "phone": number,
+        "sms_id": sms_id,
+        "body": message,
+        "freq": freq,
+        "recurring": recurring,
+        "scheduled": "NO"
+    }
+    push_record(new_timed_info, timed_records)
 
 
 def update_user_data_for_message(sender_info):
@@ -113,7 +131,7 @@ def update_user_data_for_message(sender_info):
                 "name": existing_user['name'],
                 "offset_time_zone": offset,
                 "zone_name": zone,
-                "current_local_time": local_time
+                "local_current_time": local_time
             }
             update_record(sender_info, shared_user_data, message_records)
             return shared_user_data
@@ -160,7 +178,7 @@ def update_user_data():
                 "name": existing_user['name'],
                 "offset_time_zone": offset,
                 "zone_name": zone,
-                "current_local_time": local_time
+                "local_current_time": local_time
             }
             update_record(sender_info, shared_user_data, message_records)
 
@@ -170,9 +188,18 @@ def change_db_message_value(sender_info, key, value):
         key: value
     }
     update_record(sender_info, updated_status, message_records)
-    print("Updated message '" + str(key) + "'")
+    print("Updated message '" + str(key) + "', '" + str(value) + "'")
     time.sleep(1)
     return message_records.find_one({"sms_id": sender_info['sms_id']})
+
+def change_db_message_value_by_sms_id(sms_id, key, value):
+    updated_status = {
+        key: value
+    }
+    update_sms_record(sms_id, updated_status, message_records)
+    print("Updated message '" + str(key) + "', '" + str(value) + "'")
+    time.sleep(1)
+    return message_records.find_one({"sms_id": sms_id})
 
 
 def change_db_user_value(sender_info, key, value):

@@ -1,3 +1,4 @@
+
 # coding=utf8
 
 ######################################################
@@ -15,13 +16,16 @@ import datetime
 import general_message_helpers as msg_gen
 import mongo_helpers as mongo
 from datetime import datetime
+import wit_helpers as wit
+import pika
+import sys
 
 
-def check_reminder( message):
+def check_reminder(message):
     trigger_local_time = message['local_trigger_time']
-    current_local_time = msg_gen.update_local_time(message['zone_name'])
+    local_current_time = msg_gen.update_local_time(message['zone_name'])
 
-    current_local_strip = datetime.strptime(current_local_time, '%Y-%m-%d %I:%M:%S')
+    current_local_strip = datetime.strptime(local_current_time, '%Y-%m-%d %I:%M:%S')
     trigger_local_strip = datetime.strptime(str(trigger_local_time), '%Y-%m-%d %I:%M:%S')
 
     bool_trigger = bool(current_local_strip >= trigger_local_strip)
@@ -41,38 +45,49 @@ def trigger_reminder_alert(message):
     mongo.add_new_item_to_db(message, 'reminder_trigger', 'off')
 
 def trigger_recurring(resp, sender_info):
-    print(sender_info)
-    current_user = mongo.user_records.find_one({"phone": sender_info['from']})
+    message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
     time.sleep(1)
-    name = current_user['name']
-    print(name)
     print("Inside trigger_recurring")
     freq_dict = {
-        "hourly": "every hour",
-        "daily": "once a day",
-        "weekly": "once a week",
+        "minutely": "seconds=60",
+        "hourly": "minutes=60",
+        "daily": "day=1",
+        "weekly": "week=1",
     }
     freq = resp['entities']['recur_frequency'][0]['value']
-    print(freq)
-    topic = ""
-    try:
-        topic = resp['entities']['wit_news_source'][0]['value']
-        # print("Topic:" + str(topic))
-    except:
-        try:
-            topic = resp['entities']['intent'][0]['value']
-        except:
-            pass
-
-    if (topic == ""):
-        result = "Sorry, " + name + " ... I'm having trouble setting up your notification. Please try again later. \n\n--😘,\n✨ Tia ✨ Text" \
-        " 📲 me another request, " + name + ", or text HELP"
-    else:
-        # INSERT ACTUAL SCHEDULING FUNCTION HERE
-        result = "Got it " + name + "! You'll get " + topic + " updates " + str(freq_dict[freq]) + ".\n\n--😘,\n✨ Tia ✨ Text" \
-            " 📲 me another request, " + name + ", or text HELP"
-    
-    msg_gen.store_reply_in_mongo_no_header(result, sender_info)
+    new_freq = freq_dict[freq]
+    body = sender_info['body']
+    replacements = [
+                        ('daily', ''),
+                        ('hourly', ''),
+                        ('weekly', ''),
+                        ('hourly', ''),
+                        ('hourly', ''),
+                        ('hourly', ''),
+                        ('at the top of the hour', ''),
+                        ('every 60 minutes', ''),
+                        ('every hour', ''),
+                        ('on the hour', ''),
+                        ('each minute', ''),
+                        ('every minute', ''),
+                        ('on the minute', ''),
+                        ('each day', ''),
+                        ('every day', ''),
+                        ('each and every day', ''),
+                        ('once a day', ''),
+                        ('once an hour', ''),
+                        ('once a week', ''),
+                        ('one time every day', ''),
+                        ('once a minute', ''),
+                        ('every single hour', ''),
+                    ]
+    for old, new in replacements:
+        body = re.sub(old, new, body)
+    mongo.add_timed_message_to_db(sender_info['from'], sender_info['sms_id'], body, new_freq, recurring="YES")
+    mongo.add_new_item_to_db(message_copy, 'body', body)
+    mongo.add_new_item_to_db(message_copy, 'timer_marker', "in place")
+    mongo.add_new_item_to_db(message_copy, 'timer-frequency', new_freq)
+    mongo.add_new_item_to_db(message_copy, 'status', 'timer-preset')
 
 
 def reminder_request(sender_info, input, date):

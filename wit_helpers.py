@@ -23,6 +23,23 @@ import general_message_helpers as msg_gen
 import reminder_helpers as reminder
 import mongo_helpers as mongo
 
+INTENT_DICT = {
+        "new_home_get": "msg_gen.trigger_new_home",
+        "translate_get": "trans.trigger_translate",
+        "jokes_get": "jokes.trigger_jokes",
+        "directions_get": "geo.trigger_directions",
+        "news_directory_get": "news.trigger_news_directory",
+        "news_get": "news.trigger_news",
+        "nyt_get": "news.trigger_nyt",
+        "hn_get": "news.trigger_hn",
+        "help_get": "msg_gen.trigger_help",
+        "jeopardy_get": "jep.trigger_jeopardy",
+        "yelp_get": "yelp.trigger_yelp",
+        "weather_get": "weather.trigger_weather",
+        "forecast_get": "weather.trigger_forecast",
+        "reminder_get": "reminder.trigger_reminder"
+    }
+
 def pre_wit_scrub(message):
     replacements = [
                         (',', ''),
@@ -37,7 +54,6 @@ def pre_wit_scrub(message):
 def recurring_check(resp, sender_info):
     try:
         _ = resp['entities']['recur_frequency'][0]['value']
-        print(resp['entities']['recur_frequency'][0]['value'])
         reminder.trigger_recurring(resp, sender_info)
     except:
         nlp_extraction(resp, sender_info)
@@ -70,25 +86,9 @@ def use_backup_keywords(resp):
 
 
 def nlp_extraction(resp, sender_info):
-    intent_db = {
-        "new_home_get": "msg_gen.trigger_new_home",
-        "translate_get": "trans.trigger_translate",
-        "jokes_get": "jokes.trigger_jokes",
-        "directions_get": "geo.trigger_directions",
-        "news_directory_get": "news.trigger_news_directory",
-        "news_get": "news.trigger_news",
-        "nyt_get": "news.trigger_nyt",
-        "hn_get": "news.trigger_hn",
-        "help_get": "msg_gen.trigger_help",
-        "jeopardy_get": "jep.trigger_jeopardy",
-        "yelp_get": "yelp.trigger_yelp",
-        "weather_get": "weather.trigger_weather",
-        "forecast_get": "weather.trigger_forecast",
-        "reminder_get": "reminder.trigger_reminder"
-    }
     try:
         intent_result = str(resp['entities']['intent'][0]['value'])
-        func_name = intent_db[intent_result] + "(resp, sender_info)" 
+        func_name = INTENT_DICT[intent_result] + "(resp, sender_info)" 
     except BaseException:
         print("Unable to determine intent ... moving on to keyword parsing.")
         func_name = check_keywords(resp, sender_info)

@@ -67,11 +67,11 @@ I've got some 📝 Translation 📝 info for you, Jp !
 
 --😘,✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
-{'_id': "ObjectId('5b67b428bc3dca2ed0f2bc53')", 'sms_id': 'datetime.datetime(2018', 8: None, 5: None, 22: None, 36: None, 24: None, '566000)': None, 'body': "How does a german say 'hello'?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:36:24', 'zone_name': 'America/New_York', 'count': 23, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67b428bc3dca2ed0f2bc53')", 'sms_id': 'datetime.datetime(2018', 8: None, 5: None, 22: None, 36: None, 24: None, '566000)': None, 'body': "How does a german say 'hello'?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:36:24', 'zone_name': 'America/New_York', 'count': 23, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Unable to determine intent ... continuing:
 Reminder Triggered
 Time_zone offset is: 3
-Sender Info: {'_id': "ObjectId('5b67b428bc3dca2ed0f2bc53')", 'sms_id': 'datetime.datetime(2018', 8: None, 5: None, 22: None, 36: None, 24: None, '566000)': None, 'body': "How does a german say 'hello'?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:36:24', 'zone_name': 'America/New_York', 'count': 23, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+Sender Info: {'_id': "ObjectId('5b67b428bc3dca2ed0f2bc53')", 'sms_id': 'datetime.datetime(2018', 8: None, 5: None, 22: None, 36: None, 24: None, '566000)': None, 'body': "How does a german say 'hello'?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:36:24', 'zone_name': 'America/New_York', 'count': 23, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 {'_text': "how does a german say 'hello'?", 'entities': {'reminder': [{'suggested': True, 'confidence': 0.84325, 'value': 'how', 'type': 'value'}], 'wit_language': [{'confidence': 0.94972030709856, 'value': 'german', 'type': 'value'}],
 'phrase_to_translate': [{'suggested': True, 'confidence': 0.93809, 'value': 'hello', 'type': 'value'}], 'intent': [{'confidence': 0.98078738023716, 'value': 'translate_get'}]}, 'msg_id': '0ent7r6r1CpYiPlmg'}
 
@@ -117,7 +117,7 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✍️ 'Goodbye' translated into 🌏 German 🌏 'Auf wiedersehen' ✍️
 --😘,
 ✨ Tia ✨Text 📲 me another request, Jp , or text HELP
-{'_id': "ObjectId('5b67b7b5bc3dca3768e01f46')", 'sms_id': 'PaJUudAb0c9pA1ze', 'body': "How does a german say 'goodbye'?", 'f80', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:51:32', 'zone_namYork', 'count': 24, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'J{'_id': ObjectId('5b67b7b5bc3dca3768e01f46'), 'sms_id': 'PaJUudAb0c9pA1ze', 'body': "How does a german say 'goodbye'?", 'fro', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:51:32', 'zca/New_York', 'count': 24, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'nach_time': 'NOW'}
+{'_id': "ObjectId('5b67b7b5bc3dca3768e01f46')", 'sms_id': 'PaJUudAb0c9pA1ze', 'body': "How does a german say 'goodbye'?", 'f80', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:51:32', 'zone_namYork', 'count': 24, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'J{'_id': ObjectId('5b67b7b5bc3dca3768e01f46'), 'sms_id': 'PaJUudAb0c9pA1ze', 'body': "How does a german say 'goodbye'?", 'fro', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 22:51:32', 'zca/New_York', 'count': 24, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'nach_time': 'NOW'}
 I've got some 📝 Translation 📝 info for you, Jp !
 
 F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
@@ -131,18 +131,18 @@ I've got some 📝 Translation 📝 info for you, Jp !
 --😘,
 ✨ Tia ✨Text 📲 me another request, Jp , or text HELP
 {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'apples and carrots' in spanish?",
-'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:00:13', 'zone_name': 'America/New_York', 'count': 25, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Unable to determine intent ... continuing:Reminder Triggered
 Time_zone offset is: 3
 Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'apples and carrots' ies and carrots'                                                                                                          ': '2018-08-05 23n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time street new york
 ': '2018-08-05 2
-:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette0.93241, 'value': street new york                                                                                                         age': [{'confidenny 10012', 'name': 'Jp '}                                                                                                late_get'}]}, 'ms{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
+:00:13', 'zone_name': 'America/New_York', 'count': 25, 'local_current_time': 'unknown local time', 'home': '250 lafayette0.93241, 'value': street new york                                                                                                         age': [{'confidenny 10012', 'name': 'Jp '}                                                                                                late_get'}]}, 'ms{'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
 0.93241, 'value'
  'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu
 age': [{'confide
 ce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans0.93241, 'value':Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'applage': [{'confidenes and                                                                                                                   late_get'}]}, 'msn spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time
 ': '201
-:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette
+:00:13', 'zone_name': 'America/New_York', 'count': 25, 'local_current_time': 'unknown local time', 'home': '250 lafayette
  street
 ny 10012', 'name': 'Jp '}
 {'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
@@ -151,7 +151,7 @@ ny 10012', 'name': 'Jp '}
 age': [
 ce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans
 late_ge                                                                                                                  s' in spanish?",
-n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time5 23:00:13', 'zon': '20                                                                                                                   ork ny 10012', 'n:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette
+n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time5 23:00:13', 'zon': '20                                                                                                                   ork ny 10012', 'n:00:13', 'zone_name': 'America/New_York', 'count': 25, 'local_current_time': 'unknown local time', 'home': '250 lafayette
  stree
 ny 10012', 'name': 'Jp '}
 {'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
@@ -160,7 +160,7 @@ ny 10012', 'name': 'Jp '}
 age':ce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans
 Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'apples an
 n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2
-:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayette
+:00:13', 'zone_name': 'America/New_York', 'count': 25, 'local_current_time': 'unknown local time', 'home': '250 lafayette
  stre
 ny 10012', 'name': 'Jp '}
 {'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
@@ -169,11 +169,11 @@ ny 10012', 'name': 'Jp '}
 age':ce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans
 Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'apple_id': '0YKsFLqob60X7hrE5'}
 n spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time'eminder: apples
-:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayetteny 10012', 'name': 'Jp '}
+:00:13', 'zone_name': 'America/New_York', 'count': 25, 'local_current_time': 'unknown local time', 'home': '250 lafayetteny 10012', 'name': 'Jp '}
 {'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
 0'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu 'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_langu
 ae': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'transce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'trans
-Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'appln spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time:00:13', 'zone_name': 'America/New_York', 'count': 25, 'current_local_time': 'unknown local time', 'home': '250 lafayetteny 10012', 'name': 'Jp '}
+Sender Info: {'_id': "ObjectId('5b67b9bdbc3dca20a0c76559')", 'sms_id': '6oTnLOvRYyBbl6oL', 'body': "How do you say, 'appln spanish?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time:00:13', 'zone_name': 'America/New_York', 'count': 25, 'local_current_time': 'unknown local time', 'home': '250 lafayetteny 10012', 'name': 'Jp '}
 {'_text': "how do you say 'apples and carrots' in spanish?", 'entities': {'reminder': [{'suggested': True, 'confidence':
  'apples', 'type': 'value'}, {'suggested': True, 'confidence': 0.91007, 'value': 'carrots', 'type': 'value'}], 'wit_languce': 0.84068452581314, 'value': 'Spanish', 'type': 'value'}], 'intent': [{'confidence': 0.99427491295323, 'value': 'transg_id': '0YKsFLqob60X7hrE5'}
 
@@ -215,7 +215,7 @@ I've got some 📝 Translation 📝 info for you, Jp !
 --😘,
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
-{'_id': "ObjectId('5b67bb73bc3dca3178b48bcf')", 'sms_id': 'OjPdWnvlmeiB5crY', 'body': "How do you say 'rooster' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:07:31', 'zone_name': 'America/New_York', 'count': 27, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67bb73bc3dca3178b48bcf')", 'sms_id': 'OjPdWnvlmeiB5crY', 'body': "How do you say 'rooster' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:07:31', 'zone_name': 'America/New_York', 'count': 27, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully changed Reply message
 I've got some 📝 Translation 📝 info for you, Jp !
 
@@ -252,7 +252,7 @@ I've got some 📝 Translation 📝 info for you, Jp !
 --😘,
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
-{'_id': "ObjectId('5b67bdd6bc3dca34e0eac45c')", 'sms_id': 'CWc1sFqgD5rd7cie', 'body': "How do you say 'book' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:17:42', 'zone_name': 'America/New_York', 'count': 29, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67bdd6bc3dca34e0eac45c')", 'sms_id': 'CWc1sFqgD5rd7cie', 'body': "How do you say 'book' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:17:42', 'zone_name': 'America/New_York', 'count': 29, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully changed Reply message
 I've got some 📝 Translation 📝 info for you, Jp !
 
@@ -261,7 +261,7 @@ I've got some 📝 Translation 📝 info for you, Jp !
 --😘,
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
-{'_id': "ObjectId('5b67bdd6bc3dca34e0eac45c')", 'sms_id': 'CWc1sFqgD5rd7cie', 'body': "How do you say 'book' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:17:42', 'zone_name': 'America/New_York', 'count': 29, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name'
+{'_id': "ObjectId('5b67bdd6bc3dca34e0eac45c')", 'sms_id': 'CWc1sFqgD5rd7cie', 'body': "How do you say 'book' in french?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:17:42', 'zone_name': 'America/New_York', 'count': 29, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name'
 F:\Hive\TIA-Texting-Internet-Assistant>
 F:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
  [*] Waiting for new unprocessed messages from PRE-PROCESSING QUEUE ... To exit press CTRL+C
@@ -319,7 +319,7 @@ What's thought to be the oldest log cabin in the U.S. is located on Vermont's Gr
 Text 📲 me another request, Jp , or text HELP
 Successfully marked message as completed processing
 Successfully changed Reply message
-{'_id': ObjectId('5b67bed6bc3dca3e78dedb5d'), 'sms_id': 'ohNIyG8dzz4S9ZBX', 'body': 'Jeopardy', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:21:57', 'zone_name': 'America/New_York', 'count': 31, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67bed6bc3dca3e78dedb5d'), 'sms_id': 'ohNIyG8dzz4S9ZBX', 'body': 'Jeopardy', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:21:57', 'zone_name': 'America/New_York', 'count': 31, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
  [x] Done
 Traceback (most recent call last):
   File "listener_preprocess.py", line 24, in <module>
@@ -367,7 +367,7 @@ I've got some 📝 Translation 📝 info for you, Jp !
 Text 📲 me another request, Jp , or text HELP
 <class 'dict'>
 {'_id': "ObjectId('5b67c0f8bc3dca3cdce2c056')", 'sms_id': '1fcoveom6t1rNdik', 'body': "How do you say 'popcorn' ib Italian?", 'from':
-'+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:31:04', 'zone_name': 'America/New_York', 'count': 34, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+'+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:31:04', 'zone_name': 'America/New_York', 'count': 34, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 I've got some 📝 Translation 📝 info for you, Jp !
 
 ✍️ ''popcorn' translated into 🌏 Italian 🌏 ''popcorn' ✍️
@@ -377,7 +377,7 @@ I've got some 📝 Translation 📝 info for you, Jp !
 Text 📲 me another request, Jp , or text HELP
 <class 'dict'>
 {'_id': "ObjectId('5b67c0f8bc3dca3cdce2c056')", 'sms_id': '1fcoveom6t1rNdik', 'body': "How do you say 'popcorn' ib Italian?", 'from':
-'+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:31:04', 'zone_name': 'America/New_York', 'count': 34, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+'+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:31:04', 'zone_name': 'America/New_York', 'count': 34, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
  [x] Done
 Traceback (most recent call last):
   File "listener_preprocess.py", line 24, in <module>
@@ -416,10 +416,10 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
 <class 'dict'>
-{'_id': "ObjectId('5b67c245bc3dca23cc6f3192')", 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67c245bc3dca23cc6f3192')", 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully marked message as completed processing
 Successfully changed Reply message
-{'_id': ObjectId('5b67c245bc3dca23cc6f3192'), 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67c245bc3dca23cc6f3192'), 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 I've got some 📝 Translation 📝 info for you, Jp !
 
 ✍️ 'Hotel' translated into 🌏 German 🌏 'Hotel' ✍️
@@ -428,10 +428,10 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
 <class 'dict'>
-{'_id': "ObjectId('5b67c245bc3dca23cc6f3192')", 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67c245bc3dca23cc6f3192')", 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully marked message as completed processing
 Successfully changed Reply message
-{'_id': ObjectId('5b67c245bc3dca23cc6f3192'), 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67c245bc3dca23cc6f3192'), 'sms_id': 'lHg8WvBtDHT8WR2p', 'body': 'How does a german say hotel', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:36:37', 'zone_name': 'America/New_York', 'count': 36, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
  [x] Done
 Traceback (most recent call last):
 
@@ -452,8 +452,8 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
 <class 'dict'>
-{'_id': "ObjectId('5b67c3b8bc3dca3f64edcf75')", 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
-{'_id': ObjectId('5b67c3b8bc3dca3f64edcf75'), 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67c3b8bc3dca3f64edcf75')", 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67c3b8bc3dca3f64edcf75'), 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 I've got some 📝 Translation 📝 info for you, Jp !
 
 ✍️ 'How do you say computer in italian?' translated into 🌏 Italian 🌏 'Come si dice computer in italiano?' ✍️
@@ -462,8 +462,8 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
 <class 'dict'>
-{'_id': "ObjectId('5b67c3b8bc3dca3f64edcf75')", 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
-{'_id': ObjectId('5b67c3b8bc3dca3f64edcf75'), 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67c3b8bc3dca3f64edcf75')", 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67c3b8bc3dca3f64edcf75'), 'sms_id': 'bpZGs4116yqK2ug5', 'body': 'How do you say computer in italian?', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-05 23:42:47', 'zone_name': 'America/New_York', 'count': 37, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
  [x] Done
 Traceback (most recent call last):
 
@@ -528,9 +528,9 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
 <class 'dict'>
-{'_id': "ObjectId('5b67c980bc3dca2bb02e3740')", 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67c980bc3dca2bb02e3740')", 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully changed Reply message
-{'_id': ObjectId('5b67c980bc3dca2bb02e3740'), 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67c980bc3dca2bb02e3740'), 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 NOW
 I've got some 📝 Translation 📝 info for you, Jp !
 
@@ -540,9 +540,9 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
 <class 'dict'>
-{'_id': "ObjectId('5b67c980bc3dca2bb02e3740')", 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67c980bc3dca2bb02e3740')", 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully changed Reply message
-{'_id': ObjectId('5b67c980bc3dca2bb02e3740'), 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67c980bc3dca2bb02e3740'), 'sms_id': 'CKGd8jcF09xuVP4p', 'body': 'How do you say hello in japanese', 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:07:28', 'zone_name': 'America/New_York', 'count': 39, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
  [x] Done
 Traceback (most recent call last):
   File "listener_preprocess.py", line 24, in <module>
@@ -577,13 +577,13 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
 New Message Below
-{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 <class 'dict'>
 Old Message Below
-{'_id': "ObjectId('5b67cbdebc3dca393450a0e8')", 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67cbdebc3dca393450a0e8')", 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully marked message as completed processing
 Successfully changed Reply message
-{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'completed processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'completed processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
 NOW
 I've got some 📝 Translation 📝 info for you, Jp !
 
@@ -593,10 +593,10 @@ I've got some 📝 Translation 📝 info for you, Jp !
 ✨ Tia ✨
 Text 📲 me another request, Jp , or text HELP
 New Message Below
-{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'completed processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+{'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'completed processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
 <class 'dict'>
 Old Message Below
-{'_id': "ObjectId('5b67cbdebc3dca393450a0e8')", 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67cbdebc3dca393450a0e8')", 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zone_name': 'America/New_York', 'count': 41, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully marked message as completed processing
 Successfully changed Reply message
 {'_id': ObjectId('5b67cbdebc3dca393450a0e8'), 'sms_id': 'dp3o9r4cSWlL7UnM', 'body': "How do you say 'kill' in japanese?", 'from': '+19083766480', 'status': 'completed processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:17:33', 'zoF:\Hive\TIA-Texting-Internet-Assistant>python listener_preprocess.py
@@ -617,15 +617,15 @@ I've got some 📝 Translation 📝 info for you, Jp !
 Text 📲 me another request, Jp , or text HELP
 New Message Below
 {'_id': ObjectId('5b67ccb1bc3dca25c88d2959'), 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'currently processing', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:21:04',
-'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+'zone_name': 'America/New_York', 'count': 42, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 <class 'dict'>
 Old Message Below
-{'_id': "ObjectId('5b67ccb1bc3dca25c88d2959')", 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67ccb1bc3dca25c88d2959')", 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully marked message as completed processing
 Successfully changed Reply message
 {'_id': ObjectId('5b67ccb1bc3dca25c88d2959'), 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'completed processing', 'result': "I've got some 📝 Translation 📝 info for you, Jp !\n\n✍️ ''murderer'' tran
 slated into 🌏 Chinese 🌏 ''凶手'' ✍️\n\n--😘,\n✨ Tia ✨\nText 📲 me another request, Jp , or text HELP", 'offset_time_zone': 3, 'local_c
-urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
 NOW
 I've got some 📝 Translation 📝 info for you, Jp !
 
@@ -637,13 +637,13 @@ Text 📲 me another request, Jp , or text HELP
 New Message Below
 {'_id': ObjectId('5b67ccb1bc3dca25c88d2959'), 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'completed processing', 'result': "I've got some 📝 Translation 📝 info for you, Jp !\n\n✍️ ''murderer'' tran
 slated into 🌏 Chinese 🌏 ''凶手'' ✍️\n\n--😘,\n✨ Tia ✨\nText 📲 me another request, Jp , or text HELP", 'offset_time_zone': 3, 'local_c
-urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
 <class 'dict'>
 Old Message Below
-{'_id': "ObjectId('5b67ccb1bc3dca25c88d2959')", 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
+{'_id': "ObjectId('5b67ccb1bc3dca25c88d2959')", 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'unprocessed', 'result': 'tba', 'offset_time_zone': 3, 'local_current_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp '}
 Successfully marked message as completed processing
 Successfully changed Reply message
 {'_id': ObjectId('5b67ccb1bc3dca25c88d2959'), 'sms_id': 'gAffICuF5haEE7v1', 'body': "How do you say 'murderer' in chinese?", 'from': '+19083766480', 'status': 'completed processing', 'result': "I've got some 📝 Translation 📝 info for you, Jp !\n\n✍️ ''murderer'' tran
 slated into 🌏 Chinese 🌏 ''凶手'' ✍️\n\n--😘,\n✨ Tia ✨\nText 📲 me another request, Jp , or text HELP", 'offset_time_zone': 3, 'local_c
-urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'current_local_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
+urrent_time': '2018-08-06 00:21:04', 'zone_name': 'America/New_York', 'count': 42, 'local_current_time': 'unknown local time', 'home': '250 lafayette street new york ny 10012', 'name': 'Jp ', 'launch_time': 'NOW'}
  [x] Done
