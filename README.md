@@ -19,7 +19,7 @@ TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a 
 
 ### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ (too many changes to run the server consistently at this point, so please hold off on the demo for now!)
 
-I'm currently in the midst of a <i>separation-of-concerns</i> overhaul, so while the original single-server works as is -- see <i>legacy</i> folder -- my current goal is dividing the app into the following separately continuously running servers communicating over <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queue progression: 
+I'm currently in the midst of a <i>separation-of-concerns</i> overhaul, where I'm dividing the app into the following separately continuously running servers communicating over the following <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queue progression: 
 
 1. Worker -- worker_gmail.py -- sends new user messages to gmail queue from GMAIL API
 2. Listener -- listener_gmail.py -- receives gmail queue items, logs into (Mongo) database
@@ -27,6 +27,8 @@ I'm currently in the midst of a <i>separation-of-concerns</i> overhaul, so while
 4. Listener -- listener_preprocess.py -- receives messages from preprocessing queue, performs processing, and updates message data on database
 5. Worker -- worker_voice.py -- sends processed messages from database to google voice queue
 6. Listener -- listener_voice.py -- receives messages from google voice queue, performs voice processing, and sends reply to user. 
+7. Worker -- worker_timer.py -- sends future messages, i.e., recurring and one-off reminders, from database to timer queue.
+8. Listener -- listener_timer.py -- receives messages from timer queue and also doubles as the  scheduling server, which uses a Background instance of the <a href="https://apscheduler.readthedocs.io/en/latest/index.html">APScheduler</a> library. 
 
 ## How it works
 
