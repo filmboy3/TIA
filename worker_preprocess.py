@@ -21,7 +21,7 @@ def transfer_unprocessed_to_wit_queue():
 
     for message in mongo.message_records.find({"status": "unprocessed"}):
         # message = mongo.convert_message_from_bytes(message)
-
+        message = mongo.add_new_item_to_db(message, "result", "")
         connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
         channel = connection.channel()
         channel.queue_declare(queue='pre_processing_queue', durable=True)
