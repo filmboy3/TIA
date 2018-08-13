@@ -211,6 +211,7 @@ def trigger_recurring(resp, sender_info):
         "orig_request": resp['_text'], 
         "topic": topic_full,
         "freq": freq,
+        "deactivate": "NO",
         "status": "timer-preset",
         "recurring": 'recurring',
         "scheduled": "NO",
@@ -262,17 +263,18 @@ def trigger_reminder(resp, sender_info):
         reminder_text = re.sub('Am', 'AM', reminder_text)
 
     print("\n\nOriginal Command: " + str(resp['_text']))
-    print(sender_info)
+    # print(sender_info)
     message_prep = "Your '" + reminder_text + "' reminder ⌚ is set for: " + date_info_arr[1] + ". To cancel reminders at any time, 📲 text CANCEL\n\n--😘,\n✨ Tia ✨"
-    print(message_prep)
-    message_final = "Hey, '" + sender_info['name'] + "! ' Here's your reminder: " + " '" + reminder_text.capitalize() + "'! ⌚\n\n--😘,\n✨ Tia ✨"
-    print(message_final)
+    # print(message_prep)
+    message_final = "📣 Hey, " + sender_info['name'] + "! 📣 Here's your reminder: " + " '" + reminder_text.capitalize() + "'! ⌚\n\n--😘,\n✨ Tia ✨"
+    # print(message_final)
 
     new_timed_records = {
         "from": sender_info['from'],
         "sms_id": new_sms_id,
         "body": message_prep,
         "result": [message_prep],
+        "deactivate": "NO",
         "eventual_message": message_final,
         "orig_request": resp['_text'], 
         "status": "timer-preset",

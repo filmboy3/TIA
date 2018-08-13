@@ -15,7 +15,6 @@ def reschedule_old_items_on_restart():
         eval(message['str_scheduler'])
         print("Added previously timed message")
 
-
 scheduler = BackgroundScheduler(timezone=utc)
 scheduler.start()
 
@@ -30,6 +29,21 @@ channel = connection.channel()
 channel.queue_declare(queue='timer_queue', durable=True)
 print('[*] Waiting for new unprocessed messages from TIMER QUEUE ... To exit press CTRL+C')
 
+def start_job(timed_record):
+    str_scheduler = timed_record['str_scheduler']
+    print(str_scheduler)
+    eval(str_scheduler)
+    mongo.change_db_message_value(timed_record, "status", "timer-post-setting")
+    mongo.update_record(timed_record, {"scheduled": "YES"}, mongo.timed_records)
+    remind.send_timing_receipt(timed_record)
+
+    print(" [x] Added Job to Scheduler")
+
+def deactivate_job(timed_record):
+    id = timed_record['sms_id']
+    scheduler.remove_job(id)
+    mongo.timed_records.deleteOne({ 'sms_id': id })
+    print(" [x] Removed Job From Scheduler")
 
 def callback(ch, method, properties, body):   
     body = mongo.convert_message_from_bytes(body)
@@ -38,16 +52,12 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag = method.delivery_tag)
     print(body)
     timed_record = mongo.timed_records.find_one({"sms_id": body})
-    str_scheduler = timed_record['str_scheduler']
-    print(str_scheduler)
-    eval(str_scheduler)
-    mongo.change_db_message_value(timed_record, "status", "timer-post-setting")
-    mongo.update_record(timed_record, {"scheduled": "YES"}, mongo.timed_records)
 
-    remind.send_timing_receipt(timed_record)
-    # send_recurring_receipt(body)
+    if timed_record['deactivate'] == "YES":
+        deactivate_job(timed_record)
+    else:
+        start_job(timed_record)
 
-    print(" [x] Added Job to Scheduler")
 
 channel.basic_qos(prefetch_count=1)
 channel.basic_consume(callback,
