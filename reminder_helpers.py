@@ -1,232 +1,306 @@
-
-# coding=utf8
-
-######################################################
-#
-# Tia Text Assistant - Internet tasks without using Data/Wi-Fi
-# written by Jonathan Schwartz (jonathanschwartz30@gmail.com)
-#
-######################################################
-
-from __future__ import print_function
-import time
-import re
+import datetime
 from dateutil import parser
-import datetime 
+import re
+from datetime import datetime, timedelta
+import time
+import pandas as pd
 import general_message_helpers as msg_gen
 import mongo_helpers as mongo
-from datetime import datetime
 import wit_helpers as wit
 import pika
 import sys
+import random
+import string
 
 
-# def check_reminder(message):
-#     trigger_local_time = message['local_trigger_time']
-#     local_current_time = msg_gen.update_local_time(message['zone_name'])
+def extract_time(date_arr):
+    new_date = str(date_arr)[:-6]
+    # print(new_date)
+    time_split = str(date_arr).split(" ")[1]
+    time_split = time_split.split(":")
+    hours = int(time_split[0])
+    minutes = int(time_split[1])
 
-#     current_local_strip = datetime.strptime(local_current_time, '%Y-%m-%d %I:%M:%S')
-#     trigger_local_strip = datetime.strptime(str(trigger_local_time), '%Y-%m-%d %I:%M:%S')
-
-#     bool_trigger = bool(current_local_strip >= trigger_local_strip)
-
-#     if (bool_trigger is True):
-#         print("It's time to remind user about: " + str(message['reminder_text']))
-#         trigger_reminder_alert( message)
+    return (hours, minutes, new_date)
 
 
-def trigger_reminder_alert(message):
-    result = "Don't forget! " + " '" + message['reminder_text'].capitalize() + "'!"
-
-    msg_gen.store_reply_in_mongo(
-                                    result,
-                                    message,
-                                    "⏱️ Reminder ⏱️")
-    mongo.add_new_item_to_db(message, 'reminder_trigger', 'off')
-
-def trigger_recurring(resp, sender_info):
-    message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
-    time.sleep(1)
-    print("Inside trigger_recurring")
-    freq_dict = {
-        "minutely": "seconds=60",
-        "hourly": "minutes=60",
-        "daily": "day=1",
-        "weekly": "week=1",
-    }
-    freq = resp['entities']['recur_frequency'][0]['value']
-    new_freq = freq_dict[freq]
-    body = sender_info['body']
-    replacements = [
-                        ('daily', ''),
-                        ('hourly', ''),
-                        ('weekly', ''),
-                        ('hourly', ''),
-                        ('hourly', ''),
-                        ('hourly', ''),
-                        ('at the top of the hour', ''),
-                        ('every 60 minutes', ''),
-                        ('every hour', ''),
-                        ('on the hour', ''),
-                        ('each minute', ''),
-                        ('every minute', ''),
-                        ('on the minute', ''),
-                        ('each day', ''),
-                        ('every day', ''),
-                        ('each and every day', ''),
-                        ('once a day', ''),
-                        ('once an hour', ''),
-                        ('once a week', ''),
-                        ('one time every day', ''),
-                        ('once a minute', ''),
-                        ('every single hour', ''),
-                    ]
-    for old, new in replacements:
-        body = re.sub(old, new, body)
-
-    mongo.add_timed_message_to_db(sender_info['from'], sender_info['sms_id'], body, new_freq, recurring="YES")
+def convert_local_to_readable(local):
+    new_local = extract_time(local)
+    hours = new_local[0]
+    mins = new_local[1]
     
-    updated_record = {
-            "body": body,
-            "timer_marker": "in place",
-            "timer-frequency": new_freq,
-            "status": 'timer-preset'
-        }
-    mongo.update_record(message_copy, updated_record, mongo.message_records)
-
-# def extract_utc_time_from_wit_date(sender_info, date):
-#     hour_to_trigger_pst = str(date[11:13])
-#     date = re.sub("T", ".", date)
-#     date = date.split(".")
-#     print("Date: " + str(date))
-#     time_pre_change = date[1].split(":")
-#     print(time_pre_change[1])
-
-#     offset_time_zone = sender_info['offset_time_zone']
-#     hour_in_home_zone = int(hour_to_trigger_pst) + offset_time_zone
-
-#     if (hour_in_home_zone > 10):
-#             hour_in_home_zone = str(hour_in_home_zone)
-#     else:
-#             hour_in_home_zone = "0" + str(hour_in_home_zone)
-
-#     time_post_change = hour_in_home_zone + ":" + str(time_pre_change[1]) + ":" + str(time_pre_change[2])
-#     print(time_post_change)
-
-#     new_date = str(date[0]) + " " + time_post_change
-#     parsed_date = parser.parse(new_date)
-#     print(parsed_date)
-#     home_to_utc = {
-#         -4: 12,
-#         -3: 11,
-#         -2: 10,
-#         -1: 9,
-#         0: 8,
-#         1: 7,
-#         2: 6,
-#         3: 5,
-#         4: 4,
-#         5: 3,
-#         6: 2,
-#         7: 1,
-#         8: 0,
-#         9: -1,
-#         10: -2,
-#         11: -3,
-#         12: -4,
-#         13: -5,
-#         14: -6,
-#         15: -7,
-#         16: -8,
-#         17: -9,
-#         18: -10,
-#         19: -11,
-#         20: -12,
-#     }
-
-#     utc_diff = home_to_utc[offset_time_zone]
-
-#     time = str(parsed_date).split(" ")[1]
-#     time_split = time.split(":")
-#     utc_hours = time_split[0] + utc_diff
-#     local_minutes = time_split[1]
-#     return (utc_hours, local_minutes)
-
-
-
-def reminder_request(sender_info, input, date):
-    hour_to_trigger_pst = str(date[11:13])
-    date = re.sub("T", ".", date)
-    date = date.split(".")
-    print("Date: " + str(date))
-    time_pre_change = date[1].split(":")
-    print(time_pre_change[1])
-
-    offset_time_zone = sender_info['offset_time_zone']
-    hour_in_home_zone = int(hour_to_trigger_pst) + offset_time_zone
-
-    if (hour_in_home_zone > 10):
-            hour_in_home_zone = str(hour_in_home_zone)
+    if hours > 12:
+      hour_format = str(hours - 12)
+      time_of_day = "PM"
     else:
-            hour_in_home_zone = "0" + str(hour_in_home_zone)
-
-    time_post_change = hour_in_home_zone + ":" + str(time_pre_change[1]) + ":" + str(time_pre_change[2])
-    print(time_post_change)
-
-    new_date = str(date[0]) + " " + time_post_change
-    parsed_date = parser.parse(new_date)
-    print(parsed_date)
-    # parsed_date = parser.parse(str(date[0]) + " " + str(date[1]))
-    reminder = {
-                'local_trigger_time': parsed_date,
-                'reminder_trigger': 'activated',
-                'reminder_text': input 
-                }
-    for key, value in reminder.items():
-        sender_info = mongo.add_new_item_to_db(sender_info, key, value)
-
-    day_full = str(parsed_date).split(" ")[0]
-    day_without_year = day_full.split("-")[1:]
-    day_str_without_year = "/".join(day_without_year)
-    time = str(parsed_date).split(" ")[1]
-    time_split = time.split(":")
-    hours = time_split[0]
-    minutes = time_split[1]
-    time_of_day_str = "AM"
+      hour_format = str(hours)
+      time_of_day = "AM"
     
-    if (int(hours) > 12):
-      hours = int(hours) - 12
-      time_of_day_str = "PM"
-  
-    formatted_time = str(hours) + ":" + str(minutes) + " " + time_of_day_str
+    if mins < 10:
+      mins = "0" + str(mins)
+      
+    full_local_time = hour_format + ":" + str(mins) + " " + time_of_day
+    return full_local_time
 
-    result = "I've set a reminder for " + day_str_without_year + " @ " + formatted_time + ": ⏱️ " + str(input) + " ⏱️"
-    return result
 
-def trigger_reminder(resp, sender_info):
-    print("Reminder Triggered")
-    time_zone = sender_info['offset_time_zone']
-    print("Time_zone offset is: " + str(time_zone))
-    print("Sender Info: " + str(sender_info))
-    # print(resp)
+def time_range_average(first, second):
+    ts1 = pd.Timestamp(parser.parse(first))
+    ts2 = pd.Timestamp(parser.parse(second))
+    ts_new = ts1+(ts2-ts1)/2
+    # print("Averaging time range")
+    # print(ts_new)
+    return ts_new
+
+
+def convert_date_from_wit(resp):
+    pst_counter = 0
     try:
-        reminder = resp['entities']['reminder'][0]['value']
+        date = resp['entities']['datetime'][0]['value']
+        # print("\n1st date attempt: " + str(date))
+        if "at" not in resp['_text']:
+            pst_counter = 1
     except BaseException:
         try:
-            reminder = resp['entities']['phrase_to_translate'][0]['value']
+            date = resp['entities']['datetime'][0]['values'][0]['to']['value']
+            # print("\n2nd date attempt: " + str(date))
+            if "at" not in resp['_text']:
+                pst_counter = 1
+            try:
+                date2 = resp['entities']['wdatetime'][0]['values'][0]['from']['value']
+                date = str(time_range_average(date, date2))
+            except BaseException:
+                pass
         except BaseException:
-            reminder = resp['_text']
-    print("\nReminder: " + str(reminder))
+            try:
+                date = resp['entities']['wdatetime'][0]['values'][0]['to']['value']
+                # print("\n3rd date attempt: " + str(date))
+                try:
+                    date2 = resp['entities']['wdatetime'][0]['values'][0]['from']['value']
+                    date = str(time_range_average(date, date2))
+                except BaseException:
+                    pass
+            except BaseException:
+                try:
+                    date = resp['entities']['wdatetime'][0]['value']
+                    # print("\n4th date attempt: " + str(date))
+                except BaseException:
+                    return 0
+    return (date, pst_counter)
 
-    date = wit.convert_date_from_wit(resp)
-    if date == "NO DATE":
-        today = datetime.date.today()
-        date = today + datetime.timedelta(days = 1) 
-        date = str(date) + "T00:00:00.000-07:00"
-        print("\nExcept date: " + str(date))    
 
-    print("Date: " + str(date))
-    msg_gen.store_reply_in_mongo(
-                                       reminder_request(sender_info, str(reminder), str(date)),
-                                       sender_info,
-                                       "⏱️ Reminder Setup ⏱️")
+def parse_date_for_timed_messages(date_arr, sender_info):
+
+    if (date_arr[1] == 1):
+        local_date = parser.parse(date_arr[0]) + timedelta(hours=(sender_info['offset_time_zone']))
+    else:
+        local_date = parser.parse(date_arr[0])
+
+    # print("LOCAL TIME: " + str(local_date))
+    local_readable_time = convert_local_to_readable(local_date)
+    HOME_ZONE_TO_UTC = {
+        '-4': '11',
+        '-3': '10',
+        '-2': '9',
+        '-1': '8',
+        '0': '7',
+        '1': '6',
+        '2': '5',
+        '3': '4',
+        '4': '3',
+        '5': '2',
+        '6': '1',
+        '7': '0',
+        '8': '-1',
+        '9': '-2',
+        '10': '-3',
+        '11': '-4',
+        '12': '-5',
+        '13': '-6',
+        '14': '-7',
+        '15': '-8',
+        '16': '-9',
+        '17': '-10',
+        '18': '-11',
+        '19': '-12'
+    }
+    utc_offset = HOME_ZONE_TO_UTC[str(sender_info['offset_time_zone'])]
+    utc_date = local_date + timedelta(hours = int(utc_offset))
+    # print("UTC TIME: " + str(utc_date))
+
+    utc_new_time = extract_time(utc_date)
+    # print(utc_new_time)
+    return (utc_new_time, local_readable_time)
+
+
+def reminder_date_check (resp, sender_info):
+    date_arr = convert_date_from_wit(resp)
+    result = parse_date_for_timed_messages(date_arr, sender_info)
+    # print(result)
+    return result
+
+
+def timing_date_check(resp, sender_info):
+    if (convert_date_from_wit(resp) != 0):
+        date_arr = convert_date_from_wit(resp)
+        result = parse_date_for_timed_messages(date_arr, sender_info)
+        hour = result[0][0]
+        minute = result[0][1]
+        partial_message = "hour=" + str(hour) + ", minute=" + str(minute) + ", "
+    else:
+        partial_message = "hour=13, minute=30, "
+    return (partial_message, result[1])
+
+
+def send_timing_receipt(body):
+    record = {
+        "from": body['from'],
+        "body": body['body'],
+        "result": [body['result']],
+        "launch_time": "NOW",
+        "send_all_chunks": "ALL_CHUNKS",
+        "current_chunk": 0,
+        "chunk_len": 1,
+        "status": "completed processing"
+    }
+    return mongo.database_new_populated_item(record)
+
+
+def trigger_recurring(resp, sender_info):
+    sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
+    print("Inside trigger_recurring")
+    freq = resp['entities']['recur_frequency'][0]['value']
+    date_arr = timing_date_check(resp, sender_info)
+
+    freq_dict = {
+        'daily': "'cron', " + date_arr[0],
+        'weekly': "'cron', day_of_week=0, " + date_arr[0],
+        'weekend': "'cron', day_of_week='sat-sun', " + date_arr[0],
+        'weekday': "'cron', day_of_week='mon-fri', " + date_arr[0],
+        'hourly': "'cron', hour='*', ",
+        'minute-by-minute': "'interval', seconds=60, "
+    }
+
+    try:
+        topic = " " + resp['entities']['wit_news_source'][0]['value'].upper() + " "
+        topic_full = "News " + topic
+    except BaseException:
+        try:
+            pre_topic = resp['entities']['intent'][0]['value']
+            topic = pre_topic[:-4]
+            topic = " " + pre_topic[:-4] + " "
+            topic_full = topic
+        except BaseException:
+            topic = ""
+        topic = topic.title()
+        topic = re.sub('Nyt', 'NY Times', topic)
+
+    new_sms_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0, 16)])
+    str_scheduler = "scheduler.add_job(mongo.change_db_message_value_by_sms_id, " + freq_dict[freq] + "jitter=15, id='" + new_sms_id + "'," + " kwargs={'sms_id': '" + new_sms_id + "', 'key': 'status', 'value': 'unprocessed'})"
+    reminder_text = resp['entities']["recur_frequency"][0]['value']
+    print("\n\nOriginal Command: " + str(resp['_text']))
+    message_result = "Your " + reminder_text + topic + "messages ⌚ are set for: " + date_arr[1] + ". To cancel recurring messages at any time, text CANCEL\n\n--😘,\n✨ Tia ✨"
+    print(message_result)
+
+
+    new_timed_records = {
+        "from": sender_info['from'],
+        "sms_id": new_sms_id,
+        "body": message_result,
+        "result": message_result,
+        "orig_request": resp['_text'], 
+        "topic": topic_full,
+        "freq": freq,
+        "status": "timer-preset",
+        "recurring": 'recurring',
+        "scheduled": "NO",
+        "str_scheduler": str_scheduler
+    }
+    mongo.push_record(new_timed_records, mongo.timed_records)
+
+    print("Did we reach after the pushed records?")
+
+    fresh_message_record = {
+        "sms_id": new_sms_id,
+        "body": topic_full,
+        "name": sender_info['name'],
+        "from": sender_info['from'],
+        "status": "waiting for trigger",
+        "result": "tba",
+        "home": sender_info['home'],
+        "name": "Timmy",
+        "offset_time_zone": sender_info['offset_time_zone'],
+        "zone_name": sender_info['zone_name'],
+    }
+
+    mongo.push_record(fresh_message_record, mongo.message_records)
+    
+    return str_scheduler
+
+
+def trigger_reminder(resp, sender_info):
+    sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
+    print("Inside trigger_reminder")
+    date_info_arr = reminder_date_check(resp, sender_info)
+    new_sms_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0, 16)])
+    str_scheduler = "scheduler.add_job(mongo.change_db_message_value_by_sms_id, 'date', run_date='" + date_info_arr[0][2] + "', id='" + new_sms_id + "'," + " kwargs={'sms_id': '" + new_sms_id + "', 'key': 'status', 'value': 'completed processing'})"
+    print(str_scheduler)
+    
+    try:
+        reminder_text = resp['entities']['reminder'][0]['value']
+    except BaseException:
+        try:
+            reminder_text = ""
+            for i in range(0, len(resp['entities']['phrase_to_translate'])):
+              reminder_text = reminder_text + resp['entities']['phrase_to_translate'][i]['value'] + " " 
+            reminder_text = reminder_text.rstrip()
+        except BaseException:
+            reminder_text = resp['_text']
+        reminder_text = reminder_text.title()
+        reminder_text = re.sub('Pm', 'PM', reminder_text)
+        reminder_text = re.sub('Am', 'AM', reminder_text)
+
+    print("\n\nOriginal Command: " + str(resp['_text']))
+    print(sender_info)
+    message_prep = "Your '" + reminder_text + "' reminder ⌚ is set for: " + date_info_arr[1] + ". To cancel reminders at any time, 📲 text CANCEL\n\n--😘,\n✨ Tia ✨"
+    print(message_prep)
+    message_final = "Hey, '" + sender_info['name'] + "! ' Here's your reminder: " + " '" + reminder_text.capitalize() + "'! ⌚\n\n--😘,\n✨ Tia ✨"
+    print(message_final)
+
+    new_timed_records = {
+        "from": sender_info['from'],
+        "sms_id": new_sms_id,
+        "body": message_prep,
+        "result": [message_prep],
+        "eventual_message": message_final,
+        "orig_request": resp['_text'], 
+        "status": "timer-preset",
+        "recurring": 'one-time',
+        "scheduled": "NO",
+        "str_scheduler": str_scheduler
+    }
+    mongo.push_record(new_timed_records, mongo.timed_records)
+
+    print("Did we reach after the pushed records?")
+
+    fresh_message_record = {
+        "sms_id": new_sms_id,
+        "body": message_prep,
+        "name": sender_info['name'],
+        "from": sender_info['from'],
+        "status": "waiting for trigger",
+        "result": [message_final],
+        "home": sender_info['home'],
+        "name": "Timmy",
+        "offset_time_zone": sender_info['offset_time_zone'],
+        "zone_name": sender_info['zone_name'],
+        "send_all_chunks": "ALL_CHUNKS",
+        "current_chunk": 0,
+        "chunk_len": 1,
+        "launch_time": "NOW",
+        "status": "waiting to be triggered"
+    }
+
+    mongo.push_record(fresh_message_record, mongo.message_records)
+    return str_scheduler

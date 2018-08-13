@@ -24,22 +24,6 @@ import reminder_helpers as reminder
 import mongo_helpers as mongo
 import datetime
 
-INTENT_DICT = {
-        "new_home_get": "msg_gen.trigger_new_home",
-        "translate_get": "trans.trigger_translate",
-        "jokes_get": "jokes.trigger_jokes",
-        "directions_get": "geo.trigger_directions",
-        "news_directory_get": "news.trigger_news_directory",
-        "news_get": "news.trigger_news",
-        "nyt_get": "news.trigger_nyt",
-        "hn_get": "news.trigger_hn",
-        "help_get": "msg_gen.trigger_help",
-        "jeopardy_get": "jep.trigger_jeopardy",
-        "yelp_get": "yelp.trigger_yelp",
-        "weather_get": "weather.trigger_weather",
-        "forecast_get": "weather.trigger_forecast",
-        "reminder_get": "reminder.trigger_reminder"
-    }
 
 def pre_wit_scrub(message):
     replacements = [
@@ -52,7 +36,9 @@ def pre_wit_scrub(message):
     print("Wit Scrubbed Message: " + str(message))
     return message
     
+
 def recurring_check(resp, sender_info):
+    # reminder.trigger_recurring(resp, sender_info)
     try:
         _ = resp['entities']['recur_frequency'][0]['value']
         reminder.trigger_recurring(resp, sender_info)
@@ -88,7 +74,24 @@ def use_backup_keywords(resp):
 
 def nlp_extraction(resp, sender_info):
     try:
-        intent_result = str(resp['entities']['intent'][0]['value'])
+        intent_result = resp['entities']['intent'][0]['value']
+        print("Yes, we've got an intent_result")
+        INTENT_DICT = {
+            "new_home_get": "msg_gen.trigger_new_home",
+            "translate_get": "trans.trigger_translate",
+            "jokes_get": "jokes.trigger_jokes",
+            "directions_get": "geo.trigger_directions",
+            "news_directory_get": "news.trigger_news_directory",
+            "news_get": "news.trigger_news",
+            "nyt_get": "news.trigger_nyt",
+            "hn_get": "news.trigger_hn",
+            "help_get": "msg_gen.trigger_help",
+            "jeopardy_get": "jep.trigger_jeopardy",
+            "yelp_get": "yelp.trigger_yelp",
+            "weather_get": "weather.trigger_weather",
+            "forecast_get": "weather.trigger_forecast",
+            "reminder_get": "reminder.trigger_reminder"
+         }
         func_name = INTENT_DICT[intent_result] + "(resp, sender_info)" 
     except BaseException:
         print("Unable to determine intent ... moving on to keyword parsing.")
@@ -112,26 +115,6 @@ def nlp_extraction(resp, sender_info):
                 msg_gen.send_error_text("text"),
                 sender_info,
                 "💀 Error 💀")
-
-def convert_date_from_wit(resp):
-    try:
-        date = resp['entities']['datetime'][0]['value']
-        print("\n1st Try date: " + str(date))
-    except BaseException:
-        try:
-            date = resp['entities']['datetime'][0]['values'][0]['to']['value']
-            print("\n2nd Try date: " + str(date))
-        except BaseException:
-            try:
-                date = resp['entities']['wdatetime'][0]['values'][0]['to']['value']
-                print("\n3rd Try date: " + str(date))
-            except BaseException:
-                try:
-                    date = resp['entities']['wdatetime'][0]['value']
-                    print("\n4rd Try date: " + str(date))
-                except BaseException:
-                    return "NO DATE"
-    return date
 
     
 def check_keywords(resp, sender_info):

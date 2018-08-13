@@ -15,6 +15,7 @@ import api_keys as SHEETS
 import wit_helpers as wit
 import general_message_helpers as msg_gen
 import reminder_helpers as remind
+import reminder_helpers as remind
 import news_helpers as news
 import yaml
 import random
@@ -56,9 +57,9 @@ def update_sms_record(sms_id, updates, collection):
     }, upsert=False)
 
 
-def process_reminders():
-    for message in message_records.find({"reminder_trigger": "activated"}):
-        remind.check_reminder(message)
+# def process_reminders():
+#     for message in message_records.find({"reminder_trigger": "activated"}):
+#         remind.check_reminder(message)
 
 
 def add_new_item_to_db(sender_info, key, value):
