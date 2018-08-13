@@ -28,7 +28,7 @@ channel.queue_declare(queue='timer_queue', durable=True)
 print('[*] Waiting for new unprocessed messages from TIMER QUEUE ... To exit press CTRL+C')
 
 def send_recurring_receipt(body):
-    result = "Your ⌛ recurring ⌛ message is all set! To cancel alerts at any ⌚, text CANCEL."
+    result = "Your ⌛ recurring ⌛ message is all set! To cancel these messages at any ⌚, text CANCEL."
     record = {
         "from": body['from'],
         "body": body['body'],
@@ -47,7 +47,10 @@ def callback(ch, method, properties, body):
 
     ch.basic_ack(delivery_tag = method.delivery_tag)
     print(body)
-    str_scheduler = "scheduler.add_job(mongo.change_db_message_value_by_sms_id, 'interval', " + body['timer-frequency'] + ", jitter=15, kwargs={'sms_id': '" + body['sms_id'] + "', 'key': 'status', 'value': 'unprocessed'})"
+    str_scheduler = "scheduler.add_job(mongo.change_db_message_value_by_sms_id, 'interval', " + body['timer-frequency'] + ", jitter=15, id='" + body['sms_id'] + "'," + "kwargs={'sms_id': '" + body['sms_id'] + "', 'key': 'status', 'value': 'unprocessed'})"
+    print(str_scheduler)
+    timed_record = mongo.timed_records.find_one({"sms_id": body['sms_id']})
+    mongo.update_record(timed_record, {"str_scheduler": str_scheduler}, mongo.timed_records)
     eval(str_scheduler)
     mongo.change_db_message_value(body, "status", "timer-post-setting")
     send_recurring_receipt(body)

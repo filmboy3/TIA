@@ -83,11 +83,17 @@ def trigger_recurring(resp, sender_info):
                     ]
     for old, new in replacements:
         body = re.sub(old, new, body)
+    
     mongo.add_timed_message_to_db(sender_info['from'], sender_info['sms_id'], body, new_freq, recurring="YES")
-    mongo.add_new_item_to_db(message_copy, 'body', body)
-    mongo.add_new_item_to_db(message_copy, 'timer_marker', "in place")
-    mongo.add_new_item_to_db(message_copy, 'timer-frequency', new_freq)
-    mongo.add_new_item_to_db(message_copy, 'status', 'timer-preset')
+    
+    updated_record = {
+            "body": body,
+            "timer_marker": "in place",
+            "timer-frequency": new_freq,
+            "status": 'timer-preset'
+        }
+    mongo.update_record(message_copy, updated_record, mongo.message_records)
+
 
 
 def reminder_request(sender_info, input, date):
