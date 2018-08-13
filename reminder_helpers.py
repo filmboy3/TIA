@@ -21,18 +21,18 @@ import pika
 import sys
 
 
-def check_reminder(message):
-    trigger_local_time = message['local_trigger_time']
-    local_current_time = msg_gen.update_local_time(message['zone_name'])
+# def check_reminder(message):
+#     trigger_local_time = message['local_trigger_time']
+#     local_current_time = msg_gen.update_local_time(message['zone_name'])
 
-    current_local_strip = datetime.strptime(local_current_time, '%Y-%m-%d %I:%M:%S')
-    trigger_local_strip = datetime.strptime(str(trigger_local_time), '%Y-%m-%d %I:%M:%S')
+#     current_local_strip = datetime.strptime(local_current_time, '%Y-%m-%d %I:%M:%S')
+#     trigger_local_strip = datetime.strptime(str(trigger_local_time), '%Y-%m-%d %I:%M:%S')
 
-    bool_trigger = bool(current_local_strip >= trigger_local_strip)
+#     bool_trigger = bool(current_local_strip >= trigger_local_strip)
 
-    if (bool_trigger is True):
-        print("It's time to remind user about: " + str(message['reminder_text']))
-        trigger_reminder_alert( message)
+#     if (bool_trigger is True):
+#         print("It's time to remind user about: " + str(message['reminder_text']))
+#         trigger_reminder_alert( message)
 
 
 def trigger_reminder_alert(message):
@@ -83,7 +83,7 @@ def trigger_recurring(resp, sender_info):
                     ]
     for old, new in replacements:
         body = re.sub(old, new, body)
-    
+
     mongo.add_timed_message_to_db(sender_info['from'], sender_info['sms_id'], body, new_freq, recurring="YES")
     
     updated_record = {
@@ -93,6 +93,64 @@ def trigger_recurring(resp, sender_info):
             "status": 'timer-preset'
         }
     mongo.update_record(message_copy, updated_record, mongo.message_records)
+
+# def extract_utc_time_from_wit_date(sender_info, date):
+#     hour_to_trigger_pst = str(date[11:13])
+#     date = re.sub("T", ".", date)
+#     date = date.split(".")
+#     print("Date: " + str(date))
+#     time_pre_change = date[1].split(":")
+#     print(time_pre_change[1])
+
+#     offset_time_zone = sender_info['offset_time_zone']
+#     hour_in_home_zone = int(hour_to_trigger_pst) + offset_time_zone
+
+#     if (hour_in_home_zone > 10):
+#             hour_in_home_zone = str(hour_in_home_zone)
+#     else:
+#             hour_in_home_zone = "0" + str(hour_in_home_zone)
+
+#     time_post_change = hour_in_home_zone + ":" + str(time_pre_change[1]) + ":" + str(time_pre_change[2])
+#     print(time_post_change)
+
+#     new_date = str(date[0]) + " " + time_post_change
+#     parsed_date = parser.parse(new_date)
+#     print(parsed_date)
+#     home_to_utc = {
+#         -4: 12,
+#         -3: 11,
+#         -2: 10,
+#         -1: 9,
+#         0: 8,
+#         1: 7,
+#         2: 6,
+#         3: 5,
+#         4: 4,
+#         5: 3,
+#         6: 2,
+#         7: 1,
+#         8: 0,
+#         9: -1,
+#         10: -2,
+#         11: -3,
+#         12: -4,
+#         13: -5,
+#         14: -6,
+#         15: -7,
+#         16: -8,
+#         17: -9,
+#         18: -10,
+#         19: -11,
+#         20: -12,
+#     }
+
+#     utc_diff = home_to_utc[offset_time_zone]
+
+#     time = str(parsed_date).split(" ")[1]
+#     time_split = time.split(":")
+#     utc_hours = time_split[0] + utc_diff
+#     local_minutes = time_split[1]
+#     return (utc_hours, local_minutes)
 
 
 
@@ -159,26 +217,14 @@ def trigger_reminder(resp, sender_info):
         except BaseException:
             reminder = resp['_text']
     print("\nReminder: " + str(reminder))
-    try:
-        date = resp['entities']['datetime'][0]['value']
-        print("\n1st Try date: " + str(date))
-    except BaseException:
-        try:
-            date = resp['entities']['datetime'][0]['values'][0]['to']['value']
-            print("\n2nd Try date: " + str(date))
-        except BaseException:
-            try:
-                date = resp['entities']['wdatetime'][0]['values'][0]['to']['value']
-                print("\n3rd Try date: " + str(date))
-            except BaseException:
-                try:
-                    date = resp['entities']['wdatetime'][0]['value']
-                    print("\n4rd Try date: " + str(date))
-                except BaseException:
-                    today = datetime.date.today()
-                    date = today + datetime.timedelta(days = 1) 
-                    date = str(date) + "T00:00:00.000-07:00"
-                    print("\nExcept date: " + str(date))
+
+    date = wit.convert_date_from_wit(resp)
+    if date == "NO DATE":
+        today = datetime.date.today()
+        date = today + datetime.timedelta(days = 1) 
+        date = str(date) + "T00:00:00.000-07:00"
+        print("\nExcept date: " + str(date))    
+
     print("Date: " + str(date))
     msg_gen.store_reply_in_mongo(
                                        reminder_request(sender_info, str(reminder), str(date)),

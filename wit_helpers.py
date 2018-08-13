@@ -22,6 +22,7 @@ import translation_helpers as trans
 import general_message_helpers as msg_gen
 import reminder_helpers as reminder
 import mongo_helpers as mongo
+import datetime
 
 INTENT_DICT = {
         "new_home_get": "msg_gen.trigger_new_home",
@@ -111,8 +112,28 @@ def nlp_extraction(resp, sender_info):
                 msg_gen.send_error_text("text"),
                 sender_info,
                 "💀 Error 💀")
-            
 
+def convert_date_from_wit(resp):
+    try:
+        date = resp['entities']['datetime'][0]['value']
+        print("\n1st Try date: " + str(date))
+    except BaseException:
+        try:
+            date = resp['entities']['datetime'][0]['values'][0]['to']['value']
+            print("\n2nd Try date: " + str(date))
+        except BaseException:
+            try:
+                date = resp['entities']['wdatetime'][0]['values'][0]['to']['value']
+                print("\n3rd Try date: " + str(date))
+            except BaseException:
+                try:
+                    date = resp['entities']['wdatetime'][0]['value']
+                    print("\n4rd Try date: " + str(date))
+                except BaseException:
+                    return "NO DATE"
+    return date
+
+    
 def check_keywords(resp, sender_info):
     keywords_db = {
         "01_wit_biography_terms": "know.trigger_wiki",
