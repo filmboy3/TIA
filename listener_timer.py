@@ -8,18 +8,20 @@ import datetime
 import time
 from pytz import utc
 
-def second_command():
-    print("This is a separate command")
 
-def fourth_command():
-    print("This is a command at 8:21 PST")
+def reschedule_old_items_on_restart():
+    for message in mongo.timed_records.find():
+        eval(message['str_scheduler'])
+        print("Added previously timed message")
 
-def third_command():
-    print("This one is added significantly later...")
-  
+
 scheduler = BackgroundScheduler(timezone=utc)
 scheduler.start()
-# IF THE SERVER IS FIRST STARTING, CHECK ALL THE ITEMS IN THE TIMER DB AND PUT THEM BACK IN THE SCHEDULER PLACEHOLDER
+
+# IF THE SERVER IS (RE)STARTING, CHECK ALL PREVIOUS
+# Items in the  them back into new scheduler instance
+reschedule_old_items_on_restart()
+
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
