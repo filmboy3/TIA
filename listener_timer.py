@@ -35,14 +35,16 @@ def start_job(timed_record):
     eval(str_scheduler)
     mongo.change_db_message_value(timed_record, "status", "timer-post-setting")
     mongo.update_record(timed_record, {"scheduled": "YES"}, mongo.timed_records)
+    time.sleep(1)
     remind.send_timing_receipt(timed_record)
 
     print(" [x] Added Job to Scheduler")
 
 def deactivate_job(timed_record):
-    id = timed_record['sms_id']
-    scheduler.remove_job(id)
-    mongo.timed_records.deleteOne({ 'sms_id': id })
+    print("Inside Deactivate")
+    print(timed_record['sms_id'])
+    scheduler.remove_job(timed_record['sms_id'])
+    mongo.timed_records.remove({'sms_id': timed_record['sms_id']})
     print(" [x] Removed Job From Scheduler")
 
 def callback(ch, method, properties, body):   

@@ -27,6 +27,14 @@ def callback(ch, method, properties, body):
     gv.process_reply(body, browser)
     print(" [x] Message Sent")
     mongo.change_db_message_value(body, "status", "message sent")
+    print("body: " + str(body))
+    try:
+        _ = body['single-timer']
+        print("Into the try statement with sms: " + str(body['sms_id']))
+        mongo.timed_records.remove({'sms_id': str(body['sms_id'])})
+        print(" [x] Timer Record Deleted")
+    except:
+        pass
 
 channel.basic_qos(prefetch_count=1)
 channel.basic_consume(callback,

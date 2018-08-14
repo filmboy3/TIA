@@ -245,7 +245,7 @@ def fetch_name_from_db(sender_info):
 def trigger_no(sender_info):
     name = fetch_name_from_db(sender_info)
 
-    message = "Gotcha. Let me know if you need anything! \n\n--😘,\n✨ Tia ✨ Text" \
+    message = "Gotcha! 🤐 Let me know if you need anything! \n\n--😘,\n✨ Tia ✨ Text" \
             " 📲 me another request, " + str(
             name) + ", or text HELP"
 
@@ -264,6 +264,8 @@ def core_commands_check(resp, sender_info):
                         'no': 'trigger_no',
                         'help': 'msg_gen.trigger_help',
                         'more': 'trigger_more',
+                        'cancel all': 'remind.trigger_cancel_all',
+                        'cancel': 'remind.trigger_cancel',
                         'all': 'trigger_all',
                         'info': 'msg_gen.trigger_help',
                         'news': 'news.trigger_news_directory'

@@ -60,7 +60,7 @@ def trigger_send_reply(record, browser):
         mongo.change_db_message_value(record, "current_sms_id", record['sms_id'])
     except:
         print("Error inside Trigger_send_reply")
-        time.sleep(1)
+        # This is a trouble spot
     
     updated_message = mongo.message_records.find_one({"sms_id": record['sms_id']})
     return updated_message

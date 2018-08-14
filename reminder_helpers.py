@@ -82,6 +82,8 @@ def convert_date_from_wit(resp):
             except BaseException:
                 try:
                     date = resp['entities']['wdatetime'][0]['value']
+                    if "in" in resp['_text']:
+                        pst_counter = 1
                     # print("\n4th date attempt: " + str(date))
                 except BaseException:
                     return 0
@@ -132,7 +134,7 @@ def parse_date_for_timed_messages(date_arr, sender_info):
     return (utc_new_time, local_readable_time)
 
 
-def reminder_date_check (resp, sender_info):
+def reminder_date_check(resp, sender_info):
     date_arr = convert_date_from_wit(resp)
     result = parse_date_for_timed_messages(date_arr, sender_info)
     # print(result)
@@ -140,6 +142,7 @@ def reminder_date_check (resp, sender_info):
 
 
 def timing_date_check(resp, sender_info):
+    result = [0, "."]
     if (convert_date_from_wit(resp) != 0):
         date_arr = convert_date_from_wit(resp)
         result = parse_date_for_timed_messages(date_arr, sender_info)
@@ -154,7 +157,7 @@ def timing_date_check(resp, sender_info):
 def send_timing_receipt(body):
     record = {
         "from": body['from'],
-        "body": body['body'],
+        "body": "",
         "result": [body['result']],
         "launch_time": "NOW",
         "send_all_chunks": "ALL_CHUNKS",
@@ -198,28 +201,12 @@ def trigger_recurring(resp, sender_info):
     new_sms_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0, 16)])
     str_scheduler = "scheduler.add_job(mongo.change_db_message_value_by_sms_id, " + freq_dict[freq] + "jitter=15, id='" + new_sms_id + "'," + " kwargs={'sms_id': '" + new_sms_id + "', 'key': 'status', 'value': 'unprocessed'})"
     reminder_text = resp['entities']["recur_frequency"][0]['value']
-    print("\n\nOriginal Command: " + str(resp['_text']))
-    message_result = "Your " + reminder_text + topic + "messages ⌚ are set for: " + date_arr[1] + ". To cancel recurring messages at any time, text CANCEL\n\n--😘,\n✨ Tia ✨"
-    print(message_result)
-
-
-    new_timed_records = {
-        "from": sender_info['from'],
-        "sms_id": new_sms_id,
-        "body": message_result,
-        "result": message_result,
-        "orig_request": resp['_text'], 
-        "topic": topic_full,
-        "freq": freq,
-        "deactivate": "NO",
-        "status": "timer-preset",
-        "recurring": 'recurring',
-        "scheduled": "NO",
-        "str_scheduler": str_scheduler
-    }
-    mongo.push_record(new_timed_records, mongo.timed_records)
-
-    print("Did we reach after the pushed records?")
+    # print("\n\nOriginal Command: " + str(resp['_text']))
+    time_text = str(date_arr[1])
+    if time_text != ".":
+        time_text = " for: " + time_text + "."
+    message_result = "👋 Hey, " + sender_info['name'] + "! Your " + reminder_text + " ⏰ " + topic + "messages are all set" + time_text + " To 🛑 recurring messages at any ⌚, text 📲 CANCEL\n\n--😘,\n✨ Tia ✨"
+    # print(message_result)
 
     fresh_message_record = {
         "sms_id": new_sms_id,
@@ -232,11 +219,78 @@ def trigger_recurring(resp, sender_info):
         "name": "Timmy",
         "offset_time_zone": sender_info['offset_time_zone'],
         "zone_name": sender_info['zone_name'],
+        "created_at": pd.Timestamp.now()
     }
 
     mongo.push_record(fresh_message_record, mongo.message_records)
+    time.sleep(1)
+    new_timed_records = {
+        "from": sender_info['from'],
+        "sms_id": new_sms_id,
+        "body": message_result,
+        "result": message_result,
+        "orig_request": resp['_text'], 
+        "topic": topic_full,
+        "freq": freq,
+        "deactivate": "NO",
+        "status": "timer-preset",
+        "recurring": 'recurring',
+        "scheduled": "NO",
+        "str_scheduler": str_scheduler,
+        "created_at": pd.Timestamp.now()
+    }
+    mongo.push_record(new_timed_records, mongo.timed_records)
+
+    print("Did we reach after the pushed records?")
+
     
     return str_scheduler
+
+def send_cancel_receipt(sender_info, result):
+    record = {
+        "from": sender_info['from'],
+        "body": sender_info['body'],
+        "result": [result],
+        "launch_time": "NOW",
+        "send_all_chunks": "ALL_CHUNKS",
+        "current_chunk": 0,
+        "chunk_len": 1,
+        "status": "completed processing"
+    }
+    return mongo.database_new_populated_item(record)
+
+
+def trigger_cancel(sender_info):
+    message_array = []
+    name = mongo.fetch_name_from_db(sender_info)
+    for message in mongo.timed_records.find({"from": sender_info['from']}):
+        message_array.append(message)
+    
+    most_recent = message_array[0]
+    for i in range(0, len(message_array)):
+        if most_recent['created_at'] < message_array[i]['created_at']:
+            most_recent = message_array[i]
+    result = "👌 Sure thing, " + name + '!' + " I've 🛑 your most recently scheduled ⌚ message, '" + str(most_recent['orig_request']).capitalize() + "'. To 🚫 all notifications, text 📲 CANCEL ALL. \n\n--😘,\n✨ Tia ✨"
+    # print(result)
+    db_changes = {
+            "deactivate": "YES",
+            "scheduled": "NO"
+        }
+    mongo.update_record(most_recent, db_changes, mongo.timed_records)
+    send_cancel_receipt(sender_info, result)
+
+
+def trigger_cancel_all(sender_info):
+    name = mongo.fetch_name_from_db(sender_info)
+    for message in mongo.timed_records.find({"from": sender_info['from']}):
+        db_changes = {
+            "deactivate": "YES",
+            "scheduled": "NO"
+        }
+        mongo.update_record(message, db_changes, mongo.timed_records)
+    result ="👌 Sure thing, " + name + "! 🛑 I've cancelled all of your scheduled ⌚ notifications! \n\n--😘,\n✨ Tia ✨"
+    send_cancel_receipt(sender_info, result)
+    # print(result)    
 
 
 def trigger_reminder(resp, sender_info):
@@ -264,11 +318,31 @@ def trigger_reminder(resp, sender_info):
 
     print("\n\nOriginal Command: " + str(resp['_text']))
     # print(sender_info)
-    message_prep = "Your '" + reminder_text + "' reminder ⌚ is set for: " + date_info_arr[1] + ". To cancel reminders at any time, 📲 text CANCEL\n\n--😘,\n✨ Tia ✨"
+    message_prep = "Hey, " + sender_info['name'] + "! Your '" + reminder_text + "' reminder ⌚ is set for: " + date_info_arr[1] + ". To 🚫 reminders at any ⌚, text 📲 CANCEL\n\n--😘,\n✨ Tia ✨"
     # print(message_prep)
     message_final = "📣 Hey, " + sender_info['name'] + "! 📣 Here's your reminder: " + " '" + reminder_text.capitalize() + "'! ⌚\n\n--😘,\n✨ Tia ✨"
     # print(message_final)
+    fresh_message_record = {
+        "sms_id": new_sms_id,
+        "body": message_prep,
+        "name": sender_info['name'],
+        "from": sender_info['from'],
+        "result": [message_final],
+        "home": sender_info['home'],
+        "name": "Timmy",
+        "offset_time_zone": sender_info['offset_time_zone'],
+        "zone_name": sender_info['zone_name'],
+        "send_all_chunks": "ALL_CHUNKS",
+        "current_chunk": 0,
+        "single-timer": "YES",
+        "chunk_len": 1,
+        "launch_time": "NOW",
+        "status": "waiting to be triggered",
+        "created_at": pd.Timestamp.now()
+    }
 
+    mongo.push_record(fresh_message_record, mongo.message_records)
+    time.sleep(1)
     new_timed_records = {
         "from": sender_info['from'],
         "sms_id": new_sms_id,
@@ -280,29 +354,9 @@ def trigger_reminder(resp, sender_info):
         "status": "timer-preset",
         "recurring": 'one-time',
         "scheduled": "NO",
-        "str_scheduler": str_scheduler
+        "str_scheduler": str_scheduler,
+        "created_at": pd.Timestamp.now()
     }
     mongo.push_record(new_timed_records, mongo.timed_records)
 
-    print("Did we reach after the pushed records?")
-
-    fresh_message_record = {
-        "sms_id": new_sms_id,
-        "body": message_prep,
-        "name": sender_info['name'],
-        "from": sender_info['from'],
-        "status": "waiting for trigger",
-        "result": [message_final],
-        "home": sender_info['home'],
-        "name": "Timmy",
-        "offset_time_zone": sender_info['offset_time_zone'],
-        "zone_name": sender_info['zone_name'],
-        "send_all_chunks": "ALL_CHUNKS",
-        "current_chunk": 0,
-        "chunk_len": 1,
-        "launch_time": "NOW",
-        "status": "waiting to be triggered"
-    }
-
-    mongo.push_record(fresh_message_record, mongo.message_records)
     return str_scheduler
