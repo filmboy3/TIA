@@ -25,6 +25,7 @@ def extract_time(date_arr):
 
 
 def convert_local_to_readable(local):
+    print("Inside convert_local_to_readable")
     new_local = extract_time(local)
     hours = new_local[0]
     mins = new_local[1]
@@ -40,6 +41,7 @@ def convert_local_to_readable(local):
       mins = "0" + str(mins)
       
     full_local_time = hour_format + ":" + str(mins) + " " + time_of_day
+    print("Full_local_time: " + str(full_local_time))
     return full_local_time
 
 
@@ -53,16 +55,17 @@ def time_range_average(first, second):
 
 
 def convert_date_from_wit(resp):
+    print("Inside convert_date_from_wit")
     pst_counter = 0
     try:
         date = resp['entities']['datetime'][0]['value']
-        # print("\n1st date attempt: " + str(date))
+        print("\n1st date attempt: " + str(date))
         if "at" not in resp['_text']:
             pst_counter = 1
     except BaseException:
         try:
             date = resp['entities']['datetime'][0]['values'][0]['to']['value']
-            # print("\n2nd date attempt: " + str(date))
+            print("\n2nd date attempt: " + str(date))
             if "at" not in resp['_text']:
                 pst_counter = 1
             try:
@@ -84,21 +87,24 @@ def convert_date_from_wit(resp):
                     date = resp['entities']['wdatetime'][0]['value']
                     if "in" in resp['_text']:
                         pst_counter = 1
-                    # print("\n4th date attempt: " + str(date))
+                    print("\n4th date attempt: " + str(date))
                 except BaseException:
                     return 0
     return (date, pst_counter)
 
 
 def parse_date_for_timed_messages(date_arr, sender_info):
+    current_user = mongo.user_records.find_one({"phone": sender_info['from']})
 
     if (date_arr[1] == 1):
         local_date = parser.parse(date_arr[0]) + timedelta(hours=(sender_info['offset_time_zone']))
     else:
         local_date = parser.parse(date_arr[0])
 
-    # print("LOCAL TIME: " + str(local_date))
+    print("LOCAL TIME: " + str(local_date))
+    time.sleep(2)
     local_readable_time = convert_local_to_readable(local_date)
+    print("LOCAL READABLE: " + str(local_readable_time))
     HOME_ZONE_TO_UTC = {
         '-4': '11',
         '-3': '10',
@@ -125,23 +131,24 @@ def parse_date_for_timed_messages(date_arr, sender_info):
         '18': '-11',
         '19': '-12'
     }
-    utc_offset = HOME_ZONE_TO_UTC[str(sender_info['offset_time_zone'])]
+    utc_offset = HOME_ZONE_TO_UTC[str(current_user['offset_time_zone'])]
     utc_date = local_date + timedelta(hours = int(utc_offset))
-    # print("UTC TIME: " + str(utc_date))
+    print("UTC TIME: " + str(utc_date))
 
     utc_new_time = extract_time(utc_date)
-    # print(utc_new_time)
+    print(utc_new_time)
     return (utc_new_time, local_readable_time)
 
 
 def reminder_date_check(resp, sender_info):
     date_arr = convert_date_from_wit(resp)
     result = parse_date_for_timed_messages(date_arr, sender_info)
-    # print(result)
+    print(result)
     return result
 
 
 def timing_date_check(resp, sender_info):
+    print("Inside timing_date_check")
     result = [0, "."]
     if (convert_date_from_wit(resp) != 0):
         date_arr = convert_date_from_wit(resp)
@@ -170,10 +177,14 @@ def send_timing_receipt(body):
 
 def trigger_recurring(resp, sender_info):
     sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
-    time.sleep(1)
+    time.sleep(2)
+    current_user = mongo.user_records.find_one({"phone": sender_info['from']})
+    time.sleep(2)
     print("Inside trigger_recurring")
+    print(current_user)
     freq = resp['entities']['recur_frequency'][0]['value']
     date_arr = timing_date_check(resp, sender_info)
+    print("Got a date_arr: " + str(date_arr))
 
     freq_dict = {
         'daily': "'cron', " + date_arr[0],
@@ -189,9 +200,11 @@ def trigger_recurring(resp, sender_info):
         topic_full = "News " + topic
     except BaseException:
         try:
-            pre_topic = resp['entities']['intent'][0]['value']
+            pre_topic = str(resp['entities']['intent'][0]['value'])
+            print(pre_topic)
             topic = pre_topic[:-4]
             topic = " " + pre_topic[:-4] + " "
+            print(topic)
             topic_full = topic
         except BaseException:
             topic = ""
@@ -201,25 +214,32 @@ def trigger_recurring(resp, sender_info):
     new_sms_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0, 16)])
     str_scheduler = "scheduler.add_job(mongo.change_db_message_value_by_sms_id, " + freq_dict[freq] + "jitter=15, id='" + new_sms_id + "'," + " kwargs={'sms_id': '" + new_sms_id + "', 'key': 'status', 'value': 'unprocessed'})"
     reminder_text = resp['entities']["recur_frequency"][0]['value']
-    # print("\n\nOriginal Command: " + str(resp['_text']))
+    print("\n\nOriginal Command: " + str(resp['_text']))
     time_text = str(date_arr[1])
     if time_text != ".":
         time_text = " for: " + time_text + "."
-    message_result = "👋 Hey, " + sender_info['name'] + "! Your " + reminder_text + " ⏰ " + topic + "messages are all set" + time_text + " To 🛑 recurring messages at any ⌚, text 📲 CANCEL\n\n--😘,\n✨ Tia ✨"
-    # print(message_result)
+    message_result = "👋 Hey, " + current_user['name'] + "! Your " + reminder_text + " ⏰ " + topic + "messages are all set" + time_text + " To 🛑 recurring messages at any ⌚, text 📲 CANCEL\n\n--😘,\n✨ Tia ✨"
+    print(message_result)
+    print("SMS_id: " + str(new_sms_id))
+    print("body: " + str(topic_full))
+    print("Current User: " + str(current_user))
+    print("Current Sender Info: " + str(sender_info))
+    print("from: " + str(sender_info['from']))
+    print("home: " + str(current_user['home']))
+    print("offset_time_zone: " + str(current_user['offset_time_zone']))
+    print("created_at: " + str(pd.Timestamp.now()))
 
     fresh_message_record = {
         "sms_id": new_sms_id,
         "body": topic_full,
-        "name": sender_info['name'],
+        "name": current_user['name'],
         "from": sender_info['from'],
         "status": "waiting for trigger",
         "result": "tba",
-        "home": sender_info['home'],
-        "name": "Timmy",
-        "offset_time_zone": sender_info['offset_time_zone'],
-        "zone_name": sender_info['zone_name'],
-        "created_at": pd.Timestamp.now()
+        "home": current_user['home'],
+        "offset_time_zone": current_user['offset_time_zone'],
+        "zone_name": current_user['zone_name'],
+        "created_at": str(pd.Timestamp.now())
     }
 
     mongo.push_record(fresh_message_record, mongo.message_records)
@@ -242,7 +262,6 @@ def trigger_recurring(resp, sender_info):
     mongo.push_record(new_timed_records, mongo.timed_records)
 
     print("Did we reach after the pushed records?")
-
     
     return str_scheduler
 
@@ -295,7 +314,9 @@ def trigger_cancel_all(sender_info):
 
 def trigger_reminder(resp, sender_info):
     sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
-    time.sleep(1)
+    time.sleep(2)
+    current_user = mongo.user_records.find_one({"phone": sender_info['from']})
+    time.sleep(2)
     print("Inside trigger_reminder")
     date_info_arr = reminder_date_check(resp, sender_info)
     new_sms_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0, 16)])
@@ -304,7 +325,9 @@ def trigger_reminder(resp, sender_info):
     
     try:
         reminder_text = resp['entities']['reminder'][0]['value']
+        print("Found a reminder_text")
     except BaseException:
+        print("Did not connect with a reminder_text via reminder value")
         try:
             reminder_text = ""
             for i in range(0, len(resp['entities']['phrase_to_translate'])):
@@ -312,26 +335,27 @@ def trigger_reminder(resp, sender_info):
             reminder_text = reminder_text.rstrip()
         except BaseException:
             reminder_text = resp['_text']
+            print("last resort reminder text: " + str(reminder_text))
         reminder_text = reminder_text.title()
         reminder_text = re.sub('Pm', 'PM', reminder_text)
         reminder_text = re.sub('Am', 'AM', reminder_text)
+    print("Here is the ultimate reminder_text: " + str(reminder_text))
 
     print("\n\nOriginal Command: " + str(resp['_text']))
     # print(sender_info)
-    message_prep = "Hey, " + sender_info['name'] + "! Your '" + reminder_text + "' reminder ⌚ is set for: " + date_info_arr[1] + ". To 🚫 reminders at any ⌚, text 📲 CANCEL\n\n--😘,\n✨ Tia ✨"
+    message_prep = "Hey, " + current_user['name'] + "! Your '" + reminder_text + "' reminder ⌚ is set for: " + date_info_arr[1] + ". To 🚫 reminders at any ⌚, text 📲 CANCEL\n\n--😘,\n✨ Tia ✨"
     # print(message_prep)
-    message_final = "📣 Hey, " + sender_info['name'] + "! 📣 Here's your reminder: " + " '" + reminder_text.capitalize() + "'! ⌚\n\n--😘,\n✨ Tia ✨"
+    message_final = "📣 Hey, " + current_user['name'] + "! 📣 Here's your reminder: " + " '" + reminder_text.capitalize() + "'! ⌚\n\n--😘,\n✨ Tia ✨"
     # print(message_final)
     fresh_message_record = {
         "sms_id": new_sms_id,
         "body": message_prep,
-        "name": sender_info['name'],
+        "name": current_user['name'],
         "from": sender_info['from'],
         "result": [message_final],
-        "home": sender_info['home'],
-        "name": "Timmy",
-        "offset_time_zone": sender_info['offset_time_zone'],
-        "zone_name": sender_info['zone_name'],
+        "home": current_user['home'],
+        "offset_time_zone": current_user['offset_time_zone'],
+        "zone_name": current_user['zone_name'],
         "send_all_chunks": "ALL_CHUNKS",
         "current_chunk": 0,
         "single-timer": "YES",

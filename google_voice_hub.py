@@ -20,7 +20,7 @@ def start_google_voice(emailAddress, emailPassword):
         executable_path=chromedriver,
         chrome_options=options)
     print("Browser: " + str(browser))
-    browser.get('https://voice.google.com')
+    browser.get('https://voice.google.com/')
     browser.find_element_by_xpath("""//*[@id="header"]/div[2]/a""").click()
     email = browser.find_element_by_xpath("""//*[@id="identifierId"]""")
     email.click()
@@ -33,6 +33,7 @@ def start_google_voice(emailAddress, emailPassword):
     password.send_keys(emailPassword)
     password.send_keys(Keys.RETURN)
     time.sleep(8)
+    browser.get('https://voice.google.com/u/0/messages')
     return browser
 
 
@@ -48,19 +49,32 @@ def trigger_send_reply(record, browser):
     current_chunk = record['current_chunk']
     current_message = record['result'][current_chunk]
     print("Staged Message: " + str(current_message))
-    try:
-        number = record['from']
-        initiate_gv_send(number, browser, current_message)
-        mongo.change_db_user_value(record, "current_sms_id", record['sms_id'])
-        updated_record = {
-            "current_sms_id": record['sms_id'],
-            "current_chunk": (current_chunk + 1)
-        }
-        mongo.update_record(record, updated_record, mongo.message_records)
-        mongo.change_db_message_value(record, "current_sms_id", record['sms_id'])
-    except:
-        print("Error inside Trigger_send_reply")
-        # This is a trouble spot
+    # try:
+    #     number = record['from']
+    #     initiate_gv_send(number, browser, current_message)
+    #     mongo.change_db_user_value(record, "current_sms_id", record['sms_id'])
+    #     updated_record = {
+    #         "current_sms_id": record['sms_id'],
+    #         "current_chunk": (current_chunk + 1)
+    #     }
+    #     mongo.update_record(record, updated_record, mongo.message_records)
+    #     mongo.change_db_message_value(record, "current_sms_id", record['sms_id'])
+    # except:
+    #     print("Error inside Trigger_send_reply")
+    #     # This is a trouble spot
+    # try:
+    number = record['from']
+    initiate_gv_send(number, browser, current_message)
+    mongo.change_db_user_value(record, "current_sms_id", record['sms_id'])
+    updated_record = {
+        "current_sms_id": record['sms_id'],
+        "current_chunk": (current_chunk + 1)
+    }
+    mongo.update_record(record, updated_record, mongo.message_records)
+    mongo.change_db_message_value(record, "current_sms_id", record['sms_id'])
+    # except:
+    #     print("Error inside Trigger_send_reply")
+    #     # This is a trouble spot
     
     updated_message = mongo.message_records.find_one({"sms_id": record['sms_id']})
     return updated_message
@@ -205,6 +219,8 @@ def setup_message(gv_number, browser):
 
     toForm = browser.find_element_by_xpath(
         """//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-recipient-picker/div/md-content/md-chips/md-chips-wrap/div/div/input""")
+    # toForm = browser.find_element_by_xpath(
+    #      """//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/gv-make-call/div/div/div/div/div/md-input-container""")
     toForm.click()
     toForm.send_keys(gv_number)
     toForm.send_keys(Keys.ARROW_DOWN)

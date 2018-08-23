@@ -165,6 +165,7 @@ def time_reformat(time_string):
 def trigger_yelp(resp, sender_info):
     print("Pre Sender_Info: " + str(sender_info))
     sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    current_user = mongo.user_records.find_one({"phone": sender_info['from']})
     time.sleep(1)
     print("Yelp Triggered")
     print("Sender Info: " + str(sender_info))
@@ -174,12 +175,12 @@ def trigger_yelp(resp, sender_info):
     except BaseException:
         try:
             location = resp['entities']['wit_home'][0]['value']
-            location = sender_info['home']
+            location = current_user['home']
         except BaseException:
             try:
                 location = location = resp['entities']['wikipedia_search_query'][0]['value']
             except BaseException:
-                location = sender_info['home']
+                location = current_user['home']
     try:
         category = resp['entities']['wit_yelp_category'][0]['value']
     except BaseException:
