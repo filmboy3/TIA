@@ -1,34 +1,36 @@
 # Meet Tia 
 
-TIA, aka <b><u>S</u></b>MS <b><u>I</u></b>nternet <b><u>A</u></b>ssistant, is a suite of tools to access the internet <i>without</i> the internet. Tia communicates to users through text messages. 
+TIA -- <b><u>T</u></b>exting <b><u>I</u></b>nternet <b><u>A</u></b>ssistant -- an extensive NLP-powered AI assistant which performs vital internet tasks <i>without</i> accessing any internet. Tia communicates entirely via SMS-text messaging, ideal for cellphone users who are unable to access LTE in a location or simply want to avoid cell provider data caps/throttles. 
+ 
+TIA utilizes Natural-Language-Processing machine learning via Facebook's open source <a href="wit.ai"><i>Wit.AI</i></a>, and personalizes each user's experience based on their prior history, saved in MongoDB.    
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_4.jpg" width="25%" height="25%">
 
 ## What Can Tia Do?
 
-1. Driving | Walking | Pedestrian Directions 
+1. Driving | Walking | Public Transit Directions 
 2. Current Weather | 5-Day-Forecast
 3. Information Summaries (Wolfram-Alpha and Wikipedia)
 4. Article Summaries from 75+ News Sources
 5. Jeopardy Trivia Questions
 6. Yelp Searches
-7. Translation Services
+7. Language Translation Services
 8. Late-Night Jokes
-9. Scheduled Reminders
-10. Forward | Delete | Mark-As-Read new emails (OWNER-ONLY, see gmailfeatures.py)
+9. Scheduled Reminders (One-Time and Recurring)
+10. Forward | Delete | Mark-As-Read new emails <b>*</b>
 
 ### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ (too many changes to run the server consistently at this point, so please hold off on the demo for now!)
 
-I'm currently in the midst of a <i>separation-of-concerns</i> overhaul, where I'm dividing the app into the following separately continuously running servers communicating over the following <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queue progression: 
+The app is divided into the following parallel servers communicating over the following <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queues: 
 
-1. Worker -- worker_gmail.py -- sends new user messages to gmail queue from GMAIL API
-2. Listener -- listener_gmail.py -- receives gmail queue items, logs into (Mongo) database
-3. Worker -- worker_preprocess.py -- sends new database messages to preprocessing queue
-4. Listener -- listener_preprocess.py -- receives messages from preprocessing queue, performs processing, and updates message data on database
-5. Worker -- worker_voice.py -- sends processed messages from database to google voice queue
-6. Listener -- listener_voice.py -- receives messages from google voice queue, performs voice processing, and sends reply to user. 
-7. Worker -- worker_timer.py -- sends future messages, i.e., recurring and one-off reminders, from database to timer queue.
-8. Listener -- listener_timer.py -- receives messages from timer queue and also doubles as the  scheduling server, which uses a Background instance of the <a href="https://apscheduler.readthedocs.io/en/latest/index.html">APScheduler</a> library. 
+1. Worker -- worker_gmail.py -- sends new user messages to <i>gmail queue</i> from GMAIL API
+2. Listener -- listener_gmail.py -- receives <i>gmail queue</i> items, logs into (Mongo) database
+3. Worker -- worker_preprocess.py -- sends new database messages to <i>preprocessing queue</i>
+4. Listener -- listener_preprocess.py -- receives messages from <i>preprocessing queue</i>, performs processing, and updates message data on database
+5. Worker -- worker_voice.py -- sends processed messages from database to <i>google voice queue</i>
+6. Listener -- listener_voice.py -- receives messages from <i>google voice queue</i>, performs voice processing, and sends reply to user. 
+7. Worker -- worker_timer.py -- sends future messages, i.e., recurring and one-off reminders, from database to <i>timer queue</i>.
+8. Listener -- listener_timer.py -- receives messages from <i>timer queue</i> and also doubles as the  scheduling server, which uses a Background instance of the <a href="https://apscheduler.readthedocs.io/en/latest/index.html">APScheduler</a> library. 
 
 ## How it works
 
@@ -36,15 +38,15 @@ Tia is made up of several python servers communicating via <a href="rabbitmq.com
  
 ## GMAIL API 
 
-TIA has a dedicated google voice number - (347) 352-6247 - which auto-forwards all texts to its own GMAIL account. Once the script starts, TIA continuously loops every 10 seconds `time.sleep(10)`:
+TIA has a dedicated google voice number - (347) 352-6247 - which auto-forwards all texts to its own GMAIL account. 
 
-1. A GET request is made to the Gmail API's inbox to check if anything new has been added to the list of messages currently marked <i>UNREAD</i>.  If there's nothing new in the 'unread' list, TIA skips ahead to #5. 
+1. Our first Rabbit queue worker -- worker_gmail.py -- checks if anything new has been added to the list of messages currently marked <i>UNREAD</i>.  If there's nothing new in the 'unread' list, TIA skips ahead to #5. 
 
 2. If there <i>is</i> a new unread item, TIA makes another GET request for that most recent 'UNREAD' message, and parses the body/subject of the email, checking whether it's a forwarded text from the GV number or a regular email.
 
 3. If the text is a GV text, TIA parses the email, extracting the body of the text as well as the sender's number, then marks the e-mail as 'read'. 
 
-4. The new info is added to TIA's <i><a href="https://mlab.com">MongoDB</i></a>, which features two <i>collections</i>, message_records and user_records. If there is a previous user_record with the sender's phone number, saved personal info -- name, home address, how many times they've interacted with TIA -- is transferred to the new message_record. Finally, the message is listed on the MongoDB as 'unsent'. 
+4. The new info is added to TIA's <i><a href="https://mlab.com">MongoDB</i></a>, which features three <i>collections</i>, message_records, user_records, and timed_records (for <i>send later</i> messages). If there is a previous user_record with the sender's phone number, saved personal info -- name, home address, how many times they've interacted with TIA -- is transferred to the new message_record. Finally, the message is listed on the MongoDB as 'unsent'. 
 
 5. TIA checks for any 'unsent' message_records in the MongoDB. If there are, TIA begins to process that message_record. 
 
@@ -53,8 +55,6 @@ TIA has a dedicated google voice number - (347) 352-6247 - which auto-forwards a
 # TIA COMMANDS
 
 ## Check Weather / 5-Day-Forecast
-
-There are two commands for weather services:
 
 Example: "How's the weather in Dubuque?"
 Example: "What's the forecast near me?"
@@ -72,6 +72,8 @@ For both weather-based commands, if left blank, the location defaults to home.
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_13.png" width="25%" height="25%">
 
 ## Yelp
+
+Example: "Find sushi in Brooklyn."
 
 The <a href="https://www.yelp.com/developers">Yelp API</a> is queried, using a specific Yelp category, i.e., 'Pizza' or 'movie theaters'and a location, 'in brooklyn', 'near me', etc.  Once the general query is made, another query is made with more specific business info data (open/closing times, reviews) for the top three results and formatted.  
 
@@ -101,7 +103,7 @@ Example: "What's going on at the New York Times?"
 Example: "Tell me the latest from hacker news"
 Examples: "ABC headlines please"
 
-The <a href="https://newsapi.org/"><i>News Api</i></a> features a plethora of updated news summaries from providers across the globe, 75 of which were hand-picked to use on Tia. 
+The <a href="https://newsapi.org/"><i>News Api</i></a> features a plethora of updated news summaries from providers across the globe, 75 of which were hand-picked for use on Tia. 
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_19.png" width="25%" height="25%">
 
@@ -164,9 +166,11 @@ This author put together a google sheets-based API using topical Late Night Mono
 There are two helper commands which give more information to the user:
 
 Example: "Please help"
-Example: "Which news sources can I choose from again?" (WIP)
+Example: "Which news sources can I choose from again?"
 
 These commands do not utilize any APIs, and are hard-coded text messages to remind the user of TIA's commands and which news sources are available. 
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_18.png" width="25%" height="25%">
+
+<sup>*</sup>Self-hosted option only, see <i>gmailfeatures.py</i>
 
