@@ -90,7 +90,8 @@ def nlp_extraction(resp, sender_info):
             "yelp_get": "yelp.trigger_yelp",
             "weather_get": "weather.trigger_weather",
             "forecast_get": "weather.trigger_forecast",
-            "reminder_get": "reminder.trigger_reminder"
+            "reminder_get": "reminder.trigger_reminder",
+            "wiki_get": "know.trigger_wiki"
          }
         func_name = INTENT_DICT[intent_result] + "(resp, sender_info)" 
     except BaseException:

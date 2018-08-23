@@ -63,7 +63,22 @@ def update_sms_record(sms_id, updates, collection):
 
 
 def add_new_item_to_db(sender_info, key, value):
-    current_user = user_records.find_one({"phone": sender_info['from']})
+    try:
+        current_user = user_records.find_one({"phone": sender_info['from']})
+    except:
+        new_user_info = {
+                "phone": sender_info['from'],
+                "name": "NO NAME",
+                "home": "NO ADDRESS GIVEN",
+                "count": 0,
+                "current_sms_id": "INTRO"
+            }
+        push_record(new_user_info, user_records)
+        time.sleep(2)
+        current_user = user_records.find_one({"phone": sender_info['from']})
+        time.sleep(2)
+
+    time.sleep(2)
     updated_gateway = {
         key: value
     }
@@ -84,6 +99,19 @@ def add_timed_message_to_db(number, sms_id, message, freq, recurring="YES"):
         "scheduled": "NO"
     }
     push_record(new_timed_info, timed_records)
+
+def fresh_user_data(phone):
+    print("Yes, this is a true first-time user")
+    new_user_info = {
+            "phone": phone,
+            "name": "NO NAME",
+            "home": "NO ADDRESS GIVEN",
+            "count": 0,
+            "current_sms_id": "INTRO"
+        }
+    push_record(new_user_info, user_records)
+    print("Recorded new user into user db")
+    return new_user_info
 
 
 def update_user_data_for_message(sender_info):
@@ -109,22 +137,36 @@ def update_user_data_for_message(sender_info):
             update_record(existing_user, incremented_user_count, user_records)
             sender_info = message_records.find_one({"sms_id": sender_info['sms_id']})
             # print("New Sender Info: " + str(sender_info))
-            try:
-                msg_gen.add_time_zone_data(existing_user['home'], sender_info)
-            except:
-                print("No address")
+            missing_geo_data_counter = 0
             try:
                 offset = existing_user['offset_time_zone']
             except:
                 offset = "unknown offset"
+                missing_geo_data_counter = 1
             try:
                 zone = existing_user['zone_name']
             except:
                 zone = "unknown zone"
+                missing_geo_data_counter = 1
+            try:
+                home_lat_long = existing_user['home_lat_long']
+            except:
+                zone = "unknown home lat long"
+                missing_geo_data_counter = 1
+            try:
+                home_zip = existing_user['home_zip']
+            except:
+                home_zip = "uknown home zip"
+                missing_geo_data_counter = 1
             try:
                 local_time = msg_gen.update_local_time(existing_user['zone_name'])
             except:
                 local_time = "unknown local time"
+                missing_geo_data_counter = 1
+            try:
+                home = existing_user['home']
+            except:
+                home = "NO ADDRESS"
             # "This is a transfer of existing user data back to the message"
             shared_user_data = {
                 "home": existing_user['home'],
@@ -132,24 +174,19 @@ def update_user_data_for_message(sender_info):
                 "name": existing_user['name'],
                 "offset_time_zone": offset,
                 "zone_name": zone,
-                "local_current_time": local_time
+                "local_current_time": local_time,
+                "home_zip": home_zip
             }
             update_record(sender_info, shared_user_data, message_records)
+
+            if missing_geo_data_counter > 0:
+                msg_gen.add_geo_data_to_db(existing_user['home'], sender_info)
+
             return shared_user_data
 
 
 def update_user_data():
     for sender_info in message_records.find({"status": "unprocessed"}):
-        if user_records.find_one({"phone": sender_info['from']}) is None:
-            print("Yes, this is a first-time user")
-            new_user_info = {
-                "phone": sender_info['from'],
-                "name": "NO NAME",
-                "home": "NO ADDRESS GIVEN",
-                "count": 0
-            }
-            push_record(new_user_info, user_records)
-        else:
             print("\nUpdating existing record ...")
             existing_user = user_records.find_one(
                 {"phone": sender_info['from']})
@@ -304,6 +341,8 @@ def process_message(sender_info):
         msg_gen.process_first_message(sender_info)
     elif current_user['count'] < 2:
         msg_gen.process_name_prompt(sender_info)
+    elif current_user['count'] < 3:
+        msg_gen.new_home_request(sender_info['body'], sender_info)
     # Otherwise, it processes the users' messages
     else:
         core_commands_check(sender_info['body'], sender_info)
@@ -333,7 +372,7 @@ def database_new_item(phone, message):
         "sms_id": ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0, 16)]),
         "body": scrub_html_from_message(message),
         "from": phone,
-        "status": "unprocessed",
+        "status": "created",
         "result": "tba",
     }
     push_record(record, message_records)

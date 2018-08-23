@@ -19,7 +19,7 @@ import api_keys as SHEETS
 # INFORMATION FUNCTIONS #######
 
 
-def wikipedia_request(command_body, sender_info):
+def wikipedia_request(command_body):
     return wiki_split(wikipedia.summary(command_body))
 
 
@@ -75,8 +75,7 @@ def trigger_wiki(resp, sender_info):
     print("Wit.AI Wikisearch term: " + wikiSearch)
     msg_gen.store_reply_in_mongo(
                                        wikipedia_request(
-                                           wikiSearch,
-                                           sender_info),
+                                           wikiSearch),
                                        sender_info,
                                        "🔎 Wikipedia 🔎")
 

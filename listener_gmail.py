@@ -14,9 +14,13 @@ def callback(ch, method, properties, body):
     body = body.decode("utf-8")
     result = literal_eval(body)
     print("\n[x] Received message from GMAIL QUEUE: '" + str(result[1]) + "' from '" + str(result[0]) + "'")
-    record = mongo.database_new_item(result[0], result[1])
-    mongo.update_user_data_for_message(record)
+    try:
+        record = mongo.database_new_item(result[0], result[1])
+        mongo.update_user_data_for_message(record)
+    except:
+        record = mongo.fresh_user_data(result[0])
     print("[x] Done")
+    mongo.change_db_message_value(record, "status", "unprocessed")
     ch.basic_ack(delivery_tag = method.delivery_tag)
 
 channel.basic_qos(prefetch_count=1)

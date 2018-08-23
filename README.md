@@ -1,8 +1,10 @@
 # Meet Tia 
 
-TIA -- <b><u>T</u></b>exting <b><u>I</u></b>nternet <b><u>A</u></b>ssistant -- an extensive NLP-powered AI assistant which performs vital internet tasks <i>without</i> accessing any internet. Tia communicates entirely via SMS-text messaging, ideal for cellphone users who are unable to access LTE in a location or simply want to avoid cell provider data caps/throttles. 
+TIA -- <b><u>T</u></b>exting <b><u>I</u></b>nternet <b><u>A</u></b>ssistant -- is a nimble, NLP-powered AI assistant which performs internet tasks for users <i>without</i> internet access. Tia communicates entirely over SMS, ideal for <i>off-the-grid</i> situations or those concerned about cell-provider data limits. 
  
-TIA utilizes Natural-Language-Processing machine learning via Facebook's open source <a href="wit.ai"><i>Wit.AI</i></a>, and personalizes each user's experience based on their prior history, saved in MongoDB.    
+TIA utilizes machine learning NLP via Facebook's open source <a href="wit.ai"><i>Wit.AI</i></a>, and personalizes each user experience based on their previous search history (in <a href="https://mlab.com/"><i>MongoDB</i></a>).    
+
+### For full demo, text 'Hi' to 📲 <a href="sms:347-352-6247">347-352-6247</a> 📲
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_4.jpg" width="25%" height="25%">
 
@@ -11,15 +13,13 @@ TIA utilizes Natural-Language-Processing machine learning via Facebook's open so
 1. Driving | Walking | Public Transit Directions 
 2. Current Weather | 5-Day-Forecast
 3. Information Summaries (Wolfram-Alpha and Wikipedia)
-4. Article Summaries from 75+ News Sources
+4. Top Headlines from 75+ News Sources
 5. Jeopardy Trivia Questions
-6. Yelp Searches
-7. Language Translation Services
+6. Yelp Reviews
+7. Language Translation
 8. Late-Night Jokes
 9. Scheduled Reminders (One-Time and Recurring)
-10. Forward | Delete | Mark-As-Read new emails <b>*</b>
-
-### ~~Feel free to try Tia out by texting 📲 347-352-6247 📲~~ (too many changes to run the server consistently at this point, so please hold off on the demo for now!)
+10. Email Alerts<b>*</b>
 
 The app is divided into the following parallel servers communicating over the following <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queues: 
 
@@ -172,5 +172,5 @@ These commands do not utilize any APIs, and are hard-coded text messages to remi
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_18.png" width="25%" height="25%">
 
-<sup>*</sup>Self-hosted option only, see <i>gmailfeatures.py</i>
+<sup>*</sup> New <i>gmail</i> e-mails are automatically forwarded from TIA to the user, and can be deleted/marked-as-read on request. However, this features is not currently available via the primary TIA number, and must be self-hosted -- see <i>gmailfeatures.py</i> file.
 

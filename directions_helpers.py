@@ -182,7 +182,8 @@ def get_two_lat_long(subject_label, sender_info):
             return "😟 Sorry, but I don't have your 🏠 address on file ... "
         print("Yes, this is home...")
         subject_label[0] = home
-        lat_long_origin.append(lat_long_single_location(subject_label[0]))
+        # lat_long_origin.append(lat_long_single_location(subject_label[0]))
+        lat_long_origin.append(sender_info['home_lat_long'])
         print("lat_long_origin.append 1: " + str(lat_long_origin))
     else:
         lat_long_origin.append(lat_long_single_location(subject_label[0]))
@@ -193,7 +194,8 @@ def get_two_lat_long(subject_label, sender_info):
             return "😟 Sorry, but I don't have your 🏠 address on file ... "
         print("Yes this is a destination home")
         subject_label[1] == home
-        lat_long_origin.append(lat_long_single_location(subject_label[1]))
+        # lat_long_origin.append(lat_long_single_location(subject_label[1]))
+        lat_long_origin.append(lat_long_single_location(sender_info['home_lat_long']))
         print("lat_long_origin.append 3: " + str(lat_long_origin))
     else:
         lat_long_origin.append(lat_long_single_location(subject_label[1]))

@@ -90,26 +90,26 @@ def trigger_help(sender_info):
 
     message = "\nHey, " + name + "! Here's a 🗒️ " \
     "of tasks I can 📲: \n\n🚇 Directions 🚇\n by 🚗, 🚉, " \
-    "or 🚶\n\n📲 I want to drive from home to '221 79th Street, " \
+    "or 🚶\n\nI want to drive from home to '221 79th Street, " \
     "Bay Ridge, Brooklyn' 📲 Let's walk from '403 Main Street, Oakland, " \
     "California', to '1807 Thompson Ave, Oakland, CA 94612'\n\n☀️ Weather ☀️ " \
-    "\n📲 What's it like outside in Houston? " \
-    "📲 What's the forecast near me? \n\n⏲️ Reminders ⏲️\n 📲 " \
+    "\nWhat's it like outside in Houston? " \
+    "📲 What's the forecast near me? \n\n⏲️ Reminders ⏲️\n" \
     "Remind me to pick up my sister in an hour\n\n🇺🇸 " \
-    "Translation 🇺🇸\n 📲 How would an Italian say, 'I don't like pasta'?" \
-    "\n\n🍲 Yelp 🍲\n 📲 Please find me some asian fusion " \
-    "near my house\n\n🔎 Wikipedia 🔎\n📲 : I want a bio of Barack Obama" \
+    "Translation 🇺🇸\nHow would an Italian say, 'I don't like pasta'?" \
+    "\n\n🍲 Yelp 🍲\nPlease find me some asian fusion " \
+    "near my house\n\n🔎 Wikipedia 🔎\nI want a bio of Barack Obama" \
     "\n\n💡 Jeopardy Trivia 💡 \n📲 Let's play jeopardy" \
-    "\n\nLate Night 🌃 Jokes\n🤣(most recent, random, or specific date 2009-Present)🤣" \
-    "\n📲 What are the latest jokes? " \
-    "'\n\n🔭 Knowledge Q&A 🔭\n📲 How many baseballs " \
-    "fit into a boeing 747? 📲 How many calories in a sweet potato? 📲 " \
-    "Where can I find the North Star?\n\n📰 News Briefs 📰 Get NY 🗽 Times, Hacker 💻 News, " \
+    "\n\n🤣 Late Night Jokes 🤣\n" \
+    "What are the latest jokes? " \
+    "\n\n🔭 Knowledge Q&A 🔭\nHow many baseballs " \
+    "fit into a boeing 747?\n📲 How many calories in a sweet potato?\n📲 " \
+    "Where can I find the North Star?\n\n📰 News Briefs 📰\nGet NY 🗽 Times, Hacker 💻 News, " \
     "and 75 other headlines from around the 🌏, including abc, cnn, espn, bloomberg, " \
-    "techcrunch, etc. \n📲 What's happening at buzzfeed? 📲 " \
-    "What are the headlines from wired?\n(For a full list of sources, text NEWS)\n\nI can also send" \
-    "your ✨ faves ✨ on a regular basis ⏲️ hourly, daily, or weekly.\n\n📲" \
-    "📲 I want daily new york times 📲 Give me Jeopardy every hour" \
+    "techcrunch, etc.\n\n📲 What's happening at buzzfeed? 📲 " \
+    "What are the headlines from wired?\n\n(For a full list of 🌏 sources, text NEWS)\n\nI can also send" \
+    " your ✨ faves ✨ on a regular basis ⏲️ hourly, daily, or weekly!\n\n" \
+    "📲 I want daily new york times at 9 AM\n📲 Give me Jeopardy questions every hour" \
     "\n\nNow 🙏 give me a task!"
 
     store_reply_in_mongo_no_header(message, sender_info)
@@ -147,25 +147,28 @@ def convert_wit_zone_to_home(home_zone):
   return int(result)
 
 
-def add_time_zone_data(command, sender_info):
+def add_geo_data_to_db(command, sender_info):
     home_lat_long = geo.lat_long_single_location(command)
     print("home_lat_long: " + str(home_lat_long))
     time_zone_list = convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1]))
     zone_name = time_zone_list[0]
     local_current_time = time_zone_list[1]
+    home_zip = get_zip(sender_info['home'])
 
     time_zone_change = convert_wit_zone_to_home(zone_name)
     print("time_zone_change: " + str(time_zone_change))
-    # Comment Out the Following Line when Unit Testing
 
     message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
     db_changes = {
-        "offset_time_zone", time_zone_change,
-        "local_current_time", local_current_time,
-        "zone_name", zone_name
+        "offset_time_zone": time_zone_change,
+        "local_current_time": local_current_time,
+        "zone_name": zone_name,
+        "home_lat_long": home_lat_long,
+        "home_zip": home_zip
     }
     mongo.update_record(message_copy, db_changes, mongo.message_records)
-
+    user_data = mongo.user_records.find_one({'phone': sender_info['from']})
+    mongo.update_record(user_data, db_changes, mongo.user_records)
     return time_zone_change
 
 
@@ -178,11 +181,11 @@ def new_home_request(command, sender_info):
         command = re.sub("new home", "", command)
         command = extract_quoted_text(command)
         print(command)
-        add_time_zone_data(command, sender_info)
+        add_geo_data_to_db(command, sender_info)
         sender_info = mongo.add_new_item_to_db(sender_info, "home", command)
         message = "\nThere's no place like 🏠, "
     message = message + str(sender_info['name']) + "!\n\nText me NEW HOME" \
-             " followed by your address to change 🏠 at any time\n\n🙋 Wanna see what I can do? 📲 Text INFO"
+             " followed by your address to change 🏠 at any time.\n\n🙋 Wanna see what I can do? 📲 Text INFO"
 
     store_reply_in_mongo_no_header(message, sender_info)
     # gv.send_new_message(sender_info['from'], message, sender_info)

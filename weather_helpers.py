@@ -85,10 +85,10 @@ def weather_request(subject_label, sender_info):
         if str(home) == "NO ADDRESS GIVEN":
             return "😟 Sorry, but I don't have your 🏠 address on file ... " \
                    "please text 📲 me something like: My home address is 'address'"
-        zip = get_zip(home)
+        # zip = get_zip(home)
         # zip = str(zip[len(zip) - 1])
         url = "http://api.openweathermap.org/data/2.5/weather?appid=" + \
-            str(SHEETS.OPEN_WEATHER_API) + "&zip=" + zip
+            str(SHEETS.OPEN_WEATHER_API) + "&zip=" + sender_info['home_zip']
         print("Home with URL and zip: " + str(url))
         subject_label = "🏠"
     else:
@@ -177,10 +177,10 @@ def forecast_request(subject_label, sender_info):
         if str(home) == "NO ADDRESS GIVEN":
             return "😟 Sorry, but I don't have your 🏠 address on file ... " \
                    "please text 📲 me something like: My home address is 'address'"
-        zip = get_zip(home)
+        # zip = get_zip(home)
         # zip = str(zip[len(zip) - 1])
         url = "http://api.openweathermap.org/data/2.5/forecast?appid=" + \
-            str(SHEETS.OPEN_WEATHER_API) + "&zip=" + zip
+            str(SHEETS.OPEN_WEATHER_API) + "&zip=" + sender_info['home_zip']
         subject_label = "home"
     # Or input zipcode
     else:

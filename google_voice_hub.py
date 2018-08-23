@@ -26,7 +26,7 @@ def start_google_voice(emailAddress, emailPassword):
     email.click()
     email.send_keys(emailAddress)
     email.send_keys(Keys.RETURN)
-    time.sleep(1)
+    time.sleep(3)
 
     password = browser.find_element_by_xpath(
         """//*[@id="password"]/div[1]/div/div[1]/input""")
@@ -43,6 +43,7 @@ def initiate_gv_send(number, browser, message):
     enter_message(interface_prep, message, browser)
     time.sleep(2)
     delete_previous_conversation(browser)
+    browser.get('https://voice.google.com/u/0/messages')
 
 
 def trigger_send_reply(record, browser):
@@ -217,8 +218,10 @@ def setup_message(gv_number, browser):
     initiate_Message.click()
     time.sleep(1)
 
+    # toForm = browser.find_element_by_xpath(
+    #     """//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-recipient-picker/div/md-content/md-chips/md-chips-wrap/div/div/input""")
     toForm = browser.find_element_by_xpath(
-        """//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/div/div[1]/gv-recipient-picker/div/md-content/md-chips/md-chips-wrap/div/div/input""")
+        """//*[@id="_md-chips-wrapper-3"]/div/div/input""")
     # toForm = browser.find_element_by_xpath(
     #      """//*[@id="messaging-view"]/div/div/md-content/gv-thread-details/gv-make-call/div/div/div/div/div/md-input-container""")
     toForm.click()
