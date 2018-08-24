@@ -136,7 +136,7 @@ def update_user_data_for_message(sender_info):
             }
             update_record(existing_user, incremented_user_count, user_records)
             sender_info = message_records.find_one({"sms_id": sender_info['sms_id']})
-            # print("New Sender Info: " + str(sender_info))
+            print("New Sender Info: " + str(sender_info))
             missing_geo_data_counter = 0
             try:
                 offset = existing_user['offset_time_zone']
@@ -151,17 +151,17 @@ def update_user_data_for_message(sender_info):
             try:
                 home_lat_long = existing_user['home_lat_long']
             except:
-                zone = "unknown home lat long"
+                home_lat_long = "unknown home lat long"
                 missing_geo_data_counter = 1
             try:
                 home_zip = existing_user['home_zip']
             except:
-                home_zip = "uknown home zip"
+                home_zip = "unknown home zip"
                 missing_geo_data_counter = 1
             try:
                 local_time = msg_gen.update_local_time(existing_user['zone_name'])
             except:
-                local_time = "unknown local time"
+                local_time = "unknown home_lat_long"
                 missing_geo_data_counter = 1
             try:
                 home = existing_user['home']
@@ -175,11 +175,12 @@ def update_user_data_for_message(sender_info):
                 "offset_time_zone": offset,
                 "zone_name": zone,
                 "local_current_time": local_time,
-                "home_zip": home_zip
+                "home_zip": home_zip,
+                "home_lat_long": home_lat_long
             }
             update_record(sender_info, shared_user_data, message_records)
 
-            if missing_geo_data_counter > 0:
+            if missing_geo_data_counter > 0 and existing_user['count'] > 2:
                 msg_gen.add_geo_data_to_db(existing_user['home'], sender_info)
 
             return shared_user_data
@@ -209,6 +210,10 @@ def update_user_data():
                 local_time = msg_gen.update_local_time(existing_user['zone_name'])
             except:
                 local_time = "unknown local time"
+            try:
+                home_lat_long = existing_user['home_lat_long']
+            except:
+                home_lat_long = "unknown home_lat_long"
             "This is a transfer of existing user data back to the message"
             shared_user_data = {
                 "home": existing_user['home'],
@@ -216,7 +221,8 @@ def update_user_data():
                 "name": existing_user['name'],
                 "offset_time_zone": offset,
                 "zone_name": zone,
-                "local_current_time": local_time
+                "local_current_time": local_time,
+                "home_lat_long": home_lat_long
             }
             update_record(sender_info, shared_user_data, message_records)
 

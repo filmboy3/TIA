@@ -20,6 +20,7 @@ import api_keys as SHEETS
 
 def late_night_request(response):
     url = SHEETS.JOKES_URL
+    print(url)
     json_data = requests.get(url).json()
     json_data = json_data['feed']['entry']
     if response == "latest":
@@ -69,7 +70,7 @@ def late_night_request(response):
 
 def trigger_jokes(resp, sender_info):
     print("Jokes Triggered")
-    # print(resp)
+    print(resp)
     jokes_date = "latest"
     try:
         jokes_date = resp['entities']['wdatetime'][0]['values'][0]['from']['value']

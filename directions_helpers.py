@@ -51,6 +51,7 @@ def lat_long_single_location(location_str):
     url = url + location_str
     json_data = requests.get(url).json()
     lat_long = []
+    print("JSON_DATA: " + str(json_data))
     lat_long.append(json_data['Response']['View'][0]['Result'][0]['Location']['DisplayPosition']['Latitude'])
     lat_long.append(json_data['Response']['View'][0]['Result'][0]['Location']['DisplayPosition']['Longitude'])
     return lat_long

@@ -16,6 +16,7 @@ import api_keys as SHEETS
 import directions_helpers as geo
 import wit_helpers as wit
 from dateutil import parser
+import weather_helpers as weather
 import requests
 
 
@@ -56,7 +57,7 @@ def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="SINGLE_CHU
         " 📲 me another request, " + str(
             message_copy['name']) + ", or text HELP"
     result = str(topic) + " for " + str(
-        message_copy['name']) + "!\n" + result + tia_sign_off
+        message_copy['name']) + "!\n\n" + result + tia_sign_off
 
     result = gv.sizing_sms_chunks(result, send_all_chunks)
     chunk_len = result[0]
@@ -148,12 +149,22 @@ def convert_wit_zone_to_home(home_zone):
 
 
 def add_geo_data_to_db(command, sender_info):
+    try:
+        home_str = sender_info['home']
+        if home_str == "NO ADDRESS GIVEN":
+            home_str = sender_info['body']
+    except:
+        home_str = sender_info['body']
+    
+    print("Home_str: " + str(home_str))
+    
     home_lat_long = geo.lat_long_single_location(command)
     print("home_lat_long: " + str(home_lat_long))
     time_zone_list = convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1]))
     zone_name = time_zone_list[0]
     local_current_time = time_zone_list[1]
-    home_zip = get_zip(sender_info['home'])
+
+    home_zip = weather.get_zip(home_str)
 
     time_zone_change = convert_wit_zone_to_home(zone_name)
     print("time_zone_change: " + str(time_zone_change))

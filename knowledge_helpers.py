@@ -47,7 +47,7 @@ def wolfram_request(input):
         SHEETS.WOLFRAM_API + "&input=" + input + "&output=json"
     print(url)
     json_data = requests.get(url).json()
-    result = "Question: '" + str(original_input) + "'\n\n📚 Answer: " + str(
+    result = "Question: '" + str(original_input).capitalize() + "'\n\n📚 Answer: " + str(
         json_data['queryresult']['pods'][1]['subpods'][0]['plaintext'])
     return result
     
