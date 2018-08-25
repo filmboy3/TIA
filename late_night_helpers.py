@@ -13,60 +13,67 @@ import datetime
 import requests
 from dateutil import parser
 from faker import Faker
-
+from datetime import datetime
+import re
+import time
 import general_message_helpers as msg_gen
 import api_keys as SHEETS
+import pytz
+from datetime import datetime, timedelta
+from datetime import *
+
+
+def random_joke():
+    import mongo_helpers as mongo
+    joke_raw = mongo.jokes_records.aggregate(
+        [ { "$sample": {'size': 1} } ] 
+    )
+    joke_full = list(joke_raw)
+    return joke_full[0]
+
+def record_jokes_in_db(date, joke):
+    import mongo_helpers as mongo
+    new_joke = {
+        "date": date,
+        "joke": joke
+    }
+    if mongo.jokes_records.find_one({"date": date}) is None:
+       mongo.push_record(new_joke, mongo.jokes_records)
+       print("Pushed new joke")
+    else:
+        old_data = mongo.jokes_records.find_one({"date": date})
+        print("Old joke: old_data")
 
 
 def late_night_request(response):
-    url = SHEETS.JOKES_URL
-    print(url)
-    json_data = requests.get(url).json()
-    json_data = json_data['feed']['entry']
-    if response == "latest":
-        query_date = str(datetime.datetime.now())
-        query_date = str(query_date.split(" ")[0]) + " 00:00:00"
-        query_date = parser.parse(query_date)
-    elif response == "random":
-        fake = Faker()
-        start_date = datetime.date(2009, 12, 3)
-        query_date = fake.date_between(start_date=start_date, end_date='today')
-        query_date = parser.parse(str(query_date))
-        print("Random Query Date: " + str(query_date))
+    import mongo_helpers as mongo
+    joke_text = ""
+
+    if response == "random":
+        return random_joke()
     else:
-        query_date = parser.parse(response)
-        print(query_date)
+        if response == "latest":
+            today = str(date.today())
+            query_date = parser.parse(today)
+        else:
+            query_date = parser.parse(response)
 
-    date_counter = 50
-    total_jokes = ""
+        date_new_low = 50
+        temp_message = ""
 
-    for i in range(0, len(json_data)):
-        date = json_data[i]['gsx$date']['$t']
-        current_date = parser.parse(date)
+        for message in mongo.jokes_records.find():
+            date_check = parser.parse(message['date'])
+            date_diff = query_date - date_check
+            if date_diff.days == 0:
+                joke_text = message['joke']
+                return joke_text
+            elif abs(date_diff.days) < date_new_low:
+                temp_message = message['joke']
+                date_new_low = date_diff.days
 
-        distance = abs(int(str(query_date - current_date).split(" ")[0]))
+        return temp_message
 
-        if distance > 1:
-            if distance < date_counter:
-                date_counter = distance
-                jokes = str(json_data[i]['content']['$t'])
-                jokes = re.sub("jokes:.", "😂 ", jokes)
-                jokes = re.sub(", joke\S+.", " 😂\n\n😂 ", jokes)
-                total_jokes = "🌃 " + \
-                    str(date).split(" ")[0] + " 🌃\n\n" + str(jokes) + "\n\n"
-        elif distance == 1:
-            date_counter = distance
-            next_day = json_data[i + 1]['gsx$date']['$t']
-            print("Trigger Elif")
-            jokes = str(json_data[i + 1]['content']['$t'])
-            jokes = re.sub("jokes:.", "😂 ", jokes)
-            jokes = re.sub(", joke\S+.", " 😂\n\n😂 ", jokes)
-            total_jokes = "🌃 " + \
-                str(next_day).split(" ")[0] + "🌃\n\n" + str(jokes) + "\n\n"
-            break
-
-    return total_jokes
-
+    return joke_text
 
 def trigger_jokes(resp, sender_info):
     print("Jokes Triggered")
@@ -89,8 +96,8 @@ def trigger_jokes(resp, sender_info):
         pass
 
     print(jokes_date)
-    msg_gen.store_reply_in_mongo(
+    msg_gen.store_jokes_in_mongo(
                                        late_night_request(jokes_date),
                                        sender_info,
-                                       "🌃 Late Night 🌃")
-
+                                       "🌃 Late Night 🌃"
+                                       )

@@ -17,11 +17,11 @@ import yelp_helpers as yelp
 import news_helpers as news
 import jeopardy_helpers as jep
 import weather_helpers as weather
-import late_night_helpers as jokes
 import translation_helpers as trans
 import general_message_helpers as msg_gen
 import reminder_helpers as reminder
 import mongo_helpers as mongo
+# import late_night_helpers as jokes
 import datetime
 
 

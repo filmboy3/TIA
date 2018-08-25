@@ -25,9 +25,11 @@ import time
 MONGODB_URI = SHEETS.SECRET_MONGO_URI
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
 db = client.get_database("tia")
+print(db)
 message_records = db.message_records
 user_records = db.user_records
 timed_records = db.timed_records
+jokes_records = db.jokes_records
 
 
 def convert_message_from_bytes(message):
@@ -55,11 +57,6 @@ def update_sms_record(sms_id, updates, collection):
     collection.update_one({'sms_id': sms_id}, {
         '$set': updates
     }, upsert=False)
-
-
-# def process_reminders():
-#     for message in message_records.find({"reminder_trigger": "activated"}):
-#         remind.check_reminder(message)
 
 
 def add_new_item_to_db(sender_info, key, value):
