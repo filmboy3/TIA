@@ -74,7 +74,24 @@ def store_reply_in_mongo(result, sender_info, topic, send_all_chunks="SINGLE_CHU
 
     mongo.update_record(message_copy, db_changes, mongo.message_records)
 
-    # print(sender_info)
+def store_jokes_in_mongo(result, sender_info, topic, send_all_chunks="SINGLE_CHUNKS", launch_time="NOW"):
+    message_copy = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
+    # result = eval(result)
+    print("Result type: " + str(type(result)))
+    print("result[1], chunk_result: "  + str(result[1]))
+    print("result[0], chunk_len: "  + str(result[0]))
+    db_changes = {
+        "result": result[1],
+        "status": "completed processing",
+        "launch_time": launch_time,
+        "send_all_chunks": send_all_chunks,
+        "current_chunk": 0,
+        "chunk_len": result[0]
+    }
+
+    mongo.update_record(message_copy, db_changes, mongo.message_records)
+
 
 
 
@@ -153,12 +170,14 @@ def add_geo_data_to_db(command, sender_info):
         home_str = sender_info['home']
         if home_str == "NO ADDRESS GIVEN":
             home_str = sender_info['body']
+            home_str = re.sub("new home", "", home_str.lower())
     except:
         home_str = sender_info['body']
     
     print("Home_str: " + str(home_str))
     
     home_lat_long = geo.lat_long_single_location(command)
+
     print("home_lat_long: " + str(home_lat_long))
     time_zone_list = convert_coords_to_time_zone(str(home_lat_long[0]), str(home_lat_long[1]))
     zone_name = time_zone_list[0]
@@ -306,13 +325,13 @@ def parse_address(address_string):
 def process_name_prompt(sender_info):
     current_user = mongo.user_records.find_one({"phone": sender_info['from']})
     # SECOND MESSAGE, ASKING FOR FIRST NAME
-    if current_user['count'] == 1:
+    if current_user['home'] == "NO ADDRESS GIVEN":
         name = parse_name(sender_info['body'])
         name = name.strip()
         sender_info = mongo.add_new_item_to_db(sender_info, "name", name)
         print("Hi, " + name + "!")
         message = "\nIt's a pleasure to 🤗 meet you, " + name + \
-            "!\n\nIf you'd like me to set up a 🏠 address for quicker 🚗" \
-            " directions and 🌧️ weather, please reply with your full address or NO\n"
+            "!\n\n🙋 One more bit of 🏠 keeping ...  " \
+            "What's your 🏠 address?\n"
         store_reply_in_mongo_no_header(message, sender_info)
 

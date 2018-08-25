@@ -19,7 +19,7 @@ def start_google_voice(emailAddress, emailPassword):
     browser = webdriver.Chrome(
         executable_path=chromedriver,
         chrome_options=options)
-    print("Browser: " + str(browser))
+    # print("Browser: " + str(browser))
     browser.get('https://voice.google.com/')
     browser.find_element_by_xpath("""//*[@id="header"]/div[2]/a""").click()
     email = browser.find_element_by_xpath("""//*[@id="identifierId"]""")

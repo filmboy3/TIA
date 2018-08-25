@@ -25,7 +25,6 @@ import time
 MONGODB_URI = SHEETS.SECRET_MONGO_URI
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
 db = client.get_database("tia")
-print(db)
 message_records = db.message_records
 user_records = db.user_records
 timed_records = db.timed_records
@@ -160,10 +159,7 @@ def update_user_data_for_message(sender_info):
             except:
                 local_time = "unknown home_lat_long"
                 missing_geo_data_counter = 1
-            try:
-                home = existing_user['home']
-            except:
-                home = "NO ADDRESS"
+
             # "This is a transfer of existing user data back to the message"
             shared_user_data = {
                 "home": existing_user['home'],
@@ -177,8 +173,9 @@ def update_user_data_for_message(sender_info):
             }
             update_record(sender_info, shared_user_data, message_records)
 
-            if missing_geo_data_counter > 0 and existing_user['count'] > 2:
-                msg_gen.add_geo_data_to_db(existing_user['home'], sender_info)
+            if missing_geo_data_counter > 0:
+                if (existing_user['count'] > 1 and str(existing_user['home']) != "NO ADDRESS GIVEN"):
+                    msg_gen.add_geo_data_to_db(existing_user['home'], sender_info)
 
             return shared_user_data
 

@@ -20,12 +20,6 @@ print("[*] Checking for new unprocessed messages from MongoDB ... To exit press 
 def transfer_unprocessed_to_wit_queue():
 
     for message in mongo.message_records.find({"status": "unprocessed"}):
-        # message = mongo.convert_message_from_bytes(message)
-        # try:
-        #     message = mongo.add_new_item_to_db(message, "result", "")
-        # except:
-        #     time.sleep(2)
-        #     message = mongo.add_new_item_to_db(message, "result", "")
         connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
         channel = connection.channel()
         channel.queue_declare(queue='pre_processing_queue', durable=True)
@@ -35,15 +29,13 @@ def transfer_unprocessed_to_wit_queue():
                               properties=pika.BasicProperties(
                               delivery_mode = 2, # make message persistent
                               ))
-        mongo.change_db_message_value(message, "status", "currently processing")
         print("\n\n[x] Sent Message To PRE-PROCESSING QUEUE %r" % str(message['body']))
-
 
 def wit_loop():
 
     def inner():
         transfer_unprocessed_to_wit_queue()
-
+        time.sleep(2)
     while True:
         inner()
 

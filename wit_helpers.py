@@ -21,7 +21,6 @@ import translation_helpers as trans
 import general_message_helpers as msg_gen
 import reminder_helpers as reminder
 import mongo_helpers as mongo
-# import late_night_helpers as jokes
 import datetime
 
 
@@ -73,9 +72,10 @@ def use_backup_keywords(resp):
 
 
 def nlp_extraction(resp, sender_info):
+    import late_night_helpers as jokes
     try:
         intent_result = resp['entities']['intent'][0]['value']
-        print("Yes, we've got an intent_result")
+        print("Yes, we've got an intent_result: " + intent_result)
         INTENT_DICT = {
             "new_home_get": "msg_gen.trigger_new_home",
             "translate_get": "trans.trigger_translate",
@@ -98,24 +98,28 @@ def nlp_extraction(resp, sender_info):
         print("Unable to determine intent ... moving on to keyword parsing.")
         func_name = check_keywords(resp, sender_info)
 
-    try:
-        sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
-        time.sleep(1)
-        eval(func_name)
-    except BaseException:
-        print("Final effort ")
-        try:
-            msg_gen.store_reply_in_mongo(
-                                        know.wolfram_request(
-                                            resp['_text']),
-                                        sender_info,
-                                        "🔭 Q & A 🔭")
-        except BaseException:
-            msg_gen.store_reply_in_mongo(
+    # try:
+    #     sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    #     time.sleep(1)
+    #     eval(func_name)
+    # except BaseException:
+    #     print("Final effort ")
+    #     try:
+    #         msg_gen.store_reply_in_mongo(
+    #                                     know.wolfram_request(
+    #                                         resp['_text']),
+    #                                     sender_info,
+    #                                     "🔭 Q & A 🔭")
+    #     except BaseException:
+    #         msg_gen.store_reply_in_mongo(
                 
-                msg_gen.send_error_text("text"),
-                sender_info,
-                "💀 Error 💀")
+    #             msg_gen.send_error_text("text"),
+    #             sender_info,
+    #             "💀 Error 💀")
+    # try:
+        # sender_info = mongo.message_records.find_one({"sms_id": sender_info['sms_id']})
+    time.sleep(1)
+    eval(func_name)
 
     
 def check_keywords(resp, sender_info):

@@ -33,7 +33,6 @@ def transfer_processed_to_voice_queue():
                             ))
         mongo.change_db_message_value(message, "status", "sending in process")
         print("\n\n[x] Sent Message To GOOGLE VOICE QUEUE with sms_id: %r" % message_id)
-        # mongo.change_db_message_value(message, "status", "sending in process")
 
 
 def voice_loop():
