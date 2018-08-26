@@ -3,7 +3,8 @@
 TIA -- <b><u>T</u></b>exting <b><u>I</u></b>nternet <b><u>A</u></b>ssistant -- is a nimble, NLP-powered AI assistant which performs internet tasks for users <i>without</i> internet access. Tia communicates entirely over SMS, ideal for <i>off-the-grid</i> situations or those concerned about cell-provider data limits. 
 
   <a href="https://www.turboimagehost.com/p/39220384/ezgif-5-9bdab9968e.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220384_ezgif-5-9bdab9968e.gif" border="0" alt="Free Image Hosting" /></a>
-  \n<i>Fig.1 - TIA's Welcome Messages.</i>
+  
+  <i>Fig.1 - TIA's Welcome Messages.</i>
 
 
 
@@ -11,7 +12,8 @@ TIA utilizes machine learning NLP via Facebook's open source <a href="wit.ai"><i
 
 
   <a href="https://www.turboimagehost.com/p/39222088/ezgif-5-ff0fb3bb22.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39222088_ezgif-5-ff0fb3bb22.gif" border="0" alt="Free Image Hosting" /></a>
-  \n<i>Fig.1.5 - TIA's Wit.AI Interface</i>
+
+  <i>Fig.1.5 - TIA's Wit.AI Interface</i>
 
 ### For full demo, text 'Hi' to 📲 <a href="sms:347-352-6247">347-352-6247</a> 📲
 
@@ -43,7 +45,8 @@ The app is divided into the following parallel servers communicating over the fo
 
 
     <a href="https://www.turboimagehost.com/p/39220378/ezgif-5-2ed98bbf90.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220378_ezgif-5-2ed98bbf90.gif" border="0" alt="Free Image Hosting" /></a>
-  \n<i>Fig.2 - Selenium Webdriver Controlling Google Voice Server </i>
+
+  <i>Fig.2 - Selenium Webdriver Controlling Google Voice Server </i>
 
 
 
@@ -97,7 +100,8 @@ The <a href="https://www.yelp.com/developers">Yelp API</a> is queried, using a s
 
 
     <a href="https://www.turboimagehost.com/p/39220395/ezgif-5-b0d0f30272.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220395_ezgif-5-b0d0f30272.gif" border="0" alt="Free Image Hosting" /></a>
-  \n<i>Fig.3 - Driving Directions Request </i>
+
+  <i>Fig.3 - Driving Directions Request </i>
 
 
 ## Turn-By-Turn-Directions
@@ -118,7 +122,8 @@ Again, "home" synonyms can be used in either direction to default to the creator
 
 
     <a href="https://www.turboimagehost.com/p/39220385/ezgif-5-82efca872a.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220385_ezgif-5-82efca872a.gif" border="0" alt="Free Image Hosting" /></a>
-  \n<i>Fig.4 - News Headlines Request </i>
+
+  <i>Fig.4 - News Headlines Request </i>
 
 
 
@@ -153,7 +158,8 @@ The translation command utlizes another NLP resource, <a href="https://textblob.
 
 
     <a href="https://www.turboimagehost.com/p/39218805/ezgif-5-11737366e6.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39218805_ezgif-5-11737366e6.gif" border="0" alt="Free Image Hosting" /></a> 
-  \n<i>Fig.5 - Setting One-Time Reminders Request </i>
+
+  <i>Fig.5 - Setting One-Time Reminders Request </i>
 
 
 
@@ -168,7 +174,8 @@ The Scheduled Reminders command utlizes the <a href="https://timezonedb.com>Time
 
 
     <a href="https://www.turboimagehost.com/p/39218873/ezgif-5-fdde4b64c6.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39218873_ezgif-5-fdde4b64c6.gif" border="0" alt="Free Image Hosting" /></a>
-  \n<i>Fig.6 - Jeopardy Category Questions and Answers </i>
+
+  <i>Fig.6 - Jeopardy Category Questions and Answers </i>
 
 
 
