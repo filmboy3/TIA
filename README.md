@@ -32,6 +32,8 @@ The app is divided into the following parallel servers communicating over the fo
 7. Worker -- worker_timer.py -- sends future messages, i.e., recurring and one-off reminders, from database to <i>timer queue</i>.
 8. Listener -- listener_timer.py -- receives messages from <i>timer queue</i> and also doubles as the  scheduling server, which uses a Background instance of the <a href="https://apscheduler.readthedocs.io/en/latest/index.html">APScheduler</a> library. 
 
+<a href="http://www.turboimagehost.com/p/39220398/ezgif-5-fdde4b64c6.gif.html" target="_blank"><img src="http://s7d1.turboimagehost.com/t/39220398_ezgif-5-fdde4b64c6.gif" border="0" alt="Free Image Hosting" /></a>
+
 ## How it works
 
 Tia is made up of several python servers communicating via <a href="rabbitmq.com"><i>RabbitMQ</i></a> task queues as well as dozens of RESTful APIs, beginning with:
@@ -51,6 +53,8 @@ TIA has a dedicated google voice number - (347) 352-6247 - which auto-forwards a
 5. TIA checks for any 'unsent' message_records in the MongoDB. If there are, TIA begins to process that message_record. 
 
 6. TIA queries <i><a href="https://mlab.com">Wit.AI</i></a>, a natural language processing API, which parses the message for various intents and keywords. Once the response is returned from the WIT API, the processing begins:
+
+<a href="https://www.turboimagehost.com/p/39220395/ezgif-5-b0d0f30272.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220395_ezgif-5-b0d0f30272.gif" border="0" alt="Free Image Hosting" /></a>
 
 # TIA COMMANDS
 
@@ -79,6 +83,8 @@ The <a href="https://www.yelp.com/developers">Yelp API</a> is queried, using a s
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_6.jpg" width="25%" height="25%">
 
+<a href="https://www.turboimagehost.com/p/39220385/ezgif-5-82efca872a.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220385_ezgif-5-82efca872a.gif" border="0" alt="Free Image Hosting" /></a>
+
 ## Turn-By-Turn-Directions
 
 There are three types of direction commands:
@@ -94,6 +100,8 @@ Similar to the weather commands, each of the two waypoint locations are used in 
 Again, "home" synonyms can be used in either direction to default to the creator's home location.
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_20.png" width="25%" height="25%">
+
+<a href="https://www.turboimagehost.com/p/39220384/ezgif-5-9bdab9968e.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220384_ezgif-5-9bdab9968e.gif" border="0" alt="Free Image Hosting" /></a>
 
 ## News Sources
 
@@ -123,6 +131,8 @@ Example: "Translate お元気ですか into English"
 The translation command utlizes another NLP resource, <a href="https://textblob.readthedocs.io/en/dev/">TextBlob</a>, an open-source NLP library which in turn uses Google Translate to translate text to and from over 100 different languages. 
 
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_9.jpg" width="25%" height="25%">
+
+<a href="https://www.turboimagehost.com/p/39220378/ezgif-5-2ed98bbf90.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220378_ezgif-5-2ed98bbf90.gif" border="0" alt="Free Image Hosting" /></a>
 
 ## Scheduled Reminders
 
@@ -174,3 +184,4 @@ These commands do not utilize any APIs, and are hard-coded text messages to remi
 
 <sup>*</sup> New <i>gmail</i> e-mails are automatically forwarded from TIA to the user, and can be deleted/marked-as-read on request. However, this features is not currently available via the primary TIA number, and must be self-hosted -- see <i>gmailfeatures.py</i> file.
 
+ <a href="https://www.turboimagehost.com/p/39218805/ezgif-5-11737366e6.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39218805_ezgif-5-11737366e6.gif" border="0" alt="Free Image Hosting" /></a> <a href="https://www.turboimagehost.com/p/39218873/ezgif-5-fdde4b64c6.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39218873_ezgif-5-fdde4b64c6.gif" border="0" alt="Free Image Hosting" /></a>
