@@ -17,7 +17,7 @@ TIA utilizes machine learning NLP via Facebook's open source <a href="wit.ai"><i
 
 ### For full demo, text 'Hi' to 📲 <a href="sms:347-352-6247">347-352-6247</a> 📲
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_4.jpg" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_4.jpg" width="25%" height="25%">
 
 ## What Can Tia Do?
 
@@ -82,13 +82,13 @@ First, the <a href="https://developer.here.com/documentation/geocoder/topics/qui
 
 This second call is sending the zip code information to <i><a href="https://openweathermap.org/API">Open Weather Map</a></i> API.  Once the request has been returned as JSON, weather information is extracted, formatted, and decorated with condition-specific weather emojis. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_17.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_17.png" width="25%" height="25%">
 
 Next, a <b>create request</b> is made in the GMAIL API, to craft a new email, populate it with the formatted (and emoji-fied) results of the weather call. Next, another request is made to the Gmail API to send this email to the cell-email address. This process is the same for each of Tia's non-gmail commands (except <i>Jeopardy</i>, which actually sends two emails).  
 
 For both weather-based commands, if left blank, the location defaults to home.
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_13.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_13.png" width="25%" height="25%">
 
 ## Yelp
 
@@ -96,7 +96,7 @@ Example: "Find sushi in Brooklyn."
 
 The <a href="https://www.yelp.com/developers">Yelp API</a> is queried, using a specific Yelp category, i.e., 'Pizza' or 'movie theaters'and a location, 'in brooklyn', 'near me', etc.  Once the general query is made, another query is made with more specific business info data (open/closing times, reviews) for the top three results and formatted.  
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_6.jpg" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_6.jpg" width="25%" height="25%">
 
 
     <a href="https://www.turboimagehost.com/p/39220395/ezgif-5-b0d0f30272.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220395_ezgif-5-b0d0f30272.gif" border="0" alt="Free Image Hosting" /></a>
@@ -112,13 +112,13 @@ There are three types of direction commands:
 2. "Let's walk from the brooklyn bridge to williamsburg"
 3. "How would I take public transit from faneuil hall marketplace boston to 1575 cambridge street cambridge massachusetts?"
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_11.jpg" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_11.jpg" width="25%" height="25%">
 
 Similar to the weather commands, each of the two waypoint locations are used in a GET request to the <a href="https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html"><i>Geocoder</i> API by Here</a>. Once Latitude/Longitude information is returned, a call is made to the <a href="https://developer.here.com/documentation/routing/topics/what-is.html"><i>Route API</i></a>, also by Here. The GET request URL is altered depending on the transit mode requested (pedestrian, driving, or public transit), but each uses the same route-based API. 
 
 Again, "home" synonyms can be used in either direction to default to the creator's home location.
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_20.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_20.png" width="25%" height="25%">
 
 
     <a href="https://www.turboimagehost.com/p/39220385/ezgif-5-82efca872a.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39220385_ezgif-5-82efca872a.gif" border="0" alt="Free Image Hosting" /></a>
@@ -137,15 +137,15 @@ Examples: "ABC headlines please"
 
 The <a href="https://newsapi.org/"><i>News Api</i></a> features a plethora of updated news summaries from providers across the globe, 75 of which were hand-picked for use on Tia. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_19.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_19.png" width="25%" height="25%">
 
 For this command a GET request is made to the News API for the latest ABC news headlines, which then return up to 10 of the most recent Article Titles along with brief summary, which are numbered, formatted, and emoji-fied for sms-viewing.  
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_15.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_15.png" width="25%" height="25%">
 
 While NY Times and Hacker News headlines are also available through the News API, these two have their own respective APIs, which TIA defaults to when requested, since there is more content available by querying the <a href= "https://developer.nytimes.com/">NY Times API</a> and <a href="https://github.com/HackerNews/API">Hacker News API</a>.  
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_1.jpg" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_1.jpg" width="25%" height="25%">
 
 ## Language Translation
 
@@ -154,7 +154,7 @@ Example: "Translate お元気ですか into English"
 
 The translation command utlizes another NLP resource, <a href="https://textblob.readthedocs.io/en/dev/">TextBlob</a>, an open-source NLP library which in turn uses Google Translate to translate text to and from over 100 different languages. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_9.jpg" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_9.jpg" width="25%" height="25%">
 
 
     <a href="https://www.turboimagehost.com/p/39218805/ezgif-5-11737366e6.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39218805_ezgif-5-11737366e6.gif" border="0" alt="Free Image Hosting" /></a> 
@@ -170,7 +170,7 @@ Example: "don't forget to take out the trash tomorrow"
 
 The Scheduled Reminders command utlizes the <a href="https://timezonedb.com>TimeZoneDB</a> API, which helps convert and get us local time for specific timezones.  Currently, the Scheduled Reminders are currently available only for the users' home time zones. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_21.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_21.png" width="25%" height="25%">
 
 
     <a href="https://www.turboimagehost.com/p/39218873/ezgif-5-fdde4b64c6.gif.html" target="_blank"><img src="https://s7d1.turboimg.net/t1/39218873_ezgif-5-fdde4b64c6.gif" border="0" alt="Free Image Hosting" /></a>
@@ -187,15 +187,15 @@ Example: "How many baseballs could fit inside a boeing 747?"
 
 The wiki search makes a GET request using the simple <a href="https://www.mediawiki.org/wiki/API:Main_page">Wikipedia API</a>, where the response is a substantial summary of the requested wikipedia page.  
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_12.jpg" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_12.jpg" width="25%" height="25%">
 
 More advanced, non-biographical questions use the Wolfram-Alpha algorithmic answer API, which has a wide variety of topics and sources,  including ➗ Mathematics, 🔬 Science & Technology, 🎭 Society & Culture and 🍴 Everyday Life 🏀
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_14.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_14.png" width="25%" height="25%">
 
 The jeopardy call uses a <a href="http://jservice.io/">Jeopardy Trivia API</a> to first get a random question. Using the category ID from that number, a second GET request is made for all the clues ever aired in that category. Tia randomly picks a matched set of five clues for that category, and sends the category questions along with the spoiler answers below it. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_8.jpg" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_8.jpg" width="25%" height="25%">
 
 ## Late Night Jokes
 
@@ -205,7 +205,7 @@ Example: "Give me some random jokes"
 
 This author put together a google sheets-based API using topical Late Night Monologue jokes from <a href="https://www.newsmax.com/jokes/">Newsmax's</a> vast collection from 2009-Present. A call to the API will yield all hosts' jokes (Fallon, Kimmel, Colbert, etc.) combined for a specific night. This request defaults to the most recent airdate, but users can select a specific date or request jokes from a random date as well. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_16.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_16.png" width="25%" height="25%">
 
 ## Help
 
@@ -216,7 +216,7 @@ Example: "Which news sources can I choose from again?"
 
 These commands do not utilize any APIs, and are hard-coded text messages to remind the user of TIA's commands and which news sources are available. 
 
-<img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_18.png" width="25%" height="25%">
+<img src="https://github.com/filmboy3/TIA/blob/master/images/new_18.png" width="25%" height="25%">
 
 <sup>*</sup> New <i>gmail</i> e-mails are automatically forwarded from TIA to the user, and can be deleted/marked-as-read on request. However, this features is not currently available via the primary TIA number, and must be self-hosted -- see <i>gmailfeatures.py</i> file.
 # tia-text-internet-assistant
