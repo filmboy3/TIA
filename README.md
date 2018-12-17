@@ -219,3 +219,4 @@ These commands do not utilize any APIs, and are hard-coded text messages to remi
 <img src="https://github.com/filmboy3/TIA-Texting-Internet-Assistant/blob/master/images/new_18.png" width="25%" height="25%">
 
 <sup>*</sup> New <i>gmail</i> e-mails are automatically forwarded from TIA to the user, and can be deleted/marked-as-read on request. However, this features is not currently available via the primary TIA number, and must be self-hosted -- see <i>gmailfeatures.py</i> file.
+# tia-text-internet-assistant
