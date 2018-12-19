@@ -56,7 +56,7 @@ Tia is made up of several python servers communicating via <a href="rabbitmq.com
  
 ## GMAIL API 
 
-TIA has a dedicated google voice number - (347) 352-6247 - which auto-forwards all texts to its own GMAIL account. 
+TIA has a dedicated google voice number - ~~(347) 352-6247~~ (currently unstable) - which auto-forwards all texts to its own GMAIL account. 
 
 1. Our first Rabbit queue worker -- worker_gmail.py -- checks if anything new has been added to the list of messages currently marked <i>UNREAD</i>.  If there's nothing new in the 'unread' list, TIA skips ahead to #5. 
 
