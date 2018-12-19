@@ -15,7 +15,7 @@ TIA utilizes machine learning NLP via Facebook's open source <a href="wit.ai"><i
 
   <i>Fig.1.5 - TIA's Wit.AI Interface</i>
 
-### For full demo, text 'Hi' to 📲 <a href="sms:347-352-6247">347-352-6247</a> 📲
+### For full demo, text 'Hi' to ~~📲 <a href="sms:347-352-6247">347-352-6247</a> 📲~~ (currently down for maintenance)
 
 <img src="https://github.com/filmboy3/TIA/blob/master/images/new_4.jpg" width="25%" height="25%">
 
